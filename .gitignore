@@ -18,3 +18,18 @@ local.properties
 # Eclipse project files
 .classpath
 .project
+
+project.properties
+custom_properties.xml
+face_cssong_r.png
+face_cssong.png
+face_dwkang_r.png
+face_dwkang.png
+face_hikwon_r.png
+face_hikwon.png
+face_shjin_r.png
+face_shjin.png
+face_tskim_r.png
+face_tskim.png
+face_kmkim_r.png
+face_kmkim.png
