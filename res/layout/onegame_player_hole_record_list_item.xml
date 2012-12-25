@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:minHeight="?attr/preferredItemHeight"
+    android:orientation="vertical"
+    tools:context=".PlayerRecordActivity" >
+
+    <TextView
+        android:id="@+id/HoleTextView"
+        style="?attr/listSectionHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:paddingBottom="8dip"
+        android:paddingLeft="?attr/preferredItemPaddingLeft"
+        android:paddingRight="?attr/preferredItemPaddingRight"
+        android:paddingTop="8dip" >
+
+        <TextView
+            android:id="@+id/RankingTextView"
+            android:layout_width="50dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium"
+            android:textColor="?attr/primaryTextColor" />
+
+        <TextView
+            android:id="@+id/SameRankingCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/RankingTextView"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:layout_toRightOf="@+id/RankingTextView"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/FeeTextView"
+            android:layout_width="90dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="?attr/preferredItemPaddingRight"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/FinalScoreTextView"
+            android:layout_width="40dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/FeeTextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/HandicapTextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/FinalScoreTextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/ScoreTextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/HandicapTextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="8dip"
+    android:paddingLeft="4dip"
+    android:paddingRight="4dip"
+    android:paddingTop="8dip"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:id="@+id/TopView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+        <CheckBox
+            android:id="@+id/CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/Date1TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|left"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Date2TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dip"
+            android:gravity="center_vertical|left"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+        
+        <TextView
+            android:id="@+id/Date3TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dip"
+            android:gravity="center_vertical|left"
+            android:text="HELLO"
+            android:textAppearance="?attr/textAppearanceSmall"
+            />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/Player1Space"
+        android:layout_width="1dip"
+        android:layout_height="80dip"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/TopView"
+        android:visibility="invisible" />
+
+    <View
+        android:id="@+id/Player1TagView"
+        android:layout_width="220dip"
+        android:layout_height="35dip"
+        android:layout_alignBottom="@+id/Player1Space"
+        android:layout_alignParentLeft="true"
+        android:background="#aaff4444" />
+
+    <ImageView
+        android:id="@+id/Player1Image"
+        android:layout_width="80dip"
+        android:layout_height="80dip"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/TopView"
+        android:layout_marginLeft="4dip"
+        android:contentDescription="@string/player"
+        android:scaleType="fitCenter"
+        android:src="@drawable/face_unknown_r" />
+
+    <TextView
+        android:id="@+id/Player1NameTextView"
+        android:layout_width="140dp"
+        android:layout_height="35dip"
+        android:layout_alignBottom="@+id/Player1Image"
+        android:layout_toRightOf="@+id/Player1Image"
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceMedium"
+        android:textColor="#ffffffff" />
+
+    <TextView
+        android:id="@+id/Player1ScoreTextView"
+        android:layout_width="140dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/Player1NameTextView"
+        android:layout_below="@+id/TopView"
+        android:layout_toRightOf="@+id/Player1Image"
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceLarge" />
+
+    <View
+        android:id="@+id/Player2Space"
+        android:layout_width="1dip"
+        android:layout_height="40dip"
+        android:layout_below="@+id/TopView"
+        android:layout_toRightOf="@+id/Player1TagView"
+        android:visibility="invisible" />
+
+    <View
+        android:id="@+id/Player2TagView"
+        android:layout_width="match_parent"
+        android:layout_height="20dip"
+        android:layout_alignBottom="@+id/Player2Space"
+        android:layout_toRightOf="@+id/Player1TagView"
+        android:background="#aa33b3e5" />
+
+    <ImageView
+        android:id="@+id/Player2Image"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:layout_below="@+id/TopView"
+        android:layout_marginLeft="4dip"
+        android:layout_toRightOf="@+id/Player1TagView"
+        android:contentDescription="@string/player"
+        android:scaleType="fitCenter"
+        android:src="@drawable/face_unknown_r" />
+
+    <TextView
+        android:id="@+id/Player2NameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="20dip"
+        android:layout_alignBottom="@+id/Player2Image"
+        android:layout_marginLeft="4dip"
+        android:layout_toRightOf="@+id/Player2Image"
+        android:gravity="center_vertical|left"
+        android:textAppearance="?attr/textAppearanceSmall"
+        android:textColor="#ffffffff" />
+
+    <TextView
+        android:id="@+id/Player2ScoreTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/Player2NameTextView"
+        android:layout_below="@+id/TopView"
+        android:layout_marginLeft="16dip"
+        android:layout_toRightOf="@+id/Player2Image"
+        android:gravity="center_vertical|left"
+        android:textAppearance="?attr/textAppearanceSmall" />
+
+    <View
+        android:id="@+id/Player3Space"
+        android:layout_width="1dip"
+        android:layout_height="40dip"
+        android:layout_below="@+id/Player2Image"
+        android:layout_toRightOf="@+id/Player1TagView" />
+
+    <View
+        android:id="@+id/Player3TagView"
+        android:layout_width="match_parent"
+        android:layout_height="20dip"
+        android:layout_alignBottom="@+id/Player3Space"
+        android:layout_toRightOf="@+id/Player1TagView"
+        android:background="#aaaa66cc" />
+
+    <ImageView
+        android:id="@+id/Player3Image"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:layout_below="@+id/Player2Image"
+        android:layout_marginLeft="4dip"
+        android:layout_toRightOf="@+id/Player1TagView"
+        android:contentDescription="@string/player"
+        android:scaleType="fitCenter"
+        android:src="@drawable/face_unknown_r" />
+
+    <TextView
+        android:id="@+id/Player3NameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="20dip"
+        android:layout_alignBottom="@+id/Player3Image"
+        android:layout_marginLeft="4dip"
+        android:layout_toRightOf="@+id/Player3Image"
+        android:gravity="center_vertical|left"
+        android:textAppearance="?attr/textAppearanceSmall"
+        android:textColor="#ffffffff" />
+
+    <TextView
+        android:id="@+id/Player3ScoreTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/Player3NameTextView"
+        android:layout_below="@+id/Player2Image"
+        android:layout_marginLeft="16dip"
+        android:layout_toRightOf="@+id/Player3Image"
+        android:gravity="center_vertical|left"
+        android:textAppearance="?attr/textAppearanceSmall" />
+
+    <Space
+        android:id="@+id/HorizontalSpace"
+        android:layout_width="2dip"
+        android:layout_height="2dip"
+        android:layout_below="@+id/Player1Image" />
+
+    <View
+        android:id="@+id/Player4TagView"
+        android:layout_width="8dip"
+        android:layout_height="30dip"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/HorizontalSpace"
+        android:background="#aa99cc00" />
+
+    <TextView
+        android:id="@+id/Player4NameTextView"
+        android:layout_width="80dip"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Player4TagView"
+        android:layout_marginLeft="4dip"
+        android:layout_toRightOf="@+id/Player4TagView"
+        android:gravity="center_vertical|left"
+        android:textAppearance="?attr/textAppearanceSmall"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/Player4ScoreTextView"
+        android:layout_width="80dip"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Player4TagView"
+        android:layout_marginLeft="4dip"
+        android:layout_toRightOf="@+id/Player4TagView"
+        android:gravity="center_vertical|left"
+        android:textAppearance="?attr/textAppearanceSmall"
+        android:textSize="12sp" />
+
+    <View
+        android:id="@+id/Player5TagView"
+        android:layout_width="8dip"
+        android:layout_height="30dip"
+        android:layout_below="@+id/HorizontalSpace"
+        android:layout_marginLeft="4dip"
+        android:layout_toRightOf="@+id/Player4ScoreTextView"
+        android:background="#aaffbb33" />
+
+    <TextView
+        android:id="@+id/Player5NameTextView"
+        android:layout_width="80dip"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Player5TagView"
+        android:layout_marginLeft="4dip"
+        android:layout_toRightOf="@+id/Player5TagView"
+        android:gravity="center_vertical|left"
+        android:textAppearance="?attr/textAppearanceSmall"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/Player5ScoreTextView"
+        android:layout_width="80dip"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Player5TagView"
+        android:layout_marginLeft="4dip"
+        android:layout_toRightOf="@+id/Player5TagView"
+        android:gravity="center_vertical|left"
+        android:textAppearance="?attr/textAppearanceSmall"
+        android:textSize="12sp" />
+
+    <View
+        android:id="@+id/Player6TagView"
+        android:layout_width="8dip"
+        android:layout_height="30dip"
+        android:layout_below="@+id/HorizontalSpace"
+        android:layout_marginLeft="4dip"
+        android:layout_toRightOf="@+id/Player5ScoreTextView"
+        android:background="#aa999999" />
+
+    <TextView
+        android:id="@+id/Player6NameTextView"
+        android:layout_width="80dip"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Player6TagView"
+        android:layout_marginLeft="4dip"
+        android:layout_toRightOf="@+id/Player6TagView"
+        android:gravity="center_vertical|left"
+        android:textAppearance="?attr/textAppearanceSmall"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/Player6ScoreTextView"
+        android:layout_width="80dip"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Player6TagView"
+        android:layout_marginLeft="4dip"
+        android:layout_toRightOf="@+id/Player6TagView"
+        android:gravity="center_vertical|left"
+        android:textAppearance="?attr/textAppearanceSmall"
+        android:textSize="12sp" />
+
+</RelativeLayout>

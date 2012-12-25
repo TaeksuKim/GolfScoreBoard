@@ -1,0 +1,170 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="LightTheme" parent="android:style/Theme.Holo.Light">
+        <item name="defaultBackground">@android:color/background_light</item>
+        
+        <item name="preferredItemHeightSmall">36dip</item>
+        <item name="preferredItemHeight">48dip</item>
+        <item name="listPreferredItemHeightSmall">36dip</item>
+        <item name="listPreferredItemHeight">48dip</item>
+        <item name="preferredItemPaddingLeft">16dip</item>
+        <item name="preferredItemPaddingRight">16dip</item>
+
+        <item name="stripPanel">@style/stripPanel</item>
+        <item name="stripColor">@android:color/holo_blue_light</item>
+        <item name="stripTextColor">#FFFFFFFF</item>
+        <item name="dividerHorizontal">?android:attr/dividerVertical</item>
+        <item name="dividerVertical">?android:attr/dividerVertical</item>
+        <item name="borderlessButtonPanel">@style/borderlessButtonPanel</item>
+        <item name="borderlessButton">@style/borderlessButton</item>
+        <item name="borderlessButtonHorizontalDivider">@style/borderlessButtonHorizontalDivider</item>
+        <item name="borderlessButtonVerticalDivider">@style/borderlessButtonVerticalDivider</item>
+        <item name="textAppearanceSmall">?android:attr/textAppearanceSmall</item>
+        <item name="textAppearanceMedium">?android:attr/textAppearanceMedium</item>
+        <item name="textAppearanceLarge">?android:attr/textAppearanceLarge</item>
+        <item name="progressBarStyleLarge">?android:attr/progressBarStyleLarge</item>
+        <item name="listChoiceIndicatorMultiple">?android:attr/listChoiceIndicatorMultiple</item>
+        <item name="listSectionHeader">@style/sectionHeader.Light</item>
+        <item name="emphasisColor">@color/emphasis_light</item>
+        <item name="alertColor">@color/alert_light</item>
+        <item name="primaryTextColor">?android:attr/textColorPrimary</item>
+        <item name="secondaryTextColor">?android:attr/textColorTertiary</item>
+        
+        <item name="selectableItemBackground">?android:attr/selectableItemBackground</item>
+        
+        <item name="addResultMenuIcon">@drawable/ic_menu_add_result_light</item>
+        <item name="cloudMenuIcon">@drawable/ic_menu_cloud_light</item>
+        <item name="bluetoothMenuIcon">@drawable/ic_menu_bluetooth_light</item>
+        <item name="deleteMenuIcon">@drawable/ic_menu_delete_light</item>
+        <item name="downloadMenuIcon">@drawable/ic_menu_download_light</item>
+        <item name="editMenuIcon">@drawable/ic_menu_edit_light</item>
+        <item name="newMenuIcon">@drawable/ic_menu_new_light</item>
+        <item name="saveMenuIcon">@drawable/ic_menu_save_light</item>
+        <item name="settingMenuIcon">@drawable/ic_menu_settings_light</item>
+        <item name="uploadMenuIcon">@drawable/ic_menu_upload_light</item>
+    </style>
+
+    <style name="DarkTheme" parent="android:style/Theme.Holo">
+        <item name="defaultBackground">@android:color/background_dark</item>
+        
+        <item name="preferredItemHeightSmall">36dip</item>
+        <item name="preferredItemHeight">48dip</item>
+        <item name="listPreferredItemHeightSmall">36dip</item>
+        <item name="listPreferredItemHeight">48dip</item>
+        <item name="preferredItemPaddingLeft">16dip</item>
+        <item name="preferredItemPaddingRight">16dip</item>
+
+        <item name="stripPanel">@style/stripPanel.Dark</item>
+        <item name="stripColor">@android:color/holo_blue_dark</item>
+        <item name="stripTextColor">#FFFFFFFF</item>
+        <item name="dividerHorizontal">?android:attr/dividerVertical</item>
+        <item name="dividerVertical">?android:attr/dividerVertical</item>
+        <item name="borderlessButtonPanel">@style/borderlessButtonPanel.Dark</item>
+        <item name="borderlessButton">@style/borderlessButton.Dark</item>
+        <item name="borderlessButtonHorizontalDivider">@style/borderlessButtonHorizontalDivider.Dark</item>
+        <item name="borderlessButtonVerticalDivider">@style/borderlessButtonVerticalDivider.Dark</item>
+        <item name="textAppearanceSmall">?android:attr/textAppearanceSmall</item>
+        <item name="textAppearanceMedium">?android:attr/textAppearanceMedium</item>
+        <item name="textAppearanceLarge">?android:attr/textAppearanceLarge</item>
+        <item name="progressBarStyleLarge">?android:attr/progressBarStyleLarge</item>
+        <item name="listChoiceIndicatorMultiple">?android:attr/listChoiceIndicatorMultiple</item>
+        <item name="listSectionHeader">@style/sectionHeader.Dark</item>
+        <item name="emphasisColor">@color/emphasis_dark</item>
+        <item name="alertColor">@color/alert_dark</item>
+        <item name="primaryTextColor">?android:attr/textColorPrimary</item>
+        <item name="secondaryTextColor">?android:attr/textColorTertiary</item>
+        
+        <item name="selectableItemBackground">?android:attr/selectableItemBackground</item>
+        
+        <item name="addResultMenuIcon">@drawable/ic_menu_add_result_dark</item>
+        <item name="cloudMenuIcon">@drawable/ic_menu_cloud_dark</item>
+        <item name="bluetoothMenuIcon">@drawable/ic_menu_bluetooth_dark</item>
+        <item name="deleteMenuIcon">@drawable/ic_menu_delete_dark</item>
+        <item name="downloadMenuIcon">@drawable/ic_menu_download_dark</item>
+        <item name="editMenuIcon">@drawable/ic_menu_edit_dark</item>
+        <item name="newMenuIcon">@drawable/ic_menu_new_dark</item>
+        <item name="saveMenuIcon">@drawable/ic_menu_save_dark</item>
+        <item name="settingMenuIcon">@drawable/ic_menu_settings_dark</item>
+        <item name="uploadMenuIcon">@drawable/ic_menu_upload_dark</item>
+    </style>
+
+    <style name="stripPanel" parent="android:style/Widget.Holo.Light">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dip</item>
+        <item name="android:layout_marginLeft">0dip</item>
+        <item name="android:layout_marginRight">0dip</item>
+        <item name="android:background">@android:color/holo_blue_light</item>
+    </style>
+
+    <style name="stripPanel.Dark">
+        <item name="android:background">@android:color/holo_blue_dark</item>
+    </style>
+
+    <style name="borderlessButtonPanel" parent="android:style/Widget.Holo.Light">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/preferredItemHeight</item>
+        <item name="android:layout_marginLeft">0dip</item>
+        <item name="android:layout_marginRight">0dip</item>
+        <item name="android:background">#ffdddddd</item>
+    </style>
+
+    <style name="borderlessButtonPanel.Dark">
+        <item name="android:background">#00dddddd</item>
+    </style>
+
+    <style name="borderlessButton" parent="android:style/Widget.Holo.Light">
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">?attr/primaryTextColor</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="borderlessButton.Dark" />
+
+    <style name="borderlessButtonHorizontalDivider" parent="android:style/Widget.Holo.Light">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/list_divider_holo_light</item>
+        <item name="android:layout_marginLeft">0dip</item>
+        <item name="android:layout_marginRight">0dip</item>
+        <item name="android:paddingBottom">0dip</item>
+        <item name="android:paddingTop">0dip</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="borderlessButtonHorizontalDivider.Dark">
+        <item name="android:src">@drawable/list_divider_holo_dark</item>
+    </style>
+
+    <style name="borderlessButtonVerticalDivider" parent="android:style/Widget.Holo.Light">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:src">@drawable/list_divider_holo_light</item>
+    </style>
+
+    <style name="borderlessButtonVerticalDivider.Dark">
+        <item name="android:src">@drawable/list_divider_holo_dark</item>
+    </style>
+
+    <style name="sectionHeader" parent="android:style/Widget.Holo.Light.TextView">
+        <item name="android:drawableBottom">@drawable/section_header_light</item>
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@android:color/holo_blue_light</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="sectionHeader.Light"></style>
+
+    <style name="sectionHeader.Dark">
+        <item name="android:drawableBottom">@drawable/section_header_dark</item>
+        <item name="android:textColor">@android:color/holo_blue_dark</item>
+    </style>
+
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/ImportThreeMonth"
+        android:alphabeticShortcut="t"
+        android:icon="?downloadMenuIcon"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/activity_main_menu_import_three_month"/>
+    <item
+        android:id="@+id/Settings"
+        android:alphabeticShortcut="s"
+        android:icon="?settingMenuIcon"
+        android:showAsAction="withText"
+        android:title="@string/activity_main_menu_settings"/>
+
+</menu>

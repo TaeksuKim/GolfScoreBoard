@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/ButtonPanel"
+        style="?attr/borderlessButtonPanel"
+        android:layout_alignParentBottom="true" >
+
+        <ImageView
+            style="?attr/borderlessButtonHorizontalDivider"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/divider" />
+
+        <ImageView
+            android:id="@+id/ButtonVerticalDivider"
+            style="?attr/borderlessButtonVerticalDivider"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/divider" />
+
+        <Button
+            android:id="@+id/CancelButton"
+            style="?attr/borderlessButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/ButtonVerticalDivider"
+            android:text="@android:string/cancel"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/BackButton"
+            style="?attr/borderlessButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/ButtonVerticalDivider"
+            android:text="@string/back"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/ConfirmButton"
+            style="?attr/borderlessButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/ButtonVerticalDivider"
+            android:text="@android:string/ok"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/NextButton"
+            style="?attr/borderlessButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/ButtonVerticalDivider"
+            android:text="@string/next"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ButtonPanel" >
+
+        <fragment
+            android:id="@+id/GameSettingFragment"
+            android:name="org.dolicoli.android.golfscoreboard.fragments.currentgame.NewGameSettingFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+
+        <fragment
+            android:id="@+id/HoleFeeSettingFragment"
+            android:name="org.dolicoli.android.golfscoreboard.fragments.currentgame.NewHoleFeeSettingFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <fragment
+            android:id="@+id/RankingFeeSettingFragment"
+            android:name="org.dolicoli.android.golfscoreboard.fragments.currentgame.NewRankingFeeSettingFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <fragment
+            android:id="@+id/PlayerSettingFragment"
+            android:name="org.dolicoli.android.golfscoreboard.fragments.currentgame.NewPlayerSettingFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <fragment
+            android:id="@+id/HandicapSettingFragment"
+            android:name="org.dolicoli.android.golfscoreboard.fragments.currentgame.NewHandicapSettingFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</RelativeLayout>

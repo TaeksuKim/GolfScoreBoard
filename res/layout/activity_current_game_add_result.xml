@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/ButtonPanel"
+        style="?attr/borderlessButtonPanel"
+        android:layout_alignParentBottom="true" >
+
+        <ImageView
+            android:id="@+id/UpperDivider"
+            style="?attr/borderlessButtonHorizontalDivider"
+            android:contentDescription="@string/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/UpperDivider" >
+
+            <Button
+                android:id="@+id/CancelButton"
+                style="?attr/borderlessButton"
+                android:text="@android:string/cancel" />
+
+            <ImageView
+                style="?attr/borderlessButtonVerticalDivider"
+                android:contentDescription="@string/divider" />
+
+            <Button
+                android:id="@+id/ConfirmButton"
+                style="?attr/borderlessButton"
+                android:text="@android:string/ok" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <fragment
+        android:id="@+id/AddResultFragment"
+        android:name="org.dolicoli.android.golfscoreboard.fragments.currentgame.AddResultFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ButtonPanel" />
+
+</RelativeLayout>

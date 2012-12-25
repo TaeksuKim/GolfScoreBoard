@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <!-- 5경기 -->
+
+        <TextView
+            style="?attr/listSectionHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="최근 5경기" />
+
+        <include
+            android:id="@+id/Recent5SummaryItem"
+            layout="@layout/personal_statistics_summary_item" />
+
+        <!-- 이번 달 -->
+
+        <TextView
+            style="?attr/listSectionHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이번 달" />
+
+        <include
+            android:id="@+id/ThisMonthSummaryItem"
+            layout="@layout/personal_statistics_summary_item" />
+
+        <!-- 지난 달 -->
+
+        <TextView
+            style="?attr/listSectionHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="지난 달" />
+
+        <include
+            android:id="@+id/LastMonthSummaryItem"
+            layout="@layout/personal_statistics_summary_item" />
+
+        <!-- 최근 3개월 -->
+
+        <TextView
+            style="?attr/listSectionHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="최근 3개월" />
+
+        <include
+            android:id="@+id/Last3MonthSummaryItem"
+            layout="@layout/personal_statistics_summary_item" />
+    </LinearLayout>
+
+</ScrollView>

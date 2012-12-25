@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="false"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:paddingBottom="4dip"
+    android:paddingLeft="0dip"
+    android:paddingRight="0dip"
+    android:paddingTop="4dip"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/HoleNumberTextView"
+        style="?attr/listSectionHeader"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <!-- Ranking 1 -->
+
+    <RelativeLayout
+        android:id="@+id/Ranking1Panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/HoleNumberTextView" >
+
+        <TextView
+            android:id="@+id/Ranking1TextView"
+            android:layout_width="50dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/Fee1TextView"
+            android:layout_width="90dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="?attr/preferredItemPaddingRight"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/FinalScore1TextView"
+            android:layout_width="40dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Fee1TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Handicap1TextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/FinalScore1TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Score1TextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Handicap1TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Name1TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Score1TextView"
+            android:layout_toRightOf="@+id/Ranking1TextView"
+            android:gravity="center_vertical|left"
+            android:textAppearance="?attr/textAppearanceMedium" />
+    </RelativeLayout>
+
+    <!-- Ranking 2 -->
+
+    <RelativeLayout
+        android:id="@+id/Ranking2Panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Ranking1Panel" >
+
+        <TextView
+            android:id="@+id/Ranking2TextView"
+            android:layout_width="50dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/Fee2TextView"
+            android:layout_width="90dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="?attr/preferredItemPaddingRight"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/FinalScore2TextView"
+            android:layout_width="40dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Fee2TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Handicap2TextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/FinalScore2TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Score2TextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Handicap2TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Name2TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Score2TextView"
+            android:layout_toRightOf="@+id/Ranking2TextView"
+            android:gravity="center_vertical|left"
+            android:textAppearance="?attr/textAppearanceMedium" />
+    </RelativeLayout>
+
+    <!-- Ranking 3 -->
+
+    <RelativeLayout
+        android:id="@+id/Ranking3Panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Ranking2Panel" >
+
+        <TextView
+            android:id="@+id/Ranking3TextView"
+            android:layout_width="50dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/Fee3TextView"
+            android:layout_width="90dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="?attr/preferredItemPaddingRight"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/FinalScore3TextView"
+            android:layout_width="40dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Fee3TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Handicap3TextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/FinalScore3TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Score3TextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Handicap3TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Name3TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Score3TextView"
+            android:layout_toRightOf="@+id/Ranking3TextView"
+            android:gravity="center_vertical|left"
+            android:textAppearance="?attr/textAppearanceMedium" />
+    </RelativeLayout>
+
+    <!-- Ranking 4 -->
+
+    <RelativeLayout
+        android:id="@+id/Ranking4Panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Ranking3Panel" >
+
+        <TextView
+            android:id="@+id/Ranking4TextView"
+            android:layout_width="50dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/Fee4TextView"
+            android:layout_width="90dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="?attr/preferredItemPaddingRight"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/FinalScore4TextView"
+            android:layout_width="40dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Fee4TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Handicap4TextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/FinalScore4TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Score4TextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Handicap4TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Name4TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Score4TextView"
+            android:layout_toRightOf="@+id/Ranking4TextView"
+            android:gravity="center_vertical|left"
+            android:textAppearance="?attr/textAppearanceMedium" />
+    </RelativeLayout>
+
+    <!-- Ranking 5 -->
+
+    <RelativeLayout
+        android:id="@+id/Ranking5Panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Ranking4Panel" >
+
+        <TextView
+            android:id="@+id/Ranking5TextView"
+            android:layout_width="50dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/Fee5TextView"
+            android:layout_width="90dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="?attr/preferredItemPaddingRight"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/FinalScore5TextView"
+            android:layout_width="40dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Fee5TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Handicap5TextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/FinalScore5TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Score5TextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Handicap5TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Name5TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Score5TextView"
+            android:layout_toRightOf="@+id/Ranking5TextView"
+            android:gravity="center_vertical|left"
+            android:textAppearance="?attr/textAppearanceMedium" />
+    </RelativeLayout>
+
+    <!-- Ranking 6 -->
+
+    <RelativeLayout
+        android:id="@+id/Ranking6Panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Ranking5Panel" >
+
+        <TextView
+            android:id="@+id/Ranking6TextView"
+            android:layout_width="50dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/Fee6TextView"
+            android:layout_width="90dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="?attr/preferredItemPaddingRight"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/FinalScore6TextView"
+            android:layout_width="40dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Fee6TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Handicap6TextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/FinalScore6TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Score6TextView"
+            android:layout_width="25dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Handicap6TextView"
+            android:gravity="center_vertical|right"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/Name6TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Score6TextView"
+            android:layout_toRightOf="@+id/Ranking6TextView"
+            android:gravity="center_vertical|left"
+            android:textAppearance="?attr/textAppearanceMedium" />
+    </RelativeLayout>
+
+</RelativeLayout>

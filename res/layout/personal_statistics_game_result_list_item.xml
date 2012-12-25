@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dip"
+    android:layout_marginTop="4dip"
+    android:paddingBottom="4dip"
+    android:paddingTop="4dip" >
+
+    <TextView
+        android:id="@+id/DateTextView"
+        android:layout_width="70dp"
+        android:layout_height="28dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceSmall"
+        android:textColor="?attr/secondaryTextColor" />
+
+    <TextView
+        android:id="@+id/RankingTextView"
+        android:layout_width="40dp"
+        android:layout_height="28dip"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@+id/DateTextView"
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/RankingPerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="28dip"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="2dip"
+        android:layout_marginRight="2dip"
+        android:layout_toRightOf="@+id/RankingTextView"
+        android:gravity="center"
+        android:text="/"
+        android:textAppearance="?attr/textAppearanceSmall"
+        android:textColor="?attr/secondaryTextColor" />
+
+    <TextView
+        android:id="@+id/PlayerCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="28dip"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/RankingPerTextView"
+        android:gravity="center"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:textAppearance="?attr/textAppearanceSmall"
+        android:textColor="?attr/secondaryTextColor" />
+
+    <TextView
+        android:id="@+id/ScoreTextView"
+        android:layout_width="50dp"
+        android:layout_height="28dip"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_toRightOf="@+id/PlayerCountTextView"
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/FeeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="28dip"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@+id/ScoreTextView"
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceMedium" />
+
+</RelativeLayout>

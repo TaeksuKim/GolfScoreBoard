@@ -1,0 +1,337 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name">사만원</string>
+    <string name="title_section1">정산</string>
+    <string name="title_section2">점수</string>
+    <string name="title_section3">기록</string>
+    <string name="menu_settings">Settings</string>
+    <string name="back">이전</string>
+    <string name="next">다음</string>
+    <string name="modify">수정</string>
+    <string name="refresh">새로고침</string>
+    <string name="today">오늘</string>
+    <string name="modify_game_setting">수정</string>
+    <string name="fee_format">###,##0 원</string>
+    <string name="avg_ranking_format">0.00 위</string>
+    <string name="ranking_format1">0 위</string>
+    <string name="ranking_format">%d 위</string>
+    <string name="positive_format">+%d</string>
+    <string name="negative_format">+%d</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="divider"></string>
+    <string name="score_format_par_3_minus_2">-2: Hole in One</string>
+    <string name="score_format_par_3_minus_1">-1: Birdie</string>
+    <string name="score_format_par_3_even">0: Par</string>
+    <string name="score_format_par_3_plus_1">+1: Bogey</string>
+    <string name="score_format_par_3_plus_2">+2: D. Bogey</string>
+    <string name="score_format_par_3_plus_3">+3: D. Par</string>
+    <string name="score_format_par_4_minus_3">-3: Hole in One</string>
+    <string name="score_format_par_4_minus_2">-2: Eagle</string>
+    <string name="score_format_par_4_minus_1">-1: Birdie</string>
+    <string name="score_format_par_4_even">0: Par</string>
+    <string name="score_format_par_4_plus_1">+1: Bogey</string>
+    <string name="score_format_par_4_plus_2">+2: D. Bogey</string>
+    <string name="score_format_par_4_plus_3">+3: T. Bogey</string>
+    <string name="score_format_par_4_plus_4">+4: D. Par</string>
+    <string name="score_format_par_5_minus_4">-4: Hole in One</string>
+    <string name="score_format_par_5_minus_3">-3: Albatross</string>
+    <string name="score_format_par_5_minus_2">-2: Eagle</string>
+    <string name="score_format_par_5_minus_1">-1: Birdie</string>
+    <string name="score_format_par_5_even">0: Par</string>
+    <string name="score_format_par_5_plus_1">+1: Bogey</string>
+    <string name="score_format_par_5_plus_2">+2: D. Bogey</string>
+    <string name="score_format_par_5_plus_3">+3: T. Bogey</string>
+    <string name="score_format_par_5_plus_4">+4: Q. Bogey</string>
+    <string name="score_format_par_5_plus_5">+5: D. Par</string>
+    <string name="score_format_par_6_minus_5">-5: Hole in One</string>
+    <string name="score_format_par_6_minus_4">-4: Condor</string>
+    <string name="score_format_par_6_minus_3">-3: Albatross</string>
+    <string name="score_format_par_6_minus_2">-2: Eagle</string>
+    <string name="score_format_par_6_minus_1">-1: Birdie</string>
+    <string name="score_format_par_6_even">0: Par</string>
+    <string name="score_format_par_6_plus_1">+1: Bogey</string>
+    <string name="score_format_par_6_plus_2">+2: D. Bogey</string>
+    <string name="score_format_par_6_plus_3">+3: T. Bogey</string>
+    <string name="score_format_par_6_plus_4">+4: Q. Bogey</string>
+    <string name="score_format_par_6_plus_5">+5: S. Bogey</string>
+    <string name="score_format_par_6_plus_6">+6: D. Par</string>
+    <string name="default_cached_player_name1">강동욱</string>
+    <string name="default_cached_player_name2">권혁인</string>
+    <string name="default_cached_player_name3">김경모</string>
+    <string name="default_cached_player_name4">김택수</string>
+    <string name="default_cached_player_name5">송창선</string>
+    <string name="default_cached_player_name6">진삼학</string>
+    <string name="player">사용자</string>
+
+    <!-- Titles -->
+    <string name="title_activity_main">사만원</string>
+    <string name="title_activity_current_game_new_game">새 게임</string>
+    <string name="title_activity_current_game_modify_game_setting">게임 설정 수정</string>
+    <string name="title_activity_current_game_player_record">개인 기록</string>
+    <string name="title_activity_current_game_add_result">결과추가</string>
+    <string name="title_activity_current_game_modify_result">결과수정</string>
+    <string name="title_activity_netshare_client">데이터 가져오기</string>
+    <string name="title_activity_personal_statistics">개인 통계</string>
+    <string name="title_activity_onegame">지난 게임</string>
+    <string name="title_activity_onegame_player_record">개인 기록</string>
+    <string name="title_activity_history">이전 기록</string>
+    <string name="title_activity_settings">설정</string>
+
+    <!-- Main Activity -->
+    <string name="activity_main_title_score_board">점수판</string>
+    <string name="activity_main_menu_add_result">결과 추가</string>
+    <string name="activity_main_menu_new_game">새 게임 시작</string>
+    <string name="activity_main_menu_modify_game">게임 설정 수정</string>
+    <string name="activity_main_menu_reset">결과 초기화</string>
+    <string name="activity_main_menu_cloud">데이터 서버</string>
+    <string name="activity_main_menu_bluetooth">블루투스</string>
+    <string name="activity_main_menu_export">내보내기</string>
+    <string name="activity_main_menu_import">가져오기</string>
+    <string name="activity_main_menu_import_short">가져오기</string>
+    <string name="activity_main_menu_import_three_month">3개월 정보 가져오기</string>
+    <string name="activity_main_menu_save">저장</string>
+    <string name="activity_main_menu_settings">설정</string>
+    <string name="activity_main_dialog_add_result_button">결과 추가</string>
+    <string name="activity_main_dialog_import_button">이 게임 가져오기</string>
+    <string name="activity_main_dialog_netshare_preparing">준비 중</string>
+    <string name="activity_main_dialog_netshare_please_wait">잠시만 기다려 주세요</string>
+    <string name="activity_main_dialog_netshare_export">데이터 서버로 내보내기</string>
+    <string name="activity_main_dialog_are_you_sure_to_netshare_upload">데이터 서버로 내보내시겠습니까?</string>
+    <string name="activity_main_dialog_reset">결과 초기화</string>
+    <string name="activity_main_dialog_are_you_sure_to_reset">모든 결과가 지워집니다.\n계속하시겠습니까?</string>
+    <string name="activity_main_netshare_upload_success">내보내기를 완료했습니다.</string>
+    <string name="activity_main_netshare_upload_fail">내보내기를 실패했습니다.</string>
+    <string name="activity_main_netshare_import_success">가져오기를 완료했습니다.</string>
+    <string name="activity_main_netshare_import_fail">가져오기를 실패했습니다.</string>
+
+    <!-- Current Score Fragment -->
+    <string name="fragment_current_score_sum">합계</string>
+    <string name="fragment_current_score_total_fee_separator"> / </string>
+    <string name="fragment_current_score_score">점수</string>
+    <string name="fragment_current_score_handicap">찬스</string>
+    <string name="fragment_current_score_remain_handicap">남은 찬스</string>
+    <string name="fragment_current_score_same_ranking_count">같은 순위</string>
+    <string name="fragment_current_score_average">평균</string>
+
+    <!-- Hole Result Fragment -->
+    <string name="fragment_hole_result_menu_modify">수정</string>
+    <string name="fragment_hole_result_menu_delete">삭제</string>
+    <string name="fragment_hole_result_hole_number_format">Hole %1$d (Par %2$d)</string>
+    <string name="fragment_hole_result_delete">삭제</string>
+    <string name="fragment_hole_result_are_you_sure_to_delete">%d 홀 이후의 기록이 지워집니다.\n계속하시겠습니까?</string>
+
+    <!-- Personal Statistics Fragment -->
+    <string name="fragment_personal_statistics_attend_count_format">%d 회</string>
+
+    <!-- New Game Activity -->
+    <string name="activity_new_game_title_game_setting">게임 설정</string>
+    <string name="activity_new_game_title_hole_fee_setting">홀 비용 설정</string>
+    <string name="activity_new_game_title_ranking_fee_setting">순위 비용 설정</string>
+    <string name="activity_new_game_title_player_setting">플레이어 설정</string>
+    <string name="activity_new_game_cancel">취소</string>
+    <string name="activity_new_game_are_you_sure_to_cancel">취소하시겠습니까?</string>
+
+    <!-- Modify Game Activity -->
+    <string name="activity_modify_game_title_game_setting">게임 설정</string>
+    <string name="activity_modify_game_title_hole_fee_setting">홀 비용 설정</string>
+    <string name="activity_modify_game_title_ranking_fee_setting">순위 비용 설정</string>
+    <string name="activity_modify_game_title_player_setting">플레이어 설정</string>
+    <string name="activity_modify_game_cancel">취소</string>
+    <string name="activity_modify_game_are_you_sure_to_cancel">취소하시겠습니까?</string>
+
+    <!-- Game Setting Fragment -->
+    <string name="fragment_game_setting_title_hole_number">홀 수</string>
+    <string name="fragment_game_setting_nine_home">9 홀</string>
+    <string name="fragment_game_setting_eighteen_home">18 홀</string>
+    <string name="fragment_game_setting_player">플레이어</string>
+    <string name="fragment_game_setting_game_fee">게임비</string>
+    <string name="fragment_game_setting_game_fee_a">게임비\n(A)</string>
+    <string name="fragment_game_setting_extra_fee">추가비용</string>
+    <string name="fragment_game_setting_extra_fee_a">추가비용\n(B)</string>
+    <string name="fragment_game_setting_ranking_fee">순위 비용</string>
+    <string name="fragment_game_setting_ranking_fee_a" tools:ignore="TypographyOther">순위 비용\n(C)</string>
+    <string name="fragment_game_setting_total_fee">총비용</string>
+    <string name="fragment_game_setting_total_fee_a">총비용\n(A+B)</string>
+    <string name="fragment_game_setting_hole_fee">홀비용</string>
+    <string name="fragment_game_setting_hole_fee_a">홀비용\n(A+B-C)</string>
+    <string name="fragment_game_setting_fee_ranking1">1위 비용</string>
+    <string name="fragment_game_setting_fee_ranking2">2위 비용</string>
+    <string name="fragment_game_setting_fee_ranking3">3위 비용</string>
+    <string name="fragment_game_setting_fee_ranking4">4위 비용</string>
+    <string name="fragment_game_setting_fee_ranking5">5위 비용</string>
+    <string name="fragment_game_setting_fee_ranking6">6위 비용</string>
+    <string name="fragment_game_setting_recommend">추천</string>
+    <string name="fragment_game_setting_player_count_spinner_2">2 명</string>
+    <string name="fragment_game_setting_player_count_spinner_3">3 명</string>
+    <string name="fragment_game_setting_player_count_spinner_4">4 명</string>
+    <string name="fragment_game_setting_player_count_spinner_5">5 명</string>
+    <string name="fragment_game_setting_player_count_spinner_6">6 명</string>
+    <string name="fragment_game_setting_default_player_name_1">Player 1</string>
+    <string name="fragment_game_setting_default_player_name_2">Player 2</string>
+    <string name="fragment_game_setting_default_player_name_3">Player 3</string>
+    <string name="fragment_game_setting_default_player_name_4">Player 4</string>
+    <string name="fragment_game_setting_default_player_name_5">Player 5</string>
+    <string name="fragment_game_setting_default_player_name_6">Player 6</string>
+
+    <!-- Hole Fee Setting Fragment -->
+    <string name="fragment_hole_fee_setting_total_fee">홀 비용</string>
+    <string name="fragment_hole_fee_setting_per">/</string>
+    <string name="fragment_hole_fee_setting_fee">금액</string>
+    <string name="fragment_hole_fee_setting_recommend">추천 금액</string>
+
+    <!-- Ranking Fee Setting Fragment -->
+    <string name="fragment_ranking_fee_setting_total_fee">순위 비용</string>
+    <string name="fragment_ranking_fee_setting_per">/</string>
+    <string name="fragment_ranking_fee_setting_fee">금액</string>
+    <string name="fragment_ranking_fee_setting_recommend">추천 금액</string>
+    <string name="fragment_ranking_fee_message_invalid_fee">금액이 맞지 않습니다</string>
+
+    <!-- Player Setting Fragment -->
+    <string name="fragment_player_setting_handicap">찬스</string>
+    <string name="fragment_player_setting_name">이름</string>
+    <string name="fragment_player_setting_hint_name1">이름 (첫 번째)</string>
+    <string name="fragment_player_setting_hint_name2">이름 (두 번째)</string>
+    <string name="fragment_player_setting_hint_name3">이름 (세 번째)</string>
+    <string name="fragment_player_setting_hint_name4">이름 (네 번째)</string>
+    <string name="fragment_player_setting_hint_name5">이름 (다섯 번째)</string>
+    <string name="fragment_player_setting_hint_name6">이름 (여섯 번째)</string>
+
+    <!-- Add Result Fragment -->
+    <string name="fragment_add_result_par_three">파 3</string>
+    <string name="fragment_add_result_par_four">파 4</string>
+    <string name="fragment_add_result_par_five">파 5</string>
+    <string name="fragment_add_result_par_six">파 6</string>
+    <string name="fragment_add_result_name">이름</string>
+    <string name="fragment_add_result_score">점수</string>
+    <string name="fragment_add_result_handicap">찬스</string>
+    <string name="fragment_add_result_hole_number_format">Hole %d</string>
+
+    <!-- Modify Result Fragment -->
+    <string name="fragment_modify_result_hole_number_format">Hole %d</string>
+
+    <!-- Player Record Fragment -->
+    <string name="player_record_title_section1">요약</string>
+    <string name="player_record_title_section2">홀별 기록</string>
+    <string name="fragment_player_record_solo">단독</string>
+    <string name="fragment_player_record_joint">공동</string>
+    <string name="fragment_player_record_ranking_1">1 위</string>
+    <string name="fragment_player_record_ranking_2">2 위</string>
+    <string name="fragment_player_record_ranking_3">3 위</string>
+    <string name="fragment_player_record_ranking_4">4 위</string>
+    <string name="fragment_player_record_ranking_5">5 위</string>
+    <string name="fragment_player_record_ranking_6">6 위</string>
+    <string name="fragment_player_record_count_format">%d 회</string>
+    <string name="fragment_player_record_hole_history">홀별 기록</string>
+    <string name="fragment_player_record_hole_number_format">HOLE %1$d (Par %2$d)</string>
+    <string name="fragment_player_record_player_count_format">%d 명</string>
+    <string name="fragment_player_record_ranking">순위</string>
+    <string name="fragment_player_record_score">점수</string>
+    <string name="fragment_player_record_fee">금액</string>
+    <string name="fragment_player_record_original_score">원점수</string>
+    <string name="fragment_player_record_handicap">찬스</string>
+    <string name="fragment_player_record_same_ranking_count">같은 순위</string>
+    <string name="fragment_player_record_fee_zero">0 원</string>
+    <string name="fragment_player_record_fee_under1000">- 1,000 원</string>
+    <string name="fragment_player_record_fee_under1500">- 1,500 원</string>
+    <string name="fragment_player_record_fee_under2000">- 2,000 원</string>
+    <string name="fragment_player_record_fee_under2500">- 2,500 원</string>
+    <string name="fragment_player_record_fee_over2500">2,500 원 +</string>
+    <string name="fragment_player_record_under_condor">-4 이하</string>
+    <string name="fragment_player_record_albatross">-3</string>
+    <string name="fragment_player_record_eagle">-2</string>
+    <string name="fragment_player_record_birdie">-1</string>
+    <string name="fragment_player_record_par">0</string>
+    <string name="fragment_player_record_bogey">+1</string>
+    <string name="fragment_player_record_double_bogey">+2</string>
+    <string name="fragment_player_record_triple_bogey">+3</string>
+    <string name="fragment_player_record_quadruple_bogey">+4</string>
+    <string name="fragment_player_record_over_quintuple_bogey">+5 이상</string>
+
+    <!-- Bluetooth Server -->
+    <string name="fragment_bluetooth_server_menu_open_bluetooth_preference">블루투스 환경설정</string>
+    <string name="fragment_bluetooth_server_button_start">시작</string>
+    <string name="fragment_bluetooth_server_button_stop">정지</string>
+    <string name="fragment_bluetooth_server_bluetooth_on_off">블루투스</string>
+    <string name="fragment_bluetooth_server_title_my_device_title">내 기기 정보</string>
+    <string name="fragment_bluetooth_server_check_bluetooth_discoverable">5분간 내 기기 검색 허용하기</string>
+    <string name="fragment_bluetooth_server_export_title">데이터 내보내기</string>
+    <string name="fragment_bluetooth_server_guide">하단의 시작 버튼을 누르세요</string>
+    <string name="fragment_bluetooth_server_message_bluetooth_not_avaliable">블루투스 장비를 사용할 수 없습니다.</string>
+    <string name="fragment_bluetooth_server_message_bluetooth_disabled">블루투스가 꺼져 있습니다.</string>
+
+    <!-- Bluetooth Client -->
+    <string name="fragment_bluetooth_client_menu_open_bluetooth_preference">블루투스 환경설정</string>
+    <string name="fragment_bluetooth_client_bluetooth_on_off">블루투스</string>
+    <string name="fragment_bluetooth_client_select_device">기기 선택</string>
+    <string name="fragment_bluetooth_client_search_device">기기 검색</string>
+    <string name="fragment_bluetooth_client_receive">받기</string>
+    <string name="fragment_bluetooth_client_message_bluetooth_not_avaliable">블루투스 장비를 사용할 수 없습니다.</string>
+    <string name="fragment_bluetooth_client_message_bluetooth_disabled">블루투스가 꺼져 있습니다.</string>
+    <string name="fragment_bluetooth_client_message_no_paired_device">페어링된 기기가 없습니다.\r\n하단의 기기 검색 버튼을 이용해 페어링을 먼저 해주세요.</string>
+    <string name="fragment_bluetooth_client_message_connecting">연결 중</string>
+    <string name="fragment_bluetooth_client_message_receiving">데이터를 받는 중</string>
+    <string name="fragment_bluetooth_client_message_receive_finished">데이터 수신을 완료했습니다</string>
+    <string name="fragment_bluetooth_client_message_receive_error">데이터를 수신하는 중 오류가 발생했습니다</string>
+    <string name="fragment_bluetooth_client_message_cannot_connect">연결을 할 수 없습니다</string>
+    <string name="fragment_bluetooth_client_message_receiving_game_setting">게임 설정을 수신합니다</string>
+    <string name="fragment_bluetooth_client_message_receiving_player_setting">플레이어 설정을 수신합니다</string>
+    <string name="fragment_bluetooth_client_message_receiving_result">게임 결과를 수신합니다</string>
+    <string name="fragment_bluetooth_client_message_update_db">DB를 갱신하는 중입니다</string>
+
+    <!-- Bluetooth Search -->
+    <string name="fragment_bluetooth_device_search_select_device">페어링할 기기를 선택하세요</string>
+    <string name="fragment_bluetooth_device_search_search">검색</string>
+    <string name="fragment_bluetooth_device_search_stop">중지</string>
+    <string name="fragment_bluetooth_device_search_message_bluetooth_not_avaliable">블루투스 장비를 사용할 수 없습니다.</string>
+    <string name="fragment_bluetooth_device_search_message_bluetooth_disabled">블루투스가 꺼져 있습니다.</string>
+
+    <!-- NetShare Client -->
+    <string name="fragment_netshare_client_receive">받기</string>
+    <string name="fragment_netshare_client_message_not_avaliable">인터넷에 연결할 수 없습니다.</string>
+    <string name="fragment_netshare_client_message_receiving">데이터를 받는 중</string>
+    <string name="fragment_netshare_client_message_connecting">연결 중</string>
+    <string name="fragment_netshare_client_message_receive_finished">데이터 수신을 완료했습니다</string>
+    <string name="fragment_netshare_client_message_receive_error">데이터를 수신하는 중 오류가 발생했습니다</string>
+
+    <!-- Preferences -->
+    <string name="preference_always_turn_on_key">AlwaysTurnOnScreen</string>
+    <string name="preference_always_turn_on_title">항상 켜짐</string>
+    <string name="preference_always_turn_on_summary">화면을 잠김 상태가 되지 않도록 합니다</string>
+    <string name="preference_auto_upload_key">AutoUpload</string>
+    <string name="preference_auto_upload_title">자동 업로드</string>
+    <string name="preference_auto_upload_summary">결과를 서버로 자동으로 업로드합니다</string>
+
+    <!-- Result History -->
+    <string name="activity_result_history_menu_delete">삭제</string>
+    <string name="activity_result_history_item_selected">%d개가 선택되었습니다.</string>
+    <string name="activity_result_history_delete">삭제</string>
+    <string name="activity_result_history_are_you_sure_to_delete">%d개의 기록이 지워집니다.\n계속하시겠습니까?</string>
+
+    <!-- History Activity -->
+    <string name="activity_history_title_section1">정산</string>
+    <string name="activity_history_title_section2">점수</string>
+    <string name="activity_history_title_section3">게임설정</string>
+    <string name="activity_history_prev">이전</string>
+    <string name="activity_history_next">다음</string>
+
+    <!-- History Fee -->
+    <string name="fragment_history_fee_total_fee_separator"> / </string>
+
+    <!-- History Game Setting -->
+    <string name="fragment_history_gamesetting_game_setting">게임 설정</string>
+    <string name="fragment_history_gamesetting_hole_fee">홀 비용</string>
+    <string name="fragment_history_gamesetting_ranking_fee">순위 비용</string>
+    <string name="fragment_history_gamesetting_per_hole_fee">홀당 비용</string>
+    <string name="fragment_history_gamesetting_per_hole_fee_setting">홀별 금액 설정</string>
+    <string name="fragment_history_gamesetting_per_ranking_fee_setting">순위별 금액 설정</string>
+    <string name="fragment_history_gamesetting_ranking_1">1 위</string>
+    <string name="fragment_history_gamesetting_ranking_2">2 위</string>
+    <string name="fragment_history_gamesetting_ranking_3">3 위</string>
+    <string name="fragment_history_gamesetting_ranking_4">4 위</string>
+    <string name="fragment_history_gamesetting_ranking_5">5 위</string>
+    <string name="fragment_history_gamesetting_ranking_6">6 위</string>
+    <string name="fragment_history_gamesetting_hole_count_format">%d 홀</string>
+    <string name="fragment_history_gamesetting_player_count_format">%d 명</string>
+
+</resources>

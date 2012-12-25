@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PersonalStatisticsActivity" >
+
+    <ImageView
+        android:id="@+id/PlayerImageView"
+        android:layout_width="match_parent"
+        android:layout_height="80dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/player"
+        android:scaleType="centerCrop"
+        android:src="@drawable/face_unknown" />
+
+    <View
+        android:id="@+id/PlayerView"
+        android:layout_width="match_parent"
+        android:layout_height="80dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#77eeeeee"
+        android:contentDescription="@string/player" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/PlayerImageView" >
+
+        <android.support.v4.view.PagerTitleStrip
+            android:id="@+id/pager_title_strip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="?attr/stripColor"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:textColor="?attr/stripTextColor" />
+    </android.support.v4.view.ViewPager>
+
+    <ProgressBar
+        android:id="@+id/ProgressBar"
+        style="?attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

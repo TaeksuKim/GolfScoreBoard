@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/NewGame"
+        android:alphabeticShortcut="n"
+        android:icon="?newMenuIcon"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/activity_main_menu_new_game"/>
+    <item
+        android:id="@+id/NetShare"
+        android:alphabeticShortcut="b"
+        android:icon="?cloudMenuIcon"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/activity_main_menu_cloud">
+        <menu>
+            <item
+                android:id="@+id/NetShareSendData"
+                android:alphabeticShortcut="x"
+                android:icon="?uploadMenuIcon"
+                android:showAsAction="ifRoom|withText"
+                android:title="@string/activity_main_menu_export"/>
+            <item
+                android:id="@+id/NetShareReceiveData"
+                android:alphabeticShortcut="m"
+                android:icon="?downloadMenuIcon"
+                android:showAsAction="ifRoom|withText"
+                android:title="@string/activity_main_menu_import"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/ModifyGame"
+        android:alphabeticShortcut="m"
+        android:icon="?editMenuIcon"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/activity_main_menu_modify_game"/>
+    <item
+        android:id="@+id/AddResult"
+        android:alphabeticShortcut="a"
+        android:icon="?addResultMenuIcon"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/activity_main_menu_add_result"/>
+    <item
+        android:id="@+id/Save"
+        android:alphabeticShortcut="v"
+        android:icon="?saveMenuIcon"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/activity_main_menu_save"/>
+    <item
+        android:id="@+id/Reset"
+        android:alphabeticShortcut="r"
+        android:icon="?deleteMenuIcon"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/activity_main_menu_reset"/>
+    <item
+        android:id="@+id/Settings"
+        android:alphabeticShortcut="s"
+        android:icon="?settingMenuIcon"
+        android:showAsAction="withText"
+        android:title="@string/activity_main_menu_settings"/>
+
+</menu>

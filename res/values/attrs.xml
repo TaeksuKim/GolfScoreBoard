@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    
+    <attr name="defaultBackground" format="reference|color" />
+    
+    <attr name="preferredItemHeightSmall" format="reference|dimension" />
+    <attr name="preferredItemHeight" format="reference|dimension" />
+    <attr name="listPreferredItemHeightSmall" format="reference|dimension" />
+    <attr name="listPreferredItemHeight" format="reference|dimension" />
+    <attr name="preferredItemPaddingLeft" format="reference|dimension" />
+    <attr name="preferredItemPaddingRight" format="reference|dimension" />
+    
+    <attr name="stripPanel" format="reference" />
+    <attr name="stripColor" format="reference|color" />
+    <attr name="stripTextColor" format="reference|color" />
+    
+    <attr name="dividerHorizontal" format="reference" />
+    <attr name="dividerVertical" format="reference" />
+    
+    <attr name="borderlessButtonPanel" format="reference" />
+    <attr name="borderlessButton" format="reference" />
+    <attr name="borderlessButtonHorizontalDivider" format="reference" />
+    <attr name="borderlessButtonVerticalDivider" format="reference" />
+    
+    <attr name="textAppearanceSmall" format="reference|dimension" />
+    <attr name="textAppearanceMedium" format="reference|dimension" />
+    <attr name="textAppearanceLarge" format="reference|dimension" />
+    
+    
+    <attr name="progressBarStyleLarge" format="reference" />
+    <attr name="listChoiceIndicatorMultiple" format="reference" />
+    <attr name="listSectionHeader" format="reference" />
+    
+    <attr name="emphasisColor" format="reference|color" />
+    <attr name="alertColor" format="reference|color" />
+    <attr name="primaryTextColor" format="reference|color" />
+    <attr name="secondaryTextColor" format="reference|color" />
+
+    <attr name="selectableItemBackground" format="reference|color" />
+    <attr name="spinnerButton1" format="reference|color" />
+    
+    <!-- icons -->
+    <attr name="addResultMenuIcon" format="reference" />
+    <attr name="cloudMenuIcon" format="reference" />
+    <attr name="bluetoothMenuIcon" format="reference" />
+    <attr name="deleteMenuIcon" format="reference" />
+    <attr name="downloadMenuIcon" format="reference" />
+    <attr name="editMenuIcon" format="reference" />
+    <attr name="newMenuIcon" format="reference" />
+    <attr name="saveMenuIcon" format="reference" />
+    <attr name="settingMenuIcon" format="reference" />
+    <attr name="uploadMenuIcon" format="reference" />
+</resources>

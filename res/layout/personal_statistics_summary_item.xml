@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:clickable="true"
+    android:focusable="true" >
+
+    <!-- ?attr/secondaryTextColor -->
+
+    <RelativeLayout
+        android:id="@+id/MainView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:background="@drawable/list_selector_holo_light"
+        android:clickable="false"
+        android:focusable="false" >
+
+        <!-- Attend -->
+
+        <TextView
+            android:id="@+id/AttendCountTitleTextView"
+            android:layout_width="70dip"
+            android:layout_height="30dip"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="4dip"
+            android:layout_marginTop="4dip"
+            android:gravity="center"
+            android:text="경기"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/AttendCountTextView"
+            android:layout_width="50dip"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/AttendCountTitleTextView"
+            android:layout_marginBottom="4dip"
+            android:layout_marginTop="4dip"
+            android:layout_toRightOf="@+id/AttendCountTitleTextView"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/TotalFeeTitleTextView"
+            android:layout_width="60dip"
+            android:layout_height="30dip"
+            android:layout_alignBaseline="@+id/AttendCountTitleTextView"
+            android:layout_marginBottom="4dip"
+            android:layout_marginTop="4dip"
+            android:layout_toRightOf="@+id/AttendCountTextView"
+            android:gravity="center"
+            android:text="총금액"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/TotalFeeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/AttendCountTitleTextView"
+            android:layout_marginBottom="4dip"
+            android:layout_marginTop="4dip"
+            android:layout_toRightOf="@+id/TotalFeeTitleTextView"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/ShowMoreButton"
+            android:layout_width="60dip"
+            android:layout_height="38dip"
+            android:layout_alignBaseline="@+id/AttendCountTitleTextView"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_expand"
+            android:clickable="false"
+            android:focusable="false"
+            android:gravity="center_vertical|left"
+            android:textAppearance="?attr/textAppearanceSmall" />
+    </RelativeLayout>
+
+    <GridLayout
+        android:id="@+id/DetailView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MainView"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:alignmentMode="alignBounds"
+        android:background="@drawable/list_selector_holo_light"
+        android:clickable="false"
+        android:columnCount="6"
+        android:columnOrderPreserved="false"
+        android:focusable="false"
+        android:gravity="center"
+        android:useDefaultMargins="false"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dip"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:layout_marginTop="4dip"
+            android:gravity="center"
+            android:text="평균순위"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/AvgRankingTextView"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:text="최고"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/MinRankingTextView"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:text="최저"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/MaxRankingTextView"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dip"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:layout_marginTop="4dip"
+            android:gravity="center"
+            android:text="1 위"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/FirstStandTextView"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/FirstStandRateTextView"
+            android:layout_columnSpan="4"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dip"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:layout_marginTop="4dip"
+            android:gravity="center"
+            android:text="최하위"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/LastStandTextView"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/LastStandRateTextView"
+            android:layout_columnSpan="4"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dip"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:layout_marginTop="4dip"
+            android:gravity="center"
+            android:text="평균타수"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/AvgStrokeCountTextView"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:text="최고"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/MinStrokeCountTextView"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:text="최저"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/MaxStrokeCountTextView"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dip"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:layout_marginTop="4dip"
+            android:layout_rowSpan="2"
+            android:gravity="center"
+            android:text="평균금액"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/AvgFeeTextView"
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:layout_rowSpan="2"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:text="최고"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/MinFeeTextView"
+            android:layout_columnSpan="3"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceSmall" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:text="최저"
+            android:textAppearance="?attr/textAppearanceSmall"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/MaxFeeTextView"
+            android:layout_columnSpan="3"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceSmall" />
+    </GridLayout>
+
+</RelativeLayout>

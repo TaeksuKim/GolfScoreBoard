@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.dolicoli.android.golfscoreboard.utils.CheckableRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dip"
+    android:paddingRight="?attr/preferredItemPaddingRight"
+    android:paddingTop="8dip" >
+
+    <CheckedTextView
+        android:id="@+id/CheckTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:checkMark="?attr/listChoiceIndicatorMultiple"
+        android:ellipsize="marquee"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textAppearance="?attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/Date1TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="8dip"
+        android:layout_toRightOf="@+id/CheckTextView"
+        android:gravity="bottom|left"
+        android:textAppearance="?attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/Date2TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Date1TextView"
+        android:layout_marginLeft="8dip"
+        android:layout_toRightOf="@+id/Date1TextView"
+        android:gravity="bottom|left"
+        android:textAppearance="?attr/textAppearanceSmall"
+        android:textColor="?attr/secondaryTextColor" />
+
+    <TextView
+        android:id="@+id/PlayerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Date1TextView"
+        android:layout_below="@+id/Date1TextView"
+        android:gravity="top|left"
+        android:textAppearance="?attr/textAppearanceSmall" />
+
+</org.dolicoli.android.golfscoreboard.utils.CheckableRelativeLayout>

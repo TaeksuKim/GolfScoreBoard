@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <Spinner
+            android:id="@+id/HandicapCalculatorSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/preferredItemHeight" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingLeft="?attr/preferredItemPaddingLeft"
+                android:paddingRight="?attr/preferredItemPaddingRight" >
+
+                <RelativeLayout
+                    android:id="@+id/Player1View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal" >
+
+                    <TextView
+                        android:id="@+id/Player1NameTextView"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/fragment_game_setting_default_player_name_1"
+                        android:textAppearance="?attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/Player1GameCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player1NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player1NameTextView"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="?attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/Player1AvgScoreTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player1NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player1GameCountTextView"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/Player1RecommendTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player1NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player1AvgScoreTextView"
+                        android:gravity="center_horizontal"
+                        android:text="추천"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/emphasisColor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Player1RecommendHandicapTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player1NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player1RecommendTitleTextView"
+                        android:gravity="center_horizontal"
+                        android:textColor="?attr/emphasisColor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Player1HandicapTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignLeft="@+id/Player1NameTextView"
+                        android:layout_below="@+id/Player1NameTextView"
+                        android:layout_marginRight="4dip"
+                        android:gravity="center"
+                        android:text="홀 핸디"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/secondaryTextColor" />
+
+                    <Spinner
+                        android:id="@+id/Player1HandicapSpinner"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBaseline="@+id/Player1HandicapTitleTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player1HandicapTitleTextView" />
+
+                    <TextView
+                        android:id="@+id/Player1ExtraScoreTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignTop="@+id/Player1HandicapTitleTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player1HandicapSpinner"
+                        android:gravity="center"
+                        android:text="점수 핸디"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/secondaryTextColor" />
+
+                    <Spinner
+                        android:id="@+id/Player1ExtraScoreSpinner"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBaseline="@+id/Player1HandicapTitleTextView"
+                        android:layout_toRightOf="@+id/Player1ExtraScoreTitleTextView" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Player2View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal" >
+
+                    <TextView
+                        android:id="@+id/Player2NameTextView"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/fragment_game_setting_default_player_name_2"
+                        android:textAppearance="?attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/Player2GameCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player2NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player2NameTextView"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="?attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/Player2AvgScoreTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player2NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player2GameCountTextView"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/Player2RecommendTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player2NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player2AvgScoreTextView"
+                        android:gravity="center_horizontal"
+                        android:text="추천"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/emphasisColor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Player2RecommendHandicapTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player2NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player2RecommendTitleTextView"
+                        android:gravity="center_horizontal"
+                        android:textColor="?attr/emphasisColor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Player2HandicapTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignLeft="@+id/Player2NameTextView"
+                        android:layout_below="@+id/Player2NameTextView"
+                        android:layout_marginRight="4dip"
+                        android:gravity="center"
+                        android:text="홀 핸디"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/secondaryTextColor" />
+
+                    <Spinner
+                        android:id="@+id/Player2HandicapSpinner"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBaseline="@+id/Player2HandicapTitleTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player2HandicapTitleTextView" />
+
+                    <TextView
+                        android:id="@+id/Player2ExtraScoreTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignTop="@+id/Player2HandicapTitleTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player2HandicapSpinner"
+                        android:gravity="center"
+                        android:text="점수 핸디"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/secondaryTextColor" />
+
+                    <Spinner
+                        android:id="@+id/Player2ExtraScoreSpinner"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBaseline="@+id/Player2HandicapTitleTextView"
+                        android:layout_toRightOf="@+id/Player2ExtraScoreTitleTextView" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Player3View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal" >
+
+                    <TextView
+                        android:id="@+id/Player3NameTextView"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/fragment_game_setting_default_player_name_3"
+                        android:textAppearance="?attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/Player3GameCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player3NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player3NameTextView"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="?attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/Player3AvgScoreTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player3NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player3GameCountTextView"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/Player3RecommendTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player3NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player3AvgScoreTextView"
+                        android:gravity="center_horizontal"
+                        android:text="추천"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/emphasisColor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Player3RecommendHandicapTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player3NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player3RecommendTitleTextView"
+                        android:gravity="center_horizontal"
+                        android:textColor="?attr/emphasisColor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Player3HandicapTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignLeft="@+id/Player3NameTextView"
+                        android:layout_below="@+id/Player3NameTextView"
+                        android:layout_marginRight="4dip"
+                        android:gravity="center"
+                        android:text="홀 핸디"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/secondaryTextColor" />
+
+                    <Spinner
+                        android:id="@+id/Player3HandicapSpinner"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBaseline="@+id/Player3HandicapTitleTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player3HandicapTitleTextView" />
+
+                    <TextView
+                        android:id="@+id/Player3ExtraScoreTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignTop="@+id/Player3HandicapTitleTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player3HandicapSpinner"
+                        android:gravity="center"
+                        android:text="점수 핸디"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/secondaryTextColor" />
+
+                    <Spinner
+                        android:id="@+id/Player3ExtraScoreSpinner"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBaseline="@+id/Player3HandicapTitleTextView"
+                        android:layout_toRightOf="@+id/Player3ExtraScoreTitleTextView" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Player4View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal" >
+
+                    <TextView
+                        android:id="@+id/Player4NameTextView"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/fragment_game_setting_default_player_name_4"
+                        android:textAppearance="?attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/Player4GameCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player4NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player4NameTextView"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="?attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/Player4AvgScoreTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player4NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player4GameCountTextView"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/Player4RecommendTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player4NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player4AvgScoreTextView"
+                        android:gravity="center_horizontal"
+                        android:text="추천"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/emphasisColor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Player4RecommendHandicapTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player4NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player4RecommendTitleTextView"
+                        android:gravity="center_horizontal"
+                        android:textColor="?attr/emphasisColor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Player4HandicapTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignLeft="@+id/Player4NameTextView"
+                        android:layout_below="@+id/Player4NameTextView"
+                        android:layout_marginRight="4dip"
+                        android:gravity="center"
+                        android:text="홀 핸디"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/secondaryTextColor" />
+
+                    <Spinner
+                        android:id="@+id/Player4HandicapSpinner"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBaseline="@+id/Player4HandicapTitleTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player4HandicapTitleTextView" />
+
+                    <TextView
+                        android:id="@+id/Player4ExtraScoreTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignTop="@+id/Player4HandicapTitleTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player4HandicapSpinner"
+                        android:gravity="center"
+                        android:text="점수 핸디"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/secondaryTextColor" />
+
+                    <Spinner
+                        android:id="@+id/Player4ExtraScoreSpinner"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBaseline="@+id/Player4HandicapTitleTextView"
+                        android:layout_toRightOf="@+id/Player4ExtraScoreTitleTextView" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Player5View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal" >
+
+                    <TextView
+                        android:id="@+id/Player5NameTextView"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/fragment_game_setting_default_player_name_5"
+                        android:textAppearance="?attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/Player5GameCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player5NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player5NameTextView"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="?attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/Player5AvgScoreTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player5NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player5GameCountTextView"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/Player5RecommendTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player5NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player5AvgScoreTextView"
+                        android:gravity="center_horizontal"
+                        android:text="추천"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/emphasisColor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Player5RecommendHandicapTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player5NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player5RecommendTitleTextView"
+                        android:gravity="center_horizontal"
+                        android:textColor="?attr/emphasisColor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Player5HandicapTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignLeft="@+id/Player5NameTextView"
+                        android:layout_below="@+id/Player5NameTextView"
+                        android:layout_marginRight="4dip"
+                        android:gravity="center"
+                        android:text="홀 핸디"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/secondaryTextColor" />
+
+                    <Spinner
+                        android:id="@+id/Player5HandicapSpinner"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBaseline="@+id/Player5HandicapTitleTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player5HandicapTitleTextView" />
+
+                    <TextView
+                        android:id="@+id/Player5ExtraScoreTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignTop="@+id/Player5HandicapTitleTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player5HandicapSpinner"
+                        android:gravity="center"
+                        android:text="점수 핸디"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/secondaryTextColor" />
+
+                    <Spinner
+                        android:id="@+id/Player5ExtraScoreSpinner"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBaseline="@+id/Player5HandicapTitleTextView"
+                        android:layout_toRightOf="@+id/Player5ExtraScoreTitleTextView" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Player6View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal" >
+
+                    <TextView
+                        android:id="@+id/Player6NameTextView"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/fragment_game_setting_default_player_name_6"
+                        android:textAppearance="?attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/Player6GameCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player6NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player6NameTextView"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="?attr/textAppearanceSmall" />
+
+                    <TextView
+                        android:id="@+id/Player6AvgScoreTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player6NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player6GameCountTextView"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/Player6RecommendTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player6NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player6AvgScoreTextView"
+                        android:gravity="center_horizontal"
+                        android:text="추천"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/emphasisColor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Player6RecommendHandicapTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/Player6NameTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player6RecommendTitleTextView"
+                        android:gravity="center_horizontal"
+                        android:text="+28.00"
+                        android:textColor="?attr/emphasisColor"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Player6HandicapTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignLeft="@+id/Player6NameTextView"
+                        android:layout_below="@+id/Player6NameTextView"
+                        android:layout_marginRight="4dip"
+                        android:gravity="center"
+                        android:text="홀 핸디"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/secondaryTextColor" />
+
+                    <Spinner
+                        android:id="@+id/Player6HandicapSpinner"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBaseline="@+id/Player6HandicapTitleTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player6HandicapTitleTextView" />
+
+                    <TextView
+                        android:id="@+id/Player6ExtraScoreTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignTop="@+id/Player6HandicapTitleTextView"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:layout_toRightOf="@+id/Player6HandicapSpinner"
+                        android:gravity="center"
+                        android:text="점수 핸디"
+                        android:textAppearance="?attr/textAppearanceSmall"
+                        android:textColor="?attr/secondaryTextColor" />
+
+                    <Spinner
+                        android:id="@+id/Player6ExtraScoreSpinner"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_alignBaseline="@+id/Player6HandicapTitleTextView"
+                        android:layout_toRightOf="@+id/Player6ExtraScoreTitleTextView" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/ProgressBar"
+        style="?attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

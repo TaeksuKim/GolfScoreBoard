@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <RelativeLayout
+        android:id="@+id/ButtonPanel"
+        style="?attr/borderlessButtonPanel"
+        android:layout_alignParentBottom="true" >
+
+        <ImageView
+            android:id="@+id/UpperDivider"
+            style="?attr/borderlessButtonHorizontalDivider"
+            android:contentDescription="@string/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/UpperDivider" >
+
+            <Button
+                android:id="@+id/AddResultButton"
+                style="?attr/borderlessButton"
+                android:text="@string/activity_main_dialog_add_result_button" />
+
+            <ImageView
+                style="?attr/borderlessButtonVerticalDivider"
+                android:contentDescription="@string/divider" />
+
+            <Button
+                android:id="@+id/ImportButton"
+                style="?attr/borderlessButton"
+                android:text="@string/activity_main_dialog_import_button" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ButtonPanel" >
+
+        <android.support.v4.view.PagerTitleStrip
+            android:id="@+id/pager_title_strip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="?attr/stripColor"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:textColor="?attr/stripTextColor" />
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>

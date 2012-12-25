@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NewGameActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/preferredItemHeight"
+        android:paddingLeft="?attr/preferredItemPaddingLeft"
+        android:paddingRight="?attr/preferredItemPaddingRight" >
+
+        <TextView
+            android:id="@+id/FeeTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:paddingLeft="10dip"
+            android:text="@string/fragment_ranking_fee_setting_total_fee"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TotalRankingFeeTextView"
+            android:layout_width="100dip"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/FeeSeparatorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_toLeftOf="@+id/TotalRankingFeeTextView"
+            android:gravity="center"
+            android:text="@string/fragment_ranking_fee_setting_per" />
+
+        <TextView
+            android:id="@+id/SumTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/FeeSeparatorTextView"
+            android:layout_toRightOf="@+id/FeeTitleTextView"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="?attr/stripPanel"
+        android:paddingLeft="?attr/preferredItemPaddingLeft"
+        android:paddingRight="?attr/preferredItemPaddingRight" >
+
+        <TextView
+            android:id="@+id/BarRankingTitleTextView"
+            android:layout_width="80dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:paddingRight="10dip"
+            android:text=""
+            android:textColor="?attr/stripTextColor"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/BarRecommendTitleTextView"
+            android:layout_width="100dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:text="@string/fragment_ranking_fee_setting_recommend"
+            android:textColor="?attr/stripTextColor"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/BarFeeTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:layout_toLeftOf="@+id/BarRecommendTitleTextView"
+            android:layout_toRightOf="@+id/BarRankingTitleTextView"
+            android:gravity="center"
+            android:text="@string/fragment_ranking_fee_setting_fee"
+            android:textColor="?attr/stripTextColor"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/MessageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dip"
+        android:layout_marginTop="4dip"
+        android:gravity="center"
+        android:paddingLeft="?attr/preferredItemPaddingLeft"
+        android:paddingRight="?attr/preferredItemPaddingRight"
+        android:text="@string/fragment_ranking_fee_message_invalid_fee"
+        android:textColor="?attr/alertColor"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="?attr/preferredItemPaddingLeft"
+            android:paddingRight="?attr/preferredItemPaddingRight" >
+
+            <!-- Ranking 1 -->
+
+            <TextView
+                android:id="@+id/Fee1TitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_fee_ranking1" />
+
+            <TextView
+                android:id="@+id/Recommend1TextView"
+                android:layout_width="100dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Fee1TitleTextView"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textColor="?attr/emphasisColor"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/Fee1EditText"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Fee1TitleTextView"
+                android:layout_toLeftOf="@+id/Recommend1TextView"
+                android:layout_toRightOf="@+id/Fee1TitleTextView"
+                android:hint="@string/fragment_game_setting_fee_ranking1"
+                android:inputType="number"
+                android:selectAllOnFocus="true" />
+
+            <!-- Ranking 2 -->
+
+            <TextView
+                android:id="@+id/Fee2TitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/Fee1TitleTextView"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_fee_ranking2" />
+
+            <TextView
+                android:id="@+id/Recommend2TextView"
+                android:layout_width="100dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Fee2TitleTextView"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textColor="?attr/emphasisColor"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/Fee2EditText"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Fee2TitleTextView"
+                android:layout_toLeftOf="@+id/Recommend2TextView"
+                android:layout_toRightOf="@+id/Fee2TitleTextView"
+                android:hint="@string/fragment_game_setting_fee_ranking2"
+                android:inputType="number"
+                android:selectAllOnFocus="true" />
+
+            <!-- Ranking 3 -->
+
+            <TextView
+                android:id="@+id/Fee3TitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/Fee2TitleTextView"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_fee_ranking3" />
+
+            <TextView
+                android:id="@+id/Recommend3TextView"
+                android:layout_width="100dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Fee3TitleTextView"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textColor="?attr/emphasisColor"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/Fee3EditText"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Fee3TitleTextView"
+                android:layout_toLeftOf="@+id/Recommend3TextView"
+                android:layout_toRightOf="@+id/Fee3TitleTextView"
+                android:hint="@string/fragment_game_setting_fee_ranking3"
+                android:inputType="number"
+                android:selectAllOnFocus="true" />
+
+            <!-- Ranking 4 -->
+
+            <TextView
+                android:id="@+id/Fee4TitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/Fee3TitleTextView"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_fee_ranking4" />
+
+            <TextView
+                android:id="@+id/Recommend4TextView"
+                android:layout_width="100dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Fee4TitleTextView"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textColor="?attr/emphasisColor"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/Fee4EditText"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Fee4TitleTextView"
+                android:layout_toLeftOf="@+id/Recommend4TextView"
+                android:layout_toRightOf="@+id/Fee4TitleTextView"
+                android:hint="@string/fragment_game_setting_fee_ranking4"
+                android:inputType="number"
+                android:selectAllOnFocus="true" />
+
+            <!-- Ranking 5 -->
+
+            <TextView
+                android:id="@+id/Fee5TitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/Fee4TitleTextView"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_fee_ranking5" />
+
+            <TextView
+                android:id="@+id/Recommend5TextView"
+                android:layout_width="100dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Fee5TitleTextView"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textColor="?attr/emphasisColor"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/Fee5EditText"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Fee5TitleTextView"
+                android:layout_toLeftOf="@+id/Recommend5TextView"
+                android:layout_toRightOf="@+id/Fee5TitleTextView"
+                android:hint="@string/fragment_game_setting_fee_ranking5"
+                android:inputType="number"
+                android:selectAllOnFocus="true" />
+
+            <!-- Ranking 6 -->
+
+            <TextView
+                android:id="@+id/Fee6TitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/Fee5TitleTextView"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_fee_ranking6" />
+
+            <TextView
+                android:id="@+id/Recommend6TextView"
+                android:layout_width="100dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Fee6TitleTextView"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textColor="?attr/emphasisColor"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/Fee6EditText"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Fee6TitleTextView"
+                android:layout_toLeftOf="@+id/Recommend6TextView"
+                android:layout_toRightOf="@+id/Fee6TitleTextView"
+                android:hint="@string/fragment_game_setting_fee_ranking6"
+                android:inputType="number"
+                android:selectAllOnFocus="true" />
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/preferredItemHeight"
+        android:paddingLeft="?attr/preferredItemPaddingLeft" >
+
+        <TextView
+            android:id="@+id/HoleNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="8dip"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <HorizontalScrollView
+            android:id="@+id/ParCountScrollView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/HoleNumberTextView"
+            android:fadingEdge="horizontal"
+            android:scrollbars="@null" >
+
+            <RadioGroup
+                android:id="@+id/ParRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/ParThreeRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="3dip"
+                    android:text="@string/fragment_add_result_par_three" />
+
+                <RadioButton
+                    android:id="@+id/ParFourRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dip"
+                    android:layout_marginRight="3dip"
+                    android:text="@string/fragment_add_result_par_four" />
+
+                <RadioButton
+                    android:id="@+id/ParFiveRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dip"
+                    android:text="@string/fragment_add_result_par_five" />
+
+                <RadioButton
+                    android:id="@+id/ParSixRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dip"
+                    android:text="@string/fragment_add_result_par_six" />
+            </RadioGroup>
+        </HorizontalScrollView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="?attr/stripPanel"
+        android:paddingLeft="?attr/preferredItemPaddingLeft"
+        android:paddingRight="?attr/preferredItemPaddingRight" >
+
+        <TextView
+            android:id="@+id/PlayerHandicapTitleTextView"
+            android:layout_width="60dip"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:text="@string/fragment_add_result_handicap"
+            android:textColor="?attr/stripTextColor"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/PlayerNameTitleTextView"
+            android:layout_width="100dip"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:paddingRight="10dip"
+            android:text="@string/fragment_add_result_name"
+            android:textColor="?attr/stripTextColor"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ScoreTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:layout_toLeftOf="@+id/PlayerHandicapTitleTextView"
+            android:layout_toRightOf="@+id/PlayerNameTitleTextView"
+            android:gravity="center"
+            android:paddingRight="10dip"
+            android:text="@string/fragment_add_result_score"
+            android:textColor="?attr/stripTextColor"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:paddingLeft="?attr/preferredItemPaddingLeft"
+        android:paddingRight="?attr/preferredItemPaddingRight" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Spinner
+                android:id="@+id/Player1HandicapSpinner"
+                android:layout_width="60dip"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true" />
+
+            <TextView
+                android:id="@+id/Player1NameTextView"
+                android:layout_width="100dip"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/Player1ScoreSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/Player1HandicapSpinner"
+                android:layout_toRightOf="@+id/Player1NameTextView" />
+
+            <Spinner
+                android:id="@+id/Player2HandicapSpinner"
+                android:layout_width="60dip"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/Player1HandicapSpinner" />
+
+            <TextView
+                android:id="@+id/Player2NameTextView"
+                android:layout_width="100dip"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/Player1NameTextView"
+                android:gravity="center_vertical"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/Player2ScoreSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_below="@+id/Player1ScoreSpinner"
+                android:layout_toLeftOf="@+id/Player2HandicapSpinner"
+                android:layout_toRightOf="@+id/Player2NameTextView" />
+
+            <Spinner
+                android:id="@+id/Player3HandicapSpinner"
+                android:layout_width="60dip"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/Player2HandicapSpinner" />
+
+            <TextView
+                android:id="@+id/Player3NameTextView"
+                android:layout_width="100dip"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/Player2NameTextView"
+                android:gravity="center_vertical"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/Player3ScoreSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_below="@+id/Player2ScoreSpinner"
+                android:layout_toLeftOf="@+id/Player3HandicapSpinner"
+                android:layout_toRightOf="@+id/Player3NameTextView" />
+
+            <Spinner
+                android:id="@+id/Player4HandicapSpinner"
+                android:layout_width="60dip"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/Player3HandicapSpinner" />
+
+            <TextView
+                android:id="@+id/Player4NameTextView"
+                android:layout_width="100dip"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/Player3NameTextView"
+                android:gravity="center_vertical"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/Player4ScoreSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_below="@+id/Player3ScoreSpinner"
+                android:layout_toLeftOf="@+id/Player4HandicapSpinner"
+                android:layout_toRightOf="@+id/Player4NameTextView" />
+
+            <Spinner
+                android:id="@+id/Player5HandicapSpinner"
+                android:layout_width="60dip"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/Player4HandicapSpinner" />
+
+            <TextView
+                android:id="@+id/Player5NameTextView"
+                android:layout_width="100dip"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/Player4NameTextView"
+                android:gravity="center_vertical"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/Player5ScoreSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_below="@+id/Player4ScoreSpinner"
+                android:layout_toLeftOf="@+id/Player5HandicapSpinner"
+                android:layout_toRightOf="@+id/Player5NameTextView" />
+
+            <Spinner
+                android:id="@+id/Player6HandicapSpinner"
+                android:layout_width="60dip"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/Player5HandicapSpinner" />
+
+            <TextView
+                android:id="@+id/Player6NameTextView"
+                android:layout_width="100dip"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/Player5NameTextView"
+                android:gravity="center_vertical"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/Player6ScoreSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_below="@+id/Player5ScoreSpinner"
+                android:layout_toLeftOf="@+id/Player6HandicapSpinner"
+                android:layout_toRightOf="@+id/Player6NameTextView" />
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

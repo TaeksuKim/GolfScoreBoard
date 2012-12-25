@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        style="?attr/stripPanel"
+        android:paddingLeft="?attr/preferredItemPaddingLeft"
+        android:paddingRight="?attr/preferredItemPaddingRight" >
+
+        <TextView
+            android:id="@+id/PlayerNameTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/fragment_player_setting_name"
+            android:textColor="?attr/stripTextColor"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="?attr/preferredItemPaddingLeft"
+            android:paddingRight="?attr/preferredItemPaddingRight" >
+
+            <!-- Player 1 -->
+
+            <EditText
+                android:id="@+id/Player1DummyEditText"
+                android:layout_width="1dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:inputType="number"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/Player1NewNameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Player1DummyEditText"
+                android:layout_alignParentRight="true"
+                android:text="추가" />
+
+            <Spinner
+                android:id="@+id/Player1NameSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Player1DummyEditText"
+                android:layout_toLeftOf="@+id/Player1NewNameButton"
+                android:hint="@string/fragment_player_setting_hint_name1"
+                android:paddingLeft="15dip" />
+
+            <!-- Player 2 -->
+
+            <EditText
+                android:id="@+id/Player2DummyEditText"
+                android:layout_width="1dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/Player1DummyEditText"
+                android:inputType="number"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/Player2NewNameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Player2DummyEditText"
+                android:layout_alignParentRight="true"
+                android:text="추가" />
+
+            <Spinner
+                android:id="@+id/Player2NameSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Player2DummyEditText"
+                android:layout_toLeftOf="@+id/Player2NewNameButton"
+                android:hint="@string/fragment_player_setting_hint_name1"
+                android:paddingLeft="15dip" />
+
+            <!-- Player 3 -->
+
+            <EditText
+                android:id="@+id/Player3DummyEditText"
+                android:layout_width="1dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/Player2DummyEditText"
+                android:inputType="number"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/Player3NewNameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Player3DummyEditText"
+                android:layout_alignParentRight="true"
+                android:text="추가" />
+
+            <Spinner
+                android:id="@+id/Player3NameSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Player3DummyEditText"
+                android:layout_toLeftOf="@+id/Player3NewNameButton"
+                android:hint="@string/fragment_player_setting_hint_name1"
+                android:paddingLeft="15dip" />
+
+            <!-- Player 4 -->
+
+            <EditText
+                android:id="@+id/Player4DummyEditText"
+                android:layout_width="1dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/Player3DummyEditText"
+                android:inputType="number"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/Player4NewNameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Player4DummyEditText"
+                android:layout_alignParentRight="true"
+                android:text="추가" />
+
+            <Spinner
+                android:id="@+id/Player4NameSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Player4DummyEditText"
+                android:layout_toLeftOf="@+id/Player4NewNameButton"
+                android:hint="@string/fragment_player_setting_hint_name1"
+                android:paddingLeft="15dip" />
+
+            <!-- Player 5 -->
+
+            <EditText
+                android:id="@+id/Player5DummyEditText"
+                android:layout_width="1dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/Player4DummyEditText"
+                android:inputType="number"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/Player5NewNameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Player5DummyEditText"
+                android:layout_alignParentRight="true"
+                android:text="추가" />
+
+            <Spinner
+                android:id="@+id/Player5NameSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Player5DummyEditText"
+                android:layout_toLeftOf="@+id/Player5NewNameButton"
+                android:hint="@string/fragment_player_setting_hint_name1"
+                android:paddingLeft="15dip" />
+
+            <!-- Player 6 -->
+
+            <EditText
+                android:id="@+id/Player6DummyEditText"
+                android:layout_width="1dip"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/Player5DummyEditText"
+                android:inputType="number"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/Player6NewNameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Player6DummyEditText"
+                android:layout_alignParentRight="true"
+                android:text="추가" />
+
+            <Spinner
+                android:id="@+id/Player6NameSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/preferredItemHeight"
+                android:layout_alignBaseline="@+id/Player6DummyEditText"
+                android:layout_toLeftOf="@+id/Player6NewNameButton"
+                android:hint="@string/fragment_player_setting_hint_name1"
+                android:paddingLeft="15dip" />
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

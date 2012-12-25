@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewGameActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/preferredItemHeight"
+            android:paddingLeft="?attr/preferredItemPaddingLeft"
+            android:paddingRight="?attr/preferredItemPaddingRight" >
+
+            <TextView
+                android:id="@+id/HoleNumberTitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_title_hole_number" />
+
+            <RadioGroup
+                android:id="@+id/HoleNumberRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/HoleNumberTitleTextView"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/NineHoleRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dip"
+                    android:text="@string/fragment_game_setting_nine_home" />
+
+                <RadioButton
+                    android:id="@+id/EighteenHoleRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dip"
+                    android:text="@string/fragment_game_setting_eighteen_home" />
+            </RadioGroup>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/preferredItemHeight"
+            android:paddingLeft="?attr/preferredItemPaddingLeft"
+            android:paddingRight="?attr/preferredItemPaddingRight" >
+
+            <TextView
+                android:id="@+id/PlayerCountTitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_player" />
+
+            <Spinner
+                android:id="@+id/PlayerCountSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/PlayerCountTitleTextView" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/preferredItemHeight"
+            android:paddingLeft="?attr/preferredItemPaddingLeft"
+            android:paddingRight="?attr/preferredItemPaddingRight" >
+
+            <TextView
+                android:id="@+id/GameFeeTitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_game_fee_a" />
+
+            <EditText
+                android:id="@+id/GameFeeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBaseline="@+id/GameFeeTitleTextView"
+                android:layout_toRightOf="@+id/GameFeeTitleTextView"
+                android:hint="@string/fragment_game_setting_game_fee"
+                android:inputType="numberDecimal"
+                android:selectAllOnFocus="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/preferredItemHeight"
+            android:paddingLeft="?attr/preferredItemPaddingLeft"
+            android:paddingRight="?attr/preferredItemPaddingRight" >
+
+            <TextView
+                android:id="@+id/ExtraFeeTitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_extra_fee_a" />
+
+            <EditText
+                android:id="@+id/ExtraFeeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBaseline="@+id/ExtraFeeTitleTextView"
+                android:layout_toRightOf="@+id/ExtraFeeTitleTextView"
+                android:hint="@string/fragment_game_setting_extra_fee"
+                android:inputType="number"
+                android:selectAllOnFocus="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/preferredItemHeight"
+            android:paddingLeft="?attr/preferredItemPaddingLeft"
+            android:paddingRight="?attr/preferredItemPaddingRight" >
+
+            <TextView
+                android:id="@+id/RankingFeeTitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_ranking_fee_a" />
+
+            <EditText
+                android:id="@+id/RankingFeeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBaseline="@+id/RankingFeeTitleTextView"
+                android:layout_toRightOf="@+id/RankingFeeTitleTextView"
+                android:hint="@string/fragment_game_setting_ranking_fee"
+                android:inputType="number"
+                android:selectAllOnFocus="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/preferredItemHeight"
+            android:paddingLeft="?attr/preferredItemPaddingLeft"
+            android:paddingRight="?attr/preferredItemPaddingRight" >
+
+            <TextView
+                android:id="@+id/TotalFeeTitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_total_fee_a" />
+
+            <TextView
+                android:id="@+id/TotalFeeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBaseline="@+id/TotalFeeTitleTextView"
+                android:layout_toRightOf="@+id/TotalFeeTitleTextView"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="10dip"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/preferredItemHeight"
+            android:paddingLeft="?attr/preferredItemPaddingLeft"
+            android:paddingRight="?attr/preferredItemPaddingRight" >
+
+            <TextView
+                android:id="@+id/TotalRankingFeeTitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_ranking_fee_a" />
+
+            <TextView
+                android:id="@+id/TotalRankingFeeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBaseline="@+id/TotalRankingFeeTitleTextView"
+                android:layout_toRightOf="@+id/TotalRankingFeeTitleTextView"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="10dip"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/preferredItemHeight"
+            android:paddingLeft="?attr/preferredItemPaddingLeft"
+            android:paddingRight="?attr/preferredItemPaddingRight" >
+
+            <TextView
+                android:id="@+id/TotalHoleFeeTitleTextView"
+                android:layout_width="80dip"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:text="@string/fragment_game_setting_hole_fee_a" />
+
+            <TextView
+                android:id="@+id/TotalHoleFeeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBaseline="@+id/TotalHoleFeeTitleTextView"
+                android:layout_toRightOf="@+id/TotalHoleFeeTitleTextView"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="10dip"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

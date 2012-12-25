@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/ButtonPanel"
+        style="?attr/borderlessButtonPanel"
+        android:layout_alignParentBottom="true" >
+
+        <ImageView
+            style="?attr/borderlessButtonHorizontalDivider"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/divider" />
+
+        <ImageView
+            android:id="@+id/ButtonVerticalDivider"
+            style="?attr/borderlessButtonVerticalDivider"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/divider" />
+
+        <Button
+            android:id="@+id/CancelButton"
+            style="?attr/borderlessButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/ButtonVerticalDivider"
+            android:text="@android:string/cancel" />
+
+        <Button
+            android:id="@+id/ConfirmButton"
+            style="?attr/borderlessButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/ButtonVerticalDivider"
+            android:text="@android:string/ok" />
+    </RelativeLayout>
+
+    <fragment
+        android:id="@+id/ModifyResultFragment"
+        android:name="org.dolicoli.android.golfscoreboard.fragments.currentgame.ModifyResultFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ButtonPanel" />
+
+</RelativeLayout>

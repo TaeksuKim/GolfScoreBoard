@@ -1,0 +1,87 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.dolicoli.android.golfscoreboard"
+    android:installLocation="auto"
+    android:versionCode="23"
+    android:versionName="1.1.7" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="15" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name="GolfScoreBoardApplication"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/LightTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Current Game -->
+        <activity
+            android:name=".CurrentGameNewGameSettingActivity"
+            android:label="@string/title_activity_current_game_new_game"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".CurrentGameModifyGameSettingActivity"
+            android:label="@string/title_activity_current_game_modify_game_setting"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".CurrentGameAddResultActivity"
+            android:label="@string/title_activity_current_game_add_result"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".CurrentGameModifyResultActivity"
+            android:label="@string/title_activity_current_game_modify_result"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <!-- Net Share -->
+        <activity
+            android:name=".NetShareClientActivity"
+            android:label="@string/title_activity_netshare_client"
+            android:screenOrientation="portrait" />
+
+        <!-- Personal Statistics -->
+        <activity
+            android:name=".PersonalStatisticsActivity"
+            android:label="@string/title_activity_personal_statistics"
+            android:screenOrientation="portrait" />
+
+        <!-- One Game -->
+        <activity
+            android:name=".OneGameActivity"
+            android:label="@string/title_activity_onegame"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".OneGamePlayerRecordActivity"
+            android:label="@string/title_activity_onegame_player_record"
+            android:screenOrientation="portrait" />
+
+        <!-- History -->
+        <activity
+            android:name=".HistoryActivity"
+            android:label="@string/title_activity_history"
+            android:screenOrientation="portrait" />
+
+        <!-- Setting -->
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

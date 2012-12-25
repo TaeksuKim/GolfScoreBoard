@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/MainPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true" >
+
+        <RelativeLayout
+            android:id="@+id/ButtonPanel"
+            style="?attr/borderlessButtonPanel"
+            android:layout_alignParentBottom="true" >
+
+            <ImageView
+                android:id="@+id/UpperDivider"
+                style="?attr/borderlessButtonHorizontalDivider"
+                android:contentDescription="@string/divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/UpperDivider" >
+
+                <Button
+                    android:id="@+id/RefreshButton"
+                    style="?attr/borderlessButton"
+                    android:text="@string/refresh" />
+
+                <ImageView
+                    style="?attr/borderlessButtonVerticalDivider"
+                    android:contentDescription="@string/divider" />
+
+                <Button
+                    android:id="@+id/ReceiveButton"
+                    style="?attr/borderlessButton"
+                    android:text="@string/fragment_netshare_client_receive" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <Spinner
+            android:id="@+id/DateRangeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/preferredItemHeight"
+            android:layout_alignParentTop="true" />
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ButtonPanel"
+            android:layout_below="@+id/DateRangeSpinner" />
+
+        <TextView
+            android:id="@+id/NotAvailableStatusTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ButtonPanel"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="?attr/preferredItemPaddingLeft"
+            android:layout_marginRight="?attr/preferredItemPaddingRight"
+            android:gravity="center"
+            android:text="@string/fragment_netshare_client_message_not_avaliable"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ProgressPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="?attr/preferredItemPaddingLeft"
+        android:layout_marginRight="?attr/preferredItemPaddingRight"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:id="@+id/ReceivingProgressBar"
+            style="?attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/StatusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ReceivingProgressBar"
+            android:layout_centerHorizontal="true"
+            android:text="@string/fragment_netshare_client_message_receiving"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</RelativeLayout>
