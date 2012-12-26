@@ -1,6 +1,5 @@
 package org.dolicoli.android.golfscoreboard.fragments.preferences;
 
-import org.dolicoli.android.golfscoreboard.GolfScoreBoardApplication;
 import org.dolicoli.android.golfscoreboard.R;
 
 import android.content.SharedPreferences;
@@ -44,7 +43,5 @@ public class PrefActivityFromResourceFragment extends PreferenceFragment
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
-		if (key.equals(GolfScoreBoardApplication.PK_THEME)) {
-		}
 	}
 }
