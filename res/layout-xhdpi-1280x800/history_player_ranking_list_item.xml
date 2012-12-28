@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dip"
+    android:layout_marginTop="2dip"
+    android:orientation="vertical"
+    android:paddingBottom="2dip"
+    android:paddingTop="2dip"
+    tools:context=".MainActivity" >
+
+    <View
+        android:id="@+id/PlayerTagView"
+        android:layout_width="54dip"
+        android:layout_height="78dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="#ccff4444" />
+
+    <org.dolicoli.android.golfscoreboard.utils.TagProgressBar
+        android:id="@+id/AttendCountProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="24dip"
+        android:layout_toRightOf="@+id/PlayerTagView" />
+
+    <ImageView
+        android:id="@+id/PlayerImage"
+        android:layout_width="90dip"
+        android:layout_height="70dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="4dip"
+        android:contentDescription="@string/player"
+        android:scaleType="fitCenter"
+        android:src="@drawable/face_unknown_r" />
+
+    <TextView
+        android:id="@+id/PlayerNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dip"
+        android:layout_toRightOf="@+id/PlayerImage"
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceLarge"
+        android:textColor="?attr/primaryTextColor" />
+
+    <TextView
+        android:id="@+id/AttendCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dip"
+        android:layout_toRightOf="@+id/PlayerNameTextView"
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceMedium"
+        android:textColor="?attr/secondaryTextColor" />
+
+</RelativeLayout>

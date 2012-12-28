@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/GameSettingView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+        <Button
+            android:id="@+id/ModifyFeeSettingButton"
+            style="?attr/borderlessButton"
+            android:layout_width="90dp"
+            android:layout_height="?attr/preferredItemHeightMedium"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="4dip"
+            android:paddingRight="4dip"
+            android:text="@string/modify"
+            android:textAppearance="?attr/textAppearanceMedium" />
+
+        <ImageView
+            android:id="@+id/ModifyFeeSettingSeparator"
+            style="?attr/borderlessButtonVerticalDivider"
+            android:layout_height="?attr/preferredItemHeightMedium"
+            android:layout_toLeftOf="@+id/ModifyFeeSettingButton"
+            android:contentDescription="@string/blank" />
+
+        <TextView
+            android:id="@+id/SumOfTotalFeeTextView"
+            android:layout_width="95dip"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ModifyFeeSettingButton"
+            android:layout_gravity="center_vertical"
+            android:layout_toLeftOf="@+id/ModifyFeeSettingSeparator"
+            android:gravity="center"
+            android:paddingTop="3dip"
+            android:textAppearance="?attr/textAppearanceMedium"
+            android:textColor="?attr/primaryTextColor"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TotalTotalFeeTextView"
+            android:layout_width="95dip"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ModifyFeeSettingButton"
+            android:layout_toLeftOf="@+id/ModifyFeeSettingSeparator"
+            android:gravity="center"
+            android:paddingBottom="3dip"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/SumOfHoleFeeTextView"
+            android:layout_width="95dip"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/SumOfTotalFeeTextView"
+            android:layout_gravity="center_vertical"
+            android:layout_toLeftOf="@+id/SumOfTotalFeeTextView"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium"
+            android:textColor="?primaryTextColor"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TotalHoleFeeTextView"
+            android:layout_width="95dip"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/TotalTotalFeeTextView"
+            android:layout_toLeftOf="@+id/SumOfTotalFeeTextView"
+            android:gravity="center"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:id="@+id/CurrentHoleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/SumOfTotalFeeTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/SumOfHoleFeeTextView"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium"
+            android:textColor="?attr/primaryTextColor" />
+
+        <TextView
+            android:id="@+id/FinalHoleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/TotalTotalFeeTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/TotalHoleFeeTextView"
+            android:gravity="center"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <ImageView
+            android:id="@+id/Separator"
+            style="?attr/borderlessButtonHorizontalDivider"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_below="@+id/ModifyFeeSettingButton"
+            android:contentDescription="@string/blank" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/GameSettingView" />
+
+</RelativeLayout>
