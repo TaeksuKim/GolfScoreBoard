@@ -45,8 +45,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".CurrentGameModifyResultActivity"
-            android:label="@string/title_activity_current_game_modify_result"
+            android:name=".ModifyResultActivity"
+            android:label="@string/title_activity_modify_result"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 

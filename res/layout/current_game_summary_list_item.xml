@@ -171,7 +171,7 @@
             android:layout_alignParentTop="true"
             android:layout_margin="4dip"
             android:focusable="false"
-            android:text="@string/fragment_current_game_summary_personal_statistics"
+            android:text="@string/fragment_currentgamesummary_personal_statistics"
             android:textAppearance="?attr/textAppearanceSmall" />
 
         <RelativeLayout

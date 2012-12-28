@@ -3,6 +3,7 @@ package org.dolicoli.android.golfscoreboard.tasks;
 import java.util.ArrayList;
 
 import org.dolicoli.android.golfscoreboard.GolfScoreBoardApplication;
+import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
@@ -13,17 +14,17 @@ import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.net.GameParser;
 import org.dolicoli.android.golfscoreboard.net.HttpScraper;
 import org.dolicoli.android.golfscoreboard.net.ResponseException;
-import org.dolicoli.android.golfscoreboard.tasks.GameReceiveTask.ReceiveProgress;
-import org.dolicoli.android.golfscoreboard.tasks.GameReceiveTask.ReceiveResult;
+import org.dolicoli.android.golfscoreboard.tasks.ImportGameTask.ImportProgress;
+import org.dolicoli.android.golfscoreboard.tasks.ImportGameTask.ImportResult;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class GameReceiveTask extends
-		AsyncTask<String, ReceiveProgress, ReceiveResult> {
+public class ImportGameTask extends
+		AsyncTask<String, ImportProgress, ImportResult> {
 
-	private static final String TAG = "GameReceiveTask";
+	private static final String TAG = "ImportGameTask";
 
 	public static final int CODE_OK = 100;
 	public static final int CODE_CANCEL = 101;
@@ -32,11 +33,11 @@ public class GameReceiveTask extends
 	public static final int CODE_NO_DATA = 1002;
 
 	private Context context;
-	private GameReceiveTaskListener listener;
+	private TaskListener listener;
 	private String host;
 	private boolean running;
 
-	public GameReceiveTask(Context context, GameReceiveTaskListener listener) {
+	public ImportGameTask(Context context, TaskListener listener) {
 		this.context = context;
 		this.listener = listener;
 
@@ -46,13 +47,13 @@ public class GameReceiveTask extends
 	}
 
 	@Override
-	protected void onProgressUpdate(ReceiveProgress... values) {
+	protected void onProgressUpdate(ImportProgress... values) {
 		super.onProgressUpdate(values);
 		if (values.length < 1)
 			return;
 
 		if (listener != null) {
-			listener.onReceiveProgressUpdate(values[0]);
+			listener.onImportGameProgressUpdate(values[0]);
 		}
 	}
 
@@ -61,116 +62,132 @@ public class GameReceiveTask extends
 
 		running = true;
 		if (listener != null) {
-			listener.onReceiveStart();
+			listener.onImportGameStart();
 		}
 	}
 
 	@Override
-	protected void onPostExecute(ReceiveResult result) {
+	protected void onPostExecute(ImportResult result) {
 		super.onPostExecute(result);
 
 		running = false;
 		if (listener != null) {
-			listener.onReceiveFinished(result);
+			listener.onImportGameFinished(result);
 		}
 	}
 
 	private static final String PAGE = "game";
 
 	@Override
-	protected ReceiveResult doInBackground(String... args) {
+	protected ImportResult doInBackground(String... args) {
 		if (args == null || args.length < 1) {
-			return new ReceiveResult(false, CODE_INVALID_PARAMS);
+			return new ImportResult(false, CODE_INVALID_PARAMS);
 		}
 
 		String url = host + PAGE + "?gameId=" + args[0];
 
-		publishProgress(new ReceiveProgress("접속 중"));
+		publishProgress(new ImportProgress(0, 10,
+				R.string.task_gamereceive_connecting));
 
 		String contents = null;
 		try {
 			contents = HttpScraper.scrap(url, HttpScraper.UTF_8);
 		} catch (Exception e) {
 			Log.e(TAG, e.getLocalizedMessage(), e);
-			return new ReceiveResult(false, CODE_CONNECTION_ERROR);
+			return new ImportResult(false, CODE_CONNECTION_ERROR);
 		}
 
 		if (contents == null || contents.isEmpty()) {
-			return new ReceiveResult(false, CODE_NO_DATA);
+			return new ImportResult(false, CODE_NO_DATA);
 		}
 
-		publishProgress(new ReceiveProgress("자료를 해석하는 중"));
+		publishProgress(new ImportProgress(2, 10,
+				R.string.task_gamereceive_parsing));
 
 		try {
 			GameParser parser = new GameParser();
 			if (!parser.parse(context, contents)) {
-				return new ReceiveResult(false, CODE_NO_DATA);
+				return new ImportResult(false, CODE_NO_DATA);
 			}
 
 			if (isCancelled()) {
-				return new ReceiveResult(true, CODE_CANCEL);
+				return new ImportResult(true, CODE_CANCEL);
 			}
 
-			publishProgress(new ReceiveProgress("게임 설정을 해석하는 중"));
+			publishProgress(new ImportProgress(3, 10,
+					R.string.task_gamereceive_parsing_game_setting));
 
 			GameSetting gameSetting = parser.getGameSetting();
 			if (isCancelled()) {
-				return new ReceiveResult(true, CODE_CANCEL);
+				return new ImportResult(true, CODE_CANCEL);
 			}
 
-			publishProgress(new ReceiveProgress("플레이어 설정을 해석하는 중"));
+			publishProgress(new ImportProgress(4, 10,
+					R.string.task_gamereceive_parsing_player_setting));
 
 			PlayerSetting playerSetting = parser.getPlayerSetting();
 			if (isCancelled()) {
-				return new ReceiveResult(true, CODE_CANCEL);
+				return new ImportResult(true, CODE_CANCEL);
 			}
 
-			publishProgress(new ReceiveProgress("결과를 해석하는 중"));
+			publishProgress(new ImportProgress(5, 10,
+					R.string.task_gamereceive_parsing_result));
 
 			ArrayList<Result> results = parser.getResults();
 			if (isCancelled()) {
-				return new ReceiveResult(true, CODE_CANCEL);
+				return new ImportResult(true, CODE_CANCEL);
 			}
 
-			publishProgress(new ReceiveProgress("결과를 저장하는 중"));
+			publishProgress(new ImportProgress(6, 10,
+					R.string.task_gamereceive_saving));
 
 			GameSettingDatabaseWorker gameSettingWorker = new GameSettingDatabaseWorker(
 					context);
 			gameSettingWorker.updateGameSetting(gameSetting);
 			if (isCancelled()) {
-				return new ReceiveResult(true, CODE_CANCEL);
+				return new ImportResult(true, CODE_CANCEL);
 			}
+
+			publishProgress(new ImportProgress(7, 10,
+					R.string.task_gamereceive_saving));
 
 			PlayerSettingDatabaseWorker playerSettingWorker = new PlayerSettingDatabaseWorker(
 					context);
 			playerSettingWorker.updatePlayerSetting(playerSetting);
 			if (isCancelled()) {
-				return new ReceiveResult(true, CODE_CANCEL);
+				return new ImportResult(true, CODE_CANCEL);
 			}
+
+			publishProgress(new ImportProgress(8, 10,
+					R.string.task_gamereceive_saving));
 
 			ResultDatabaseWorker resultWorker = new ResultDatabaseWorker(
 					context);
 			resultWorker.cleanUpAllData();
 			if (isCancelled()) {
-				return new ReceiveResult(true, CODE_CANCEL);
+				return new ImportResult(true, CODE_CANCEL);
 			}
 
 			for (Result result : results) {
 				resultWorker.updateResult(result);
 				if (isCancelled()) {
-					return new ReceiveResult(true, CODE_CANCEL);
+					return new ImportResult(true, CODE_CANCEL);
 				}
 			}
+
+			publishProgress(new ImportProgress(9, 10,
+					R.string.task_gamereceive_saving));
 
 			HistoryGameSettingDatabaseWorker historyWorker = new HistoryGameSettingDatabaseWorker(
 					context);
 			historyWorker.addCurrentHistory(false, gameSetting, playerSetting,
 					results);
 
-			publishProgress(new ReceiveProgress("완료"));
-			return new ReceiveResult();
+			publishProgress(new ImportProgress(10, 10,
+					R.string.task_gamereceive_finish));
+			return new ImportResult();
 		} catch (ResponseException e) {
-			return new ReceiveResult(false, CODE_CONNECTION_ERROR);
+			return new ImportResult(false, CODE_CONNECTION_ERROR);
 		}
 	}
 
@@ -178,39 +195,39 @@ public class GameReceiveTask extends
 		return running;
 	}
 
-	public static class ReceiveProgress {
+	public static class ImportProgress {
 		private int msgId;
-		private String msg;
+		private int current, total;
 
-		public ReceiveProgress(int msgId) {
+		public ImportProgress(int current, int total, int msgId) {
+			this.current = current;
+			this.total = total;
 			this.msgId = msgId;
-			this.msg = null;
-		}
-
-		public ReceiveProgress(String msg) {
-			this.msgId = 0;
-			this.msg = msg;
-		}
-
-		public String getMessage() {
-			return msg;
 		}
 
 		public int getMessageId() {
 			return msgId;
 		}
+
+		public int getCurrent() {
+			return current;
+		}
+
+		public int getTotal() {
+			return total;
+		}
 	}
 
-	public static class ReceiveResult {
+	public static class ImportResult {
 
 		private boolean success;
 		private int errorCode;
 
-		public ReceiveResult() {
+		public ImportResult() {
 			this(true, CODE_OK);
 		}
 
-		public ReceiveResult(boolean success, int msgId) {
+		public ImportResult(boolean success, int msgId) {
 			this.success = success;
 			this.errorCode = msgId;
 		}
@@ -228,11 +245,11 @@ public class GameReceiveTask extends
 		}
 	}
 
-	public static interface GameReceiveTaskListener {
-		void onReceiveStart();
+	public static interface TaskListener {
+		void onImportGameStart();
 
-		void onReceiveProgressUpdate(ReceiveProgress value);
+		void onImportGameProgressUpdate(ImportProgress progress);
 
-		void onReceiveFinished(ReceiveResult result);
+		void onImportGameFinished(ImportResult result);
 	}
 }

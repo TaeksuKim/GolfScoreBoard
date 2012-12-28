@@ -166,6 +166,32 @@ public class UIUtil {
 		}
 	}
 
+	public static String formatHandicap(Context context, int handicap) {
+		if (context == null)
+			return String.valueOf(handicap);
+
+		if (handicap <= 0) {
+			return String.valueOf(handicap);
+		}
+
+		return "+" + String.valueOf(handicap);
+	}
+
+	public static void setHandicapTextView(Context context, TextView textView,
+			int handicap) {
+		loadPrimaryTextColor(context);
+		setHandicapTextView(context, textView, primaryTextColor, handicap);
+	}
+
+	public static void setHandicapTextView(Context context, TextView textView,
+			int defaultTextColor, int handicap) {
+		if (context == null || textView == null)
+			return;
+
+		String text = formatHandicap(context, handicap);
+		textView.setText(text);
+	}
+
 	public static String formatGameCount(Context context, int count) {
 		if (context == null)
 			return String.valueOf(count);

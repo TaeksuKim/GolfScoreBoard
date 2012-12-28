@@ -31,7 +31,7 @@ public class SimpleHistoryQueryTask extends
 	protected void onPreExecute() {
 		super.onPreExecute();
 		if (listener != null) {
-			listener.onGameQueryStarted();
+			listener.onSimpleHistoryQueryStarted();
 		}
 	}
 
@@ -39,7 +39,7 @@ public class SimpleHistoryQueryTask extends
 	protected void onPostExecute(SingleGameResult[] results) {
 		super.onPostExecute(results);
 		if (listener != null) {
-			listener.onGameQueryFinished(results);
+			listener.onSimpleHistoryQueryFinished(results);
 		}
 	}
 
@@ -89,8 +89,8 @@ public class SimpleHistoryQueryTask extends
 	}
 
 	public static interface TaskListener {
-		void onGameQueryStarted();
+		void onSimpleHistoryQueryStarted();
 
-		void onGameQueryFinished(SingleGameResult[] gameResults);
+		void onSimpleHistoryQueryFinished(SingleGameResult[] gameResults);
 	}
 }

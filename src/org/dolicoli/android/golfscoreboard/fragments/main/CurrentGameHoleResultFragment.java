@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import org.dolicoli.android.golfscoreboard.Constants;
-import org.dolicoli.android.golfscoreboard.CurrentGameModifyResultActivity;
+import org.dolicoli.android.golfscoreboard.ModifyResultActivity;
 import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.Reloadable;
 import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
@@ -14,6 +14,7 @@ import org.dolicoli.android.golfscoreboard.tasks.CurrentGameQueryTask;
 import org.dolicoli.android.golfscoreboard.utils.FeeCalculator;
 import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -94,7 +95,6 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 	@Override
 	public void onPause() {
 		super.onPause();
-
 		hideActionMode();
 	}
 
@@ -118,39 +118,11 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		FragmentActivity activity = getActivity();
-		if (activity == null || !(activity instanceof CurrentGameDataContainer)) {
+		Activity activity = getActivity();
+		if (activity == null || !(activity instanceof MainFragmentContainer)) {
 			return false;
 		}
-		CurrentGameDataContainer container = (CurrentGameDataContainer) activity;
-
-		switch (item.getItemId()) {
-		case R.id.AddResult:
-			container.addResult();
-			return true;
-		case R.id.NewGame:
-			container.newGame();
-			return true;
-		case R.id.ModifyGame:
-			container.modifyGame();
-			return true;
-		case R.id.Reset:
-			container.showResetDialog();
-			return true;
-		case R.id.NetShareSendData:
-			container.showExportDataDialog();
-			return true;
-		case R.id.NetShareReceiveData:
-			container.importData();
-			return true;
-		case R.id.Save:
-			container.saveHistory();
-			return true;
-		case R.id.Settings:
-			container.showSettingActivity();
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+		return ((MainFragmentContainer) activity).onOptionsItemSelected(item);
 	}
 
 	public void hideActionMode() {
@@ -181,17 +153,21 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 		mActionMode = getActivity().startActionMode(mActionModeCallback);
 		if (holeResult != null) {
 			mActionMode.setTag(holeResult);
-			mActionMode.setTitle(holeResult.holeNumber + "¹ø È¦");
+			mActionMode
+					.setTitle(getString(
+							R.string.fragment_currentgameholeresult_action_mode_hole_format,
+							holeResult.holeNumber));
 		}
 	}
 
 	@Override
 	public void reload() {
-		if (getActivity() == null)
+		FragmentActivity activity = getActivity();
+
+		if (activity == null)
 			return;
 
-		CurrentGameQueryTask task = new CurrentGameQueryTask(getActivity(),
-				this);
+		CurrentGameQueryTask task = new CurrentGameQueryTask(activity, this);
 		task.execute();
 	}
 
@@ -200,37 +176,40 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 		final int id = v.getId();
 		switch (id) {
 		case R.id.ModifyFeeSettingButton:
-			((CurrentGameDataContainer) getActivity()).modifyGame();
+			((MainFragmentContainer) getActivity())
+					.showModifyGameSettingActivity();
 			return;
 		}
 	}
 
-	public boolean isAllGameFinished() {
+	private boolean isAllGameFinished() {
 		if (gameResult == null)
 			return false;
 		return (currentHole >= gameResult.getHoleCount());
 	}
 
-	private void openEditActivity(HoleResult holeResult) {
+	private void openHoleResultEditActivity(HoleResult holeResult) {
 		if (holeResult == null)
 			return;
 
-		Intent intent = new Intent(getActivity(),
-				CurrentGameModifyResultActivity.class);
-		intent.putExtra(CurrentGameModifyResultActivity.IK_HOLE_NUMBER,
+		Intent intent = new Intent(getActivity(), ModifyResultActivity.class);
+		intent.putExtra(ModifyResultActivity.IK_HOLE_NUMBER,
 				holeResult.holeNumber);
 		startActivity(intent);
 	}
 
 	private void deleteResult(final HoleResult holeResult) {
-		if (holeResult == null)
+		final Activity activity = getActivity();
+
+		if (activity == null || holeResult == null)
 			return;
 
-		new AlertDialog.Builder(getActivity())
+		final int holeNumber = holeResult.holeNumber;
+		new AlertDialog.Builder(activity)
 				.setTitle(R.string.dialog_delete)
 				.setMessage(
 						getString(R.string.dialog_are_you_sure_to_delete,
-								holeResult.holeNumber))
+								holeNumber))
 				.setPositiveButton(android.R.string.yes,
 						new DialogInterface.OnClickListener() {
 
@@ -238,10 +217,9 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 							public void onClick(DialogInterface dialog,
 									int which) {
 								ResultDatabaseWorker resultWorker = new ResultDatabaseWorker(
-										getActivity());
-								resultWorker.removeAfter(holeResult.holeNumber);
-								((CurrentGameDataContainer) getActivity())
-										.reload();
+										activity);
+								resultWorker.removeAfter(holeNumber);
+								((MainFragmentContainer) getActivity()).reload();
 							}
 
 						}).setNegativeButton(android.R.string.no, null).show();
@@ -459,7 +437,7 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 			switch (item.getItemId()) {
 			case R.id.Modify:
-				openEditActivity((HoleResult) mActionMode.getTag());
+				openHoleResultEditActivity((HoleResult) mActionMode.getTag());
 				mode.finish();
 				return true;
 			case R.id.Delete:
@@ -625,7 +603,7 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 				return v;
 
 			holder.holeNumberTextView.setText(getString(
-					R.string.fragment_hole_result_hole_number_format,
+					R.string.fragment_currentgameholeresult_hole_number_format,
 					holeResult.holeNumber, holeResult.parNumber));
 
 			int playerCount = holeResult.playerCount;
@@ -648,11 +626,13 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 						item.score);
 
 				if (item.handicap > 0) {
-					holder.handicapTextViews[i].setText("-" + item.handicap);
+					UIUtil.setHandicapTextView(context,
+							holder.handicapTextViews[i], item.handicap);
 					holder.handicapTextViews[i].setVisibility(View.VISIBLE);
 					holder.scoreTextViews[i].setVisibility(View.VISIBLE);
 				} else {
-					holder.handicapTextViews[i].setText("-");
+					holder.handicapTextViews[i]
+							.setText(R.string.fragment_currentgameholeresult_no_handicap);
 					holder.handicapTextViews[i].setVisibility(View.GONE);
 					holder.scoreTextViews[i].setVisibility(View.GONE);
 				}
@@ -673,11 +653,11 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 	}
 
 	@Override
-	public void onGameQueryStarted() {
+	public void onCurrentGameQueryStarted() {
 	}
 
 	@Override
-	public void onGameQueryFinished(SingleGameResult gameResult) {
+	public void onCurrentGameQueryFinished(SingleGameResult gameResult) {
 		this.gameResult = gameResult;
 		reloadUI();
 	}
@@ -739,9 +719,18 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 			holeResult.sort();
 		}
 
-		finalHoleTextView.setText("Hole " + holeCount);
-		currentHoleTextView.setText((currentHole < 1) ? "-" : "Hole "
-				+ currentHole);
+		finalHoleTextView.setText(getString(
+				R.string.fragment_currentgameholeresult_final_hole_format,
+				holeCount));
+		if (currentHole < 1) {
+			currentHoleTextView
+					.setText(R.string.fragment_currentgameholeresult_no_hole_number);
+		} else {
+			currentHoleTextView
+					.setText(getString(
+							R.string.fragment_currentgameholeresult_current_hole_format,
+							currentHole));
+		}
 		adjustFee(playerScoreList, gameResult,
 				currentHole >= gameResult.getHoleCount());
 

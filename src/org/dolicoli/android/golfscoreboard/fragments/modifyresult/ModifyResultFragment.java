@@ -1,7 +1,6 @@
-package org.dolicoli.android.golfscoreboard.fragments.currentgame;
+package org.dolicoli.android.golfscoreboard.fragments.modifyresult;
 
 import org.dolicoli.android.golfscoreboard.Constants;
-import org.dolicoli.android.golfscoreboard.CurrentGameModifyResultActivity;
 import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.data.UsedHandicap;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
@@ -26,6 +25,8 @@ import android.widget.TextView;
 
 public class ModifyResultFragment extends Fragment implements OnClickListener {
 
+	public static final String IK_HOLE_NUMBER = "HOLE_NUMBER";
+
 	private RadioButton parThreeRadioButton, parFourRadioButton,
 			parFiveRadioButton, parSixRadioButton;
 
@@ -44,8 +45,7 @@ public class ModifyResultFragment extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(
-				R.layout.current_game_modify_result_fragment, null);
+		View view = inflater.inflate(R.layout.modify_result_fragment, null);
 
 		holeNumberTextView = (TextView) view
 				.findViewById(R.id.HoleNumberTextView);
@@ -234,6 +234,64 @@ public class ModifyResultFragment extends Fragment implements OnClickListener {
 		loadData();
 	}
 
+	@Override
+	public void onClick(View v) {
+		final int id = v.getId();
+		switch (id) {
+		case R.id.ParThreeRadioButton:
+		case R.id.ParFourRadioButton:
+		case R.id.ParFiveRadioButton:
+		case R.id.ParSixRadioButton:
+			for (int playerId = 0; playerId < Constants.MAX_PLAYER_COUNT; playerId++) {
+				fillScoreSpinner(playerScoreSpinners[playerId],
+						playerScoreSpinnerAdapters[playerId]);
+			}
+			break;
+		}
+	}
+
+	public int getHoleNumber() {
+		return holeNumber;
+	}
+
+	public int getParNumber() {
+		if (parThreeRadioButton.isChecked())
+			return 3;
+		if (parFourRadioButton.isChecked())
+			return 4;
+		if (parFiveRadioButton.isChecked())
+			return 5;
+		if (parSixRadioButton.isChecked())
+			return 6;
+		return 4;
+	}
+
+	public int getScore(int playerId) {
+		if (playerId < 0 || playerId > playerCount - 1)
+			return 100;
+
+		ScoreSpinnerItem scoreItem = null;
+
+		scoreItem = (ScoreSpinnerItem) playerScoreSpinners[playerId]
+				.getSelectedItem();
+		if (scoreItem == null)
+			return 0;
+		return scoreItem.score;
+	}
+
+	public int getHandicap(int playerId) {
+		if (playerId < 0 || playerId > playerCount - 1)
+			return 0;
+
+		HandicapSpinnerItem handicapItem = null;
+
+		handicapItem = (HandicapSpinnerItem) playerHandicapSpinners[playerId]
+				.getSelectedItem();
+		if (handicapItem == null)
+			return 0;
+		return handicapItem.handicap;
+	}
+
 	private void loadData() {
 
 		PlayerSettingDatabaseWorker playerSettingWorker = new PlayerSettingDatabaseWorker(
@@ -242,8 +300,7 @@ public class ModifyResultFragment extends Fragment implements OnClickListener {
 		playerSettingWorker.getPlayerSetting(playerSetting);
 
 		Intent intent = getActivity().getIntent();
-		holeNumber = intent.getIntExtra(
-				CurrentGameModifyResultActivity.IK_HOLE_NUMBER, 1);
+		holeNumber = intent.getIntExtra(IK_HOLE_NUMBER, 1);
 
 		ResultDatabaseWorker resultWorker = new ResultDatabaseWorker(
 				getActivity());
@@ -319,22 +376,6 @@ public class ModifyResultFragment extends Fragment implements OnClickListener {
 					break;
 				}
 			}
-		}
-	}
-
-	@Override
-	public void onClick(View v) {
-		final int id = v.getId();
-		switch (id) {
-		case R.id.ParThreeRadioButton:
-		case R.id.ParFourRadioButton:
-		case R.id.ParFiveRadioButton:
-		case R.id.ParSixRadioButton:
-			for (int playerId = 0; playerId < Constants.MAX_PLAYER_COUNT; playerId++) {
-				fillScoreSpinner(playerScoreSpinners[playerId],
-						playerScoreSpinnerAdapters[playerId]);
-			}
-			break;
 		}
 	}
 
@@ -491,47 +532,5 @@ public class ModifyResultFragment extends Fragment implements OnClickListener {
 		public String toString() {
 			return title;
 		}
-	}
-
-	public int getHoleNumber() {
-		return holeNumber;
-	}
-
-	public int getParNumber() {
-		if (parThreeRadioButton.isChecked())
-			return 3;
-		else if (parFourRadioButton.isChecked())
-			return 4;
-		else if (parFiveRadioButton.isChecked())
-			return 5;
-		else if (parSixRadioButton.isChecked())
-			return 6;
-		return 4;
-	}
-
-	public int getScore(int playerId) {
-		if (playerId < 0 || playerId > playerCount - 1)
-			return 100;
-
-		ScoreSpinnerItem scoreItem = null;
-
-		scoreItem = (ScoreSpinnerItem) playerScoreSpinners[playerId]
-				.getSelectedItem();
-		if (scoreItem == null)
-			return 0;
-		return scoreItem.score;
-	}
-
-	public int getHandicap(int playerId) {
-		if (playerId < 0 || playerId > playerCount - 1)
-			return 0;
-
-		HandicapSpinnerItem handicapItem = null;
-
-		handicapItem = (HandicapSpinnerItem) playerHandicapSpinners[playerId]
-				.getSelectedItem();
-		if (handicapItem == null)
-			return 0;
-		return handicapItem.handicap;
 	}
 }

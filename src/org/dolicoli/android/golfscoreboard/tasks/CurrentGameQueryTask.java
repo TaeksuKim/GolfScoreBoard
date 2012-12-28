@@ -14,7 +14,8 @@ import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
 import android.content.Context;
 import android.os.AsyncTask;
 
-public class CurrentGameQueryTask extends AsyncTask<Void, Void, SingleGameResult> {
+public class CurrentGameQueryTask extends
+		AsyncTask<Void, Void, SingleGameResult> {
 
 	private Context context;
 	private TaskListener listener;
@@ -28,7 +29,7 @@ public class CurrentGameQueryTask extends AsyncTask<Void, Void, SingleGameResult
 	protected void onPreExecute() {
 		super.onPreExecute();
 		if (listener != null) {
-			listener.onGameQueryStarted();
+			listener.onCurrentGameQueryStarted();
 		}
 	}
 
@@ -36,7 +37,7 @@ public class CurrentGameQueryTask extends AsyncTask<Void, Void, SingleGameResult
 	protected void onPostExecute(SingleGameResult result) {
 		super.onPostExecute(result);
 		if (listener != null) {
-			listener.onGameQueryFinished(result);
+			listener.onCurrentGameQueryFinished(result);
 		}
 	}
 
@@ -74,8 +75,8 @@ public class CurrentGameQueryTask extends AsyncTask<Void, Void, SingleGameResult
 	}
 
 	public static interface TaskListener {
-		void onGameQueryStarted();
+		void onCurrentGameQueryStarted();
 
-		void onGameQueryFinished(SingleGameResult gameResult);
+		void onCurrentGameQueryFinished(SingleGameResult gameResult);
 	}
 }

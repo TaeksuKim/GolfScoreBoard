@@ -71,7 +71,7 @@
     <string name="title_activity_current_game_new_game">새 게임</string>
     <string name="title_activity_current_game_modify_game_setting">게임 설정 수정</string>
     <string name="title_activity_current_game_add_result">결과추가</string>
-    <string name="title_activity_current_game_modify_result">결과수정</string>
+    <string name="title_activity_modify_result">결과수정</string>
     <string name="title_activity_netshare_client">데이터 가져오기</string>
     <string name="title_activity_personal_statistics">개인 통계</string>
     <string name="title_activity_onegame">지난 게임</string>
@@ -95,18 +95,22 @@
     <!-- Dialog -->
     <string name="dialog_reset">결과 초기화</string>
     <string name="dialog_are_you_sure_to_reset">모든 결과가 지워집니다.\n계속하시겠습니까?</string>
-    <string name="dialog_netshare_export">데이터 서버로 내보내기</string>
-    <string name="dialog_are_you_sure_to_netshare_upload">데이터 서버로 내보내시겠습니까?</string>
-    <string name="dialog_netshare_preparing">준비 중</string>
-    <string name="dialog_netshare_please_wait">잠시만 기다려 주세요</string>
+    <string name="dialog_import_current_game">준비 중</string>
+    <string name="dialog_import_please_wait">잠시만 기다려 주세요</string>
     <string name="dialog_delete">삭제</string>
+    <string name="dialog_export_current_game">현재 게임 내보내기</string>
+    <string name="dialog_are_you_sure_to_export_current_game">데이터 서버로 내보내시겠습니까?</string>
+    <string name="dialog_export_current_game_please_wait">잠시만 기다려 주세요</string>
     <string name="dialog_are_you_sure_to_delete">모든 결과가 지워집니다.\n계속하시겠습니까?</string>
+    <string name="dialog_import_three_month">3개월 자료 가져오기</string>
+    <string name="dialog_are_you_sure_to_import_three_month">최근 3개월 자료를 가져오시겠습니까?\n돈이 많이 들 수 있습니다.</string>
+    <string name="dialog_import_three_month_please_wait">잠시만 기다려 주세요</string>
 
-    <!-- Main Activity -->
-    <string name="activity_main_title">점수판</string>
-    <string name="activity_main_fragment_current_game_summary">현재 게임 정산</string>
+    <!-- MainActivity -->
+    <string name="activity_main_title">사만원</string>
+    <string name="activity_main_fragment_current_game_summary">점수표</string>
     <string name="activity_main_fragment_current_game_hole_result">홀별 기록</string>
-    <string name="activity_main_fragment_history_main">예전 기록</string>
+    <string name="activity_main_fragment_attend_count">최근 3개월</string>
     <string name="activity_main_add_result_button">결과 추가</string>
     <string name="activity_main_import_this_game_button">이 게임 가져오기</string>
     <string name="activity_main_netshare_upload_success">내보내기를 완료했습니다.</string>
@@ -148,11 +152,17 @@
     <string name="activity_personal_statistics_fragment_summary">요약</string>
     <string name="activity_personal_statistics_fragment_game_result_list">날짜별 기록</string>
 
-    <!-- Current Game Summary Fragment -->
-    <string name="fragment_current_game_summary_personal_statistics">Hole %1$d (Par %2$d)</string>
+    <!-- CurrentGameSummaryFragment -->
+    <string name="fragment_currentgamesummary_personal_statistics">개인 통계</string>
+    <string name="fragment_currentgamesummary_current_hole_format">HOLE %d</string>
 
-    <!-- Current Hole Result Fragment -->
-    <string name="fragment_hole_result_hole_number_format">Hole %1$d (Par %2$d)</string>
+    <!-- CurrentGameHoleResultFragment -->
+    <string name="fragment_currentgameholeresult_hole_number_format">Hole %1$d (Par %2$d)</string>
+    <string name="fragment_currentgameholeresult_final_hole_format">Hole %d</string>
+    <string name="fragment_currentgameholeresult_current_hole_format">Hole %d</string>
+    <string name="fragment_currentgameholeresult_no_hole_number">-</string>
+    <string name="fragment_currentgameholeresult_action_mode_hole_format">%d번 홀</string>
+    <string name="fragment_currentgameholeresult_no_handicap">-</string>
 
     <!-- Game Setting Fragment -->
     <string name="fragment_game_setting_title_hole_number">홀 수</string>
@@ -225,21 +235,21 @@
     <string name="fragment_netshare_client_message_receive_finished">데이터 수신을 완료했습니다</string>
     <string name="fragment_netshare_client_message_receive_error">데이터를 수신하는 중 오류가 발생했습니다</string>
 
+    <!-- AttendCountFragment -->
+    <string name="fragment_attend_count_no_history">기록이 없습니다</string>
+    <string name="fragment_attend_count_click_to_see_detail">상세한 기록을 보려면 화면을 클릭하세요</string>
+    <string name="fragment_attendcount_import_three_month_success">가져오기를 완료했습니다.</string>
+    <string name="fragment_attendcount_import_three_month_fail">가져오기를 실패했습니다.</string>
+
     <!-- GameResultHistoryFragment -->
     <string name="fragment_game_result_result_history_item_selected">%d개가 선택되었습니다.</string>
-
-    <!-- Old Games Summary Fragment -->
-    
-	<!-- Old Game Result List Fragment -->
-    <string name="fragment_old_game_result_list_no_history">기록이 없습니다</string>
-    <string name="fragment_old_game_result_list_click_to_see_detail">상세한 기록을 보려면 화면을 클릭하세요</string>
 
     <!-- One Game Hole Result Fragment -->
     <string name="fragment_one_game_hole_result_hole_number_format">Hole %1$d (Par %2$d)</string>
 
     <!-- OneGameSummaryFragment -->
     <string name="fragment_onegame_summary_personal_statistics">개인 통계</string>
-    
+
     <!-- OneGameGameSettingFragment -->
     <string name="fragment_one_game_gamesetting_game_setting">게임 설정</string>
     <string name="fragment_one_game_gamesetting_total_fee">전체 비용</string>
@@ -288,7 +298,7 @@
     <!-- OneGamePlayerHoleRecordFragment -->
     <string name="fragment_onegame_player_hole_record_hole_number_format">HOLE %1$d (Par %2$d)</string>
     <string name="fragment_onegame_player_hole_record_player_count_format">%d 명</string>
-    
+
     <!-- Personal Statistics Summary -->
     <string name="fragment_personal_statistics_summary_first_standing">1 위</string>
     <string name="fragment_personal_statistics_summary_last_standing">최하위</string>
@@ -302,7 +312,7 @@
     <string name="fragment_personal_statistics_summary_max">최고</string>
     <string name="fragment_personal_statistics_summary_min">최저</string>
     <string name="fragment_personal_statistics_summary_avg_score">평균타수</string>
-    
+
     <!-- Personal Statistics Game Result List -->
     <string name="fragment_personal_statistics_game_result_list_per">/</string>
 
@@ -313,5 +323,28 @@
     <string name="preference_auto_upload_key">AutoUpload</string>
     <string name="preference_auto_upload_title">자동 업로드</string>
     <string name="preference_auto_upload_summary">결과를 서버로 자동으로 업로드합니다</string>
+    
+    <!-- GameReceiveTask -->
+    <string name="task_gamereceive_connecting">접속 중</string>
+    <string name="task_gamereceive_parsing">자료를 해석하는 중</string>
+    <string name="task_gamereceive_parsing_game_setting">게임 설정을 해석하는 중</string>
+    <string name="task_gamereceive_parsing_player_setting">플레이어 설정을 해석하는 중</string>
+    <string name="task_gamereceive_parsing_result">홀별 결과를 해석하는 중</string>
+    <string name="task_gamereceive_saving">자료를 저장하는 중</string>
+    <string name="task_gamereceive_finish">완료</string>
+    <string name="task_gamereceive_saving_format">자료를 저장하는 중\n%s</string>
+
+    <!-- ExportCurrentGameTask -->
+    <string name="task_exportcurrentgame_preparing_game_setting">게임 설정을 해석하는 중</string>
+    <string name="task_exportcurrentgame_preparing_player_setting">플레이어 설정을 해석하는 중</string>
+    <string name="task_exportcurrentgame_preparing_result">홀별 결과를 해석하는 중</string>
+    <string name="task_exportcurrentgame_exporting">자료를  전송하는 중</string>
+    <string name="task_exportcurrentgame_finish">완료</string>
+    
+    <!-- ThreeMonthsGameReceiveTask -->
+    <string name="task_threemonthsgamereceive_connecting">접속 중</string>
+    <string name="task_threemonthsgamereceive_parsing">자료를 해석하는 중</string>
+    <string name="task_threemonthsgamereceive_saving">자료를 저장하는 중</string>
+    <string name="task_threemonthsgamereceive_saving_format">자료를 저장하는 중\n%s</string>
 
 </resources>

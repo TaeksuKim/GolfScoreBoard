@@ -11,11 +11,18 @@ import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.Reloadable;
 import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
 import org.dolicoli.android.golfscoreboard.tasks.SimpleHistoryQueryTask;
+import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask;
+import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask.ReceiveProgress;
+import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask.ReceiveResult;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil.DateRange;
 import org.dolicoli.android.golfscoreboard.utils.PlayerUIUtil;
 import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,12 +36,16 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class OldGamesSummaryFragment extends Fragment implements Reloadable,
-		OnClickListener, SimpleHistoryQueryTask.TaskListener {
+public class AttendCountFragment extends Fragment implements Reloadable,
+		OnClickListener, SimpleHistoryQueryTask.TaskListener,
+		ThreeMonthsGameReceiveTask.TaskListener {
 
 	@SuppressWarnings("unused")
-	private static final String TAG = "OldGamesSummaryFragment";
+	private static final String TAG = "AttendCountFragment";
+
+	private static final String DEFAULT_PLAYER_NAME_PREFIX = "Player";
 
 	private static final int REQ_HISTORY = 0x0001;
 
@@ -47,11 +58,12 @@ public class OldGamesSummaryFragment extends Fragment implements Reloadable,
 
 	private PlayerAttendCount[] playerAttendCountArray;
 
+	private ProgressDialog progressDialog;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.old_game_result_list_fragment,
-				null);
+		View view = inflater.inflate(R.layout.attend_count_fragment, null);
 
 		noHistoryTextView = view.findViewById(R.id.NoHistoryTextView);
 		mainView = view.findViewById(R.id.MainView);
@@ -136,26 +148,23 @@ public class OldGamesSummaryFragment extends Fragment implements Reloadable,
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.old_games_summary, menu);
+		inflater.inflate(R.menu.attend_count, menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		FragmentActivity activity = getActivity();
-		if (activity == null || !(activity instanceof CurrentGameDataContainer)) {
+		if (activity == null) {
 			return false;
 		}
-		CurrentGameDataContainer container = (CurrentGameDataContainer) activity;
 
 		switch (item.getItemId()) {
 		case R.id.ImportThreeMonth:
-			container.importThreeMonthData();
-			return true;
-		case R.id.Settings:
-			container.showSettingActivity();
+			importThreeMonthData();
 			return true;
 		}
-		return super.onOptionsItemSelected(item);
+
+		return ((MainFragmentContainer) activity).onOptionsItemSelected(item);
 	}
 
 	@Override
@@ -178,22 +187,22 @@ public class OldGamesSummaryFragment extends Fragment implements Reloadable,
 
 	@Override
 	public void reload() {
-		if (getActivity() == null || totalFeeSumTextView == null)
+		FragmentActivity activity = getActivity();
+		if (activity == null || totalFeeSumTextView == null)
 			return;
 
 		DateRange dateRange = DateRangeUtil.getDateRange(3);
 
-		SimpleHistoryQueryTask task = new SimpleHistoryQueryTask(getActivity(),
-				this);
+		SimpleHistoryQueryTask task = new SimpleHistoryQueryTask(activity, this);
 		task.execute(dateRange);
 	}
 
 	@Override
-	public void onGameQueryStarted() {
+	public void onSimpleHistoryQueryStarted() {
 	}
 
 	@Override
-	public void onGameQueryFinished(SingleGameResult[] gameResults) {
+	public void onSimpleHistoryQueryFinished(SingleGameResult[] gameResults) {
 		FragmentActivity activity = getActivity();
 		if (activity == null || gameResults == null)
 			return;
@@ -209,7 +218,7 @@ public class OldGamesSummaryFragment extends Fragment implements Reloadable,
 			int playerCount = gameResult.getPlayerCount();
 			for (int playerId = 0; playerId < playerCount; playerId++) {
 				String playerName = gameResult.getPlayerName(playerId);
-				if (playerName.startsWith("Player"))
+				if (playerName.startsWith(DEFAULT_PLAYER_NAME_PREFIX))
 					continue;
 
 				playerName = PlayerUIUtil.toCanonicalName(playerName);
@@ -270,6 +279,109 @@ public class OldGamesSummaryFragment extends Fragment implements Reloadable,
 		}
 	}
 
+	@Override
+	public void onThreeMonthsGameReceiveStart() {
+		showProgressDialog();
+	}
+
+	@Override
+	public void onThreeMonthsGameReceiveProgressUpdate(ReceiveProgress value) {
+		if (value == null)
+			return;
+
+		int current = value.getCurrent();
+		int total = value.getTotal();
+
+		setProgressDialogStatus(current, total, value.getMessage());
+	}
+
+	@Override
+	public void onThreeMonthsGameReceiveFinished(ReceiveResult result) {
+		FragmentActivity activity = getActivity();
+		if (activity == null)
+			return;
+
+		if (result.isSuccess()) {
+			if (!result.isCancel()) {
+				Toast.makeText(
+						activity,
+						R.string.fragment_attendcount_import_three_month_success,
+						Toast.LENGTH_LONG).show();
+				reload();
+			}
+		} else {
+			Toast.makeText(activity,
+					R.string.fragment_attendcount_import_three_month_fail,
+					Toast.LENGTH_LONG).show();
+		}
+		hideProgressDialog();
+	}
+
+	private void importThreeMonthData() {
+		final Activity activity = getActivity();
+		final AttendCountFragment instance = this;
+
+		new AlertDialog.Builder(activity)
+				.setTitle(R.string.dialog_import_three_month)
+				.setMessage(R.string.dialog_are_you_sure_to_import_three_month)
+				.setPositiveButton(android.R.string.yes,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								ThreeMonthsGameReceiveTask task = new ThreeMonthsGameReceiveTask(
+										activity, instance);
+								task.execute();
+							}
+
+						}).setNegativeButton(android.R.string.no, null).show();
+	}
+
+	private void showProgressDialog() {
+		FragmentActivity activity = getActivity();
+		if (activity == null)
+			return;
+
+		if (progressDialog != null && progressDialog.isShowing()) {
+			return;
+		}
+
+		progressDialog = new ProgressDialog(activity);
+		progressDialog.setTitle(R.string.dialog_import_three_month);
+		progressDialog
+				.setMessage(getString(R.string.dialog_import_three_month_please_wait));
+		progressDialog.setIndeterminate(true);
+		progressDialog.setMax(100);
+		progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		progressDialog.setCancelable(true);
+		progressDialog.show();
+	}
+
+	private void setProgressDialogStatus(int current, int total,
+			final String message) {
+		if (progressDialog == null) {
+			showProgressDialog();
+		} else {
+			if (total <= 0) {
+				progressDialog.setIndeterminate(true);
+			} else {
+				progressDialog.setIndeterminate(false);
+
+				progressDialog.setMax(total);
+				progressDialog.setProgress(current);
+			}
+			progressDialog.setMessage(message);
+		}
+	}
+
+	private void hideProgressDialog() {
+		if (progressDialog != null) {
+			progressDialog.dismiss();
+			progressDialog = null;
+		}
+	}
+
 	private static class PlayerAttendCount implements Serializable,
 			Comparable<PlayerAttendCount> {
 
@@ -296,5 +408,4 @@ public class OldGamesSummaryFragment extends Fragment implements Reloadable,
 			return name.compareTo(another.name);
 		}
 	}
-
 }

@@ -15,10 +15,10 @@ import org.dolicoli.android.golfscoreboard.utils.FeeCalculator;
 import org.dolicoli.android.golfscoreboard.utils.PlayerUIUtil;
 import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.text.format.DateUtils;
 import android.util.SparseArray;
@@ -98,39 +98,11 @@ public class CurrentGameSummaryFragment extends ListFragment implements
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		FragmentActivity activity = getActivity();
-		if (activity == null || !(activity instanceof CurrentGameDataContainer)) {
+		Activity activity = getActivity();
+		if (activity == null || !(activity instanceof MainFragmentContainer)) {
 			return false;
 		}
-		CurrentGameDataContainer container = (CurrentGameDataContainer) activity;
-
-		switch (item.getItemId()) {
-		case R.id.AddResult:
-			container.addResult();
-			return true;
-		case R.id.NewGame:
-			container.newGame();
-			return true;
-		case R.id.ModifyGame:
-			container.modifyGame();
-			return true;
-		case R.id.Reset:
-			container.showResetDialog();
-			return true;
-		case R.id.NetShareSendData:
-			container.showExportDataDialog();
-			return true;
-		case R.id.NetShareReceiveData:
-			container.importData();
-			return true;
-		case R.id.Save:
-			container.saveHistory();
-			return true;
-		case R.id.Settings:
-			container.showSettingActivity();
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+		return ((MainFragmentContainer) activity).onOptionsItemSelected(item);
 	}
 
 	@Override
@@ -222,9 +194,11 @@ public class CurrentGameSummaryFragment extends ListFragment implements
 							| DateUtils.FORMAT_12HOUR);
 			dateTextView.setText(dateString);
 		} else {
-			dateTextView.setText("");
+			dateTextView.setText(R.string.blank);
 		}
-		currentHoleTextView.setText("HOLE " + currentHole);
+		currentHoleTextView.setText(getString(
+				R.string.fragment_currentgamesummary_current_hole_format,
+				currentHole));
 		finalHoleTextView.setText(String.valueOf(holeCount));
 		adapter.clear();
 		for (PlayerScore playerScore : list) {
@@ -669,11 +643,11 @@ public class CurrentGameSummaryFragment extends ListFragment implements
 	}
 
 	@Override
-	public void onGameQueryStarted() {
+	public void onCurrentGameQueryStarted() {
 	}
 
 	@Override
-	public void onGameQueryFinished(SingleGameResult gameResult) {
+	public void onCurrentGameQueryFinished(SingleGameResult gameResult) {
 		this.gameResult = gameResult;
 		reloadUI();
 	}

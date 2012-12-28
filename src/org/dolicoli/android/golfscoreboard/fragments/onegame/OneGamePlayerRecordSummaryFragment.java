@@ -160,11 +160,11 @@ public class OneGamePlayerRecordSummaryFragment extends Fragment implements
 	}
 
 	@Override
-	public void onGameQueryStarted() {
+	public void onCurrentGameQueryStarted() {
 	}
 
 	@Override
-	public void onGameQueryFinished(SingleGameResult gameResult) {
+	public void onCurrentGameQueryFinished(SingleGameResult gameResult) {
 		reloadUI(gameResult);
 	}
 

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.dolicoli.android.golfscoreboard.GolfScoreBoardApplication;
+import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
@@ -15,9 +16,8 @@ import org.dolicoli.android.golfscoreboard.net.HistoryListParser;
 import org.dolicoli.android.golfscoreboard.net.HistoryListParser.History;
 import org.dolicoli.android.golfscoreboard.net.HttpScraper;
 import org.dolicoli.android.golfscoreboard.net.ResponseException;
-import org.dolicoli.android.golfscoreboard.tasks.GameReceiveTask.GameReceiveTaskListener;
-import org.dolicoli.android.golfscoreboard.tasks.GameReceiveTask.ReceiveProgress;
-import org.dolicoli.android.golfscoreboard.tasks.GameReceiveTask.ReceiveResult;
+import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask.ReceiveProgress;
+import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask.ReceiveResult;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil.DateRange;
 
@@ -27,7 +27,7 @@ import android.text.format.DateUtils;
 import android.util.Log;
 
 public class ThreeMonthsGameReceiveTask extends
-		AsyncTask<String, ReceiveProgress, ReceiveResult> {
+		AsyncTask<Void, ReceiveProgress, ReceiveResult> {
 
 	private static final String TAG = "ThreeMonthsGameReceiveTask";
 
@@ -38,12 +38,11 @@ public class ThreeMonthsGameReceiveTask extends
 	public static final int CODE_NO_DATA = 1002;
 
 	private Context context;
-	private GameReceiveTaskListener listener;
+	private TaskListener listener;
 	private String host;
 	private boolean running;
 
-	public ThreeMonthsGameReceiveTask(Context context,
-			GameReceiveTaskListener listener) {
+	public ThreeMonthsGameReceiveTask(Context context, TaskListener listener) {
 		this.context = context;
 		this.listener = listener;
 
@@ -59,7 +58,7 @@ public class ThreeMonthsGameReceiveTask extends
 			return;
 
 		if (listener != null) {
-			listener.onReceiveProgressUpdate(values[0]);
+			listener.onThreeMonthsGameReceiveProgressUpdate(values[0]);
 		}
 	}
 
@@ -68,7 +67,7 @@ public class ThreeMonthsGameReceiveTask extends
 
 		running = true;
 		if (listener != null) {
-			listener.onReceiveStart();
+			listener.onThreeMonthsGameReceiveStart();
 		}
 	}
 
@@ -78,14 +77,14 @@ public class ThreeMonthsGameReceiveTask extends
 
 		running = false;
 		if (listener != null) {
-			listener.onReceiveFinished(result);
+			listener.onThreeMonthsGameReceiveFinished(result);
 		}
 	}
 
 	private static final String PAGE = "historyList";
 
 	@Override
-	protected ReceiveResult doInBackground(String... args) {
+	protected ReceiveResult doInBackground(Void... args) {
 		DateRange dateRange = DateRangeUtil.getDateRange(2);
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHH",
 				Locale.getDefault());
@@ -97,8 +96,10 @@ public class ThreeMonthsGameReceiveTask extends
 		String url = host + PAGE + "?from=" + format.format(fromDate) + "&to="
 				+ format.format(toDate);
 
-		// publishProgress(new ReceiveProgress(0 /* Requesting... */));
-		publishProgress(new ReceiveProgress("접속 중"));
+		publishProgress(new ReceiveProgress(
+				0,
+				0,
+				context.getString(R.string.task_threemonthsgamereceive_connecting)));
 
 		String contents = null;
 		try {
@@ -112,7 +113,8 @@ public class ThreeMonthsGameReceiveTask extends
 			return new ReceiveResult(false, CODE_NO_DATA);
 		}
 
-		publishProgress(new ReceiveProgress("자료를 해석하는 중"));
+		publishProgress(new ReceiveProgress(0, 0,
+				context.getString(R.string.task_threemonthsgamereceive_parsing)));
 
 		try {
 			HistoryListParser parser = new HistoryListParser();
@@ -124,22 +126,33 @@ public class ThreeMonthsGameReceiveTask extends
 				return new ReceiveResult(true, CODE_CANCEL);
 			}
 
-			publishProgress(new ReceiveProgress("자료를 저장하는 중"));
+			publishProgress(new ReceiveProgress(
+					0,
+					0,
+					context.getString(R.string.task_threemonthsgamereceive_saving)));
 
 			ArrayList<History> historyList = parser.getHistoryList();
 			if (isCancelled()) {
 				return new ReceiveResult(true, CODE_CANCEL);
 			}
 
+			int totalSize = historyList.size();
+			int index = 0;
 			for (History history : historyList) {
 				GameSetting gameSetting = history.getGameSetting();
 
-				publishProgress(new ReceiveProgress("자료를 저장하는 중\n"
-						+ DateUtils.formatDateTime(context, gameSetting
-								.getDate().getTime(),
-								DateUtils.FORMAT_SHOW_DATE
-										| DateUtils.FORMAT_SHOW_TIME
-										| DateUtils.FORMAT_ABBREV_RELATIVE)));
+				publishProgress(new ReceiveProgress(
+						index++,
+						totalSize,
+						context.getString(
+								R.string.task_threemonthsgamereceive_saving_format,
+								DateUtils
+										.formatDateTime(
+												context,
+												gameSetting.getDate().getTime(),
+												DateUtils.FORMAT_SHOW_DATE
+														| DateUtils.FORMAT_SHOW_TIME
+														| DateUtils.FORMAT_ABBREV_RELATIVE))));
 
 				PlayerSetting playerSetting = history.getPlayerSetting();
 				if (isCancelled()) {
@@ -164,5 +177,63 @@ public class ThreeMonthsGameReceiveTask extends
 
 	public boolean isRunning() {
 		return running;
+	}
+
+	public static interface TaskListener {
+		void onThreeMonthsGameReceiveStart();
+
+		void onThreeMonthsGameReceiveProgressUpdate(ReceiveProgress progress);
+
+		void onThreeMonthsGameReceiveFinished(ReceiveResult result);
+	}
+
+	public static class ReceiveProgress {
+		private String msg;
+		private int current, total;
+
+		public ReceiveProgress(int current, int total, String msg) {
+			this.current = current;
+			this.total = total;
+			this.msg = msg;
+		}
+
+		public String getMessage() {
+			return msg;
+		}
+
+		public int getCurrent() {
+			return current;
+		}
+
+		public int getTotal() {
+			return total;
+		}
+	}
+
+	public static class ReceiveResult {
+
+		private boolean success;
+		private int errorCode;
+
+		public ReceiveResult() {
+			this(true, CODE_OK);
+		}
+
+		public ReceiveResult(boolean success, int msgId) {
+			this.success = success;
+			this.errorCode = msgId;
+		}
+
+		public boolean isSuccess() {
+			return success;
+		}
+
+		public int getErrorCode() {
+			return errorCode;
+		}
+
+		public boolean isCancel() {
+			return (errorCode == CODE_CANCEL);
+		}
 	}
 }
