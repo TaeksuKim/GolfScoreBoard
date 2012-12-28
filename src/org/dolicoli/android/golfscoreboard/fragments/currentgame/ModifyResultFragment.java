@@ -1,4 +1,4 @@
-package org.dolicoli.android.golfscoreboard.fragments.modifyresult;
+package org.dolicoli.android.golfscoreboard.fragments.currentgame;
 
 import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.R;
@@ -314,10 +314,8 @@ public class ModifyResultFragment extends Fragment implements OnClickListener {
 			fillHandicapSpinner(playerSetting, playerId);
 		}
 
-		holeNumberTextView
-				.setText(getString(
-						R.string.fragment_modify_result_hole_number_format,
-						holeNumber));
+		holeNumberTextView.setText(getString(
+				R.string.fragment_modifyresult_hole_number_format, holeNumber));
 
 		switch (oldResult.getParNumber()) {
 		case 3:

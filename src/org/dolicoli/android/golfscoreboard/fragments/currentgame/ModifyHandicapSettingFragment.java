@@ -245,9 +245,9 @@ public class ModifyHandicapSettingFragment extends Fragment implements
 			progressBar.setVisibility(View.VISIBLE);
 
 			for (int i = 0; i < Constants.MAX_PLAYER_COUNT; i++) {
-				playerRecommendHandicapTextViews[i].setText("");
-				playerAvgScoreTexts[i].setText("");
-				playerGameCountTexts[i].setText("");
+				playerRecommendHandicapTextViews[i].setText(R.string.blank);
+				playerAvgScoreTexts[i].setText(R.string.blank);
+				playerGameCountTexts[i].setText(R.string.blank);
 				playerHandicapSpinners[i].setSelection(0);
 				playerExtraScoreSpinners[i].setSelection(0);
 			}
@@ -355,14 +355,18 @@ public class ModifyHandicapSettingFragment extends Fragment implements
 					.valueOf(handicap));
 
 			int gameCount = calculator.getGameCount(playerName);
-			playerGameCountTexts[i].setText(gameCount + "°ÔÀÓ");
+			playerGameCountTexts[i]
+					.setText(getString(
+							R.string.fragment_game_setting_game_count_format,
+							gameCount));
 
 			float avgScore = calculator.getAvgScore(playerName);
 			if (gameCount > 0) {
 				playerAvgScoreTexts[i].setText(UIUtil.formatAvgScore(activity,
 						avgScore));
 			} else {
-				playerAvgScoreTexts[i].setText("-");
+				playerAvgScoreTexts[i]
+						.setText(R.string.fragment_game_setting_no_game_count);
 			}
 		}
 	}

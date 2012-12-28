@@ -224,10 +224,9 @@ public class ModifyPlayerSettingFragment extends Fragment implements
 	private void showInputPlayerNameDialog(final Spinner spinner) {
 		AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 
-		alert.setTitle("이름");
-		alert.setMessage("이름을 입력하세요.");
+		alert.setTitle(R.string.dialog_add_name_title);
+		alert.setMessage(R.string.dialog_please_insert_name);
 
-		// Set an EditText view to get user input
 		final EditText input = new EditText(getActivity());
 		alert.setView(input);
 
@@ -276,7 +275,7 @@ public class ModifyPlayerSettingFragment extends Fragment implements
 				.getStringArray(R.array.DefaultCachedPlayerNames);
 		ArrayList<String> names = new ArrayList<String>();
 
-		names.add("이름 선택");
+		names.add(getString(R.string.fragment_game_setting_select_player_name));
 		for (String name : defaultCachedPlayerNames) {
 			if (names.contains(name))
 				continue;

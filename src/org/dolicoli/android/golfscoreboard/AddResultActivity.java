@@ -18,8 +18,8 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class CurrentGameAddResultActivity extends FragmentActivity implements
-		InputFragmentListener, OnClickListener {
+public class AddResultActivity extends FragmentActivity implements
+		OnClickListener {
 
 	private AddResultFragment mainFragment;
 	private Button confirmButton;
@@ -79,7 +79,6 @@ public class CurrentGameAddResultActivity extends FragmentActivity implements
 		}
 	}
 
-	@Override
 	public void inputDataChanged() {
 		runOnUiThread(new Runnable() {
 			@Override

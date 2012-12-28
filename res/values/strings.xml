@@ -15,9 +15,9 @@
     <string name="game">게임</string>
     <string name="ranking">순위</string>
     <string name="score">점수</string>
-    <string name="handicap">찬스</string>
+    <string name="handicap">핸디캡</string>
     <string name="fee">금액</string>
-    <string name="remain_handicap">남은 찬스</string>
+    <string name="remain_handicap">남은 핸디캡</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
     <string name="blank"></string>
@@ -70,7 +70,7 @@
     <string name="title_activity_main">사만원</string>
     <string name="title_activity_current_game_new_game">새 게임</string>
     <string name="title_activity_current_game_modify_game_setting">게임 설정 수정</string>
-    <string name="title_activity_current_game_add_result">결과추가</string>
+    <string name="title_activity_add_result">결과추가</string>
     <string name="title_activity_modify_result">결과수정</string>
     <string name="title_activity_netshare_client">데이터 가져오기</string>
     <string name="title_activity_personal_statistics">개인 통계</string>
@@ -103,8 +103,10 @@
     <string name="dialog_export_current_game_please_wait">잠시만 기다려 주세요</string>
     <string name="dialog_are_you_sure_to_delete">모든 결과가 지워집니다.\n계속하시겠습니까?</string>
     <string name="dialog_import_three_month">3개월 자료 가져오기</string>
-    <string name="dialog_are_you_sure_to_import_three_month">최근 3개월 자료를 가져오시겠습니까?\n돈이 많이 들 수 있습니다.</string>
+    <string name="dialog_are_you_sure_to_import_three_month">최근 3개월 자료를 가져오시겠습니까?\n돈이 많이 들 수 있습니다</string>
     <string name="dialog_import_three_month_please_wait">잠시만 기다려 주세요</string>
+    <string name="dialog_add_name_title">이름</string>
+    <string name="dialog_please_insert_name">이름을 입력하세요</string>
 
     <!-- MainActivity -->
     <string name="activity_main_title">사만원</string>
@@ -113,17 +115,17 @@
     <string name="activity_main_fragment_attend_count">최근 3개월</string>
     <string name="activity_main_add_result_button">결과 추가</string>
     <string name="activity_main_import_this_game_button">이 게임 가져오기</string>
-    <string name="activity_main_netshare_upload_success">내보내기를 완료했습니다.</string>
-    <string name="activity_main_netshare_upload_fail">내보내기를 실패했습니다.</string>
-    <string name="activity_main_netshare_import_success">가져오기를 완료했습니다.</string>
-    <string name="activity_main_netshare_import_fail">가져오기를 실패했습니다.</string>
+    <string name="activity_main_netshare_upload_success">내보내기를 완료했습니다</string>
+    <string name="activity_main_netshare_upload_fail">내보내기를 실패했습니다</string>
+    <string name="activity_main_netshare_import_success">가져오기를 완료했습니다</string>
+    <string name="activity_main_netshare_import_fail">가져오기를 실패했습니다</string>
 
     <!-- New Game Activity -->
     <string name="activity_new_game_page_title_game_setting">게임 설정</string>
     <string name="activity_new_game_page_title_hole_fee_setting">홀 비용 설정</string>
     <string name="activity_new_game_page_title_ranking_fee_setting">순위 비용 설정</string>
     <string name="activity_new_game_page_title_player_setting">플레이어 설정</string>
-    <string name="activity_new_game_page_title_handicap_setting">찬스 설정</string>
+    <string name="activity_new_game_page_title_handicap_setting">핸디캡 설정</string>
     <string name="activity_new_game_are_you_sure_to_cancel">취소하시겠습니까?</string>
 
     <!-- Modify Game Activity -->
@@ -131,7 +133,7 @@
     <string name="activity_modify_game_page_title_hole_fee_setting">홀 비용 설정</string>
     <string name="activity_modify_game_page_title_ranking_fee_setting">순위 비용 설정</string>
     <string name="activity_modify_game_page_title_player_setting">플레이어 설정</string>
-    <string name="activity_modify_game_page_title_handicap_setting">찬스 설정</string>
+    <string name="activity_modify_game_page_title_handicap_setting">핸디캡 설정</string>
     <string name="activity_modify_game_are_you_sure_to_cancel">취소하시겠습니까?</string>
 
     <!-- History Activity -->
@@ -183,17 +185,21 @@
     <string name="fragment_game_setting_fee_ranking4">4위 비용</string>
     <string name="fragment_game_setting_fee_ranking5">5위 비용</string>
     <string name="fragment_game_setting_fee_ranking6">6위 비용</string>
+    <string name="fragment_game_setting_player_count_format">%d 명</string>
     <string name="fragment_game_setting_player_count_spinner_2">2 명</string>
     <string name="fragment_game_setting_player_count_spinner_3">3 명</string>
     <string name="fragment_game_setting_player_count_spinner_4">4 명</string>
     <string name="fragment_game_setting_player_count_spinner_5">5 명</string>
     <string name="fragment_game_setting_player_count_spinner_6">6 명</string>
+    <string name="fragment_game_setting_select_player_name">이름 선택</string>
     <string name="fragment_game_setting_default_player_name_1">Player 1</string>
     <string name="fragment_game_setting_default_player_name_2">Player 2</string>
     <string name="fragment_game_setting_default_player_name_3">Player 3</string>
     <string name="fragment_game_setting_default_player_name_4">Player 4</string>
     <string name="fragment_game_setting_default_player_name_5">Player 5</string>
     <string name="fragment_game_setting_default_player_name_6">Player 6</string>
+    <string name="fragment_game_setting_game_count_format">%d 경기</string>
+    <string name="fragment_game_setting_no_game_count">-</string>
     <string name="fragment_game_setting_hole_handicap">홀 핸디</string>
     <string name="fragment_game_setting_extra_score">점수 핸디</string>
     <string name="fragment_game_setting_recommnd">추천</string>
@@ -221,15 +227,16 @@
     <string name="fragment_player_setting_hint_name6">이름 (여섯 번째)</string>
     <string name="fragment_player_setting_add">추가</string>
 
-    <!-- Add Result Fragment -->
+    <!-- AddResultFragment -->
+    <string name="fragment_addresult_no_hole_number">Hole -</string>
+	<string name="fragment_addresult_hole_number_format">Hole %d</string>
 
-
-    <!-- Modify Result Fragment -->
-    <string name="fragment_modify_result_hole_number_format">Hole %d</string>
+    <!-- ModifyResultFragment -->
+    <string name="fragment_modifyresult_hole_number_format">Hole %d</string>
 
     <!-- NetShare Client Fragment -->
     <string name="fragment_netshare_client_receive">받기</string>
-    <string name="fragment_netshare_client_message_not_avaliable">인터넷에 연결할 수 없습니다.</string>
+    <string name="fragment_netshare_client_message_not_avaliable">인터넷에 연결할 수 없습니다</string>
     <string name="fragment_netshare_client_message_receiving">데이터를 받는 중</string>
     <string name="fragment_netshare_client_message_connecting">연결 중</string>
     <string name="fragment_netshare_client_message_receive_finished">데이터 수신을 완료했습니다</string>
@@ -238,11 +245,11 @@
     <!-- AttendCountFragment -->
     <string name="fragment_attend_count_no_history">기록이 없습니다</string>
     <string name="fragment_attend_count_click_to_see_detail">상세한 기록을 보려면 화면을 클릭하세요</string>
-    <string name="fragment_attendcount_import_three_month_success">가져오기를 완료했습니다.</string>
-    <string name="fragment_attendcount_import_three_month_fail">가져오기를 실패했습니다.</string>
+    <string name="fragment_attendcount_import_three_month_success">가져오기를 완료했습니다</string>
+    <string name="fragment_attendcount_import_three_month_fail">가져오기를 실패했습니다</string>
 
     <!-- GameResultHistoryFragment -->
-    <string name="fragment_game_result_result_history_item_selected">%d개가 선택되었습니다.</string>
+    <string name="fragment_game_result_result_history_item_selected">%d개가 선택되었습니다</string>
 
     <!-- One Game Hole Result Fragment -->
     <string name="fragment_one_game_hole_result_hole_number_format">Hole %1$d (Par %2$d)</string>

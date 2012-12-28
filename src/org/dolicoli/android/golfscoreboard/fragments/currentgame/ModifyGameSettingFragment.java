@@ -84,7 +84,10 @@ public class ModifyGameSettingFragment extends Fragment implements
 			eighteenHoleRadioButton.setChecked(false);
 		}
 		playerCount = gameSetting.getPlayerCount();
-		playerCountTextView.setText(playerCount + " Έν");
+		playerCountTextView
+				.setText(getString(
+						R.string.fragment_game_setting_player_count_format,
+						playerCount));
 
 		gameFeeEditText.setText(String.valueOf(gameSetting.getGameFee()));
 		extraFeeEditText.setText(String.valueOf(gameSetting.getExtraFee()));

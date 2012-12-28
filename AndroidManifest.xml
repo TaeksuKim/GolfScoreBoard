@@ -40,8 +40,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".CurrentGameAddResultActivity"
-            android:label="@string/title_activity_current_game_add_result"
+            android:name=".AddResultActivity"
+            android:label="@string/title_activity_add_result"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity

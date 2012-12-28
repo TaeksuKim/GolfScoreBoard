@@ -14,9 +14,9 @@ import org.dolicoli.android.golfscoreboard.fragments.main.MainFragmentContainer;
 import org.dolicoli.android.golfscoreboard.tasks.ExportCurrentGameTask;
 import org.dolicoli.android.golfscoreboard.tasks.ExportCurrentGameTask.ExportProgress;
 import org.dolicoli.android.golfscoreboard.tasks.ExportCurrentGameTask.ExportResult;
-import org.dolicoli.android.golfscoreboard.tasks.ImportGameTask;
-import org.dolicoli.android.golfscoreboard.tasks.ImportGameTask.ImportProgress;
-import org.dolicoli.android.golfscoreboard.tasks.ImportGameTask.ImportResult;
+import org.dolicoli.android.golfscoreboard.tasks.ImportCurrentGameTask;
+import org.dolicoli.android.golfscoreboard.tasks.ImportCurrentGameTask.ImportProgress;
+import org.dolicoli.android.golfscoreboard.tasks.ImportCurrentGameTask.ImportResult;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -40,7 +40,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements
-		MainFragmentContainer, ImportGameTask.TaskListener,
+		MainFragmentContainer, ImportCurrentGameTask.TaskListener,
 		ExportCurrentGameTask.TaskListener, OnClickListener,
 		OnPageChangeListener {
 
@@ -96,7 +96,7 @@ public class MainActivity extends FragmentActivity implements
 			showAddResultActivity();
 			return;
 		case R.id.ImportButton:
-			importThisGame();
+			importCurentGame();
 			return;
 		}
 	}
@@ -237,7 +237,7 @@ public class MainActivity extends FragmentActivity implements
 			return;
 		}
 
-		Intent intent = new Intent(this, CurrentGameAddResultActivity.class);
+		Intent intent = new Intent(this, AddResultActivity.class);
 		startActivityForResult(intent, REQ_ADD_RESULT);
 	}
 
@@ -353,7 +353,7 @@ public class MainActivity extends FragmentActivity implements
 		resultWorker.reset();
 	}
 
-	private void importThisGame() {
+	private void importCurentGame() {
 		GameSettingDatabaseWorker gameSettingWorker = new GameSettingDatabaseWorker(
 				this);
 		GameSetting gameSetting = new GameSetting();
@@ -362,7 +362,7 @@ public class MainActivity extends FragmentActivity implements
 		String currentGameId = GameSetting
 				.toGameIdFormat(gameSetting.getDate());
 
-		ImportGameTask task = new ImportGameTask(this, this);
+		ImportCurrentGameTask task = new ImportCurrentGameTask(this, this);
 		task.execute(currentGameId);
 	}
 

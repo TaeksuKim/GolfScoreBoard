@@ -14,17 +14,17 @@ import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.net.GameParser;
 import org.dolicoli.android.golfscoreboard.net.HttpScraper;
 import org.dolicoli.android.golfscoreboard.net.ResponseException;
-import org.dolicoli.android.golfscoreboard.tasks.ImportGameTask.ImportProgress;
-import org.dolicoli.android.golfscoreboard.tasks.ImportGameTask.ImportResult;
+import org.dolicoli.android.golfscoreboard.tasks.ImportCurrentGameTask.ImportProgress;
+import org.dolicoli.android.golfscoreboard.tasks.ImportCurrentGameTask.ImportResult;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class ImportGameTask extends
+public class ImportCurrentGameTask extends
 		AsyncTask<String, ImportProgress, ImportResult> {
 
-	private static final String TAG = "ImportGameTask";
+	private static final String TAG = "ImportCurrentGameTask";
 
 	public static final int CODE_OK = 100;
 	public static final int CODE_CANCEL = 101;
@@ -37,7 +37,7 @@ public class ImportGameTask extends
 	private String host;
 	private boolean running;
 
-	public ImportGameTask(Context context, TaskListener listener) {
+	public ImportCurrentGameTask(Context context, TaskListener listener) {
 		this.context = context;
 		this.listener = listener;
 

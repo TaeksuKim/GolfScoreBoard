@@ -4,7 +4,7 @@ import org.dolicoli.android.golfscoreboard.data.settings.Result;
 import org.dolicoli.android.golfscoreboard.db.HistoryGameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.PlayerSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
-import org.dolicoli.android.golfscoreboard.fragments.modifyresult.ModifyResultFragment;
+import org.dolicoli.android.golfscoreboard.fragments.currentgame.ModifyResultFragment;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

@@ -1,7 +1,7 @@
 package org.dolicoli.android.golfscoreboard.fragments.currentgame;
 
+import org.dolicoli.android.golfscoreboard.AddResultActivity;
 import org.dolicoli.android.golfscoreboard.Constants;
-import org.dolicoli.android.golfscoreboard.InputFragmentListener;
 import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.data.UsedHandicap;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
@@ -25,7 +25,7 @@ import android.widget.TextView;
 public class AddResultFragment extends Fragment implements OnClickListener {
 
 	private int playerCount;
-	private int holeNumber;
+	private int holeNumber, gameMaxHoleNumber;
 	private ScoreSpinnerAdapter[] playerScoreSpinnerAdapters;
 	private HandicapSpinnerAdapter[] playerHandicapSpinnerAdapters;
 	private UsedHandicap usedHandicaps;
@@ -40,8 +40,7 @@ public class AddResultFragment extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.current_game_add_result_fragment,
-				null);
+		View view = inflater.inflate(R.layout.add_result_fragment, null);
 
 		parThreeRadioButton = (RadioButton) view
 				.findViewById(R.id.ParThreeRadioButton);
@@ -236,14 +235,20 @@ public class AddResultFragment extends Fragment implements OnClickListener {
 				getActivity());
 		int maxHoleNumber = resultWorker.getMaxHoleNumber();
 		holeNumber = maxHoleNumber + 1;
-		if (holeNumber > gameSetting.getHoleCount()) {
-			holeNumberTextView.setText("Hole - ");
+		gameMaxHoleNumber = gameSetting.getHoleCount();
+		if (holeNumber > gameMaxHoleNumber) {
+			holeNumberTextView
+					.setText(R.string.fragment_addresult_no_hole_number);
+
 			holeNumber = -1;
 		} else {
-			holeNumberTextView.setText("Hole " + holeNumber);
+			holeNumberTextView
+					.setText(getString(
+							R.string.fragment_addresult_hole_number_format,
+							holeNumber));
 		}
 
-		((InputFragmentListener) getActivity()).inputDataChanged();
+		((AddResultActivity) getActivity()).inputDataChanged();
 	}
 
 	@Override
@@ -284,7 +289,7 @@ public class AddResultFragment extends Fragment implements OnClickListener {
 	}
 
 	public boolean isAllFieldValid() {
-		return (holeNumber > 0);
+		return (holeNumber > 0 && holeNumber <= gameMaxHoleNumber);
 	}
 
 	private void fillScoreSpinner(Spinner spinner, ScoreSpinnerAdapter adapter) {
