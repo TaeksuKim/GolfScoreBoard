@@ -75,7 +75,7 @@ public class GameResultHistoryFragment extends ListFragment implements
 				int checkCount = listView.getCheckedItemCount();
 				if (checkCount > 0)
 					mode.setTitle(getString(
-							R.string.activity_result_history_item_selected,
+							R.string.fragment_game_result_result_history_item_selected,
 							checkCount));
 				if (checked) {
 					adapter.setNewSelection(position, checked);
@@ -418,8 +418,7 @@ public class GameResultHistoryFragment extends ListFragment implements
 							.setImageResource(faceImageResourceId);
 				}
 
-				int tagColor = PlayerUIUtil
-						.getTagColor(playerScoreItem.name);
+				int tagColor = PlayerUIUtil.getTagColor(playerScoreItem.name);
 				holder.playerTagViews[i].setBackgroundColor(tagColor);
 			}
 

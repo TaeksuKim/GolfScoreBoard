@@ -12,7 +12,7 @@
         <ImageView
             android:id="@+id/UpperDivider"
             style="?attr/borderlessButtonHorizontalDivider"
-            android:contentDescription="@string/divider" />
+            android:contentDescription="@string/blank" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,16 +22,16 @@
             <Button
                 android:id="@+id/PrevButton"
                 style="?attr/borderlessButton"
-                android:text="@string/activity_history_prev" />
+                android:text="@string/back" />
 
             <ImageView
                 style="?attr/borderlessButtonVerticalDivider"
-                android:contentDescription="@string/divider" />
+                android:contentDescription="@string/blank" />
 
             <Button
                 android:id="@+id/NextButton"
                 style="?attr/borderlessButton"
-                android:text="@string/activity_history_next" />
+                android:text="@string/next" />
         </LinearLayout>
     </RelativeLayout>
 

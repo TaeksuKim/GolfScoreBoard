@@ -1,6 +1,7 @@
 package org.dolicoli.android.golfscoreboard;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
@@ -75,7 +76,7 @@ public class MainActivity extends FragmentActivity implements
 		addResultButton.setOnClickListener(this);
 		findViewById(R.id.ImportButton).setOnClickListener(this);
 
-		getActionBar().setTitle(R.string.activity_main_title_score_board);
+		getActionBar().setTitle(R.string.activity_main_title);
 
 		SharedPreferences preferences = PreferenceManager
 				.getDefaultSharedPreferences(this);
@@ -125,11 +126,16 @@ public class MainActivity extends FragmentActivity implements
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
 			case TAB_CURRENT_GAME_SUMMARY_FRAGMENT:
-				return getString(R.string.title_section1).toUpperCase();
+				return getString(
+						R.string.activity_main_fragment_current_game_summary)
+						.toUpperCase(Locale.US);
 			case TAB_CURRENG_GAME_HOLE_RESULT_FRAGMENT:
-				return getString(R.string.title_section2).toUpperCase();
+				return getString(
+						R.string.activity_main_fragment_current_game_hole_result)
+						.toUpperCase(Locale.US);
 			case TAB_OLD_GAMES_SUMMARY_FRAGMENT:
-				return getString(R.string.title_section3).toUpperCase();
+				return getString(R.string.activity_main_fragment_history_main)
+						.toUpperCase(Locale.US);
 			}
 			return null;
 		}
@@ -221,9 +227,8 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	public void showResetDialog() {
 		new AlertDialog.Builder(this)
-				// .setIcon(android.R.drawable.ic_dialog_info)
-				.setTitle(R.string.activity_main_dialog_reset)
-				.setMessage(R.string.activity_main_dialog_are_you_sure_to_reset)
+				.setTitle(R.string.dialog_reset)
+				.setMessage(R.string.dialog_are_you_sure_to_reset)
 				.setPositiveButton(android.R.string.yes,
 						new DialogInterface.OnClickListener() {
 
@@ -270,10 +275,8 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	public void showExportDataDialog() {
 		new AlertDialog.Builder(this)
-				// .setIcon(android.R.drawable.ic_dialog_info)
-				.setTitle(R.string.activity_main_dialog_netshare_export)
-				.setMessage(
-						R.string.activity_main_dialog_are_you_sure_to_netshare_upload)
+				.setTitle(R.string.dialog_netshare_export)
+				.setMessage(R.string.dialog_are_you_sure_to_netshare_upload)
 				.setPositiveButton(android.R.string.yes,
 						new DialogInterface.OnClickListener() {
 							@Override
@@ -434,9 +437,8 @@ public class MainActivity extends FragmentActivity implements
 		}
 		final Activity activity = this;
 		progressDialog = ProgressDialog.show(activity,
-				getString(R.string.activity_main_dialog_netshare_please_wait),
-				getString(R.string.activity_main_dialog_netshare_preparing),
-				true, false);
+				getString(R.string.dialog_netshare_please_wait),
+				getString(R.string.dialog_netshare_preparing), true, false);
 	}
 
 	private void hideProgressDialog() {

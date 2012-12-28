@@ -172,7 +172,7 @@ public class CurrentGameNewGameSettingActivity extends FragmentActivity
 	@Override
 	public void onBackPressed() {
 		new AlertDialog.Builder(this)
-				.setTitle(R.string.activity_new_game_cancel)
+				.setTitle(R.string.cancel)
 				.setMessage(R.string.activity_new_game_are_you_sure_to_cancel)
 				.setPositiveButton(android.R.string.yes,
 						new DialogInterface.OnClickListener() {
@@ -188,7 +188,8 @@ public class CurrentGameNewGameSettingActivity extends FragmentActivity
 
 	private void showGameSettingFragment() {
 		currentPage = PAGE_GAME_SETTING;
-		getActionBar().setTitle(R.string.activity_new_game_title_game_setting);
+		getActionBar().setTitle(
+				R.string.activity_new_game_page_title_game_setting);
 
 		gameSettingFragment.getView().setVisibility(View.VISIBLE);
 		holeFeeSettingFragment.getView().setVisibility(View.GONE);
@@ -207,7 +208,7 @@ public class CurrentGameNewGameSettingActivity extends FragmentActivity
 	private void showHoleFeeSettingFragment() {
 		currentPage = PAGE_HOLE_FEE_SETTING;
 		getActionBar().setTitle(
-				R.string.activity_new_game_title_hole_fee_setting);
+				R.string.activity_new_game_page_title_hole_fee_setting);
 
 		holeFeeSettingFragment.setInitialValues(
 				gameSettingFragment.getHoleCount(),
@@ -231,7 +232,7 @@ public class CurrentGameNewGameSettingActivity extends FragmentActivity
 	private void showRankingFeeSettingFragment() {
 		currentPage = PAGE_RANKING_FEE_SETTING;
 		getActionBar().setTitle(
-				R.string.activity_new_game_title_ranking_fee_setting);
+				R.string.activity_new_game_page_title_ranking_fee_setting);
 
 		rankingFeeSettingFragment.setInitialValues(
 				gameSettingFragment.getPlayerCount(),
@@ -253,8 +254,8 @@ public class CurrentGameNewGameSettingActivity extends FragmentActivity
 
 	private void showPlayerSettingFragment() {
 		currentPage = PAGE_PLAYER_SETTING;
-		getActionBar()
-				.setTitle(R.string.activity_new_game_title_player_setting);
+		getActionBar().setTitle(
+				R.string.activity_new_game_page_title_player_setting);
 
 		playerSettingFragment.setInitialValues(gameSettingFragment
 				.getPlayerCount());
@@ -275,7 +276,8 @@ public class CurrentGameNewGameSettingActivity extends FragmentActivity
 
 	private void showHandicapSettingFragment() {
 		currentPage = PAGE_HANDICAP_SETTING;
-		getActionBar().setTitle("ÇÚµðÄ¸ ¼³Á¤");
+		getActionBar().setTitle(
+				R.string.activity_new_game_page_title_handicap_setting);
 
 		int playerCount = gameSettingFragment.getPlayerCount();
 		String[] playerNames = new String[playerCount];

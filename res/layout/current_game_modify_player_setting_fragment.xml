@@ -50,7 +50,7 @@
                 android:layout_height="?attr/preferredItemHeight"
                 android:layout_alignBaseline="@+id/Player1DummyEditText"
                 android:layout_alignParentRight="true"
-                android:text="추가" />
+                android:text="@string/fragment_player_setting_add" />
 
             <Spinner
                 android:id="@+id/Player1NameSpinner"
@@ -78,7 +78,7 @@
                 android:layout_height="?attr/preferredItemHeight"
                 android:layout_alignBaseline="@+id/Player2DummyEditText"
                 android:layout_alignParentRight="true"
-                android:text="추가" />
+                android:text="@string/fragment_player_setting_add" />
 
             <Spinner
                 android:id="@+id/Player2NameSpinner"
@@ -106,7 +106,7 @@
                 android:layout_height="?attr/preferredItemHeight"
                 android:layout_alignBaseline="@+id/Player3DummyEditText"
                 android:layout_alignParentRight="true"
-                android:text="추가" />
+                android:text="@string/fragment_player_setting_add" />
 
             <Spinner
                 android:id="@+id/Player3NameSpinner"
@@ -134,7 +134,7 @@
                 android:layout_height="?attr/preferredItemHeight"
                 android:layout_alignBaseline="@+id/Player4DummyEditText"
                 android:layout_alignParentRight="true"
-                android:text="추가" />
+                android:text="@string/fragment_player_setting_add" />
 
             <Spinner
                 android:id="@+id/Player4NameSpinner"
@@ -162,7 +162,7 @@
                 android:layout_height="?attr/preferredItemHeight"
                 android:layout_alignBaseline="@+id/Player5DummyEditText"
                 android:layout_alignParentRight="true"
-                android:text="추가" />
+                android:text="@string/fragment_player_setting_add" />
 
             <Spinner
                 android:id="@+id/Player5NameSpinner"
@@ -190,7 +190,7 @@
                 android:layout_height="?attr/preferredItemHeight"
                 android:layout_alignBaseline="@+id/Player6DummyEditText"
                 android:layout_alignParentRight="true"
-                android:text="추가" />
+                android:text="@string/fragment_player_setting_add" />
 
             <Spinner
                 android:id="@+id/Player6NameSpinner"

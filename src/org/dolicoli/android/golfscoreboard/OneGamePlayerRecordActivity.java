@@ -1,5 +1,7 @@
 package org.dolicoli.android.golfscoreboard;
 
+import java.util.Locale;
+
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
@@ -243,11 +245,13 @@ public class OneGamePlayerRecordActivity extends FragmentActivity implements
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
 			case TAB_PLAYER_RECORD_SUMMARY_FRAGMENT:
-				return getString(R.string.player_record_title_section1)
-						.toUpperCase();
+				return getString(
+						R.string.activity_onegame_player_record_fragment_summary)
+						.toUpperCase(Locale.US);
 			case TAB_PLAYER_HOLE_RECORD_FRAGMENT:
-				return getString(R.string.player_record_title_section2)
-						.toUpperCase();
+				return getString(
+						R.string.activity_onegame_player_record_fragment_hole_result)
+						.toUpperCase(Locale.US);
 			}
 			return null;
 		}

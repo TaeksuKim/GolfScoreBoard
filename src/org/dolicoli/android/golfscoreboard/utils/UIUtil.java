@@ -171,7 +171,8 @@ public class UIUtil {
 			return String.valueOf(count);
 
 		if (gameCountFormat == null) {
-			gameCountFormat = new DecimalFormat("###,### ȸ");
+			gameCountFormat = new DecimalFormat(
+					context.getString(R.string.game_count_format));
 		}
 
 		return gameCountFormat.format(count);

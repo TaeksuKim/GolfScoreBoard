@@ -31,7 +31,7 @@
             android:layout_marginBottom="4dip"
             android:layout_marginTop="4dip"
             android:gravity="center"
-            android:text="경기"
+            android:text="@string/game"
             android:textAppearance="?attr/textAppearanceSmall"
             android:textColor="?attr/secondaryTextColor" />
 
@@ -55,7 +55,7 @@
             android:layout_marginTop="4dip"
             android:layout_toRightOf="@+id/AttendCountTextView"
             android:gravity="center"
-            android:text="총금액"
+            android:text="@string/fragment_personal_statistics_summary_total_fee"
             android:textAppearance="?attr/textAppearanceSmall"
             android:textColor="?attr/secondaryTextColor" />
 
@@ -107,7 +107,7 @@
             android:layout_marginRight="4dip"
             android:layout_marginTop="4dip"
             android:gravity="center"
-            android:text="평균순위"
+            android:text="@string/fragment_personal_statistics_summary_avg_ranking"
             android:textAppearance="?attr/textAppearanceSmall"
             android:textColor="?attr/secondaryTextColor" />
 
@@ -124,7 +124,7 @@
             android:layout_marginLeft="4dip"
             android:layout_marginRight="4dip"
             android:gravity="center"
-            android:text="최고"
+            android:text="@string/fragment_personal_statistics_summary_max"
             android:textAppearance="?attr/textAppearanceSmall"
             android:textColor="?attr/secondaryTextColor" />
 
@@ -141,7 +141,7 @@
             android:layout_marginLeft="4dip"
             android:layout_marginRight="4dip"
             android:gravity="center"
-            android:text="최저"
+            android:text="@string/fragment_personal_statistics_summary_min"
             android:textAppearance="?attr/textAppearanceSmall"
             android:textColor="?attr/secondaryTextColor" />
 
@@ -160,7 +160,7 @@
             android:layout_marginRight="4dip"
             android:layout_marginTop="4dip"
             android:gravity="center"
-            android:text="1 위"
+            android:text="@string/fragment_personal_statistics_summary_first_standing"
             android:textAppearance="?attr/textAppearanceSmall"
             android:textColor="?attr/secondaryTextColor" />
 
@@ -188,7 +188,7 @@
             android:layout_marginRight="4dip"
             android:layout_marginTop="4dip"
             android:gravity="center"
-            android:text="최하위"
+            android:text="@string/fragment_personal_statistics_summary_last_standing"
             android:textAppearance="?attr/textAppearanceSmall"
             android:textColor="?attr/secondaryTextColor" />
 
@@ -216,7 +216,7 @@
             android:layout_marginRight="4dip"
             android:layout_marginTop="4dip"
             android:gravity="center"
-            android:text="평균타수"
+            android:text="@string/fragment_personal_statistics_summary_avg_score"
             android:textAppearance="?attr/textAppearanceSmall"
             android:textColor="?attr/secondaryTextColor" />
 
@@ -233,7 +233,7 @@
             android:layout_marginLeft="4dip"
             android:layout_marginRight="4dip"
             android:gravity="center"
-            android:text="최고"
+            android:text="@string/fragment_personal_statistics_summary_max"
             android:textAppearance="?attr/textAppearanceSmall"
             android:textColor="?attr/secondaryTextColor" />
 
@@ -250,7 +250,7 @@
             android:layout_marginLeft="4dip"
             android:layout_marginRight="4dip"
             android:gravity="center"
-            android:text="최저"
+            android:text="@string/fragment_personal_statistics_summary_min"
             android:textAppearance="?attr/textAppearanceSmall"
             android:textColor="?attr/secondaryTextColor" />
 
@@ -270,7 +270,7 @@
             android:layout_marginTop="4dip"
             android:layout_rowSpan="2"
             android:gravity="center"
-            android:text="평균금액"
+            android:text="@string/fragment_personal_statistics_summary_avg_fee"
             android:textAppearance="?attr/textAppearanceSmall"
             android:textColor="?attr/secondaryTextColor" />
 
@@ -288,7 +288,7 @@
             android:layout_marginLeft="4dip"
             android:layout_marginRight="4dip"
             android:gravity="center"
-            android:text="최고"
+            android:text="@string/fragment_personal_statistics_summary_max"
             android:textAppearance="?attr/textAppearanceSmall"
             android:textColor="?attr/secondaryTextColor" />
 
@@ -306,7 +306,7 @@
             android:layout_marginLeft="4dip"
             android:layout_marginRight="4dip"
             android:gravity="center"
-            android:text="최저"
+            android:text="@string/fragment_personal_statistics_summary_min"
             android:textAppearance="?attr/textAppearanceSmall"
             android:textColor="?attr/secondaryTextColor" />
 

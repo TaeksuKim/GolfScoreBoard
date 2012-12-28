@@ -6,6 +6,6 @@
         android:alphabeticShortcut="d"
         android:icon="?deleteMenuIcon"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/activity_result_history_menu_delete"/>
+        android:title="@string/menu_delete"/>
 
 </menu>

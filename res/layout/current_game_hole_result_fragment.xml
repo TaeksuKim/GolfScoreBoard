@@ -19,7 +19,7 @@
             android:layout_alignParentTop="true"
             android:paddingLeft="4dip"
             android:paddingRight="4dip"
-            android:text="@string/modify_game_setting"
+            android:text="@string/modify"
             android:textAppearance="?attr/textAppearanceSmall" />
 
         <ImageView
@@ -27,7 +27,7 @@
             style="?attr/borderlessButtonVerticalDivider"
             android:layout_height="?attr/preferredItemHeight"
             android:layout_toLeftOf="@+id/ModifyFeeSettingButton"
-            android:contentDescription="@string/divider" />
+            android:contentDescription="@string/blank" />
 
         <TextView
             android:id="@+id/SumOfTotalFeeTextView"
@@ -99,7 +99,7 @@
             style="?attr/borderlessButtonHorizontalDivider"
             android:layout_alignWithParentIfMissing="true"
             android:layout_below="@+id/ModifyFeeSettingButton"
-            android:contentDescription="@string/divider" />
+            android:contentDescription="@string/blank" />
     </RelativeLayout>
 
     <ListView

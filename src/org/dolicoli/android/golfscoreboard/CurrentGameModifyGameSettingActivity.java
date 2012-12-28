@@ -170,7 +170,7 @@ public class CurrentGameModifyGameSettingActivity extends FragmentActivity
 	@Override
 	public void onBackPressed() {
 		new AlertDialog.Builder(this)
-				.setTitle(R.string.activity_modify_game_cancel)
+				.setTitle(R.string.cancel)
 				.setMessage(
 						R.string.activity_modify_game_are_you_sure_to_cancel)
 				.setPositiveButton(android.R.string.yes,
@@ -188,7 +188,7 @@ public class CurrentGameModifyGameSettingActivity extends FragmentActivity
 	private void showGameSettingFragment() {
 		currentPage = PAGE_GAME_SETTING;
 		getActionBar().setTitle(
-				R.string.activity_modify_game_title_game_setting);
+				R.string.activity_modify_game_page_title_game_setting);
 
 		gameSettingFragment.getView().setVisibility(View.VISIBLE);
 		holeFeeSettingFragment.getView().setVisibility(View.GONE);
@@ -207,7 +207,7 @@ public class CurrentGameModifyGameSettingActivity extends FragmentActivity
 	private void showHoleFeeSettingFragment() {
 		currentPage = PAGE_HOLE_FEE_SETTING;
 		getActionBar().setTitle(
-				R.string.activity_modify_game_title_hole_fee_setting);
+				R.string.activity_modify_game_page_title_hole_fee_setting);
 
 		holeFeeSettingFragment.setInitialValues(
 				gameSettingFragment.getHoleCount(),
@@ -231,7 +231,7 @@ public class CurrentGameModifyGameSettingActivity extends FragmentActivity
 	private void showRankingFeeSettingFragment() {
 		currentPage = PAGE_RANKING_FEE_SETTING;
 		getActionBar().setTitle(
-				R.string.activity_modify_game_title_ranking_fee_setting);
+				R.string.activity_modify_game_page_title_ranking_fee_setting);
 
 		rankingFeeSettingFragment.setInitialValues(
 				gameSettingFragment.getPlayerCount(),
@@ -254,7 +254,7 @@ public class CurrentGameModifyGameSettingActivity extends FragmentActivity
 	private void showPlayerSettingFragment() {
 		currentPage = PAGE_PLAYER_SETTING;
 		getActionBar().setTitle(
-				R.string.activity_modify_game_title_player_setting);
+				R.string.activity_modify_game_page_title_player_setting);
 
 		gameSettingFragment.getView().setVisibility(View.GONE);
 		holeFeeSettingFragment.getView().setVisibility(View.GONE);
@@ -272,7 +272,8 @@ public class CurrentGameModifyGameSettingActivity extends FragmentActivity
 
 	private void showHandicapSettingFragment() {
 		currentPage = PAGE_HANDICAP_SETTING;
-		getActionBar().setTitle("ÇÚµðÄ¸ ¼³Á¤");
+		getActionBar().setTitle(
+				R.string.activity_modify_game_page_title_handicap_setting);
 
 		int playerCount = gameSettingFragment.getPlayerCount();
 		String[] playerNames = new String[playerCount];

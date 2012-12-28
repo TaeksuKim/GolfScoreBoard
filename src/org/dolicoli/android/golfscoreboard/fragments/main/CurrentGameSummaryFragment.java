@@ -81,7 +81,7 @@ public class CurrentGameSummaryFragment extends ListFragment implements
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.current_game_summary, menu);
+		inflater.inflate(R.menu.current_game, menu);
 	}
 
 	@Override

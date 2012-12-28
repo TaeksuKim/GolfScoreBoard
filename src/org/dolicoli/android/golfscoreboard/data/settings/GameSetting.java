@@ -2,6 +2,7 @@ package org.dolicoli.android.golfscoreboard.data.settings;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import org.dolicoli.android.golfscoreboard.Constants;
 
@@ -145,7 +146,7 @@ public class GameSetting {
 	}
 
 	private static final SimpleDateFormat GAME_ID_FORMAT = new SimpleDateFormat(
-			"yyyyMMddHHmm");
+			"yyyyMMddHHmm", Locale.getDefault());
 
 	public static String toGameIdFormat(Date date) {
 		return GAME_ID_FORMAT.format(date);

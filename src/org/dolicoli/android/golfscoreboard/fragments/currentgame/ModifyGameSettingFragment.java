@@ -1,14 +1,14 @@
 package org.dolicoli.android.golfscoreboard.fragments.currentgame;
 
-import java.text.DecimalFormat;
-
 import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
+import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -29,7 +29,6 @@ public class ModifyGameSettingFragment extends Fragment implements
 	private TextView totalFeeTextView, totalHoleFeeTextView,
 			totalRankingFeeTextView;
 
-	private DecimalFormat feeFormat;
 	private int playerCount;
 
 	@Override
@@ -37,8 +36,6 @@ public class ModifyGameSettingFragment extends Fragment implements
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(
 				R.layout.current_game_modify_game_setting_fragment, null);
-
-		feeFormat = new DecimalFormat(getString(R.string.fee_format));
 
 		nineHoleRadioButton = (RadioButton) view
 				.findViewById(R.id.NineHoleRadioButton);
@@ -130,11 +127,14 @@ public class ModifyGameSettingFragment extends Fragment implements
 	}
 
 	private void feeChanged() {
+		FragmentActivity activity = getActivity();
+
 		int totalFee = getGameFee() + getExtraFee();
 		int totalRankingFee = getRankingFee();
-		totalFeeTextView.setText(feeFormat.format(totalFee));
-		totalRankingFeeTextView.setText(feeFormat.format(totalRankingFee));
-		totalHoleFeeTextView.setText(feeFormat.format(totalFee
+		totalFeeTextView.setText(UIUtil.formatFee(activity, totalFee));
+		totalRankingFeeTextView.setText(UIUtil.formatFee(activity,
+				totalRankingFee));
+		totalHoleFeeTextView.setText(UIUtil.formatFee(activity, totalFee
 				- totalRankingFee));
 	}
 

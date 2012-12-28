@@ -15,7 +15,7 @@
             style="?attr/listSectionHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="최근 5경기" />
+            android:text="@string/fragment_personal_statistics_summary_recent_five_games" />
 
         <include
             android:id="@+id/Recent5SummaryItem"
@@ -27,7 +27,7 @@
             style="?attr/listSectionHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="이번 달" />
+            android:text="@string/fragment_personal_statistics_summary_this_month" />
 
         <include
             android:id="@+id/ThisMonthSummaryItem"
@@ -39,7 +39,7 @@
             style="?attr/listSectionHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="지난 달" />
+            android:text="@string/fragment_personal_statistics_summary_last_month" />
 
         <include
             android:id="@+id/LastMonthSummaryItem"
@@ -51,7 +51,7 @@
             style="?attr/listSectionHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="최근 3개월" />
+            android:text="@string/fragment_personal_statistics_summary_recent_three_months" />
 
         <include
             android:id="@+id/Last3MonthSummaryItem"

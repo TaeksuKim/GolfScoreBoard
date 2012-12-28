@@ -2,6 +2,7 @@ package org.dolicoli.android.golfscoreboard;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 import org.dolicoli.android.golfscoreboard.data.GameAndResult;
 import org.dolicoli.android.golfscoreboard.fragments.DummySectionFragment;
@@ -193,10 +194,13 @@ public class PersonalStatisticsActivity extends FragmentActivity implements
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
 			case TAB_SUMMARY_FRAGMENT:
-				return getString(R.string.player_record_title_section1)
-						.toUpperCase();
+				return getString(
+						R.string.activity_personal_statistics_fragment_summary)
+						.toUpperCase(Locale.US);
 			case TAB_GAME_RESULT_LIST_FRAGMENT:
-				return "날짜별 기록";
+				return getString(
+						R.string.activity_personal_statistics_fragment_game_result_list)
+						.toUpperCase(Locale.US);
 			}
 			return null;
 		}

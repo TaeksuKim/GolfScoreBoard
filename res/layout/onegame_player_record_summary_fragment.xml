@@ -13,7 +13,7 @@
             style="?attr/listSectionHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_player_record_ranking" />
+            android:text="@string/ranking" />
 
         <RelativeLayout
             android:layout_width="276dip"
@@ -31,7 +31,7 @@
                 android:layout_marginBottom="2dip"
                 android:layout_marginTop="10dip"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_joint" />
+                android:text="@string/fragment_onegame_player_record_joint" />
 
             <TextView
                 android:id="@+id/RankingRightValueTextView"
@@ -40,7 +40,7 @@
                 android:layout_alignBaseline="@+id/RankingRightSameValueTextView"
                 android:layout_toLeftOf="@+id/RankingRightSameValueTextView"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_solo" />
+                android:text="@string/fragment_onegame_player_record_solo" />
 
             <TextView
                 android:id="@+id/RankingRightTitleTextView"
@@ -58,7 +58,7 @@
                 android:layout_alignBaseline="@+id/RankingRightSameValueTextView"
                 android:layout_toLeftOf="@+id/RankingRightTitleTextView"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_joint" />
+                android:text="@string/fragment_onegame_player_record_joint" />
 
             <TextView
                 android:id="@+id/RankingLeftValueTextView"
@@ -67,7 +67,7 @@
                 android:layout_alignBaseline="@+id/RankingLeftSameValueTextView"
                 android:layout_toLeftOf="@+id/RankingLeftSameValueTextView"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_solo" />
+                android:text="@string/fragment_onegame_player_record_solo" />
 
             <TextView
                 android:id="@+id/RankingLeftTitleTextView"
@@ -108,7 +108,7 @@
                 android:layout_alignBaseline="@+id/Ranking2SameValueTextView"
                 android:layout_alignLeft="@+id/RankingRightTitleTextView"
                 android:layout_alignWithParentIfMissing="true"
-                android:text="@string/fragment_player_record_ranking_2" />
+                android:text="@string/fragment_onegame_player_record_ranking_2" />
 
             <TextView
                 android:id="@+id/Ranking1SameValueTextView"
@@ -137,7 +137,7 @@
                 android:layout_alignBaseline="@+id/Ranking2SameValueTextView"
                 android:layout_alignLeft="@+id/RankingLeftTitleTextView"
                 android:layout_alignWithParentIfMissing="true"
-                android:text="@string/fragment_player_record_ranking_1" />
+                android:text="@string/fragment_onegame_player_record_ranking_1" />
 
             <!-- ROW 2 -->
 
@@ -170,7 +170,7 @@
                 android:layout_alignBaseline="@+id/Ranking4SameValueTextView"
                 android:layout_alignLeft="@+id/Ranking2TitleTextView"
                 android:layout_alignWithParentIfMissing="true"
-                android:text="@string/fragment_player_record_ranking_4" />
+                android:text="@string/fragment_onegame_player_record_ranking_4" />
 
             <TextView
                 android:id="@+id/Ranking3SameValueTextView"
@@ -199,7 +199,7 @@
                 android:layout_alignBaseline="@+id/Ranking4SameValueTextView"
                 android:layout_alignLeft="@+id/Ranking1TitleTextView"
                 android:layout_alignWithParentIfMissing="true"
-                android:text="@string/fragment_player_record_ranking_3" />
+                android:text="@string/fragment_onegame_player_record_ranking_3" />
 
             <!-- ROW 3 -->
 
@@ -232,7 +232,7 @@
                 android:layout_alignBaseline="@+id/Ranking6SameValueTextView"
                 android:layout_alignLeft="@+id/Ranking4TitleTextView"
                 android:layout_alignWithParentIfMissing="true"
-                android:text="@string/fragment_player_record_ranking_6" />
+                android:text="@string/fragment_onegame_player_record_ranking_6" />
 
             <TextView
                 android:id="@+id/Ranking5SameValueTextView"
@@ -261,7 +261,7 @@
                 android:layout_alignBaseline="@+id/Ranking6SameValueTextView"
                 android:layout_alignLeft="@+id/Ranking3TitleTextView"
                 android:layout_alignWithParentIfMissing="true"
-                android:text="@string/fragment_player_record_ranking_5" />
+                android:text="@string/fragment_onegame_player_record_ranking_5" />
         </RelativeLayout>
 
         <TextView
@@ -269,7 +269,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dip"
-            android:text="@string/fragment_player_record_fee" />
+            android:text="@string/fee" />
 
         <RelativeLayout
             android:layout_width="276dip"
@@ -285,7 +285,7 @@
                 android:layout_marginBottom="4dip"
                 android:layout_marginTop="4dip"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_fee_zero" />
+                android:text="@string/fragment_onegame_player_record_fee_zero" />
 
             <TextView
                 android:id="@+id/FeeZeroValueTextView"
@@ -307,7 +307,7 @@
                 android:layout_marginTop="4dip"
                 android:layout_toRightOf="@+id/FeeZeroValueTextView"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_fee_under1000" />
+                android:text="@string/fragment_onegame_player_record_fee_under1000" />
 
             <TextView
                 android:id="@+id/FeeUnder1000ValueTextView"
@@ -329,7 +329,7 @@
                 android:layout_marginBottom="4dip"
                 android:layout_marginTop="4dip"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_fee_under1500" />
+                android:text="@string/fragment_onegame_player_record_fee_under1500" />
 
             <TextView
                 android:id="@+id/FeeUnder1500ValueTextView"
@@ -351,7 +351,7 @@
                 android:layout_marginTop="4dip"
                 android:layout_toRightOf="@+id/FeeUnder1500ValueTextView"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_fee_under2000" />
+                android:text="@string/fragment_onegame_player_record_fee_under2000" />
 
             <TextView
                 android:id="@+id/FeeUnder2000ValueTextView"
@@ -373,7 +373,7 @@
                 android:layout_marginBottom="4dip"
                 android:layout_marginTop="4dip"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_fee_under2500" />
+                android:text="@string/fragment_onegame_player_record_fee_under2500" />
 
             <TextView
                 android:id="@+id/FeeUnder2500ValueTextView"
@@ -395,7 +395,7 @@
                 android:layout_marginTop="4dip"
                 android:layout_toRightOf="@+id/FeeUnder2500ValueTextView"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_fee_over2500" />
+                android:text="@string/fragment_onegame_player_record_fee_over2500" />
 
             <TextView
                 android:id="@+id/FeeOver2500ValueTextView"
@@ -414,7 +414,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dip"
-            android:text="@string/fragment_player_record_score" />
+            android:text="@string/score" />
 
         <RelativeLayout
             android:layout_width="276dip"
@@ -430,7 +430,7 @@
                 android:layout_marginBottom="4dip"
                 android:layout_marginTop="4dip"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_under_condor" />
+                android:text="@string/fragment_onegame_player_record_under_condor" />
 
             <TextView
                 android:id="@+id/UnderCondorValueTextView"
@@ -452,7 +452,7 @@
                 android:layout_marginTop="4dip"
                 android:layout_toRightOf="@+id/UnderCondorValueTextView"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_albatross" />
+                android:text="@string/fragment_onegame_player_record_albatross" />
 
             <TextView
                 android:id="@+id/AlbatrossValueTextView"
@@ -474,7 +474,7 @@
                 android:layout_marginBottom="4dip"
                 android:layout_marginTop="4dip"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_eagle" />
+                android:text="@string/fragment_onegame_player_record_eagle" />
 
             <TextView
                 android:id="@+id/EagleValueTextView"
@@ -496,7 +496,7 @@
                 android:layout_marginTop="4dip"
                 android:layout_toRightOf="@+id/EagleValueTextView"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_birdie" />
+                android:text="@string/fragment_onegame_player_record_birdie" />
 
             <TextView
                 android:id="@+id/BirdieValueTextView"
@@ -518,7 +518,7 @@
                 android:layout_marginBottom="4dip"
                 android:layout_marginTop="4dip"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_par" />
+                android:text="@string/fragment_onegame_player_record_par" />
 
             <TextView
                 android:id="@+id/ParValueTextView"
@@ -540,7 +540,7 @@
                 android:layout_marginTop="4dip"
                 android:layout_toRightOf="@+id/ParValueTextView"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_bogey" />
+                android:text="@string/fragment_onegame_player_record_bogey" />
 
             <TextView
                 android:id="@+id/BogeyValueTextView"
@@ -562,7 +562,7 @@
                 android:layout_marginBottom="4dip"
                 android:layout_marginTop="4dip"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_double_bogey" />
+                android:text="@string/fragment_onegame_player_record_double_bogey" />
 
             <TextView
                 android:id="@+id/DoubleBogeyValueTextView"
@@ -584,7 +584,7 @@
                 android:layout_marginTop="4dip"
                 android:layout_toRightOf="@+id/DoubleBogeyValueTextView"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_triple_bogey" />
+                android:text="@string/fragment_onegame_player_record_triple_bogey" />
 
             <TextView
                 android:id="@+id/TripleBogeyValueTextView"
@@ -606,7 +606,7 @@
                 android:layout_marginBottom="4dip"
                 android:layout_marginTop="4dip"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_quadruple_bogey" />
+                android:text="@string/fragment_onegame_player_record_quadruple_bogey" />
 
             <TextView
                 android:id="@+id/QuadrupleBogeyValueTextView"
@@ -628,7 +628,7 @@
                 android:layout_marginTop="4dip"
                 android:layout_toRightOf="@+id/QuadrupleBogeyValueTextView"
                 android:gravity="center"
-                android:text="@string/fragment_player_record_over_quintuple_bogey" />
+                android:text="@string/fragment_onegame_player_record_over_quintuple_bogey" />
 
             <TextView
                 android:id="@+id/OverQuintupleBogeyValueTextView"

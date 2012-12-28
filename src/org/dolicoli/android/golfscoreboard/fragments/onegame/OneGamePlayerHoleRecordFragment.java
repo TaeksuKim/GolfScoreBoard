@@ -190,9 +190,10 @@ public class OneGamePlayerHoleRecordFragment extends ListFragment implements
 			if (playerScore == null)
 				return v;
 
-			holder.holeTextView.setText(getString(
-					R.string.fragment_player_record_hole_number_format,
-					playerScore.holeNumber, playerScore.parNumber));
+			holder.holeTextView
+					.setText(getString(
+							R.string.fragment_onegame_player_hole_record_hole_number_format,
+							playerScore.holeNumber, playerScore.parNumber));
 
 			UIUtil.setScoreTextView(getContext(), holder.scoreTextView,
 					playerScore.score);
@@ -214,9 +215,10 @@ public class OneGamePlayerHoleRecordFragment extends ListFragment implements
 					playerScore.ranking);
 
 			if (playerScore.sameRankingCount > 1) {
-				holder.sameRankingCountTextView.setText(getString(
-						R.string.fragment_player_record_player_count_format,
-						playerScore.sameRankingCount));
+				holder.sameRankingCountTextView
+						.setText(getString(
+								R.string.fragment_onegame_player_hole_record_player_count_format,
+								playerScore.sameRankingCount));
 				holder.sameRankingCountTextView.setVisibility(View.VISIBLE);
 			} else {
 				holder.sameRankingCountTextView.setVisibility(View.INVISIBLE);

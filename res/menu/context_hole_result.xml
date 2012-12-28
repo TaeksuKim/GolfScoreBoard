@@ -6,13 +6,12 @@
         android:alphabeticShortcut="m"
         android:icon="?editMenuIcon"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/fragment_hole_result_menu_modify"/>
-    
+        android:title="@string/modify"/>
     <item
         android:id="@+id/Delete"
         android:alphabeticShortcut="d"
         android:icon="?deleteMenuIcon"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/fragment_hole_result_menu_delete"/>
+        android:title="@string/delete"/>
 
 </menu>

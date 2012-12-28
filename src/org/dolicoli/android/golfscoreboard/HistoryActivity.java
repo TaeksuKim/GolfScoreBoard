@@ -2,6 +2,7 @@ package org.dolicoli.android.golfscoreboard;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.dolicoli.android.golfscoreboard.data.GameAndResult;
 import org.dolicoli.android.golfscoreboard.db.HistoryGameSettingDatabaseWorker;
@@ -157,9 +158,13 @@ public class HistoryActivity extends FragmentActivity implements
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
 			case TAB_GAME_RESULT_HISTORY_FRAGMENT:
-				return getString(R.string.title_section3).toUpperCase();
+				return getString(
+						R.string.activity_history_fragment_game_result_history)
+						.toUpperCase(Locale.US);
 			case TAB_PLAYER_RANKING_FRAGMENT:
-				return "Ελ°θ".toUpperCase();
+				return getString(
+						R.string.activity_history_fragment_player_ranking)
+						.toUpperCase(Locale.US);
 			}
 			return null;
 		}
@@ -341,10 +346,10 @@ public class HistoryActivity extends FragmentActivity implements
 		final int selectionCount = playDates.size();
 		if (selectionCount > 0) {
 			new AlertDialog.Builder(this)
-					.setTitle(R.string.activity_result_history_delete)
+					.setTitle(R.string.delete)
 					.setMessage(
 							getString(
-									R.string.activity_result_history_are_you_sure_to_delete,
+									R.string.activity_history_are_you_sure_to_delete,
 									selectionCount))
 					.setPositiveButton(android.R.string.yes,
 							new DialogInterface.OnClickListener() {

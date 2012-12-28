@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.dolicoli.android.golfscoreboard.GolfScoreBoardApplication;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
@@ -86,7 +87,8 @@ public class ThreeMonthsGameReceiveTask extends
 	@Override
 	protected ReceiveResult doInBackground(String... args) {
 		DateRange dateRange = DateRangeUtil.getDateRange(2);
-		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHH");
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHH",
+				Locale.getDefault());
 		Date fromDate = new Date();
 		fromDate.setTime(dateRange.getFrom());
 		Date toDate = new Date();

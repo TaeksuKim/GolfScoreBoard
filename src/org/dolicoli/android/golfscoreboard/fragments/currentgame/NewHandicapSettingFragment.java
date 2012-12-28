@@ -339,8 +339,8 @@ public class NewHandicapSettingFragment extends Fragment implements
 			if (handicap < 0)
 				handicap = 0;
 
-			playerHandicapSpinners[i].setSelection(0);
-			playerExtraScoreSpinners[i].setSelection(handicap);
+			playerHandicapSpinners[i].setSelection(handicap);
+			playerExtraScoreSpinners[i].setSelection(0);
 			playerRecommendHandicapTextViews[i].setText(String
 					.valueOf(handicap));
 

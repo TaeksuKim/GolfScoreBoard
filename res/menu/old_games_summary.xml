@@ -6,12 +6,12 @@
         android:alphabeticShortcut="t"
         android:icon="?downloadMenuIcon"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/activity_main_menu_import_three_month"/>
+        android:title="@string/menu_import_three_month"/>
     <item
         android:id="@+id/Settings"
         android:alphabeticShortcut="s"
         android:icon="?settingMenuIcon"
-        android:showAsAction="withText"
-        android:title="@string/activity_main_menu_settings"/>
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_settings"/>
 
 </menu>

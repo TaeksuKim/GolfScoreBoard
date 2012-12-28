@@ -1,5 +1,6 @@
 package org.dolicoli.android.golfscoreboard.fragments.main;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -37,6 +38,8 @@ public class OldGamesSummaryFragment extends Fragment implements Reloadable,
 
 	private static final int REQ_HISTORY = 0x0001;
 
+	private View noHistoryTextView, mainView;
+
 	private TextView gameCountTextView, totalFeeSumTextView;
 	private View[] playerViews, playerTagViews;
 	private ImageView[] playerImageViews;
@@ -49,6 +52,9 @@ public class OldGamesSummaryFragment extends Fragment implements Reloadable,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.old_game_result_list_fragment,
 				null);
+
+		noHistoryTextView = view.findViewById(R.id.NoHistoryTextView);
+		mainView = view.findViewById(R.id.MainView);
 
 		gameCountTextView = (TextView) view
 				.findViewById(R.id.GameCountTextView);
@@ -113,7 +119,7 @@ public class OldGamesSummaryFragment extends Fragment implements Reloadable,
 		playerAttendCountTextViews[5] = (TextView) view
 				.findViewById(R.id.Player6AttendCountTextView);
 
-		view.setOnClickListener(this);
+		mainView.setOnClickListener(this);
 
 		return view;
 	}
@@ -154,9 +160,11 @@ public class OldGamesSummaryFragment extends Fragment implements Reloadable,
 
 	@Override
 	public void onClick(View v) {
+		if (playerAttendCountArray == null || playerAttendCountArray.length < 1)
+			return;
+
 		Intent historyIntent = new Intent(getActivity(), HistoryActivity.class);
 		startActivityForResult(historyIntent, REQ_HISTORY);
-
 	}
 
 	@Override
@@ -222,40 +230,51 @@ public class OldGamesSummaryFragment extends Fragment implements Reloadable,
 		playerAttendCounts.toArray(playerAttendCountArray);
 		Arrays.sort(playerAttendCountArray);
 
-		UIUtil.setGameCountTextView(activity, gameCountTextView, gameCount);
-		UIUtil.setFeeTextView(activity, totalFeeSumTextView, totalFeeSum);
+		if (playerAttendCountArray.length < 1) {
+			noHistoryTextView.setVisibility(View.VISIBLE);
+			mainView.setVisibility(View.INVISIBLE);
+		} else {
+			noHistoryTextView.setVisibility(View.INVISIBLE);
+			mainView.setVisibility(View.VISIBLE);
 
-		for (int i = 0; i < Constants.MAX_PLAYER_COUNT; i++) {
-			int imageResourceId = R.drawable.face_unknown_r;
-			int tagColorResourceId = 0x00000000;
-			if (i < playerAttendCountArray.length) {
-				imageResourceId = PlayerUIUtil
-						.getRoundResourceId(playerAttendCountArray[i].name);
-				tagColorResourceId = PlayerUIUtil
-						.getTagColor(playerAttendCountArray[i].name);
-				if (playerAttendCountArray[i].name.length() > 3) {
-					playerNameTextViews[i]
-							.setText(playerAttendCountArray[i].name
-									.subSequence(0, 4));
+			UIUtil.setGameCountTextView(activity, gameCountTextView, gameCount);
+			UIUtil.setFeeTextView(activity, totalFeeSumTextView, totalFeeSum);
+
+			for (int i = 0; i < Constants.MAX_PLAYER_COUNT; i++) {
+				int imageResourceId = R.drawable.face_unknown_r;
+				int tagColorResourceId = 0x00000000;
+				if (i < playerAttendCountArray.length) {
+					imageResourceId = PlayerUIUtil
+							.getRoundResourceId(playerAttendCountArray[i].name);
+					tagColorResourceId = PlayerUIUtil
+							.getTagColor(playerAttendCountArray[i].name);
+					if (playerAttendCountArray[i].name.length() > 3) {
+						playerNameTextViews[i]
+								.setText(playerAttendCountArray[i].name
+										.subSequence(0, 4));
+					} else {
+						playerNameTextViews[i]
+								.setText(playerAttendCountArray[i].name);
+					}
+					playerImageViews[i].setImageResource(imageResourceId);
+					playerTagViews[i].setBackgroundColor(tagColorResourceId);
+					UIUtil.setGameCountTextView(activity,
+							playerAttendCountTextViews[i],
+							playerAttendCountArray[i].count);
+
+					playerViews[i].setVisibility(View.VISIBLE);
 				} else {
-					playerNameTextViews[i]
-							.setText(playerAttendCountArray[i].name);
+					playerViews[i].setVisibility(View.INVISIBLE);
 				}
-				playerImageViews[i].setImageResource(imageResourceId);
-				playerTagViews[i].setBackgroundColor(tagColorResourceId);
-				UIUtil.setGameCountTextView(activity,
-						playerAttendCountTextViews[i],
-						playerAttendCountArray[i].count);
-
-				playerViews[i].setVisibility(View.VISIBLE);
-			} else {
-				playerViews[i].setVisibility(View.INVISIBLE);
 			}
 		}
 	}
 
-	private static class PlayerAttendCount implements
+	private static class PlayerAttendCount implements Serializable,
 			Comparable<PlayerAttendCount> {
+
+		private static final long serialVersionUID = 7782414183265330052L;
+
 		private String name;
 		private int count;
 

@@ -40,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="3dip"
-                    android:text="@string/fragment_add_result_par_three" />
+                    android:text="@string/par_three" />
 
                 <RadioButton
                     android:id="@+id/ParFourRadioButton"
@@ -48,24 +48,23 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="3dip"
                     android:layout_marginRight="3dip"
-                    android:text="@string/fragment_add_result_par_four" />
+                    android:text="@string/par_four" />
 
                 <RadioButton
                     android:id="@+id/ParFiveRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="3dip"
-                    android:text="@string/fragment_add_result_par_five" />
+                    android:text="@string/par_five" />
 
                 <RadioButton
                     android:id="@+id/ParSixRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="3dip"
-                    android:text="@string/fragment_add_result_par_six" />
+                    android:text="@string/par_six" />
             </RadioGroup>
         </HorizontalScrollView>
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -82,7 +81,7 @@
             android:layout_marginBottom="5dip"
             android:layout_marginTop="5dip"
             android:gravity="center"
-            android:text="@string/fragment_add_result_handicap"
+            android:text="@string/handicap"
             android:textColor="?attr/stripTextColor"
             android:textStyle="bold" />
 
@@ -96,7 +95,7 @@
             android:layout_marginTop="5dip"
             android:gravity="center"
             android:paddingRight="10dip"
-            android:text="@string/fragment_add_result_name"
+            android:text="@string/name"
             android:textColor="?attr/stripTextColor"
             android:textStyle="bold" />
 
@@ -111,7 +110,7 @@
             android:layout_toRightOf="@+id/PlayerNameTitleTextView"
             android:gravity="center"
             android:paddingRight="10dip"
-            android:text="@string/fragment_add_result_score"
+            android:text="@string/score"
             android:textColor="?attr/stripTextColor"
             android:textStyle="bold" />
     </RelativeLayout>

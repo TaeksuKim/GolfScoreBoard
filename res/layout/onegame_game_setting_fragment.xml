@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:text="@string/fragment_history_gamesetting_game_setting" />
+            android:text="@string/fragment_one_game_gamesetting_game_setting" />
 
         <GridLayout
             android:id="@+id/GameSettingView"
@@ -36,7 +36,7 @@
             <TextView
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="홀 수"
+                android:text="@string/fragment_one_game_gamesetting_hole_count"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -44,14 +44,13 @@
                 android:id="@+id/HoleCountTextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="18 홀"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
             <TextView
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="플레이어"
+                android:text="@string/fragment_one_game_gamesetting_player_count"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -59,14 +58,13 @@
                 android:id="@+id/PlayerCountTextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="3 명"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
             <TextView
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="전체 비용"
+                android:text="@string/fragment_one_game_gamesetting_total_fee"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -75,14 +73,13 @@
                 android:layout_columnSpan="3"
                 android:layout_gravity="center_vertical|left"
                 android:layout_margin="4dp"
-                android:text="175,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
             <TextView
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="@string/fragment_history_gamesetting_hole_fee"
+                android:text="@string/fragment_one_game_gamesetting_hole_fee"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -90,14 +87,13 @@
                 android:id="@+id/HoleFeeTextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="175,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
             <TextView
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="@string/fragment_history_gamesetting_ranking_fee"
+                android:text="@string/fragment_one_game_gamesetting_ranking_fee"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -105,7 +101,6 @@
                 android:id="@+id/RankingFeeTextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="85,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
         </GridLayout>
@@ -116,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/GameSettingView"
-            android:text="@string/fragment_history_gamesetting_per_hole_fee_setting" />
+            android:text="@string/fragment_one_game_gamesetting_per_hole_fee_setting" />
 
         <LinearLayout
             android:id="@+id/TotalHoleFeeSettingView"
@@ -130,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="@string/fragment_history_gamesetting_per_hole_fee"
+                android:text="@string/fragment_one_game_gamesetting_per_hole_fee"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -140,7 +135,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="175,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
         </LinearLayout>
@@ -167,7 +161,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
                 android:gravity="center"
-                android:text="@string/fragment_history_gamesetting_ranking_1"
+                android:text="@string/fragment_one_game_gamesetting_ranking_1"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -179,7 +173,6 @@
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="4dp"
                 android:gravity="center_vertical|right"
-                android:text="15,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
@@ -191,7 +184,7 @@
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:text="@string/fragment_history_gamesetting_ranking_2"
+                android:text="@string/fragment_one_game_gamesetting_ranking_2"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -199,7 +192,6 @@
                 android:id="@+id/HoleFee2TextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="85,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
@@ -208,7 +200,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
                 android:gravity="center"
-                android:text="@string/fragment_history_gamesetting_ranking_3"
+                android:text="@string/fragment_one_game_gamesetting_ranking_3"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -216,7 +208,6 @@
                 android:id="@+id/HoleFee3TextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="15,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
@@ -225,7 +216,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
                 android:gravity="center"
-                android:text="@string/fragment_history_gamesetting_ranking_4"
+                android:text="@string/fragment_one_game_gamesetting_ranking_4"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -233,7 +224,6 @@
                 android:id="@+id/HoleFee4TextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="85,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
@@ -242,7 +232,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
                 android:gravity="center"
-                android:text="@string/fragment_history_gamesetting_ranking_5"
+                android:text="@string/fragment_one_game_gamesetting_ranking_5"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -250,7 +240,6 @@
                 android:id="@+id/HoleFee5TextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="15,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
@@ -259,7 +248,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
                 android:gravity="center"
-                android:text="@string/fragment_history_gamesetting_ranking_6"
+                android:text="@string/fragment_one_game_gamesetting_ranking_6"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -267,7 +256,6 @@
                 android:id="@+id/HoleFee6TextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="85,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
         </GridLayout>
@@ -278,7 +266,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/HoleFeeSettingView"
-            android:text="@string/fragment_history_gamesetting_per_ranking_fee_setting" />
+            android:text="@string/fragment_one_game_gamesetting_per_ranking_fee_setting" />
 
         <GridLayout
             android:id="@+id/RankingFeeSettingView"
@@ -302,7 +290,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
                 android:gravity="center"
-                android:text="@string/fragment_history_gamesetting_ranking_1"
+                android:text="@string/fragment_one_game_gamesetting_ranking_1"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -314,7 +302,6 @@
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="4dp"
                 android:gravity="center_vertical|right"
-                android:text="15,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
@@ -326,7 +313,7 @@
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:text="@string/fragment_history_gamesetting_ranking_2"
+                android:text="@string/fragment_one_game_gamesetting_ranking_2"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -334,7 +321,6 @@
                 android:id="@+id/RankingFee2TextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="85,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
@@ -343,7 +329,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
                 android:gravity="center"
-                android:text="@string/fragment_history_gamesetting_ranking_3"
+                android:text="@string/fragment_one_game_gamesetting_ranking_3"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -351,7 +337,6 @@
                 android:id="@+id/RankingFee3TextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="15,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
@@ -360,7 +345,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
                 android:gravity="center"
-                android:text="@string/fragment_history_gamesetting_ranking_4"
+                android:text="@string/fragment_one_game_gamesetting_ranking_4"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -368,7 +353,6 @@
                 android:id="@+id/RankingFee4TextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="85,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
@@ -377,7 +361,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
                 android:gravity="center"
-                android:text="@string/fragment_history_gamesetting_ranking_5"
+                android:text="@string/fragment_one_game_gamesetting_ranking_5"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -385,7 +369,6 @@
                 android:id="@+id/RankingFee5TextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="15,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
 
@@ -394,7 +377,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
                 android:gravity="center"
-                android:text="@string/fragment_history_gamesetting_ranking_6"
+                android:text="@string/fragment_one_game_gamesetting_ranking_6"
                 android:textAppearance="?attr/textAppearanceSmall"
                 android:textColor="?attr/secondaryTextColor" />
 
@@ -402,7 +385,6 @@
                 android:id="@+id/RankingFee6TextView"
                 android:layout_gravity="center"
                 android:layout_margin="4dp"
-                android:text="85,000 원"
                 android:textAppearance="?attr/textAppearanceMedium"
                 android:textColor="?attr/primaryTextColor" />
         </GridLayout>

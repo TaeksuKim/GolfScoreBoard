@@ -538,17 +538,6 @@ public class NetShareClientFragment extends ListFragment implements
 			}
 
 			setUIStatus();
-			// switch (result) {
-			// case RESULT_OK:
-			// receiveFinished(R.string.fragment_netshare_client_message_receive_finished);
-			// return;
-			// case RESULT_CONNECTION_ERROR:
-			// receiveFailed(R.string.fragment_netshare_client_message_cannot_connect);
-			// return;
-			// case RESULT_RECEIVE_ERROR:
-			// receiveFailed(R.string.fragment_netshare_client_message_receive_error);
-			// return;
-			// }
 		}
 
 		private static final String PAGE = "games";

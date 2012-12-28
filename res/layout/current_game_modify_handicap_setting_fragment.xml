@@ -75,7 +75,7 @@
                         android:layout_marginRight="4dip"
                         android:layout_toRightOf="@+id/Player1AvgScoreTextView"
                         android:gravity="center_horizontal"
-                        android:text="추천"
+                        android:text="@string/fragment_game_setting_recommnd"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/emphasisColor"
                         android:textStyle="bold" />
@@ -100,7 +100,7 @@
                         android:layout_below="@+id/Player1NameTextView"
                         android:layout_marginRight="4dip"
                         android:gravity="center"
-                        android:text="홀 핸디"
+                        android:text="@string/fragment_game_setting_hole_handicap"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/secondaryTextColor" />
 
@@ -122,7 +122,7 @@
                         android:layout_marginRight="4dip"
                         android:layout_toRightOf="@+id/Player1HandicapSpinner"
                         android:gravity="center"
-                        android:text="점수 핸디"
+                        android:text="@string/fragment_game_setting_extra_score"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/secondaryTextColor" />
 
@@ -180,7 +180,7 @@
                         android:layout_marginRight="4dip"
                         android:layout_toRightOf="@+id/Player2AvgScoreTextView"
                         android:gravity="center_horizontal"
-                        android:text="추천"
+                        android:text="@string/fragment_game_setting_recommnd"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/emphasisColor"
                         android:textStyle="bold" />
@@ -205,7 +205,7 @@
                         android:layout_below="@+id/Player2NameTextView"
                         android:layout_marginRight="4dip"
                         android:gravity="center"
-                        android:text="홀 핸디"
+                        android:text="@string/fragment_game_setting_hole_handicap"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/secondaryTextColor" />
 
@@ -227,7 +227,7 @@
                         android:layout_marginRight="4dip"
                         android:layout_toRightOf="@+id/Player2HandicapSpinner"
                         android:gravity="center"
-                        android:text="점수 핸디"
+                        android:text="@string/fragment_game_setting_extra_score"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/secondaryTextColor" />
 
@@ -285,7 +285,7 @@
                         android:layout_marginRight="4dip"
                         android:layout_toRightOf="@+id/Player3AvgScoreTextView"
                         android:gravity="center_horizontal"
-                        android:text="추천"
+                        android:text="@string/fragment_game_setting_recommnd"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/emphasisColor"
                         android:textStyle="bold" />
@@ -310,7 +310,7 @@
                         android:layout_below="@+id/Player3NameTextView"
                         android:layout_marginRight="4dip"
                         android:gravity="center"
-                        android:text="홀 핸디"
+                        android:text="@string/fragment_game_setting_hole_handicap"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/secondaryTextColor" />
 
@@ -332,7 +332,7 @@
                         android:layout_marginRight="4dip"
                         android:layout_toRightOf="@+id/Player3HandicapSpinner"
                         android:gravity="center"
-                        android:text="점수 핸디"
+                        android:text="@string/fragment_game_setting_extra_score"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/secondaryTextColor" />
 
@@ -390,7 +390,7 @@
                         android:layout_marginRight="4dip"
                         android:layout_toRightOf="@+id/Player4AvgScoreTextView"
                         android:gravity="center_horizontal"
-                        android:text="추천"
+                        android:text="@string/fragment_game_setting_recommnd"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/emphasisColor"
                         android:textStyle="bold" />
@@ -415,7 +415,7 @@
                         android:layout_below="@+id/Player4NameTextView"
                         android:layout_marginRight="4dip"
                         android:gravity="center"
-                        android:text="홀 핸디"
+                        android:text="@string/fragment_game_setting_hole_handicap"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/secondaryTextColor" />
 
@@ -437,7 +437,7 @@
                         android:layout_marginRight="4dip"
                         android:layout_toRightOf="@+id/Player4HandicapSpinner"
                         android:gravity="center"
-                        android:text="점수 핸디"
+                        android:text="@string/fragment_game_setting_extra_score"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/secondaryTextColor" />
 
@@ -495,7 +495,7 @@
                         android:layout_marginRight="4dip"
                         android:layout_toRightOf="@+id/Player5AvgScoreTextView"
                         android:gravity="center_horizontal"
-                        android:text="추천"
+                        android:text="@string/fragment_game_setting_recommnd"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/emphasisColor"
                         android:textStyle="bold" />
@@ -520,7 +520,7 @@
                         android:layout_below="@+id/Player5NameTextView"
                         android:layout_marginRight="4dip"
                         android:gravity="center"
-                        android:text="홀 핸디"
+                        android:text="@string/fragment_game_setting_hole_handicap"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/secondaryTextColor" />
 
@@ -542,7 +542,7 @@
                         android:layout_marginRight="4dip"
                         android:layout_toRightOf="@+id/Player5HandicapSpinner"
                         android:gravity="center"
-                        android:text="점수 핸디"
+                        android:text="@string/fragment_game_setting_extra_score"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/secondaryTextColor" />
 
@@ -600,7 +600,7 @@
                         android:layout_marginRight="4dip"
                         android:layout_toRightOf="@+id/Player6AvgScoreTextView"
                         android:gravity="center_horizontal"
-                        android:text="추천"
+                        android:text="@string/fragment_game_setting_recommnd"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/emphasisColor"
                         android:textStyle="bold" />
@@ -614,7 +614,6 @@
                         android:layout_marginRight="4dip"
                         android:layout_toRightOf="@+id/Player6RecommendTitleTextView"
                         android:gravity="center_horizontal"
-                        android:text="+28.00"
                         android:textColor="?attr/emphasisColor"
                         android:textStyle="bold" />
 
@@ -626,7 +625,7 @@
                         android:layout_below="@+id/Player6NameTextView"
                         android:layout_marginRight="4dip"
                         android:gravity="center"
-                        android:text="홀 핸디"
+                        android:text="@string/fragment_game_setting_hole_handicap"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/secondaryTextColor" />
 
@@ -648,7 +647,7 @@
                         android:layout_marginRight="4dip"
                         android:layout_toRightOf="@+id/Player6HandicapSpinner"
                         android:gravity="center"
-                        android:text="점수 핸디"
+                        android:text="@string/fragment_game_setting_extra_score"
                         android:textAppearance="?attr/textAppearanceSmall"
                         android:textColor="?attr/secondaryTextColor" />
 

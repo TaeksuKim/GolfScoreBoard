@@ -11,7 +11,7 @@
         <ImageView
             style="?attr/borderlessButtonHorizontalDivider"
             android:layout_alignParentTop="true"
-            android:contentDescription="@string/divider" />
+            android:contentDescription="@string/blank" />
 
         <ImageView
             android:id="@+id/ButtonVerticalDivider"
@@ -19,7 +19,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:contentDescription="@string/divider" />
+            android:contentDescription="@string/blank" />
 
         <Button
             android:id="@+id/CancelButton"

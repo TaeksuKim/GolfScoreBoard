@@ -6,6 +6,7 @@
     
     <attr name="preferredItemHeightSmall" format="reference|dimension" />
     <attr name="preferredItemHeight" format="reference|dimension" />
+    <attr name="preferredItemHeightMedium" format="reference|dimension" />
     <attr name="listPreferredItemHeightSmall" format="reference|dimension" />
     <attr name="listPreferredItemHeight" format="reference|dimension" />
     <attr name="preferredItemPaddingLeft" format="reference|dimension" />

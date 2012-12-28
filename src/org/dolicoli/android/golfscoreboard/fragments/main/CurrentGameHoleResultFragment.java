@@ -1,6 +1,5 @@
 package org.dolicoli.android.golfscoreboard.fragments.main;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -23,7 +22,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.util.SparseArray;
-import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -103,7 +101,7 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.current_game_hole_result, menu);
+		inflater.inflate(R.menu.current_game, menu);
 	}
 
 	@Override
@@ -229,10 +227,9 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 			return;
 
 		new AlertDialog.Builder(getActivity())
-				.setTitle(R.string.fragment_hole_result_delete)
+				.setTitle(R.string.dialog_delete)
 				.setMessage(
-						getString(
-								R.string.fragment_hole_result_are_you_sure_to_delete,
+						getString(R.string.dialog_are_you_sure_to_delete,
 								holeResult.holeNumber))
 				.setPositiveButton(android.R.string.yes,
 						new DialogInterface.OnClickListener() {
@@ -499,19 +496,12 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 	private class HoleResultListAdapter extends ArrayAdapter<HoleResult> {
 
 		private HoleResultListViewHolder holder;
-		private DecimalFormat feeFormat;
-		private int defaultTextColor;
 		private int textViewResourceId;
 
 		public HoleResultListAdapter(Context context, int textViewResourceId) {
 			super(context, textViewResourceId);
 
 			this.textViewResourceId = textViewResourceId;
-			TypedValue tv = new TypedValue();
-			context.getTheme().resolveAttribute(R.attr.primaryTextColor, tv,
-					true);
-			defaultTextColor = getResources().getColor(tv.resourceId);
-			feeFormat = new DecimalFormat(getString(R.string.fee_format));
 		}
 
 		@Override
@@ -648,17 +638,14 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 				else
 					holder.rankingTextViews[i].setVisibility(View.INVISIBLE);
 
-				holder.rankingTextViews[i].setText(getString(
-						R.string.ranking_format, item.ranking));
+				Context context = getContext();
+
+				holder.rankingTextViews[i].setText(UIUtil.formatRanking(
+						context, item.ranking));
 				holder.nameTextViews[i].setText(item.name);
 
-				if (item.score > 0) {
-					holder.scoreTextViews[i].setText(getString(
-							R.string.positive_format, item.score));
-				} else {
-					holder.scoreTextViews[i]
-							.setText(String.valueOf(item.score));
-				}
+				UIUtil.setScoreTextView(context, holder.scoreTextViews[i],
+						item.score);
 
 				if (item.handicap > 0) {
 					holder.handicapTextViews[i].setText("-" + item.handicap);
@@ -670,26 +657,11 @@ public class CurrentGameHoleResultFragment extends ListFragment implements
 					holder.scoreTextViews[i].setVisibility(View.GONE);
 				}
 
-				holder.feeTextViews[i].setText(feeFormat.format(item.fee));
+				holder.feeTextViews[i].setText(UIUtil.formatFee(context,
+						item.fee));
 
-				if (item.finalScore > 0) {
-					holder.finalScoreTextViews[i].setText(getString(
-							R.string.positive_format, item.finalScore));
-				} else {
-					holder.finalScoreTextViews[i].setText(String
-							.valueOf(item.finalScore));
-				}
-
-				if (item.finalScore < 0) {
-					holder.finalScoreTextViews[i]
-							.setTextColor(Constants.UNDER_PAR_TEXT_COLOR);
-				} else if (item.finalScore == 0) {
-					holder.finalScoreTextViews[i]
-							.setTextColor(Constants.EVEN_PAR_TEXT_COLOR);
-				} else {
-					holder.finalScoreTextViews[i]
-							.setTextColor(defaultTextColor);
-				}
+				UIUtil.setScoreTextView(context, holder.finalScoreTextViews[i],
+						item.finalScore);
 			}
 
 			for (int i = playerCount; i < Constants.MAX_PLAYER_COUNT; i++) {

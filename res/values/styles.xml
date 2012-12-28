@@ -5,6 +5,7 @@
         
         <item name="preferredItemHeightSmall">36dip</item>
         <item name="preferredItemHeight">48dip</item>
+        <item name="preferredItemHeightMedium">52dip</item>
         <item name="listPreferredItemHeightSmall">36dip</item>
         <item name="listPreferredItemHeight">48dip</item>
         <item name="preferredItemPaddingLeft">16dip</item>

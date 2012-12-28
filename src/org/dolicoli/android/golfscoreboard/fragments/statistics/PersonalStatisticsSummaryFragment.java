@@ -330,7 +330,7 @@ public class PersonalStatisticsSummaryFragment extends Fragment implements
 			int ranking = playerScore.getRanking();
 			boolean lastStanding = playerScore.isLastStanding();
 			int fee = playerScore.getAdjustedTotalFee();
-			int score = playerScore.getScore();
+			int score = playerScore.getOriginalScore();
 
 			if (recent5Count < 5) {
 				recent5RankingSum += ranking;

@@ -6,8 +6,10 @@
     <!-- Light -->
     <color name="emphasis_light">@android:color/holo_blue_light</color>
     <color name="alert_light">#FF9933CC</color>
+    <!-- 
     <color name="primary_text_light">@android:color/primary_text_light</color>
     <color name="secondary_text_light">#FF737373</color>
+     -->
     <!-- <color name="secondary_text_light">@android:color/tertiary_text_light</color> -->
     
 
@@ -15,8 +17,10 @@
     <!-- Dark -->
     <color name="emphasis_dark">@android:color/holo_blue_dark</color>
     <color name="alert_dark">#FFFF4444</color>
+    <!-- 
     <color name="primary_text_dark">@android:color/primary_text_dark</color>
     <color name="secondary_text_dark">#FFA3A3A3</color>
+     -->
     <!-- <color name="secondary_text_dark">@android:color/tertiary_text_dark</color> -->
 
 </resources>

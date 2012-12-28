@@ -1,20 +1,19 @@
 package org.dolicoli.android.golfscoreboard.fragments.statistics;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.Reloadable;
 import org.dolicoli.android.golfscoreboard.data.GameAndResult;
 import org.dolicoli.android.golfscoreboard.data.PlayerScore;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
+import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.text.format.DateUtils;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +26,6 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 	private PersonalStatisticsDataContainer dataContainer;
 
 	private GameAndResultListAdapter adapter;
-
-	private DecimalFormat feeFormat;
 
 	private ArrayList<GameAndResult> gameAndResults;
 	private String playerName;
@@ -54,7 +51,6 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		feeFormat = new DecimalFormat(getString(R.string.fee_format));
 
 		if (dataContainer != null) {
 			gameAndResults = dataContainer.getGameAndResults();
@@ -91,25 +87,21 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 	private class GameAndResultListAdapter extends ArrayAdapter<GameAndResult> {
 
 		private GameAndResultListViewHolder holder;
-		private int defaultTextColor;
 		private int textViewResourceId;
 
 		public GameAndResultListAdapter(Context context, int textViewResourceId) {
 			super(context, textViewResourceId);
 
 			this.textViewResourceId = textViewResourceId;
-
-			TypedValue tv = new TypedValue();
-			context.getTheme().resolveAttribute(R.attr.primaryTextColor, tv,
-					true);
-			defaultTextColor = getResources().getColor(tv.resourceId);
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			FragmentActivity activity = getActivity();
+
 			View v = convertView;
 			if (v == null) {
-				LayoutInflater vi = (LayoutInflater) getActivity()
+				LayoutInflater vi = (LayoutInflater) activity
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = vi.inflate(textViewResourceId, null);
 				holder = new GameAndResultListViewHolder();
@@ -142,9 +134,8 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 				return v;
 
 			GameSetting gameSetting = gameAndResult.getGameSetting();
-			String dateString = DateUtils
-					.formatDateTime(getActivity(), gameSetting.getDate()
-							.getTime(), DateUtils.FORMAT_SHOW_DATE);
+			String dateString = DateUtils.formatDateTime(activity, gameSetting
+					.getDate().getTime(), DateUtils.FORMAT_SHOW_DATE);
 			holder.dateTextView.setText(dateString);
 
 			PlayerScore playerScore = gameAndResult.getPlayerScore(playerName);
@@ -153,24 +144,11 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 			holder.playerCountTextView.setText(String.valueOf(gameSetting
 					.getPlayerCount()) + " Έν");
 
-			int score = playerScore.getScore();
-			if (score > 0) {
-				holder.scoreTextView.setText("+" + score);
-			} else {
-				holder.scoreTextView.setText(String.valueOf(score));
-			}
-			if (score < 0) {
-				holder.scoreTextView
-						.setTextColor(Constants.UNDER_PAR_TEXT_COLOR);
-			} else if (score == 0) {
-				holder.scoreTextView
-						.setTextColor(Constants.EVEN_PAR_TEXT_COLOR);
-			} else {
-				holder.scoreTextView.setTextColor(defaultTextColor);
-			}
+			int score = playerScore.getOriginalScore();
+			UIUtil.setScoreTextView(activity, holder.scoreTextView, score);
 
-			holder.feeTextView.setText(feeFormat.format(playerScore
-					.getAdjustedTotalFee()));
+			UIUtil.setFeeTextView(activity, holder.feeTextView,
+					playerScore.getAdjustedTotalFee());
 
 			return v;
 		}

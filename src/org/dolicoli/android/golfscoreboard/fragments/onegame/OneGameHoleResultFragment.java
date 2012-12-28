@@ -1,6 +1,5 @@
 package org.dolicoli.android.golfscoreboard.fragments.onegame;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -11,6 +10,7 @@ import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
 import org.dolicoli.android.golfscoreboard.tasks.HistoryQueryTask;
 import org.dolicoli.android.golfscoreboard.utils.FeeCalculator;
+import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
 import android.content.Context;
 import android.content.Intent;
@@ -212,8 +212,6 @@ public class OneGameHoleResultFragment extends ListFragment implements
 	private class HoleResultListAdapter extends ArrayAdapter<HoleResult> {
 
 		private HoleResultListViewHolder holder;
-		private DecimalFormat feeFormat;
-		private int defaultTextColor;
 		private int textViewResourceId;
 
 		public HoleResultListAdapter(Context context, int textViewResourceId) {
@@ -222,8 +220,6 @@ public class OneGameHoleResultFragment extends ListFragment implements
 			TypedValue tv = new TypedValue();
 			context.getTheme().resolveAttribute(R.attr.primaryTextColor, tv,
 					true);
-			defaultTextColor = getResources().getColor(tv.resourceId);
-			feeFormat = new DecimalFormat(getString(R.string.fee_format));
 		}
 
 		@Override
@@ -347,7 +343,7 @@ public class OneGameHoleResultFragment extends ListFragment implements
 				return v;
 
 			holder.holeNumberTextView.setText(getString(
-					R.string.fragment_hole_result_hole_number_format,
+					R.string.fragment_one_game_hole_result_hole_number_format,
 					holeResult.holeNumber, holeResult.parNumber));
 
 			int playerCount = holeResult.playerCount;
@@ -360,17 +356,12 @@ public class OneGameHoleResultFragment extends ListFragment implements
 				else
 					holder.rankingTextViews[i].setVisibility(View.INVISIBLE);
 
-				holder.rankingTextViews[i].setText(getString(
-						R.string.ranking_format, item.ranking));
+				holder.rankingTextViews[i].setText(UIUtil.formatRanking(
+						getContext(), item.ranking));
 				holder.nameTextViews[i].setText(item.name);
 
-				if (item.score > 0) {
-					holder.scoreTextViews[i].setText(getString(
-							R.string.positive_format, item.score));
-				} else {
-					holder.scoreTextViews[i]
-							.setText(String.valueOf(item.score));
-				}
+				UIUtil.setScoreTextView(getContext(), holder.scoreTextViews[i],
+						item.score);
 
 				if (item.handicap > 0) {
 					holder.handicapTextViews[i].setText("-" + item.handicap);
@@ -382,26 +373,10 @@ public class OneGameHoleResultFragment extends ListFragment implements
 					holder.scoreTextViews[i].setVisibility(View.GONE);
 				}
 
-				holder.feeTextViews[i].setText(feeFormat.format(item.fee));
-
-				if (item.finalScore > 0) {
-					holder.finalScoreTextViews[i].setText(getString(
-							R.string.positive_format, item.finalScore));
-				} else {
-					holder.finalScoreTextViews[i].setText(String
-							.valueOf(item.finalScore));
-				}
-
-				if (item.finalScore < 0) {
-					holder.finalScoreTextViews[i]
-							.setTextColor(Constants.UNDER_PAR_TEXT_COLOR);
-				} else if (item.finalScore == 0) {
-					holder.finalScoreTextViews[i]
-							.setTextColor(Constants.EVEN_PAR_TEXT_COLOR);
-				} else {
-					holder.finalScoreTextViews[i]
-							.setTextColor(defaultTextColor);
-				}
+				UIUtil.setFeeTextView(getContext(), holder.feeTextViews[i],
+						item.fee);
+				UIUtil.setScoreTextView(getContext(),
+						holder.finalScoreTextViews[i], item.finalScore);
 			}
 
 			for (int i = playerCount; i < Constants.MAX_PLAYER_COUNT; i++) {

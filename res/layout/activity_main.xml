@@ -12,7 +12,7 @@
         <ImageView
             android:id="@+id/UpperDivider"
             style="?attr/borderlessButtonHorizontalDivider"
-            android:contentDescription="@string/divider" />
+            android:contentDescription="@string/blank" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,16 +22,16 @@
             <Button
                 android:id="@+id/AddResultButton"
                 style="?attr/borderlessButton"
-                android:text="@string/activity_main_dialog_add_result_button" />
+                android:text="@string/activity_main_add_result_button" />
 
             <ImageView
                 style="?attr/borderlessButtonVerticalDivider"
-                android:contentDescription="@string/divider" />
+                android:contentDescription="@string/blank" />
 
             <Button
                 android:id="@+id/ImportButton"
                 style="?attr/borderlessButton"
-                android:text="@string/activity_main_dialog_import_button" />
+                android:text="@string/activity_main_import_this_game_button" />
         </LinearLayout>
     </RelativeLayout>
 

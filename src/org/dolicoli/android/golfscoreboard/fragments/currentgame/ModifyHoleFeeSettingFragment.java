@@ -1,15 +1,15 @@
 package org.dolicoli.android.golfscoreboard.fragments.currentgame;
 
-import java.text.DecimalFormat;
-
 import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.utils.FeeCalculator;
+import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -28,15 +28,11 @@ public class ModifyHoleFeeSettingFragment extends Fragment {
 	private EditText[] feeEditTexts;
 	private TextView[] recommendTextViews;
 
-	private DecimalFormat feeFormat;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(
 				R.layout.current_game_modify_hole_fee_setting_fragment, null);
-
-		feeFormat = new DecimalFormat(getString(R.string.fee_format));
 
 		sumTextView = (TextView) view.findViewById(R.id.SumTextView);
 		totalHoleFeeTextView = (TextView) view
@@ -138,7 +134,8 @@ public class ModifyHoleFeeSettingFragment extends Fragment {
 		this.playerCount = playerCount;
 		this.totalHoleFee = totalHoleFee;
 
-		totalHoleFeeTextView.setText(feeFormat.format(totalHoleFee));
+		totalHoleFeeTextView.setText(UIUtil.formatFee(getActivity(),
+				totalHoleFee));
 
 		for (int i = 2; i < feeTitleTextViews.length; i++) {
 			if (i < playerCount) {
@@ -157,13 +154,15 @@ public class ModifyHoleFeeSettingFragment extends Fragment {
 	}
 
 	private void fillRecommendFees() {
+		FragmentActivity activity = getActivity();
+
 		if (totalHoleFee <= 0) {
-			recommendTextViews[0].setText(feeFormat.format(0));
-			recommendTextViews[1].setText(feeFormat.format(0));
-			recommendTextViews[2].setText(feeFormat.format(0));
-			recommendTextViews[3].setText(feeFormat.format(0));
-			recommendTextViews[4].setText(feeFormat.format(0));
-			recommendTextViews[5].setText(feeFormat.format(0));
+			recommendTextViews[0].setText(UIUtil.formatFee(activity, 0));
+			recommendTextViews[1].setText(UIUtil.formatFee(activity, 0));
+			recommendTextViews[2].setText(UIUtil.formatFee(activity, 0));
+			recommendTextViews[3].setText(UIUtil.formatFee(activity, 0));
+			recommendTextViews[4].setText(UIUtil.formatFee(activity, 0));
+			recommendTextViews[5].setText(UIUtil.formatFee(activity, 0));
 			return;
 		}
 
@@ -235,12 +234,12 @@ public class ModifyHoleFeeSettingFragment extends Fragment {
 			break;
 
 		default:
-			recommendTextViews[0].setText(feeFormat.format(0));
-			recommendTextViews[1].setText(feeFormat.format(0));
-			recommendTextViews[2].setText(feeFormat.format(0));
-			recommendTextViews[3].setText(feeFormat.format(0));
-			recommendTextViews[4].setText(feeFormat.format(0));
-			recommendTextViews[5].setText(feeFormat.format(0));
+			recommendTextViews[0].setText(UIUtil.formatFee(activity, 0));
+			recommendTextViews[1].setText(UIUtil.formatFee(activity, 0));
+			recommendTextViews[2].setText(UIUtil.formatFee(activity, 0));
+			recommendTextViews[3].setText(UIUtil.formatFee(activity, 0));
+			recommendTextViews[4].setText(UIUtil.formatFee(activity, 0));
+			recommendTextViews[5].setText(UIUtil.formatFee(activity, 0));
 			return;
 		}
 
@@ -252,8 +251,8 @@ public class ModifyHoleFeeSettingFragment extends Fragment {
 		recommendFeesForRanking[playerCount - 1] += addition;
 
 		for (int i = 0; i < Constants.MAX_PLAYER_COUNT; i++) {
-			recommendTextViews[i].setText(feeFormat
-					.format(recommendFeesForRanking[i]));
+			recommendTextViews[i].setText(UIUtil.formatFee(activity,
+					recommendFeesForRanking[i]));
 		}
 	}
 
@@ -263,7 +262,7 @@ public class ModifyHoleFeeSettingFragment extends Fragment {
 			fee += getFeeForRanking(i);
 		}
 
-		sumTextView.setText(feeFormat.format(fee * holeCount));
+		sumTextView.setText(UIUtil.formatFee(getActivity(), fee * holeCount));
 	}
 
 	private void feeEditChanged() {
