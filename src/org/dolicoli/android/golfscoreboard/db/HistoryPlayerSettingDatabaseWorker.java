@@ -34,12 +34,12 @@ public class HistoryPlayerSettingDatabaseWorker extends AbstractDatabaseWorker {
 	public static final String COLUMN_HANDICAP_5 = "handicap5";
 	public static final String COLUMN_HANDICAP_6 = "handicap6";
 
-	private static final String COLUMN_EXTRA_SCORE_1 = "extra_score1";
-	private static final String COLUMN_EXTRA_SCORE_2 = "extra_score2";
-	private static final String COLUMN_EXTRA_SCORE_3 = "extra_score3";
-	private static final String COLUMN_EXTRA_SCORE_4 = "extra_score4";
-	private static final String COLUMN_EXTRA_SCORE_5 = "extra_score5";
-	private static final String COLUMN_EXTRA_SCORE_6 = "extra_score6";
+	public static final String COLUMN_EXTRA_SCORE_1 = "extra_score1";
+	public static final String COLUMN_EXTRA_SCORE_2 = "extra_score2";
+	public static final String COLUMN_EXTRA_SCORE_3 = "extra_score3";
+	public static final String COLUMN_EXTRA_SCORE_4 = "extra_score4";
+	public static final String COLUMN_EXTRA_SCORE_5 = "extra_score5";
+	public static final String COLUMN_EXTRA_SCORE_6 = "extra_score6";
 
 	// COLUMN_PLAY_DATE + " VARCHAR(12) PRIMARY KEY , " +
 	// COLUMN_NAME_1 + " VARCHAR(25) , " +
@@ -340,7 +340,7 @@ public class HistoryPlayerSettingDatabaseWorker extends AbstractDatabaseWorker {
 		}
 	}
 
-	public static void getAllPlayerName(SQLiteDatabase db,
+	private static void getAllPlayerName(SQLiteDatabase db,
 			ArrayList<String> playerNames) throws SQLException {
 		Log.d(TAG, "getAllPlayerName()");
 		Cursor cursor = null;

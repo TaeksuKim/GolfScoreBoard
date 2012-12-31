@@ -8,7 +8,6 @@ import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
 import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
-import org.dolicoli.android.golfscoreboard.db.PlayerSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
 
 import android.content.Context;
@@ -49,20 +48,14 @@ public class CurrentGameQueryTask extends
 
 		GameSetting gameSetting = new GameSetting();
 		PlayerSetting playerSetting = new PlayerSetting();
-		ArrayList<Result> results = null;
+		ArrayList<Result> results = new ArrayList<Result>();
 		UsedHandicap usedHandicap = null;
 
 		GameSettingDatabaseWorker gameSettingWorker = new GameSettingDatabaseWorker(
 				context);
-		gameSettingWorker.getGameSetting(gameSetting);
-
-		PlayerSettingDatabaseWorker playerSettingWorker = new PlayerSettingDatabaseWorker(
-				context);
-		playerSettingWorker.getPlayerSetting(playerSetting);
+		gameSettingWorker.getGameSetting(gameSetting, playerSetting, results);
 
 		ResultDatabaseWorker resultWorker = new ResultDatabaseWorker(context);
-		results = resultWorker.getResults();
-
 		usedHandicap = resultWorker.getUsedHandicaps();
 
 		SingleGameResult result = new SingleGameResult();

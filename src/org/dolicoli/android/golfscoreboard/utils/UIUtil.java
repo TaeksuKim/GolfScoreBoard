@@ -18,6 +18,8 @@ public class UIUtil {
 	private static DecimalFormat avgRankingFormat;
 	private static DecimalFormat avgScoreFormat;
 	private static DecimalFormat gameCountFormat;
+	private static DecimalFormat rateFormat;
+	private static DecimalFormat playerCountFormat;
 
 	public static String formatFee(Context context, int fee) {
 		if (context == null)
@@ -56,7 +58,7 @@ public class UIUtil {
 
 		if (rankingFormat == null) {
 			rankingFormat = new DecimalFormat(
-					context.getString(R.string.ranking_format1));
+					context.getString(R.string.ranking_format));
 		}
 
 		return rankingFormat.format(ranking);
@@ -210,6 +212,49 @@ public class UIUtil {
 			return;
 
 		String text = formatGameCount(context, count);
+		textView.setText(text);
+	}
+
+	public static String formatRate(Context context, double rate) {
+		if (context == null)
+			return String.valueOf(rate);
+
+		if (rateFormat == null) {
+			rateFormat = new DecimalFormat(
+					context.getString(R.string.rate_format));
+		}
+
+		return rateFormat.format(rate);
+	}
+
+	public static void setRateTextView(Context context, TextView textView,
+			double rate) {
+		if (context == null || textView == null)
+			return;
+
+		String text = formatRate(context, rate);
+		textView.setText(text);
+	}
+
+	public static String formatPlayerCount(Context context, int count) {
+		if (context == null)
+			return String.valueOf(count);
+
+		if (playerCountFormat == null) {
+			playerCountFormat = new DecimalFormat(
+					context.getString(R.string.player_count_format));
+		}
+
+		return playerCountFormat.format(count);
+	}
+
+	public static void setPlayerCountTextView(Context context,
+			TextView textView, int count) {
+		if (context == null || textView == null)
+			return;
+
+		String text = formatPlayerCount(context, count);
+
 		textView.setText(text);
 	}
 

@@ -140,9 +140,10 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 
 			PlayerScore playerScore = gameAndResult.getPlayerScore(playerName);
 
-			holder.rankingTextView.setText(playerScore.getRanking() + " À§");
-			holder.playerCountTextView.setText(String.valueOf(gameSetting
-					.getPlayerCount()) + " ¸í");
+			UIUtil.setRankingTextView(activity, holder.rankingTextView,
+					playerScore.getRanking());
+			UIUtil.setPlayerCountTextView(activity, holder.playerCountTextView,
+					gameSetting.getPlayerCount());
 
 			int score = playerScore.getOriginalScore();
 			UIUtil.setScoreTextView(activity, holder.scoreTextView, score);

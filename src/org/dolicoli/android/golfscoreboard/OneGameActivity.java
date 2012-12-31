@@ -24,6 +24,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.format.DateUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +35,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class OneGameActivity extends FragmentActivity implements
-		OnNavigationListener, OnClickListener {
+		OnNavigationListener, OnClickListener, OnPageChangeListener {
 
 	public static final String IK_PLAY_DATE = "PLAY_DATE";
 	public static final String IK_DATE = "DATE";
@@ -52,6 +53,7 @@ public class OneGameActivity extends FragmentActivity implements
 
 	private Button prevButton, nextButton;
 	private int maxHoleNumber = 0;
+	private String playDate;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class OneGameActivity extends FragmentActivity implements
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+		mViewPager.setOnPageChangeListener(this);
 
 		TextView dateTextView = (TextView) findViewById(R.id.DateTextView);
 		prevButton = (Button) findViewById(R.id.PrevButton);
@@ -87,7 +90,7 @@ public class OneGameActivity extends FragmentActivity implements
 							| DateUtils.FORMAT_12HOUR);
 			dateTextView.setText(dateString);
 
-			String playDate = GameSetting.toGameIdFormat(date);
+			playDate = GameSetting.toGameIdFormat(date);
 			HistoryResultDatabaseWorker resultWorker = new HistoryResultDatabaseWorker(
 					this);
 			ArrayList<Result> results = resultWorker.getResults(playDate);
@@ -177,6 +180,19 @@ public class OneGameActivity extends FragmentActivity implements
 		}
 	}
 
+	@Override
+	public void onPageScrollStateChanged(int position) {
+	}
+
+	@Override
+	public void onPageScrolled(int position, float positionOffest,
+			int positionOffsetPixels) {
+	}
+
+	@Override
+	public void onPageSelected(int position) {
+	}
+
 	private void setUIState() {
 		if (prevButton == null)
 			return;
@@ -207,6 +223,16 @@ public class OneGameActivity extends FragmentActivity implements
 
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
+
+			Intent intent = getIntent();
+			String playDate = intent
+					.getStringExtra(OneGameActivity.IK_PLAY_DATE);
+			Bundle bundle = new Bundle();
+			bundle.putInt(OneGameActivityPage.BK_MODE,
+					OneGameActivityPage.MODE_HISTORY);
+			bundle.putString(OneGameActivityPage.BK_PLAY_DATE, playDate);
+			summaryFragment.setArguments(bundle);
+			holeResultFragment.setArguments(bundle);
 		}
 
 		@Override

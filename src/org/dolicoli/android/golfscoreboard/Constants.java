@@ -10,4 +10,6 @@ public interface Constants {
 
 	public static final int UNDER_PAR_TEXT_COLOR = 0xFFFF8800;
 	public static final int EVEN_PAR_TEXT_COLOR = 0xFF0099CC;
+
+	public static int WHOLE_HOLE = 0;
 }

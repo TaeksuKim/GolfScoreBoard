@@ -357,4 +357,12 @@ public class GameAndResult implements Comparable<GameAndResult>, GameResultItem 
 	public Date getDate() {
 		return gameSetting.getDate();
 	}
+
+	public int getTotalFee() {
+		return gameSetting.getTotalFee();
+	}
+
+	public String getPlayerName(int playerId) {
+		return playerSetting.getPlayerName(playerId);
+	}
 }

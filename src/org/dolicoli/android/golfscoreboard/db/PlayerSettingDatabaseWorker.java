@@ -14,30 +14,30 @@ public class PlayerSettingDatabaseWorker extends AbstractDatabaseWorker {
 
 	private static final String TAG = "PlayerSettingDatabaseWorker";
 
-	private static final String TABLE = "playerSetting";
+	public static final String TABLE = "playerSetting";
 
-	private static final String COLUMN_KEY_INDEX = "keyIndex";
+	public static final String COLUMN_KEY_INDEX = "keyIndex";
 
-	private static final String COLUMN_NAME_1 = "name1";
-	private static final String COLUMN_NAME_2 = "name2";
-	private static final String COLUMN_NAME_3 = "name3";
-	private static final String COLUMN_NAME_4 = "name4";
-	private static final String COLUMN_NAME_5 = "name5";
-	private static final String COLUMN_NAME_6 = "name6";
+	public static final String COLUMN_NAME_1 = "name1";
+	public static final String COLUMN_NAME_2 = "name2";
+	public static final String COLUMN_NAME_3 = "name3";
+	public static final String COLUMN_NAME_4 = "name4";
+	public static final String COLUMN_NAME_5 = "name5";
+	public static final String COLUMN_NAME_6 = "name6";
 
-	private static final String COLUMN_HANDICAP_1 = "handicap1";
-	private static final String COLUMN_HANDICAP_2 = "handicap2";
-	private static final String COLUMN_HANDICAP_3 = "handicap3";
-	private static final String COLUMN_HANDICAP_4 = "handicap4";
-	private static final String COLUMN_HANDICAP_5 = "handicap5";
-	private static final String COLUMN_HANDICAP_6 = "handicap6";
+	public static final String COLUMN_HANDICAP_1 = "handicap1";
+	public static final String COLUMN_HANDICAP_2 = "handicap2";
+	public static final String COLUMN_HANDICAP_3 = "handicap3";
+	public static final String COLUMN_HANDICAP_4 = "handicap4";
+	public static final String COLUMN_HANDICAP_5 = "handicap5";
+	public static final String COLUMN_HANDICAP_6 = "handicap6";
 
-	private static final String COLUMN_EXTRA_SCORE_1 = "extra_score1";
-	private static final String COLUMN_EXTRA_SCORE_2 = "extra_score2";
-	private static final String COLUMN_EXTRA_SCORE_3 = "extra_score3";
-	private static final String COLUMN_EXTRA_SCORE_4 = "extra_score4";
-	private static final String COLUMN_EXTRA_SCORE_5 = "extra_score5";
-	private static final String COLUMN_EXTRA_SCORE_6 = "extra_score6";
+	public static final String COLUMN_EXTRA_SCORE_1 = "extra_score1";
+	public static final String COLUMN_EXTRA_SCORE_2 = "extra_score2";
+	public static final String COLUMN_EXTRA_SCORE_3 = "extra_score3";
+	public static final String COLUMN_EXTRA_SCORE_4 = "extra_score4";
+	public static final String COLUMN_EXTRA_SCORE_5 = "extra_score5";
+	public static final String COLUMN_EXTRA_SCORE_6 = "extra_score6";
 
 	// COLUMN_KEY_INDEX + " INTEGER PRIMARY KEY , " +
 	// COLUMN_NAME_1 + " VARCHAR(25) , " +
@@ -202,8 +202,8 @@ public class PlayerSettingDatabaseWorker extends AbstractDatabaseWorker {
 		}
 	}
 
-	public static void getPlayerSetting(SQLiteDatabase db, PlayerSetting setting)
-			throws SQLException {
+	private static void getPlayerSetting(SQLiteDatabase db,
+			PlayerSetting setting) throws SQLException {
 		Log.d(TAG, "getPlayerSetting()");
 		Cursor cursor = null;
 		try {
@@ -319,7 +319,7 @@ public class PlayerSettingDatabaseWorker extends AbstractDatabaseWorker {
 		}
 	}
 
-	public static void updateUsedHandicap(SQLiteDatabase db, Result result) {
+	private static void updateUsedHandicap(SQLiteDatabase db, Result result) {
 		Log.d(TAG, "updateUsedHandicap()");
 
 		PlayerSetting setting = new PlayerSetting();

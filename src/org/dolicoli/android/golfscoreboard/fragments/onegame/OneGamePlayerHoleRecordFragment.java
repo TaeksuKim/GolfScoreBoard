@@ -6,7 +6,7 @@ import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
 import org.dolicoli.android.golfscoreboard.tasks.CurrentGameQueryTask;
-import org.dolicoli.android.golfscoreboard.tasks.HistoryQueryTask;
+import org.dolicoli.android.golfscoreboard.tasks.HistoryGameSettingWithResultQueryTask;
 import org.dolicoli.android.golfscoreboard.utils.FeeCalculator;
 import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 public class OneGamePlayerHoleRecordFragment extends ListFragment implements
 		OneGamePlayerRecordActivityPage, CurrentGameQueryTask.TaskListener,
-		HistoryQueryTask.TaskListener {
+		HistoryGameSettingWithResultQueryTask.TaskListener {
 
 	private ScoreListAdapter adapter;
 
@@ -72,8 +72,8 @@ public class OneGamePlayerHoleRecordFragment extends ListFragment implements
 			CurrentGameQueryTask task = new CurrentGameQueryTask(activity, this);
 			task.execute();
 		} else {
-			HistoryQueryTask task = new HistoryQueryTask(activity, this);
-			task.execute(new HistoryQueryTask.QueryParam(playDate));
+			HistoryGameSettingWithResultQueryTask task = new HistoryGameSettingWithResultQueryTask(activity, this);
+			task.execute(new HistoryGameSettingWithResultQueryTask.QueryParam(playDate));
 		}
 	}
 
@@ -215,10 +215,9 @@ public class OneGamePlayerHoleRecordFragment extends ListFragment implements
 					playerScore.ranking);
 
 			if (playerScore.sameRankingCount > 1) {
-				holder.sameRankingCountTextView
-						.setText(getString(
-								R.string.fragment_onegame_player_hole_record_player_count_format,
-								playerScore.sameRankingCount));
+				UIUtil.setPlayerCountTextView(getContext(),
+						holder.sameRankingCountTextView,
+						playerScore.sameRankingCount);
 				holder.sameRankingCountTextView.setVisibility(View.VISIBLE);
 			} else {
 				holder.sameRankingCountTextView.setVisibility(View.INVISIBLE);

@@ -21,10 +21,15 @@
     <string name="plus">+</string>
     <string name="minus">-</string>
     <string name="blank"></string>
+    <string name="no_data">-</string>
     <string name="fee_format">###,##0 원</string>
-    <string name="ranking_format1">0 위</string>
+    <string name="ranking_format">0 위</string>
     <string name="avg_ranking_format">0.00 위</string>
     <string name="game_count_format">###,### 회</string>
+    <string name="no_game_count">- 회</string>
+    <string name="rate_format">###.00 %</string>
+    <string name="no_rate">- %</string>
+    <string name="player_count_format">0 명</string>
     <string name="par_three">파 3</string>
     <string name="par_four">파 4</string>
     <string name="par_five">파 5</string>
@@ -141,7 +146,7 @@
     <string name="activity_history_fragment_player_ranking">개인 기록</string>
     <string name="activity_history_are_you_sure_to_delete">%d개의 기록이 지워집니다.\n계속하시겠습니까?</string>
 
-    <!-- One Game Activity -->
+    <!-- OneGameActivity -->
     <string name="activity_one_game_fragment_summary">정산</string>
     <string name="activity_one_game_fragment_hole_result">홀별 기록</string>
     <string name="activity_one_game_fragment_game_setting">게임 설정</string>
@@ -154,17 +159,17 @@
     <string name="activity_personal_statistics_fragment_summary">요약</string>
     <string name="activity_personal_statistics_fragment_game_result_list">날짜별 기록</string>
 
-    <!-- CurrentGameSummaryFragment -->
-    <string name="fragment_currentgamesummary_personal_statistics">개인 통계</string>
-    <string name="fragment_currentgamesummary_current_hole_format">HOLE %d</string>
+    <!-- OneGameSummaryFragment -->
+    <string name="fragment_onegamesummary_personal_statistics">개인 통계</string>
+    <string name="fragment_onegamesummary_current_hole_format">HOLE %d</string>
 
-    <!-- CurrentGameHoleResultFragment -->
-    <string name="fragment_currentgameholeresult_hole_number_format">Hole %1$d (Par %2$d)</string>
-    <string name="fragment_currentgameholeresult_final_hole_format">Hole %d</string>
-    <string name="fragment_currentgameholeresult_current_hole_format">Hole %d</string>
-    <string name="fragment_currentgameholeresult_no_hole_number">-</string>
-    <string name="fragment_currentgameholeresult_action_mode_hole_format">%d번 홀</string>
-    <string name="fragment_currentgameholeresult_no_handicap">-</string>
+    <!-- OneGameHoleResultFragment -->
+    <string name="fragment_onegameholeresult_hole_number_format">Hole %1$d (Par %2$d)</string>
+    <string name="fragment_onegameholeresult_final_hole_format">Hole %d</string>
+    <string name="fragment_onegameholeresult_current_hole_format">Hole %d</string>
+    <string name="fragment_onegameholeresult_no_hole_number">-</string>
+    <string name="fragment_onegameholeresult_action_mode_hole_format">%d번 홀</string>
+    <string name="fragment_onegameholeresult_no_handicap">-</string>
 
     <!-- Game Setting Fragment -->
     <string name="fragment_game_setting_title_hole_number">홀 수</string>
@@ -185,7 +190,6 @@
     <string name="fragment_game_setting_fee_ranking4">4위 비용</string>
     <string name="fragment_game_setting_fee_ranking5">5위 비용</string>
     <string name="fragment_game_setting_fee_ranking6">6위 비용</string>
-    <string name="fragment_game_setting_player_count_format">%d 명</string>
     <string name="fragment_game_setting_player_count_spinner_2">2 명</string>
     <string name="fragment_game_setting_player_count_spinner_3">3 명</string>
     <string name="fragment_game_setting_player_count_spinner_4">4 명</string>
@@ -251,12 +255,6 @@
     <!-- GameResultHistoryFragment -->
     <string name="fragment_game_result_result_history_item_selected">%d개가 선택되었습니다</string>
 
-    <!-- One Game Hole Result Fragment -->
-    <string name="fragment_one_game_hole_result_hole_number_format">Hole %1$d (Par %2$d)</string>
-
-    <!-- OneGameSummaryFragment -->
-    <string name="fragment_onegame_summary_personal_statistics">개인 통계</string>
-
     <!-- OneGameGameSettingFragment -->
     <string name="fragment_one_game_gamesetting_game_setting">게임 설정</string>
     <string name="fragment_one_game_gamesetting_total_fee">전체 비용</string>
@@ -274,7 +272,6 @@
     <string name="fragment_one_game_gamesetting_hole_count">홀 수</string>
     <string name="fragment_one_game_gamesetting_hole_count_format">%d 홀</string>
     <string name="fragment_one_game_gamesetting_player_count">플레이어 수</string>
-    <string name="fragment_one_game_gamesetting_player_count_format">%d 명</string>
 
     <!-- OneGamePlayerRecordFragment -->
     <string name="fragment_onegame_player_record_solo">단독</string>
@@ -304,7 +301,6 @@
 
     <!-- OneGamePlayerHoleRecordFragment -->
     <string name="fragment_onegame_player_hole_record_hole_number_format">HOLE %1$d (Par %2$d)</string>
-    <string name="fragment_onegame_player_hole_record_player_count_format">%d 명</string>
 
     <!-- Personal Statistics Summary -->
     <string name="fragment_personal_statistics_summary_first_standing">1 위</string>

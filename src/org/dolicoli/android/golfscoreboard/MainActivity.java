@@ -8,9 +8,9 @@ import org.dolicoli.android.golfscoreboard.db.HistoryGameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.fragments.DummySectionFragment;
 import org.dolicoli.android.golfscoreboard.fragments.main.AttendCountFragment;
-import org.dolicoli.android.golfscoreboard.fragments.main.CurrentGameHoleResultFragment;
-import org.dolicoli.android.golfscoreboard.fragments.main.CurrentGameSummaryFragment;
 import org.dolicoli.android.golfscoreboard.fragments.main.MainFragmentContainer;
+import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameHoleResultFragment;
+import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameSummaryFragment;
 import org.dolicoli.android.golfscoreboard.tasks.ExportCurrentGameTask;
 import org.dolicoli.android.golfscoreboard.tasks.ExportCurrentGameTask.ExportProgress;
 import org.dolicoli.android.golfscoreboard.tasks.ExportCurrentGameTask.ExportResult;
@@ -144,7 +144,7 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	public void onPageSelected(int position) {
 		if (position != TAB_CURRENG_GAME_HOLE_RESULT_FRAGMENT) {
-			CurrentGameHoleResultFragment fragment = (CurrentGameHoleResultFragment) mSectionsPagerAdapter
+			OneGameHoleResultFragment fragment = (OneGameHoleResultFragment) mSectionsPagerAdapter
 					.getItem(TAB_CURRENG_GAME_HOLE_RESULT_FRAGMENT);
 			if (fragment == null || !fragment.isAdded()) {
 				return;
@@ -227,7 +227,7 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	private void showAddResultActivity() {
-		CurrentGameSummaryFragment currentScoreFragment = (CurrentGameSummaryFragment) mSectionsPagerAdapter
+		OneGameSummaryFragment currentScoreFragment = (OneGameSummaryFragment) mSectionsPagerAdapter
 				.getItem(TAB_CURRENT_GAME_SUMMARY_FRAGMENT);
 		if (currentScoreFragment == null) {
 			return;
@@ -408,8 +408,8 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	private class SectionsPagerAdapter extends FragmentPagerAdapter {
-		CurrentGameSummaryFragment currentGameSummaryFragment = new CurrentGameSummaryFragment();
-		CurrentGameHoleResultFragment currentGameHoleResultFragment = new CurrentGameHoleResultFragment();
+		OneGameSummaryFragment currentGameSummaryFragment = new OneGameSummaryFragment();
+		OneGameHoleResultFragment currentGameHoleResultFragment = new OneGameHoleResultFragment();
 		AttendCountFragment attendCountFragment = new AttendCountFragment();
 
 		public SectionsPagerAdapter(FragmentManager fm) {

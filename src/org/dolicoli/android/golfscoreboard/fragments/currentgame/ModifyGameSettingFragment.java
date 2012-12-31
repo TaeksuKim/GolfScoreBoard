@@ -65,12 +65,13 @@ public class ModifyGameSettingFragment extends Fragment implements
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		ResultDatabaseWorker resultWorker = new ResultDatabaseWorker(
-				getActivity());
+		FragmentActivity activity = getActivity();
+
+		ResultDatabaseWorker resultWorker = new ResultDatabaseWorker(activity);
 		int maxHoleNumber = resultWorker.getMaxHoleNumber();
 
 		GameSettingDatabaseWorker gameSettingWorker = new GameSettingDatabaseWorker(
-				getActivity());
+				activity);
 		GameSetting gameSetting = new GameSetting();
 		gameSettingWorker.getGameSetting(gameSetting);
 		if (gameSetting.getHoleCount() == 18) {
@@ -84,10 +85,8 @@ public class ModifyGameSettingFragment extends Fragment implements
 			eighteenHoleRadioButton.setChecked(false);
 		}
 		playerCount = gameSetting.getPlayerCount();
-		playerCountTextView
-				.setText(getString(
-						R.string.fragment_game_setting_player_count_format,
-						playerCount));
+		UIUtil.setPlayerCountTextView(activity, playerCountTextView,
+				playerCount);
 
 		gameFeeEditText.setText(String.valueOf(gameSetting.getGameFee()));
 		extraFeeEditText.setText(String.valueOf(gameSetting.getExtraFee()));

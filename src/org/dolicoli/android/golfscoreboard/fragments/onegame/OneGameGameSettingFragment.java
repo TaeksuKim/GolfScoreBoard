@@ -4,7 +4,7 @@ import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.OneGameActivity;
 import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
-import org.dolicoli.android.golfscoreboard.tasks.SimpleHistoryQueryTask2;
+import org.dolicoli.android.golfscoreboard.tasks.HistoryGameSettingQueryTask;
 import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
 import android.content.Intent;
@@ -17,13 +17,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class OneGameGameSettingFragment extends Fragment implements
-		OneGameActivityPage, SimpleHistoryQueryTask2.TaskListener {
+		OneGameActivityPage, HistoryGameSettingQueryTask.TaskListener {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "OneGameGameSettingFragment";
 
 	private TextView holeCountTextView, playerCountTextView;
-	private TextView holeFeeTextView, rankingFeeTextView, perHoleFeeTextView;
+	private TextView totalFeeTextView, holeFeeTextView, rankingFeeTextView,
+			perHoleFeeTextView;
 	private TextView[] holeFeePerRankingTextViews;
 	private TextView[] rankingFeePerRankingTextViews;
 	private View[] holeFeePerRankingTitleTextViews;
@@ -42,6 +43,7 @@ public class OneGameGameSettingFragment extends Fragment implements
 		playerCountTextView = (TextView) view
 				.findViewById(R.id.PlayerCountTextView);
 
+		totalFeeTextView = (TextView) view.findViewById(R.id.TotalFeeTextView);
 		holeFeeTextView = (TextView) view.findViewById(R.id.HoleFeeTextView);
 		rankingFeeTextView = (TextView) view
 				.findViewById(R.id.RankingFeeTextView);
@@ -131,7 +133,7 @@ public class OneGameGameSettingFragment extends Fragment implements
 		if (getActivity() == null || playDate == null)
 			return;
 
-		SimpleHistoryQueryTask2 task = new SimpleHistoryQueryTask2(
+		HistoryGameSettingQueryTask task = new HistoryGameSettingQueryTask(
 				getActivity(), this);
 		task.execute(playDate);
 	}
@@ -156,9 +158,8 @@ public class OneGameGameSettingFragment extends Fragment implements
 		holeCountTextView.setText(getString(
 				R.string.fragment_one_game_gamesetting_hole_count_format,
 				holeCount));
-		playerCountTextView.setText(getString(
-				R.string.fragment_one_game_gamesetting_player_count_format,
-				playerCount));
+		UIUtil.setPlayerCountTextView(activity, playerCountTextView,
+				playerCount);
 
 		int holeFee = gameResult.getHoleFee();
 		int rankingFee = gameResult.getRankingFee();
@@ -167,6 +168,8 @@ public class OneGameGameSettingFragment extends Fragment implements
 			perHoleFee += gameResult.getHoleFeeForRanking(i);
 		}
 
+		totalFeeTextView.setText(UIUtil.formatFee(activity, holeFee
+				+ rankingFee));
 		holeFeeTextView.setText(UIUtil.formatFee(activity, holeFee));
 		rankingFeeTextView.setText(UIUtil.formatFee(activity, rankingFee));
 		perHoleFeeTextView.setText(UIUtil.formatFee(activity, perHoleFee));

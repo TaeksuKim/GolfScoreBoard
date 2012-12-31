@@ -2,15 +2,9 @@ package org.dolicoli.android.golfscoreboard.tasks;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 import org.dolicoli.android.golfscoreboard.data.GameAndResult;
-import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
-import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
-import org.dolicoli.android.golfscoreboard.data.settings.Result;
 import org.dolicoli.android.golfscoreboard.db.HistoryGameSettingDatabaseWorker;
-import org.dolicoli.android.golfscoreboard.db.HistoryPlayerSettingDatabaseWorker;
-import org.dolicoli.android.golfscoreboard.db.HistoryResultDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil.DateRange;
 
 import android.content.Context;
@@ -55,40 +49,14 @@ public class GameAndResultTask extends
 
 		HistoryGameSettingDatabaseWorker historyGameWorker = new HistoryGameSettingDatabaseWorker(
 				context);
-		ArrayList<GameSetting> games = new ArrayList<GameSetting>();
+		ArrayList<GameAndResult> gameAndResults = new ArrayList<GameAndResult>();
+		historyGameWorker.getGameSettingsWithResult(dateRanges[0].getFrom(),
+				dateRanges[0].getTo(), gameAndResults);
 
-		historyGameWorker.getGameSettings(dateRanges[0].getFrom(),
-				dateRanges[0].getTo(), games);
+		Collections.sort(gameAndResults);
 
-		HashMap<String, PlayerSetting> playerSettingMap = new HashMap<String, PlayerSetting>();
-		HashMap<String, ArrayList<Result>> resultsMap = new HashMap<String, ArrayList<Result>>();
-
-		HistoryPlayerSettingDatabaseWorker historyPlayerWorker = new HistoryPlayerSettingDatabaseWorker(
-				context);
-		HistoryResultDatabaseWorker historyResultWorker = new HistoryResultDatabaseWorker(
-				context);
-
-		ArrayList<GameAndResult> gameAndResultList = new ArrayList<GameAndResult>();
-		for (GameSetting game : games) {
-			String playDate = game.getPlayDate();
-
-			PlayerSetting playerSetting = new PlayerSetting();
-			historyPlayerWorker.getPlayerSetting(playDate, playerSetting);
-			playerSettingMap.put(playDate, playerSetting);
-
-			ArrayList<Result> results = new ArrayList<Result>();
-			results = historyResultWorker.getResults(playDate);
-			resultsMap.put(playDate, results);
-
-			GameAndResult gameAndResult = new GameAndResult(game,
-					playerSetting, results);
-			gameAndResultList.add(gameAndResult);
-		}
-
-		Collections.sort(gameAndResultList);
-
-		GameAndResult[] results = new GameAndResult[gameAndResultList.size()];
-		gameAndResultList.toArray(results);
+		GameAndResult[] results = new GameAndResult[gameAndResults.size()];
+		gameAndResults.toArray(results);
 		return results;
 	}
 

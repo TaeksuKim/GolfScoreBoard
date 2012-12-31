@@ -1,12 +1,17 @@
 package org.dolicoli.android.golfscoreboard.db;
 
+import java.util.List;
+
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
+import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
+import org.dolicoli.android.golfscoreboard.data.settings.Result;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
 public class GameSettingDatabaseWorker extends AbstractDatabaseWorker {
@@ -141,29 +146,62 @@ public class GameSettingDatabaseWorker extends AbstractDatabaseWorker {
 		Log.d(TAG, "reset()");
 	}
 
-	public void getGameSetting(GameSetting setting) throws SQLException {
+	public void getGameSetting(GameSetting gameSetting) throws SQLException {
+		getGameSetting(gameSetting, null);
+	}
+
+	public void getGameSetting(GameSetting gameSetting,
+			PlayerSetting playerSetting) throws SQLException {
 		Log.d(TAG, "getGameSetting()");
+
+		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+		queryBuilder.setTables(TABLE + " G " + " LEFT JOIN "
+				+ PlayerSettingDatabaseWorker.TABLE + " P ");
+
+		String sql = queryBuilder.buildQuery(new String[] {
+				"G." + COLUMN_HOLE_COUNT, "G." + COLUMN_PLAYER_COUNT,
+				"G." + COLUMN_GAME_FEE, "G." + COLUMN_EXTRA_FEE,
+				"G." + COLUMN_RANKING_FEE, "G." + COLUMN_DATE,
+
+				"G." + COLUMN_HOLE_FEE_RANKING_1,
+				"G." + COLUMN_HOLE_FEE_RANKING_2,
+				"G." + COLUMN_HOLE_FEE_RANKING_3,
+				"G." + COLUMN_HOLE_FEE_RANKING_4,
+				"G." + COLUMN_HOLE_FEE_RANKING_5,
+				"G." + COLUMN_HOLE_FEE_RANKING_6,
+				"G." + COLUMN_RANKING_FEE_RANKING_1,
+				"G." + COLUMN_RANKING_FEE_RANKING_2,
+				"G." + COLUMN_RANKING_FEE_RANKING_3,
+				"G." + COLUMN_RANKING_FEE_RANKING_4,
+				"G." + COLUMN_RANKING_FEE_RANKING_5,
+				"G." + COLUMN_RANKING_FEE_RANKING_6,
+
+				"P." + PlayerSettingDatabaseWorker.COLUMN_NAME_1,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_NAME_2,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_NAME_3,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_NAME_4,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_NAME_5,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_NAME_6,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_HANDICAP_1,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_HANDICAP_2,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_HANDICAP_3,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_HANDICAP_4,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_HANDICAP_5,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_HANDICAP_6,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_EXTRA_SCORE_1,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_EXTRA_SCORE_2,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_EXTRA_SCORE_3,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_EXTRA_SCORE_4,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_EXTRA_SCORE_5,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_EXTRA_SCORE_6, },
+
+		null, null, null, null, null);
 
 		open();
 
 		Cursor cursor = null;
 		try {
-			cursor = mDb.query(true, TABLE,
-					new String[] { COLUMN_HOLE_COUNT, COLUMN_PLAYER_COUNT,
-							COLUMN_GAME_FEE, COLUMN_EXTRA_FEE,
-							COLUMN_HOLE_FEE_RANKING_1,
-							COLUMN_HOLE_FEE_RANKING_2,
-							COLUMN_HOLE_FEE_RANKING_3,
-							COLUMN_HOLE_FEE_RANKING_4,
-							COLUMN_HOLE_FEE_RANKING_5,
-							COLUMN_HOLE_FEE_RANKING_6, COLUMN_DATE,
-							COLUMN_RANKING_FEE, COLUMN_RANKING_FEE_RANKING_1,
-							COLUMN_RANKING_FEE_RANKING_2,
-							COLUMN_RANKING_FEE_RANKING_3,
-							COLUMN_RANKING_FEE_RANKING_4,
-							COLUMN_RANKING_FEE_RANKING_5,
-							COLUMN_RANKING_FEE_RANKING_6, }, null, null, null,
-					null, null, null);
+			cursor = mDb.rawQuery(sql, new String[0]);
 
 			if (cursor != null)
 				cursor.moveToFirst();
@@ -187,6 +225,27 @@ public class GameSettingDatabaseWorker extends AbstractDatabaseWorker {
 			int holeFeeRanking6 = 0;
 			long date = 0L;
 
+			String playerName1 = "";
+			String playerName2 = "";
+			String playerName3 = "";
+			String playerName4 = "";
+			String playerName5 = "";
+			String playerName6 = "";
+
+			int handicap1 = 0;
+			int handicap2 = 0;
+			int handicap3 = 0;
+			int handicap4 = 0;
+			int handicap5 = 0;
+			int handicap6 = 0;
+
+			int extraScore1 = 0;
+			int extraScore2 = 0;
+			int extraScore3 = 0;
+			int extraScore4 = 0;
+			int extraScore5 = 0;
+			int extraScore6 = 0;
+
 			if (!cursor.isAfterLast()) {
 				int offset = 0;
 
@@ -194,14 +253,16 @@ public class GameSettingDatabaseWorker extends AbstractDatabaseWorker {
 				playerCount = cursor.getInt(offset++);
 				gameFee = cursor.getInt(offset++);
 				extraFee = cursor.getInt(offset++);
+				rankingFee = cursor.getInt(offset++);
+				date = cursor.getLong(offset++);
+
 				holeFeeRanking1 = cursor.getInt(offset++);
 				holeFeeRanking2 = cursor.getInt(offset++);
 				holeFeeRanking3 = cursor.getInt(offset++);
 				holeFeeRanking4 = cursor.getInt(offset++);
 				holeFeeRanking5 = cursor.getInt(offset++);
 				holeFeeRanking6 = cursor.getInt(offset++);
-				date = cursor.getLong(offset++);
-				rankingFee = cursor.getInt(offset++);
+
 				rankingFeeRanking1 = cursor.getInt(offset++);
 				rankingFeeRanking2 = cursor.getInt(offset++);
 				rankingFeeRanking3 = cursor.getInt(offset++);
@@ -209,42 +270,327 @@ public class GameSettingDatabaseWorker extends AbstractDatabaseWorker {
 				rankingFeeRanking5 = cursor.getInt(offset++);
 				rankingFeeRanking6 = cursor.getInt(offset++);
 
-				setting.setHoleCount(holeCount);
-				setting.setPlayerCount(playerCount);
-				setting.setGameFee(gameFee);
-				setting.setExtraFee(extraFee);
-				setting.setRankingFee(rankingFee);
-				setting.setHoleFeeForRanking(1, holeFeeRanking1);
-				setting.setHoleFeeForRanking(2, holeFeeRanking2);
-				setting.setHoleFeeForRanking(3, holeFeeRanking3);
-				setting.setHoleFeeForRanking(4, holeFeeRanking4);
-				setting.setHoleFeeForRanking(5, holeFeeRanking5);
-				setting.setHoleFeeForRanking(6, holeFeeRanking6);
-				setting.setRankingFeeForRanking(1, rankingFeeRanking1);
-				setting.setRankingFeeForRanking(2, rankingFeeRanking2);
-				setting.setRankingFeeForRanking(3, rankingFeeRanking3);
-				setting.setRankingFeeForRanking(4, rankingFeeRanking4);
-				setting.setRankingFeeForRanking(5, rankingFeeRanking5);
-				setting.setRankingFeeForRanking(6, rankingFeeRanking6);
-				setting.setDate(date);
+				playerName1 = cursor.getString(offset++);
+				playerName2 = cursor.getString(offset++);
+				playerName3 = cursor.getString(offset++);
+				playerName4 = cursor.getString(offset++);
+				playerName5 = cursor.getString(offset++);
+				playerName6 = cursor.getString(offset++);
 
-				// Log.d(TAG, "Hole count: " + setting.getHoleCount());
-				// Log.d(TAG, "Player count: " + setting.getPlayerCount());
-				// Log.d(TAG, "Game fee: " + setting.getGameFee());
-				// Log.d(TAG, "Extra fee: " + setting.getExtraFee());
-				// Log.d(TAG, "Ranking fee: " + setting.getRankingFee());
-				// Log.d(TAG, "Hole fee (1): " + setting.getHoleFee(1));
-				// Log.d(TAG, "Hole fee (2): " + setting.getHoleFee(2));
-				// Log.d(TAG, "Hole fee (3): " + setting.getHoleFee(3));
-				// Log.d(TAG, "Hole fee (4): " + setting.getHoleFee(4));
-				// Log.d(TAG, "Hole fee (5): " + setting.getHoleFee(5));
-				// Log.d(TAG, "Hole fee (6): " + setting.getHoleFee(6));
-				// Log.d(TAG, "Ranking fee (1): " + setting.getRankingFee(1));
-				// Log.d(TAG, "Ranking fee (2): " + setting.getRankingFee(2));
-				// Log.d(TAG, "Ranking fee (3): " + setting.getRankingFee(3));
-				// Log.d(TAG, "Ranking fee (4): " + setting.getRankingFee(4));
-				// Log.d(TAG, "Ranking fee (5): " + setting.getRankingFee(5));
-				// Log.d(TAG, "Ranking fee (6): " + setting.getRankingFee(6));
+				handicap1 = cursor.getInt(offset++);
+				handicap2 = cursor.getInt(offset++);
+				handicap3 = cursor.getInt(offset++);
+				handicap4 = cursor.getInt(offset++);
+				handicap5 = cursor.getInt(offset++);
+				handicap6 = cursor.getInt(offset++);
+
+				extraScore1 = cursor.getInt(offset++);
+				extraScore2 = cursor.getInt(offset++);
+				extraScore3 = cursor.getInt(offset++);
+				extraScore4 = cursor.getInt(offset++);
+				extraScore5 = cursor.getInt(offset++);
+				extraScore6 = cursor.getInt(offset++);
+
+				if (gameSetting != null) {
+					gameSetting.setHoleCount(holeCount);
+					gameSetting.setPlayerCount(playerCount);
+					gameSetting.setGameFee(gameFee);
+					gameSetting.setExtraFee(extraFee);
+					gameSetting.setRankingFee(rankingFee);
+					gameSetting.setHoleFeeForRanking(1, holeFeeRanking1);
+					gameSetting.setHoleFeeForRanking(2, holeFeeRanking2);
+					gameSetting.setHoleFeeForRanking(3, holeFeeRanking3);
+					gameSetting.setHoleFeeForRanking(4, holeFeeRanking4);
+					gameSetting.setHoleFeeForRanking(5, holeFeeRanking5);
+					gameSetting.setHoleFeeForRanking(6, holeFeeRanking6);
+					gameSetting.setRankingFeeForRanking(1, rankingFeeRanking1);
+					gameSetting.setRankingFeeForRanking(2, rankingFeeRanking2);
+					gameSetting.setRankingFeeForRanking(3, rankingFeeRanking3);
+					gameSetting.setRankingFeeForRanking(4, rankingFeeRanking4);
+					gameSetting.setRankingFeeForRanking(5, rankingFeeRanking5);
+					gameSetting.setRankingFeeForRanking(6, rankingFeeRanking6);
+					gameSetting.setDate(date);
+				}
+
+				if (playerSetting != null) {
+					playerSetting.setPlayerName(0, playerName1);
+					playerSetting.setPlayerName(1, playerName2);
+					playerSetting.setPlayerName(2, playerName3);
+					playerSetting.setPlayerName(3, playerName4);
+					playerSetting.setPlayerName(4, playerName5);
+					playerSetting.setPlayerName(5, playerName6);
+					playerSetting.setHandicap(0, handicap1);
+					playerSetting.setHandicap(1, handicap2);
+					playerSetting.setHandicap(2, handicap3);
+					playerSetting.setHandicap(3, handicap4);
+					playerSetting.setHandicap(4, handicap5);
+					playerSetting.setHandicap(5, handicap6);
+					playerSetting.setExtraScore(0, extraScore1);
+					playerSetting.setExtraScore(1, extraScore2);
+					playerSetting.setExtraScore(2, extraScore3);
+					playerSetting.setExtraScore(3, extraScore4);
+					playerSetting.setExtraScore(4, extraScore5);
+					playerSetting.setExtraScore(5, extraScore6);
+				}
+
+				cursor.moveToNext();
+			}
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
+
+			close();
+		}
+	}
+
+	public void getGameSetting(GameSetting gameSetting,
+			PlayerSetting playerSetting, List<Result> results)
+			throws SQLException {
+		Log.d(TAG, "getGameSetting()");
+
+		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+		queryBuilder.setTables(TABLE + " G " + " LEFT JOIN "
+				+ PlayerSettingDatabaseWorker.TABLE + " P " + " LEFT JOIN "
+				+ ResultDatabaseWorker.TABLE + " R ");
+
+		String sql = queryBuilder.buildQuery(new String[] {
+				"G." + COLUMN_HOLE_COUNT, "G." + COLUMN_PLAYER_COUNT,
+				"G." + COLUMN_GAME_FEE, "G." + COLUMN_EXTRA_FEE,
+				"G." + COLUMN_RANKING_FEE, "G." + COLUMN_DATE,
+
+				"G." + COLUMN_HOLE_FEE_RANKING_1,
+				"G." + COLUMN_HOLE_FEE_RANKING_2,
+				"G." + COLUMN_HOLE_FEE_RANKING_3,
+				"G." + COLUMN_HOLE_FEE_RANKING_4,
+				"G." + COLUMN_HOLE_FEE_RANKING_5,
+				"G." + COLUMN_HOLE_FEE_RANKING_6,
+				"G." + COLUMN_RANKING_FEE_RANKING_1,
+				"G." + COLUMN_RANKING_FEE_RANKING_2,
+				"G." + COLUMN_RANKING_FEE_RANKING_3,
+				"G." + COLUMN_RANKING_FEE_RANKING_4,
+				"G." + COLUMN_RANKING_FEE_RANKING_5,
+				"G." + COLUMN_RANKING_FEE_RANKING_6,
+
+				"P." + PlayerSettingDatabaseWorker.COLUMN_NAME_1,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_NAME_2,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_NAME_3,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_NAME_4,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_NAME_5,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_NAME_6,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_HANDICAP_1,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_HANDICAP_2,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_HANDICAP_3,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_HANDICAP_4,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_HANDICAP_5,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_HANDICAP_6,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_EXTRA_SCORE_1,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_EXTRA_SCORE_2,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_EXTRA_SCORE_3,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_EXTRA_SCORE_4,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_EXTRA_SCORE_5,
+				"P." + PlayerSettingDatabaseWorker.COLUMN_EXTRA_SCORE_6,
+
+				"R." + ResultDatabaseWorker.COLUMN_HOLE_NUMBER,
+				"R." + ResultDatabaseWorker.COLUMN_PAR_NUMBER,
+				"R." + ResultDatabaseWorker.COLUMN_PLAYER_1_SCORE,
+				"R." + ResultDatabaseWorker.COLUMN_PLAYER_2_SCORE,
+				"R." + ResultDatabaseWorker.COLUMN_PLAYER_3_SCORE,
+				"R." + ResultDatabaseWorker.COLUMN_PLAYER_4_SCORE,
+				"R." + ResultDatabaseWorker.COLUMN_PLAYER_5_SCORE,
+				"R." + ResultDatabaseWorker.COLUMN_PLAYER_6_SCORE,
+				"R." + ResultDatabaseWorker.COLUMN_PLAYER_1_HANDICAP_USED,
+				"R." + ResultDatabaseWorker.COLUMN_PLAYER_2_HANDICAP_USED,
+				"R." + ResultDatabaseWorker.COLUMN_PLAYER_3_HANDICAP_USED,
+				"R." + ResultDatabaseWorker.COLUMN_PLAYER_4_HANDICAP_USED,
+				"R." + ResultDatabaseWorker.COLUMN_PLAYER_5_HANDICAP_USED,
+				"R." + ResultDatabaseWorker.COLUMN_PLAYER_6_HANDICAP_USED, },
+
+		null, null, null, "R." + ResultDatabaseWorker.COLUMN_HOLE_NUMBER, null);
+
+		open();
+
+		Cursor cursor = null;
+		try {
+			cursor = mDb.rawQuery(sql, new String[0]);
+
+			if (cursor != null)
+				cursor.moveToFirst();
+
+			int playerCount = 4;
+			int holeCount = 9;
+			int gameFee = 0;
+			int extraFee = 0;
+			int rankingFee = 0;
+			int rankingFeeRanking1 = 0;
+			int rankingFeeRanking2 = 0;
+			int rankingFeeRanking3 = 0;
+			int rankingFeeRanking4 = 0;
+			int rankingFeeRanking5 = 0;
+			int rankingFeeRanking6 = 0;
+			int holeFeeRanking1 = 0;
+			int holeFeeRanking2 = 0;
+			int holeFeeRanking3 = 0;
+			int holeFeeRanking4 = 0;
+			int holeFeeRanking5 = 0;
+			int holeFeeRanking6 = 0;
+			long date = 0L;
+
+			String playerName1 = "";
+			String playerName2 = "";
+			String playerName3 = "";
+			String playerName4 = "";
+			String playerName5 = "";
+			String playerName6 = "";
+
+			int handicap1 = 0;
+			int handicap2 = 0;
+			int handicap3 = 0;
+			int handicap4 = 0;
+			int handicap5 = 0;
+			int handicap6 = 0;
+
+			int extraScore1 = 0;
+			int extraScore2 = 0;
+			int extraScore3 = 0;
+			int extraScore4 = 0;
+			int extraScore5 = 0;
+			int extraScore6 = 0;
+
+			int holeNumber = 0;
+			int parNumber = 0;
+			int player1Score = 0;
+			int player2Score = 0;
+			int player3Score = 0;
+			int player4Score = 0;
+			int player5Score = 0;
+			int player6Score = 0;
+			int player1HandicapUsed = 0;
+			int player2HandicapUsed = 0;
+			int player3HandicapUsed = 0;
+			int player4HandicapUsed = 0;
+			int player5HandicapUsed = 0;
+			int player6HandicapUsed = 0;
+
+			while (!cursor.isAfterLast()) {
+				int offset = 0;
+
+				if (cursor.isFirst()) {
+					holeCount = cursor.getInt(offset++);
+					playerCount = cursor.getInt(offset++);
+					gameFee = cursor.getInt(offset++);
+					extraFee = cursor.getInt(offset++);
+					rankingFee = cursor.getInt(offset++);
+					date = cursor.getLong(offset++);
+
+					holeFeeRanking1 = cursor.getInt(offset++);
+					holeFeeRanking2 = cursor.getInt(offset++);
+					holeFeeRanking3 = cursor.getInt(offset++);
+					holeFeeRanking4 = cursor.getInt(offset++);
+					holeFeeRanking5 = cursor.getInt(offset++);
+					holeFeeRanking6 = cursor.getInt(offset++);
+
+					rankingFeeRanking1 = cursor.getInt(offset++);
+					rankingFeeRanking2 = cursor.getInt(offset++);
+					rankingFeeRanking3 = cursor.getInt(offset++);
+					rankingFeeRanking4 = cursor.getInt(offset++);
+					rankingFeeRanking5 = cursor.getInt(offset++);
+					rankingFeeRanking6 = cursor.getInt(offset++);
+
+					playerName1 = cursor.getString(offset++);
+					playerName2 = cursor.getString(offset++);
+					playerName3 = cursor.getString(offset++);
+					playerName4 = cursor.getString(offset++);
+					playerName5 = cursor.getString(offset++);
+					playerName6 = cursor.getString(offset++);
+
+					handicap1 = cursor.getInt(offset++);
+					handicap2 = cursor.getInt(offset++);
+					handicap3 = cursor.getInt(offset++);
+					handicap4 = cursor.getInt(offset++);
+					handicap5 = cursor.getInt(offset++);
+					handicap6 = cursor.getInt(offset++);
+
+					extraScore1 = cursor.getInt(offset++);
+					extraScore2 = cursor.getInt(offset++);
+					extraScore3 = cursor.getInt(offset++);
+					extraScore4 = cursor.getInt(offset++);
+					extraScore5 = cursor.getInt(offset++);
+					extraScore6 = cursor.getInt(offset++);
+
+					gameSetting.setHoleCount(holeCount);
+					gameSetting.setPlayerCount(playerCount);
+					gameSetting.setGameFee(gameFee);
+					gameSetting.setExtraFee(extraFee);
+					gameSetting.setRankingFee(rankingFee);
+					gameSetting.setHoleFeeForRanking(1, holeFeeRanking1);
+					gameSetting.setHoleFeeForRanking(2, holeFeeRanking2);
+					gameSetting.setHoleFeeForRanking(3, holeFeeRanking3);
+					gameSetting.setHoleFeeForRanking(4, holeFeeRanking4);
+					gameSetting.setHoleFeeForRanking(5, holeFeeRanking5);
+					gameSetting.setHoleFeeForRanking(6, holeFeeRanking6);
+					gameSetting.setRankingFeeForRanking(1, rankingFeeRanking1);
+					gameSetting.setRankingFeeForRanking(2, rankingFeeRanking2);
+					gameSetting.setRankingFeeForRanking(3, rankingFeeRanking3);
+					gameSetting.setRankingFeeForRanking(4, rankingFeeRanking4);
+					gameSetting.setRankingFeeForRanking(5, rankingFeeRanking5);
+					gameSetting.setRankingFeeForRanking(6, rankingFeeRanking6);
+					gameSetting.setDate(date);
+
+					playerSetting.setPlayerName(0, playerName1);
+					playerSetting.setPlayerName(1, playerName2);
+					playerSetting.setPlayerName(2, playerName3);
+					playerSetting.setPlayerName(3, playerName4);
+					playerSetting.setPlayerName(4, playerName5);
+					playerSetting.setPlayerName(5, playerName6);
+					playerSetting.setHandicap(0, handicap1);
+					playerSetting.setHandicap(1, handicap2);
+					playerSetting.setHandicap(2, handicap3);
+					playerSetting.setHandicap(3, handicap4);
+					playerSetting.setHandicap(4, handicap5);
+					playerSetting.setHandicap(5, handicap6);
+					playerSetting.setExtraScore(0, extraScore1);
+					playerSetting.setExtraScore(1, extraScore2);
+					playerSetting.setExtraScore(2, extraScore3);
+					playerSetting.setExtraScore(3, extraScore4);
+					playerSetting.setExtraScore(4, extraScore5);
+					playerSetting.setExtraScore(5, extraScore6);
+				} else {
+					offset = cursor
+							.getColumnIndex(ResultDatabaseWorker.COLUMN_HOLE_NUMBER);
+				}
+
+				holeNumber = cursor.getInt(offset++);
+				parNumber = cursor.getInt(offset++);
+				player1Score = cursor.getInt(offset++);
+				player2Score = cursor.getInt(offset++);
+				player3Score = cursor.getInt(offset++);
+				player4Score = cursor.getInt(offset++);
+				player5Score = cursor.getInt(offset++);
+				player6Score = cursor.getInt(offset++);
+				player1HandicapUsed = cursor.getInt(offset++);
+				player2HandicapUsed = cursor.getInt(offset++);
+				player3HandicapUsed = cursor.getInt(offset++);
+				player4HandicapUsed = cursor.getInt(offset++);
+				player5HandicapUsed = cursor.getInt(offset++);
+				player6HandicapUsed = cursor.getInt(offset++);
+
+				Result result = new Result(holeNumber, parNumber);
+				result.setScore(0, player1Score);
+				result.setScore(1, player2Score);
+				result.setScore(2, player3Score);
+				result.setScore(3, player4Score);
+				result.setScore(4, player5Score);
+				result.setScore(5, player6Score);
+				result.setUsedHandicap(0, player1HandicapUsed);
+				result.setUsedHandicap(1, player2HandicapUsed);
+				result.setUsedHandicap(2, player3HandicapUsed);
+				result.setUsedHandicap(3, player4HandicapUsed);
+				result.setUsedHandicap(4, player5HandicapUsed);
+				result.setUsedHandicap(5, player6HandicapUsed);
+				result.calculate();
+
+				results.add(result);
 
 				cursor.moveToNext();
 			}
@@ -268,23 +614,6 @@ public class GameSettingDatabaseWorker extends AbstractDatabaseWorker {
 
 	private static void updateGameSetting(SQLiteDatabase db, GameSetting setting) {
 		Log.d(TAG, "updateGameSetting()");
-		// Log.d(TAG, "Hole count: " + setting.getHoleCount());
-		// Log.d(TAG, "Player count: " + setting.getPlayerCount());
-		// Log.d(TAG, "Game fee: " + setting.getGameFee());
-		// Log.d(TAG, "Extra fee: " + setting.getExtraFee());
-		// Log.d(TAG, "Ranking fee: " + setting.getRankingFee());
-		// Log.d(TAG, "Hole fee (1): " + setting.getHoleFee(1));
-		// Log.d(TAG, "Hole fee (2): " + setting.getHoleFee(2));
-		// Log.d(TAG, "Hole fee (3): " + setting.getHoleFee(3));
-		// Log.d(TAG, "Hole fee (4): " + setting.getHoleFee(4));
-		// Log.d(TAG, "Hole fee (5): " + setting.getHoleFee(5));
-		// Log.d(TAG, "Hole fee (6): " + setting.getHoleFee(6));
-		// Log.d(TAG, "Ranking fee (1): " + setting.getRankingFee(1));
-		// Log.d(TAG, "Ranking fee (2): " + setting.getRankingFee(2));
-		// Log.d(TAG, "Ranking fee (3): " + setting.getRankingFee(3));
-		// Log.d(TAG, "Ranking fee (4): " + setting.getRankingFee(4));
-		// Log.d(TAG, "Ranking fee (5): " + setting.getRankingFee(5));
-		// Log.d(TAG, "Ranking fee (6): " + setting.getRankingFee(6));
 
 		ContentValues args = new ContentValues();
 

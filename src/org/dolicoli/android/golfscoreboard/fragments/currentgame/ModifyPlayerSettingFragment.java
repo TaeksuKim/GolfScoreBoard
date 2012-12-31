@@ -4,14 +4,12 @@ import java.util.ArrayList;
 
 import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.CurrentGameModifyGameSettingActivity;
-import org.dolicoli.android.golfscoreboard.InputFragmentListener;
 import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.data.PlayerCache;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.PlayerCacheDatabaseWorker;
-import org.dolicoli.android.golfscoreboard.db.PlayerSettingDatabaseWorker;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -107,10 +105,12 @@ public class ModifyPlayerSettingFragment extends Fragment implements
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
+		GameSetting gameSetting = new GameSetting();
+		PlayerSetting playerSetting = new PlayerSetting();
+
 		GameSettingDatabaseWorker gameSettingWorker = new GameSettingDatabaseWorker(
 				getActivity());
-		GameSetting gameSetting = new GameSetting();
-		gameSettingWorker.getGameSetting(gameSetting);
+		gameSettingWorker.getGameSetting(gameSetting, playerSetting);
 		playerCount = gameSetting.getPlayerCount();
 
 		for (int i = 0; i < Constants.MAX_PLAYER_COUNT; i++) {
@@ -121,11 +121,6 @@ public class ModifyPlayerSettingFragment extends Fragment implements
 			playerNameSpinners[i].setOnItemSelectedListener(this);
 			newNameButtons[i].setOnClickListener(this);
 		}
-
-		PlayerSettingDatabaseWorker playerSettingWorker = new PlayerSettingDatabaseWorker(
-				getActivity());
-		PlayerSetting playerSetting = new PlayerSetting();
-		playerSettingWorker.getPlayerSetting(playerSetting);
 
 		for (int i = 0; i < playerCount; i++) {
 			String playerName = playerSetting.getPlayerName(i);

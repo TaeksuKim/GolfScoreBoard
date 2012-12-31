@@ -40,7 +40,7 @@
             android:layout_width="100dip"
             android:layout_height="30dip"
             android:layout_alignTop="@+id/LargeImage"
-            android:layout_marginLeft="8dip"
+            android:layout_marginLeft="16dip"
             android:layout_marginTop="8dip"
             android:layout_toRightOf="@+id/LargeImage"
             android:gravity="center"
@@ -171,7 +171,7 @@
             android:layout_alignParentTop="true"
             android:layout_margin="4dip"
             android:focusable="false"
-            android:text="@string/fragment_onegame_summary_personal_statistics"
+            android:text="@string/fragment_onegamesummary_personal_statistics"
             android:textAppearance="?attr/textAppearanceSmall" />
 
         <RelativeLayout

@@ -6,8 +6,6 @@ import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.HistoryGameSettingDatabaseWorker;
-import org.dolicoli.android.golfscoreboard.db.HistoryPlayerSettingDatabaseWorker;
-import org.dolicoli.android.golfscoreboard.db.PlayerSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.fragments.DummySectionFragment;
 import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGamePlayerHoleRecordFragment;
 import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGamePlayerRecordActivityPage;
@@ -16,6 +14,7 @@ import org.dolicoli.android.golfscoreboard.utils.PlayerUIUtil;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -86,19 +85,11 @@ public class OneGamePlayerRecordActivity extends FragmentActivity implements
 		if (currentGame) {
 			GameSettingDatabaseWorker gameWorker = new GameSettingDatabaseWorker(
 					this);
-			gameWorker.getGameSetting(gameSetting);
-
-			PlayerSettingDatabaseWorker playerWorker = new PlayerSettingDatabaseWorker(
-					this);
-			playerWorker.getPlayerSetting(playerSetting);
+			gameWorker.getGameSetting(gameSetting, playerSetting);
 		} else {
 			HistoryGameSettingDatabaseWorker gameWorker = new HistoryGameSettingDatabaseWorker(
 					this);
-			gameWorker.getGameSetting(playDate, gameSetting);
-
-			HistoryPlayerSettingDatabaseWorker playerWorker = new HistoryPlayerSettingDatabaseWorker(
-					this);
-			playerWorker.getPlayerSetting(playDate, playerSetting);
+			gameWorker.getGameSetting(playDate, gameSetting, playerSetting);
 		}
 
 		int playerCount = gameSetting.getPlayerCount();
@@ -129,7 +120,7 @@ public class OneGamePlayerRecordActivity extends FragmentActivity implements
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
-			setResult(0);
+			setResult(Activity.RESULT_CANCELED);
 			finish();
 			return true;
 		}

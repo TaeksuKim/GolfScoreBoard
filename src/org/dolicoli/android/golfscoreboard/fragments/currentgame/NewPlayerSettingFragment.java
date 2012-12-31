@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.CurrentGameNewGameSettingActivity;
-import org.dolicoli.android.golfscoreboard.InputFragmentListener;
 import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.data.PlayerCache;
 import org.dolicoli.android.golfscoreboard.db.PlayerCacheDatabaseWorker;

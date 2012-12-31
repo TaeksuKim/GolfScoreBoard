@@ -1,7 +1,5 @@
 package org.dolicoli.android.golfscoreboard.db;
 
-import java.util.ArrayList;
-
 import org.dolicoli.android.golfscoreboard.data.UsedHandicap;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
 
@@ -15,22 +13,22 @@ public class ResultDatabaseWorker extends AbstractDatabaseWorker {
 
 	private static final String TAG = "ResultDatabaseWorker";
 
-	private static final String TABLE = "result";
+	public static final String TABLE = "result";
 
-	private static final String COLUMN_HOLE_NUMBER = "holeNumber";
-	private static final String COLUMN_PAR_NUMBER = "parNumber";
-	private static final String COLUMN_PLAYER_1_SCORE = "player1Score";
-	private static final String COLUMN_PLAYER_2_SCORE = "player2Score";
-	private static final String COLUMN_PLAYER_3_SCORE = "player3Score";
-	private static final String COLUMN_PLAYER_4_SCORE = "player4Score";
-	private static final String COLUMN_PLAYER_5_SCORE = "player5Score";
-	private static final String COLUMN_PLAYER_6_SCORE = "player6Score";
-	private static final String COLUMN_PLAYER_1_HANDICAP_USED = "player1HandicapUsed";
-	private static final String COLUMN_PLAYER_2_HANDICAP_USED = "player2HandicapUsed";
-	private static final String COLUMN_PLAYER_3_HANDICAP_USED = "player3HandicapUsed";
-	private static final String COLUMN_PLAYER_4_HANDICAP_USED = "player4HandicapUsed";
-	private static final String COLUMN_PLAYER_5_HANDICAP_USED = "player5HandicapUsed";
-	private static final String COLUMN_PLAYER_6_HANDICAP_USED = "player6HandicapUsed";
+	public static final String COLUMN_HOLE_NUMBER = "holeNumber";
+	public static final String COLUMN_PAR_NUMBER = "parNumber";
+	public static final String COLUMN_PLAYER_1_SCORE = "player1Score";
+	public static final String COLUMN_PLAYER_2_SCORE = "player2Score";
+	public static final String COLUMN_PLAYER_3_SCORE = "player3Score";
+	public static final String COLUMN_PLAYER_4_SCORE = "player4Score";
+	public static final String COLUMN_PLAYER_5_SCORE = "player5Score";
+	public static final String COLUMN_PLAYER_6_SCORE = "player6Score";
+	public static final String COLUMN_PLAYER_1_HANDICAP_USED = "player1HandicapUsed";
+	public static final String COLUMN_PLAYER_2_HANDICAP_USED = "player2HandicapUsed";
+	public static final String COLUMN_PLAYER_3_HANDICAP_USED = "player3HandicapUsed";
+	public static final String COLUMN_PLAYER_4_HANDICAP_USED = "player4HandicapUsed";
+	public static final String COLUMN_PLAYER_5_HANDICAP_USED = "player5HandicapUsed";
+	public static final String COLUMN_PLAYER_6_HANDICAP_USED = "player6HandicapUsed";
 
 	// COLUMN_HOLE_NUMBER + " INTEGER PRIMARY KEY , " +
 	// COLUMN_PAR_NUMBER + " INTEGER , " +
@@ -216,74 +214,6 @@ public class ResultDatabaseWorker extends AbstractDatabaseWorker {
 			}
 
 			return usedHandicap;
-		} finally {
-			if (cursor != null) {
-				cursor.close();
-			}
-			close();
-		}
-	}
-
-	public ArrayList<Result> getResults() {
-		Log.d(TAG, "getResults()");
-		open();
-		Cursor cursor = null;
-		try {
-			cursor = mDb.query(TABLE, new String[] { COLUMN_HOLE_NUMBER,
-					COLUMN_PAR_NUMBER, COLUMN_PLAYER_1_SCORE,
-					COLUMN_PLAYER_2_SCORE, COLUMN_PLAYER_3_SCORE,
-					COLUMN_PLAYER_4_SCORE, COLUMN_PLAYER_5_SCORE,
-					COLUMN_PLAYER_6_SCORE, COLUMN_PLAYER_1_HANDICAP_USED,
-					COLUMN_PLAYER_2_HANDICAP_USED,
-					COLUMN_PLAYER_3_HANDICAP_USED,
-					COLUMN_PLAYER_4_HANDICAP_USED,
-					COLUMN_PLAYER_5_HANDICAP_USED,
-					COLUMN_PLAYER_6_HANDICAP_USED }, null, null, null, null,
-					COLUMN_HOLE_NUMBER, null);
-
-			if (cursor != null)
-				cursor.moveToFirst();
-
-			ArrayList<Result> list = new ArrayList<Result>();
-			while (!cursor.isAfterLast()) {
-				int offset = 0;
-
-				int holeNumber = cursor.getInt(offset++);
-				int parNumber = cursor.getInt(offset++);
-				int player1Score = cursor.getInt(offset++);
-				int player2Score = cursor.getInt(offset++);
-				int player3Score = cursor.getInt(offset++);
-				int player4Score = cursor.getInt(offset++);
-				int player5Score = cursor.getInt(offset++);
-				int player6Score = cursor.getInt(offset++);
-				int player1HandicapUsed = cursor.getInt(offset++);
-				int player2HandicapUsed = cursor.getInt(offset++);
-				int player3HandicapUsed = cursor.getInt(offset++);
-				int player4HandicapUsed = cursor.getInt(offset++);
-				int player5HandicapUsed = cursor.getInt(offset++);
-				int player6HandicapUsed = cursor.getInt(offset++);
-
-				Result result = new Result(holeNumber, parNumber);
-				result.setScore(0, player1Score);
-				result.setScore(1, player2Score);
-				result.setScore(2, player3Score);
-				result.setScore(3, player4Score);
-				result.setScore(4, player5Score);
-				result.setScore(5, player6Score);
-				result.setUsedHandicap(0, player1HandicapUsed);
-				result.setUsedHandicap(1, player2HandicapUsed);
-				result.setUsedHandicap(2, player3HandicapUsed);
-				result.setUsedHandicap(3, player4HandicapUsed);
-				result.setUsedHandicap(4, player5HandicapUsed);
-				result.setUsedHandicap(5, player6HandicapUsed);
-				result.calculate();
-
-				list.add(result);
-
-				cursor.moveToNext();
-			}
-
-			return list;
 		} finally {
 			if (cursor != null) {
 				cursor.close();

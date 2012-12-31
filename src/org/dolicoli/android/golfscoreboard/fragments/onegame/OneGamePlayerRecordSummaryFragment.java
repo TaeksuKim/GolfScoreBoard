@@ -5,7 +5,7 @@ import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
 import org.dolicoli.android.golfscoreboard.tasks.CurrentGameQueryTask;
-import org.dolicoli.android.golfscoreboard.tasks.HistoryQueryTask;
+import org.dolicoli.android.golfscoreboard.tasks.HistoryGameSettingWithResultQueryTask;
 import org.dolicoli.android.golfscoreboard.utils.FeeCalculator;
 import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 public class OneGamePlayerRecordSummaryFragment extends Fragment implements
 		OneGamePlayerRecordActivityPage, CurrentGameQueryTask.TaskListener,
-		HistoryQueryTask.TaskListener {
+		HistoryGameSettingWithResultQueryTask.TaskListener {
 
 	private int playerId;
 
@@ -177,8 +177,8 @@ public class OneGamePlayerRecordSummaryFragment extends Fragment implements
 			CurrentGameQueryTask task = new CurrentGameQueryTask(activity, this);
 			task.execute();
 		} else {
-			HistoryQueryTask task = new HistoryQueryTask(activity, this);
-			task.execute(new HistoryQueryTask.QueryParam(playDate));
+			HistoryGameSettingWithResultQueryTask task = new HistoryGameSettingWithResultQueryTask(activity, this);
+			task.execute(new HistoryGameSettingWithResultQueryTask.QueryParam(playDate));
 		}
 	}
 

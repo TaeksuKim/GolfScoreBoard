@@ -8,8 +8,6 @@ import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
 import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
-import org.dolicoli.android.golfscoreboard.db.PlayerSettingDatabaseWorker;
-import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.net.GameUploader;
 import org.dolicoli.android.golfscoreboard.tasks.ExportCurrentGameTask.ExportProgress;
 import org.dolicoli.android.golfscoreboard.tasks.ExportCurrentGameTask.ExportResult;
@@ -78,38 +76,19 @@ public class ExportCurrentGameTask extends
 		publishProgress(new ExportProgress(0, 10,
 				R.string.task_exportcurrentgame_preparing_game_setting));
 
+		GameSetting gameSetting = new GameSetting();
+		PlayerSetting playerSetting = new PlayerSetting();
+		ArrayList<Result> results = new ArrayList<Result>();
+
 		GameSettingDatabaseWorker gameSettingWorker = new GameSettingDatabaseWorker(
 				context);
-		GameSetting gameSetting = new GameSetting();
-		gameSettingWorker.getGameSetting(gameSetting);
+		gameSettingWorker.getGameSetting(gameSetting, playerSetting, results);
 
 		if (isCancelled()) {
 			return new ExportResult(true, CODE_CANCEL);
 		}
 
-		publishProgress(new ExportProgress(2, 10,
-				R.string.task_exportcurrentgame_preparing_player_setting));
-
-		PlayerSettingDatabaseWorker playerSettingWorker = new PlayerSettingDatabaseWorker(
-				context);
-		PlayerSetting playerSetting = new PlayerSetting();
-		playerSettingWorker.getPlayerSetting(playerSetting);
-
-		if (isCancelled()) {
-			return new ExportResult(true, CODE_CANCEL);
-		}
-
-		publishProgress(new ExportProgress(4, 10,
-				R.string.task_exportcurrentgame_preparing_result));
-
-		ResultDatabaseWorker resultWorker = new ResultDatabaseWorker(context);
-		ArrayList<Result> results = resultWorker.getResults();
-
-		if (isCancelled()) {
-			return new ExportResult(true, CODE_CANCEL);
-		}
-
-		publishProgress(new ExportProgress(6, 10,
+		publishProgress(new ExportProgress(5, 10,
 				R.string.task_exportcurrentgame_exporting));
 
 		boolean success = GameUploader.upload(host, gameSetting, playerSetting,

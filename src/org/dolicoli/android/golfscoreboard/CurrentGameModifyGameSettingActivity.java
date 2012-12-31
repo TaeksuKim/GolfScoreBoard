@@ -5,6 +5,7 @@ import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.PlayerCacheDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.PlayerSettingDatabaseWorker;
+import org.dolicoli.android.golfscoreboard.fragments.currentgame.InputFragmentListener;
 import org.dolicoli.android.golfscoreboard.fragments.currentgame.ModifyGameSettingFragment;
 import org.dolicoli.android.golfscoreboard.fragments.currentgame.ModifyHandicapSettingFragment;
 import org.dolicoli.android.golfscoreboard.fragments.currentgame.ModifyHoleFeeSettingFragment;

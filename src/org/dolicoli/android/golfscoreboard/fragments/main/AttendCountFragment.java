@@ -9,8 +9,8 @@ import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.HistoryActivity;
 import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.Reloadable;
-import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
-import org.dolicoli.android.golfscoreboard.tasks.SimpleHistoryQueryTask;
+import org.dolicoli.android.golfscoreboard.data.GameAndResult;
+import org.dolicoli.android.golfscoreboard.tasks.HistoryGameSettingRangeQueryTask;
 import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask;
 import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask.ReceiveProgress;
 import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask.ReceiveResult;
@@ -19,7 +19,6 @@ import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil.DateRange;
 import org.dolicoli.android.golfscoreboard.utils.PlayerUIUtil;
 import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -39,7 +38,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class AttendCountFragment extends Fragment implements Reloadable,
-		OnClickListener, SimpleHistoryQueryTask.TaskListener,
+		OnClickListener, HistoryGameSettingRangeQueryTask.TaskListener,
 		ThreeMonthsGameReceiveTask.TaskListener {
 
 	@SuppressWarnings("unused")
@@ -153,18 +152,18 @@ public class AttendCountFragment extends Fragment implements Reloadable,
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		FragmentActivity activity = getActivity();
-		if (activity == null) {
-			return false;
-		}
-
 		switch (item.getItemId()) {
 		case R.id.ImportThreeMonth:
 			importThreeMonthData();
 			return true;
 		}
 
-		return ((MainFragmentContainer) activity).onOptionsItemSelected(item);
+		FragmentActivity activity = getActivity();
+		if (activity == null) {
+			return false;
+		}
+
+		return activity.onOptionsItemSelected(item);
 	}
 
 	@Override
@@ -193,16 +192,17 @@ public class AttendCountFragment extends Fragment implements Reloadable,
 
 		DateRange dateRange = DateRangeUtil.getDateRange(3);
 
-		SimpleHistoryQueryTask task = new SimpleHistoryQueryTask(activity, this);
+		HistoryGameSettingRangeQueryTask task = new HistoryGameSettingRangeQueryTask(
+				activity, this);
 		task.execute(dateRange);
 	}
 
 	@Override
-	public void onSimpleHistoryQueryStarted() {
+	public void onHistoryGameSettingQueryStarted() {
 	}
 
 	@Override
-	public void onSimpleHistoryQueryFinished(SingleGameResult[] gameResults) {
+	public void onHistoryGameSettingQueryFinished(GameAndResult[] gameResults) {
 		FragmentActivity activity = getActivity();
 		if (activity == null || gameResults == null)
 			return;
@@ -211,7 +211,7 @@ public class AttendCountFragment extends Fragment implements Reloadable,
 
 		int gameCount = 0;
 		int totalFeeSum = 0;
-		for (SingleGameResult gameResult : gameResults) {
+		for (GameAndResult gameResult : gameResults) {
 			totalFeeSum += gameResult.getTotalFee();
 			gameCount++;
 
@@ -318,7 +318,7 @@ public class AttendCountFragment extends Fragment implements Reloadable,
 	}
 
 	private void importThreeMonthData() {
-		final Activity activity = getActivity();
+		final FragmentActivity activity = getActivity();
 		final AttendCountFragment instance = this;
 
 		new AlertDialog.Builder(activity)
