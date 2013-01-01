@@ -6,7 +6,6 @@ import java.util.Collections;
 import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.ModifyResultActivity;
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.Reloadable;
 import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
 import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
@@ -38,8 +37,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class OneGameHoleResultFragment extends ListFragment implements
-		Reloadable, OneGameActivityPage, OnClickListener,
-		CurrentGameQueryTask.TaskListener, HistoryGameSettingWithResultQueryTask.TaskListener {
+		OneGameActivityPage, OnClickListener,
+		CurrentGameQueryTask.TaskListener,
+		HistoryGameSettingWithResultQueryTask.TaskListener {
 
 	private View gameSettingView;
 	private TextView currentHoleTextView, finalHoleTextView;
@@ -132,12 +132,7 @@ public class OneGameHoleResultFragment extends ListFragment implements
 		} else {
 			gameSettingView.setVisibility(View.GONE);
 		}
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		reload();
+		reload(false);
 	}
 
 	@Override
@@ -214,7 +209,7 @@ public class OneGameHoleResultFragment extends ListFragment implements
 	}
 
 	@Override
-	public void reload() {
+	public void reload(boolean clean) {
 		FragmentActivity activity = getActivity();
 
 		if (activity == null)
@@ -224,8 +219,10 @@ public class OneGameHoleResultFragment extends ListFragment implements
 			CurrentGameQueryTask task = new CurrentGameQueryTask(activity, this);
 			task.execute();
 		} else if (mode == MODE_HISTORY) {
-			HistoryGameSettingWithResultQueryTask task = new HistoryGameSettingWithResultQueryTask(getActivity(), this);
-			task.execute(new HistoryGameSettingWithResultQueryTask.QueryParam(playDate, holeNumber));
+			HistoryGameSettingWithResultQueryTask task = new HistoryGameSettingWithResultQueryTask(
+					getActivity(), this);
+			task.execute(new HistoryGameSettingWithResultQueryTask.QueryParam(
+					playDate, holeNumber));
 		}
 	}
 
@@ -254,7 +251,7 @@ public class OneGameHoleResultFragment extends ListFragment implements
 	public void setHoleNumber(int holeNumber) {
 		this.holeNumber = holeNumber;
 
-		reload();
+		reload(false);
 	}
 
 	private void reloadUI() {
@@ -378,7 +375,7 @@ public class OneGameHoleResultFragment extends ListFragment implements
 										activity);
 								resultWorker.removeAfter(holeNumber);
 								((MainFragmentContainer) getActivity())
-										.reload();
+										.reload(false);
 							}
 
 						}).setNegativeButton(android.R.string.no, null).show();

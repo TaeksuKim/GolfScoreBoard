@@ -20,6 +20,7 @@ import org.dolicoli.android.golfscoreboard.net.GameParser;
 import org.dolicoli.android.golfscoreboard.net.HttpScraper;
 import org.dolicoli.android.golfscoreboard.net.ResponseException;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -440,6 +441,9 @@ public class NetShareClientFragment extends ListFragment implements
 			item = (DateItem) dateRangeSpinner.getSelectedItem();
 		}
 
+		if (item == null)
+			return;
+
 		gameListTask = new GameHistoryListReceiveTask(getActivity());
 		gameListTask.execute(item);
 	}
@@ -636,6 +640,7 @@ public class NetShareClientFragment extends ListFragment implements
 			if (error) {
 				requestFailed(R.string.fragment_netshare_client_message_receive_error);
 			} else {
+				getActivity().setResult(Activity.RESULT_OK);
 				getActivity().finish();
 				return;
 			}

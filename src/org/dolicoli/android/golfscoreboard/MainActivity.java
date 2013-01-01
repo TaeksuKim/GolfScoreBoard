@@ -9,6 +9,7 @@ import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.fragments.DummySectionFragment;
 import org.dolicoli.android.golfscoreboard.fragments.main.AttendCountFragment;
 import org.dolicoli.android.golfscoreboard.fragments.main.MainFragmentContainer;
+import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameActivityPage;
 import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameHoleResultFragment;
 import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameSummaryFragment;
 import org.dolicoli.android.golfscoreboard.tasks.ExportCurrentGameTask;
@@ -157,6 +158,7 @@ public class MainActivity extends FragmentActivity implements
 	private static final int REQ_ADD_RESULT = 0x0001;
 	private static final int REQ_NEW_GAME = 0x0002;
 	private static final int REQ_MODIFY_GAME = 0x0003;
+	private static final int REQ_IMPORT = 0x0004;
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -173,7 +175,7 @@ public class MainActivity extends FragmentActivity implements
 					exportData();
 				}
 			}
-			reload();
+			reload(true);
 			return;
 		case REQ_MODIFY_GAME:
 			if (resultCode == Activity.RESULT_OK) {
@@ -185,7 +187,7 @@ public class MainActivity extends FragmentActivity implements
 					exportData();
 				}
 			}
-			reload();
+			reload(true);
 			return;
 		case REQ_ADD_RESULT:
 			if (resultCode == Activity.RESULT_OK) {
@@ -197,7 +199,12 @@ public class MainActivity extends FragmentActivity implements
 					exportData();
 				}
 			}
-			reload();
+			reload(false);
+			return;
+		case REQ_IMPORT:
+			if (resultCode == Activity.RESULT_OK) {
+				reload(true);
+			}
 			return;
 		}
 	}
@@ -220,7 +227,7 @@ public class MainActivity extends FragmentActivity implements
 							public void onClick(DialogInterface dialog,
 									int which) {
 								resetDatabase();
-								reload();
+								reload(true);
 							}
 
 						}).setNegativeButton(android.R.string.no, null).show();
@@ -273,7 +280,7 @@ public class MainActivity extends FragmentActivity implements
 
 		Intent intent = new Intent(this, NetShareClientActivity.class);
 		intent.putExtra(NetShareClientActivity.IK_GAME_ID, currentGameId);
-		startActivity(intent);
+		startActivityForResult(intent, REQ_IMPORT);
 	}
 
 	private void saveHistory() {
@@ -281,7 +288,7 @@ public class MainActivity extends FragmentActivity implements
 				this);
 		worker.addCurrentHistory(true);
 
-		reload();
+		reload(false);
 	}
 
 	private void showSettingActivity() {
@@ -313,7 +320,7 @@ public class MainActivity extends FragmentActivity implements
 				Toast.makeText(MainActivity.this,
 						R.string.activity_main_netshare_import_success,
 						Toast.LENGTH_LONG).show();
-				reload();
+				reload(false);
 			}
 		} else {
 			Toast.makeText(MainActivity.this,
@@ -324,7 +331,7 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	@Override
-	public void reload() {
+	public void reload(final boolean clean) {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -332,11 +339,12 @@ public class MainActivity extends FragmentActivity implements
 					return;
 
 				int count = mSectionsPagerAdapter.getCount();
-				Reloadable fragment = null;
+				OneGameActivityPage fragment = null;
 				for (int i = 0; i < count; i++) {
-					fragment = (Reloadable) mSectionsPagerAdapter.getItem(i);
+					fragment = (OneGameActivityPage) mSectionsPagerAdapter
+							.getItem(i);
 					if (fragment != null)
-						fragment.reload();
+						fragment.reload(clean);
 				}
 			}
 		});

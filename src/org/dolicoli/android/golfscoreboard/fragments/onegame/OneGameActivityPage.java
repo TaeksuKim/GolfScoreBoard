@@ -1,6 +1,8 @@
 package org.dolicoli.android.golfscoreboard.fragments.onegame;
 
-public interface OneGameActivityPage {
+import org.dolicoli.android.golfscoreboard.Reloadable;
+
+public interface OneGameActivityPage extends Reloadable {
 
 	public static final String BK_MODE = "Mode";
 	public static final String BK_PLAY_DATE = "PlayDate";

@@ -3,12 +3,12 @@ package org.dolicoli.android.golfscoreboard.fragments.onegame;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.OneGamePlayerRecordActivity;
 import org.dolicoli.android.golfscoreboard.PersonalStatisticsActivity;
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.Reloadable;
 import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
 import org.dolicoli.android.golfscoreboard.tasks.CurrentGameQueryTask;
@@ -37,7 +37,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class OneGameSummaryFragment extends ListFragment implements Reloadable,
+public class OneGameSummaryFragment extends ListFragment implements
 		OneGameActivityPage, CurrentGameQueryTask.TaskListener,
 		HistoryGameSettingWithResultQueryTask.TaskListener {
 
@@ -52,6 +52,8 @@ public class OneGameSummaryFragment extends ListFragment implements Reloadable,
 	private int mode;
 	private String playDate;
 	private int holeNumber;
+
+	private HashMap<String, Boolean> expandMap;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -113,12 +115,7 @@ public class OneGameSummaryFragment extends ListFragment implements Reloadable,
 			setHasOptionsMenu(true);
 			statusView.setVisibility(View.VISIBLE);
 		}
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		reload();
+		reload(false);
 	}
 
 	@Override
@@ -171,9 +168,14 @@ public class OneGameSummaryFragment extends ListFragment implements Reloadable,
 	}
 
 	@Override
-	public void reload() {
+	public void reload(boolean clean) {
 		if (getActivity() == null)
 			return;
+
+		if (clean && expandMap != null) {
+			expandMap.clear();
+			expandMap = null;
+		}
 
 		if (mode == MODE_CURRENT) {
 			CurrentGameQueryTask task = new CurrentGameQueryTask(getActivity(),
@@ -182,8 +184,8 @@ public class OneGameSummaryFragment extends ListFragment implements Reloadable,
 		} else if (mode == MODE_HISTORY) {
 			HistoryGameSettingWithResultQueryTask task = new HistoryGameSettingWithResultQueryTask(
 					getActivity(), this);
-			task.execute(new HistoryGameSettingWithResultQueryTask.QueryParam(playDate,
-					holeNumber));
+			task.execute(new HistoryGameSettingWithResultQueryTask.QueryParam(
+					playDate, holeNumber));
 		}
 	}
 
@@ -201,7 +203,7 @@ public class OneGameSummaryFragment extends ListFragment implements Reloadable,
 	public void setHoleNumber(int holeNumber) {
 		this.holeNumber = holeNumber;
 
-		reload();
+		reload(false);
 	}
 
 	private void reloadUI() {
@@ -276,8 +278,17 @@ public class OneGameSummaryFragment extends ListFragment implements Reloadable,
 				R.string.fragment_onegamesummary_current_hole_format,
 				currentHole));
 		finalHoleTextView.setText(String.valueOf(holeCount));
+
+		if (expandMap == null) {
+			expandMap = new HashMap<String, Boolean>();
+		}
 		adapter.clear();
 		for (PlayerScore playerScore : list) {
+			if (expandMap.containsKey(playerScore.name)) {
+				playerScore.expand = expandMap.get(playerScore.name);
+			} else {
+				playerScore.expand = false;
+			}
 			adapter.add(playerScore);
 		}
 		adapter.notifyDataSetChanged();
@@ -424,6 +435,8 @@ public class OneGameSummaryFragment extends ListFragment implements Reloadable,
 
 	private static class PlayerScore implements Comparable<PlayerScore> {
 
+		private boolean expand;
+
 		private int playerId;
 		private String name;
 		private int ranking;
@@ -445,6 +458,8 @@ public class OneGameSummaryFragment extends ListFragment implements Reloadable,
 
 		public PlayerScore(int playerId, String name, int handicap,
 				int remainHandicap, int extraScore) {
+			this.expand = false;
+
 			this.playerId = playerId;
 			this.name = name;
 			this.handicap = handicap;
@@ -636,7 +651,7 @@ public class OneGameSummaryFragment extends ListFragment implements Reloadable,
 					.getTagColor(playerScore.name));
 
 			showMoreButton.setOnClickListener(this);
-			showMoreButton.setTag(holder.detailView);
+			showMoreButton.setTag(playerScore);
 
 			holder.personalStatisticsButton.setOnClickListener(this);
 			holder.personalStatisticsButton.setTag(playerScore.name);
@@ -687,6 +702,14 @@ public class OneGameSummaryFragment extends ListFragment implements Reloadable,
 				holder.avgRankingTextView.setVisibility(View.INVISIBLE);
 			}
 
+			if (playerScore.expand) {
+				holder.detailView.setVisibility(View.VISIBLE);
+				showMoreButton.setBackgroundResource(R.drawable.ic_collapse);
+			} else {
+				holder.detailView.setVisibility(View.GONE);
+				showMoreButton.setBackgroundResource(R.drawable.ic_expand);
+			}
+
 			return v;
 		}
 
@@ -704,16 +727,14 @@ public class OneGameSummaryFragment extends ListFragment implements Reloadable,
 				intent.putExtra(PersonalStatisticsActivity.IK_PLAYER_NAME,
 						PlayerUIUtil.toCanonicalName(playerName));
 				startActivity(intent);
-			} else {
+			} else if (id == R.id.LargeShowMoreButton
+					|| id == R.id.MediumShowMoreButton) {
 				Button button = (Button) v;
-				View more = (View) button.getTag();
-				if (more.getVisibility() == View.VISIBLE) {
-					more.setVisibility(View.GONE);
-					button.setBackgroundResource(R.drawable.ic_expand);
-				} else {
-					more.setVisibility(View.VISIBLE);
-					button.setBackgroundResource(R.drawable.ic_collapse);
-				}
+				PlayerScore playerScore = (PlayerScore) button.getTag();
+				playerScore.expand = !playerScore.expand;
+				if (expandMap != null)
+					expandMap.put(playerScore.name, playerScore.expand);
+				notifyDataSetChanged();
 			}
 		}
 	}

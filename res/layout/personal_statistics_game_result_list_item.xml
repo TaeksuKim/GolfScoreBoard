@@ -17,7 +17,8 @@
         android:layout_marginRight="4dp"
         android:gravity="center"
         android:textAppearance="?attr/textAppearanceSmall"
-        android:textColor="?attr/secondaryTextColor" />
+        android:textColor="?attr/secondaryTextColor"
+        android:textSize="8sp" />
 
     <TextView
         android:id="@+id/RankingTextView"

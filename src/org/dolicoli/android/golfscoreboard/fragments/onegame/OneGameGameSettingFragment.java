@@ -116,7 +116,7 @@ public class OneGameGameSettingFragment extends Fragment implements
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		reload();
+		reload(false);
 	}
 
 	@Override
@@ -129,7 +129,8 @@ public class OneGameGameSettingFragment extends Fragment implements
 		super.onPause();
 	}
 
-	private void reload() {
+	@Override
+	public void reload(boolean clean) {
 		if (getActivity() == null || playDate == null)
 			return;
 

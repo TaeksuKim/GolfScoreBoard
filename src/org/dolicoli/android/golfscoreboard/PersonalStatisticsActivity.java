@@ -154,7 +154,7 @@ public class PersonalStatisticsActivity extends FragmentActivity implements
 		for (int i = 0; i < itemCount; i++) {
 			Fragment item = mSectionsPagerAdapter.getItem(i);
 			if (item != null && (item instanceof Reloadable))
-				((Reloadable) item).reload();
+				((Reloadable) item).reload(false);
 		}
 	}
 

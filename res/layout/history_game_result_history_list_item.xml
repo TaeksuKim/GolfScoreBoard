@@ -52,7 +52,7 @@
 
     <View
         android:id="@+id/Player1TagView"
-        android:layout_width="200dip"
+        android:layout_width="180dip"
         android:layout_height="35dip"
         android:layout_alignBottom="@+id/Player1Space"
         android:layout_alignParentLeft="true"
@@ -71,7 +71,7 @@
 
     <TextView
         android:id="@+id/Player1NameTextView"
-        android:layout_width="120dip"
+        android:layout_width="100dip"
         android:layout_height="35dip"
         android:layout_alignBottom="@+id/Player1Image"
         android:layout_toRightOf="@+id/Player1Image"
@@ -81,7 +81,7 @@
 
     <TextView
         android:id="@+id/Player1ScoreTextView"
-        android:layout_width="120dip"
+        android:layout_width="100dip"
         android:layout_height="match_parent"
         android:layout_above="@+id/Player1NameTextView"
         android:layout_below="@+id/TopView"

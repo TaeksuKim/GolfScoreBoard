@@ -61,11 +61,11 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 	@Override
 	public void onResume() {
 		super.onResume();
-		reload();
+		reload(false);
 	}
 
 	@Override
-	public void reload() {
+	public void reload(boolean clean) {
 		if (dataContainer == null)
 			return;
 

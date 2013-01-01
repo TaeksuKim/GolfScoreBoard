@@ -27,7 +27,7 @@
     <string name="avg_ranking_format">0.00 위</string>
     <string name="game_count_format">###,### 회</string>
     <string name="no_game_count">- 회</string>
-    <string name="rate_format">###.00 %</string>
+    <string name="rate_format">##0.00 %</string>
     <string name="no_rate">- %</string>
     <string name="player_count_format">0 명</string>
     <string name="par_three">파 3</string>

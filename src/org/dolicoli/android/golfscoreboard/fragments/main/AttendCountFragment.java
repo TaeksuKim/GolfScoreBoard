@@ -140,8 +140,7 @@ public class AttendCountFragment extends Fragment implements Reloadable,
 		super.onActivityCreated(savedInstanceState);
 
 		setHasOptionsMenu(true);
-
-		reload();
+		reload(false);
 	}
 
 	@Override
@@ -180,12 +179,12 @@ public class AttendCountFragment extends Fragment implements Reloadable,
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if (requestCode == REQ_HISTORY) {
-			reload();
+			reload(true);
 		}
 	}
 
 	@Override
-	public void reload() {
+	public void reload(boolean clean) {
 		FragmentActivity activity = getActivity();
 		if (activity == null || totalFeeSumTextView == null)
 			return;
@@ -307,7 +306,7 @@ public class AttendCountFragment extends Fragment implements Reloadable,
 						activity,
 						R.string.fragment_attendcount_import_three_month_success,
 						Toast.LENGTH_LONG).show();
-				reload();
+				reload(true);
 			}
 		} else {
 			Toast.makeText(activity,
