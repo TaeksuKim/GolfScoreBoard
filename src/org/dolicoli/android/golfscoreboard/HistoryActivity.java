@@ -111,7 +111,7 @@ public class HistoryActivity extends FragmentActivity implements
 
 	public void reloadData() {
 		GameAndResultTask task = new GameAndResultTask(this, this);
-		task.execute(DateRangeUtil.getDateRange(3));
+		task.execute(DateRangeUtil.getDateRange(2));
 
 		reload();
 	}
@@ -236,7 +236,7 @@ public class HistoryActivity extends FragmentActivity implements
 		items.add(new DateItem(lastMonthRange.getFrom(),
 				lastMonthRange.getTo(), "지난 달"));
 
-		DateRange lastThreeMonthRange = DateRangeUtil.getDateRange(3);
+		DateRange lastThreeMonthRange = DateRangeUtil.getDateRange(2);
 		items.add(new DateItem(lastThreeMonthRange.getFrom(),
 				lastThreeMonthRange.getTo(), "최근 3개월"));
 

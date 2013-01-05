@@ -96,6 +96,7 @@
     <string name="menu_reset">결과 초기화</string>
     <string name="menu_delete">삭제</string>
     <string name="menu_settings">설정</string>
+    <string name="menu_about">사만원 1.1.10에 대하여</string>
 
     <!-- Dialog -->
     <string name="dialog_reset">결과 초기화</string>

@@ -8,8 +8,8 @@ import java.util.HashMap;
 import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.HistoryActivity;
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.Reloadable;
 import org.dolicoli.android.golfscoreboard.data.GameAndResult;
+import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameActivityPage;
 import org.dolicoli.android.golfscoreboard.tasks.HistoryGameSettingRangeQueryTask;
 import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask;
 import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask.ReceiveProgress;
@@ -37,8 +37,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AttendCountFragment extends Fragment implements Reloadable,
-		OnClickListener, HistoryGameSettingRangeQueryTask.TaskListener,
+public class AttendCountFragment extends Fragment implements
+		OneGameActivityPage, OnClickListener,
+		HistoryGameSettingRangeQueryTask.TaskListener,
 		ThreeMonthsGameReceiveTask.TaskListener {
 
 	@SuppressWarnings("unused")
@@ -189,11 +190,15 @@ public class AttendCountFragment extends Fragment implements Reloadable,
 		if (activity == null || totalFeeSumTextView == null)
 			return;
 
-		DateRange dateRange = DateRangeUtil.getDateRange(3);
+		DateRange dateRange = DateRangeUtil.getDateRange(2);
 
 		HistoryGameSettingRangeQueryTask task = new HistoryGameSettingRangeQueryTask(
 				activity, this);
 		task.execute(dateRange);
+	}
+
+	@Override
+	public void setHoleNumber(int holeNumber) {
 	}
 
 	@Override

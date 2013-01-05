@@ -13,5 +13,10 @@
         android:icon="?settingMenuIcon"
         android:showAsAction="ifRoom|withText"
         android:title="@string/menu_settings"/>
+    <item
+        android:id="@+id/About"
+        android:icon="?aboutMenuIcon"
+        android:showAsAction="withText"
+        android:title="@string/menu_about"/>
 
 </menu>

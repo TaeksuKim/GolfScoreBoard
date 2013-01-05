@@ -52,4 +52,5 @@
     <attr name="saveMenuIcon" format="reference" />
     <attr name="settingMenuIcon" format="reference" />
     <attr name="uploadMenuIcon" format="reference" />
+    <attr name="aboutMenuIcon" format="reference" />
 </resources>
