@@ -7,6 +7,7 @@ import org.dolicoli.android.golfscoreboard.R;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
+import org.dolicoli.android.golfscoreboard.db.DownloadTickDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.HistoryGameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.PlayerSettingDatabaseWorker;
@@ -113,6 +114,10 @@ public class ImportCurrentGameTask extends
 			if (isCancelled()) {
 				return new ImportResult(true, CODE_CANCEL);
 			}
+
+			DownloadTickDatabaseWorker tickWorker = new DownloadTickDatabaseWorker(
+					context);
+			tickWorker.updateTick(parser.getTick());
 
 			publishProgress(new ImportProgress(3, 10,
 					R.string.task_gamereceive_parsing_game_setting));

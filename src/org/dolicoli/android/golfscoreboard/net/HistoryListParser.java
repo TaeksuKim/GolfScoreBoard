@@ -3,6 +3,8 @@ package org.dolicoli.android.golfscoreboard.net;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
@@ -18,7 +20,12 @@ public class HistoryListParser extends ResponseParser {
 
 	private static final String TAG = "HistoryListParser";
 
+	private long tick;
 	private ArrayList<History> historyList;
+
+	public long getTick() {
+		return tick;
+	}
 
 	public ArrayList<History> getHistoryList() {
 		return historyList;
@@ -57,6 +64,14 @@ public class HistoryListParser extends ResponseParser {
 							String errorMessage = xpp.getAttributeValue(null,
 									"message");
 							throw new ResponseException(errorMessage);
+						}
+
+						String tickString = xpp.getAttributeValue(null, "tick");
+						if (tickString != null && !tickString.isEmpty()) {
+							try {
+								tick = Long.parseLong(tickString);
+							} catch (Throwable t) {
+							}
 						}
 					} else if (xpp.getName().equals("game")) {
 						gameSetting = new GameSetting();
@@ -156,6 +171,14 @@ public class HistoryListParser extends ResponseParser {
 				}
 				eventType = xpp.next();
 			}
+
+			Collections.sort(historyList, new Comparator<History>() {
+				@Override
+				public int compare(History lhs, History rhs) {
+					return rhs.getGameSetting().getDate()
+							.compareTo(lhs.getGameSetting().getDate());
+				}
+			});
 			return true;
 		} catch (Exception e) {
 			Log.d(TAG, e.getMessage());

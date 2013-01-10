@@ -15,7 +15,9 @@ import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 import org.dolicoli.android.golfscoreboard.utils.handicaps.Ecco1Calculator;
 import org.dolicoli.android.golfscoreboard.utils.handicaps.HandicapCalculator;
 import org.dolicoli.android.golfscoreboard.utils.handicaps.HandicapCalculator.GameResultItem;
+import org.dolicoli.android.golfscoreboard.utils.handicaps.HandicapCalculator.ResourceContainer;
 import org.dolicoli.android.golfscoreboard.utils.handicaps.LaterBetterCalculator;
+import org.dolicoli.android.golfscoreboard.utils.handicaps.MoyaCalculator;
 import org.dolicoli.android.golfscoreboard.utils.handicaps.SimpleHandicapCalculator;
 
 import android.app.Activity;
@@ -53,18 +55,24 @@ public class NewHandicapSettingFragment extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		Activity activity = getActivity();
+		final Activity activity = getActivity();
 		View view = inflater.inflate(
 				R.layout.current_game_new_handicap_setting_fragment, null);
 
 		progressBar = (ProgressBar) view.findViewById(R.id.ProgressBar);
 
+		ResourceContainer resourceContainer = new ResourceContainer() {
+			@Override
+			public String getString(int resourceId) {
+				return activity.getString(resourceId);
+			}
+		};
 		calculators = new HandicapCalculator[] {
 				new SimpleHandicapCalculator(), new Ecco1Calculator(),
-				new LaterBetterCalculator() };
+				new LaterBetterCalculator(), new MoyaCalculator() };
 		String[] calculatorNames = new String[calculators.length];
 		for (int i = 0; i < calculators.length; i++) {
-			calculatorNames[i] = calculators[i].getName(activity);
+			calculatorNames[i] = calculators[i].getName(resourceContainer);
 		}
 
 		final SpinnerAdapter handicapCalculatorSpinnerAdapter = new ArrayAdapter<String>(

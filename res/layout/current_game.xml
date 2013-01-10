@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="invisible" >
+
+    <RelativeLayout
+        android:id="@+id/StatusView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/stripColor"
+        android:paddingBottom="4dip"
+        android:paddingLeft="4dip"
+        android:paddingRight="4dip"
+        android:paddingTop="4dip" >
+
+        <TextView
+            android:id="@+id/CurrentHoleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium"
+            android:textColor="?attr/stripTextColor" />
+
+        <TextView
+            android:id="@+id/CenterTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/CurrentHoleTextView"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:layout_toRightOf="@+id/CurrentHoleTextView"
+            android:gravity="center"
+            android:text="@string/fragment_hole_fee_setting_per"
+            android:textColor="?attr/stripTextColor"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/FinalHoleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/CurrentHoleTextView"
+            android:layout_toRightOf="@+id/CenterTextView"
+            android:gravity="center"
+            android:textColor="?attr/stripTextColor"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/DateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/FinalHoleTextView"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/FinalHoleTextView"
+            android:gravity="center_vertical|right"
+            android:textColor="?attr/stripTextColor" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ButtonPanel"
+        style="?attr/borderlessButtonPanel"
+        android:layout_alignParentBottom="true" >
+
+        <ImageView
+            android:id="@+id/UpperDivider"
+            style="?attr/borderlessButtonHorizontalDivider"
+            android:contentDescription="@string/blank" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/UpperDivider" >
+
+            <Button
+                android:id="@+id/ImportButton"
+                style="?attr/borderlessButton"
+                android:text="@string/activity_main_import_this_game_button" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/MainView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ButtonPanel"
+        android:layout_below="@+id/StatusView"
+        android:background="@drawable/list_selector_holo_light"
+        android:clickable="true"
+        android:focusable="true" >
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/PlayerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_selector_holo_light"
+                android:clickable="true"
+                android:focusable="true" >
+
+                <RelativeLayout
+                    android:id="@+id/Player1View"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dip" >
+
+                    <View
+                        android:id="@+id/Player1TagView"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dip"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="4dip"
+                        android:background="#ccff4444" />
+
+                    <ImageView
+                        android:id="@+id/Player1ImageView"
+                        android:layout_width="80dip"
+                        android:layout_height="60dip"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="8dip"
+                        android:contentDescription="@string/player"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/face_unknown_r" />
+
+                    <TextView
+                        android:id="@+id/Player1NameTextView"
+                        android:layout_width="100dip"
+                        android:layout_height="25dip"
+                        android:layout_alignTop="@+id/Player1ImageView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_marginTop="4dip"
+                        android:layout_toRightOf="@+id/Player1ImageView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="#ffffffff" />
+
+                    <TextView
+                        android:id="@+id/Player1ScoreTextView"
+                        android:layout_width="40dip"
+                        android:layout_height="35dip"
+                        android:layout_below="@+id/Player1NameTextView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_toRightOf="@+id/Player1ImageView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="?attr/primaryTextColor" />
+
+                    <TextView
+                        android:id="@+id/Player1TotalFeeTextView"
+                        android:layout_width="100dip"
+                        android:layout_height="35dip"
+                        android:layout_below="@+id/Player1NameTextView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_toRightOf="@+id/Player1ScoreTextView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="?attr/primaryTextColor" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Player2View"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dip"
+                    android:layout_below="@+id/Player1View"
+                    android:layout_marginTop="4dp" >
+
+                    <View
+                        android:id="@+id/Player2TagView"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dip"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="4dip"
+                        android:background="#ccff4444" />
+
+                    <ImageView
+                        android:id="@+id/Player2ImageView"
+                        android:layout_width="80dip"
+                        android:layout_height="60dip"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="8dip"
+                        android:contentDescription="@string/player"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/face_unknown_r" />
+
+                    <TextView
+                        android:id="@+id/Player2NameTextView"
+                        android:layout_width="100dip"
+                        android:layout_height="25dip"
+                        android:layout_alignTop="@+id/Player2ImageView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_marginTop="4dip"
+                        android:layout_toRightOf="@+id/Player2ImageView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="#ffffffff" />
+
+                    <TextView
+                        android:id="@+id/Player2ScoreTextView"
+                        android:layout_width="40dip"
+                        android:layout_height="35dip"
+                        android:layout_below="@+id/Player2NameTextView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_toRightOf="@+id/Player2ImageView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="?attr/primaryTextColor" />
+
+                    <TextView
+                        android:id="@+id/Player2TotalFeeTextView"
+                        android:layout_width="100dip"
+                        android:layout_height="35dip"
+                        android:layout_below="@+id/Player2NameTextView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_toRightOf="@+id/Player2ScoreTextView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="?attr/primaryTextColor" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Player3View"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dip"
+                    android:layout_below="@+id/Player2View"
+                    android:layout_marginTop="4dp" >
+
+                    <View
+                        android:id="@+id/Player3TagView"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dip"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="4dip"
+                        android:background="#ccff4444" />
+
+                    <ImageView
+                        android:id="@+id/Player3ImageView"
+                        android:layout_width="80dip"
+                        android:layout_height="60dip"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="8dip"
+                        android:contentDescription="@string/player"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/face_unknown_r" />
+
+                    <TextView
+                        android:id="@+id/Player3NameTextView"
+                        android:layout_width="100dip"
+                        android:layout_height="25dip"
+                        android:layout_alignTop="@+id/Player3ImageView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_marginTop="4dip"
+                        android:layout_toRightOf="@+id/Player3ImageView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="#ffffffff" />
+
+                    <TextView
+                        android:id="@+id/Player3ScoreTextView"
+                        android:layout_width="40dip"
+                        android:layout_height="35dip"
+                        android:layout_below="@+id/Player3NameTextView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_toRightOf="@+id/Player3ImageView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="?attr/primaryTextColor" />
+
+                    <TextView
+                        android:id="@+id/Player3TotalFeeTextView"
+                        android:layout_width="100dip"
+                        android:layout_height="35dip"
+                        android:layout_below="@+id/Player3NameTextView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_toRightOf="@+id/Player3ScoreTextView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="?attr/primaryTextColor" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Player4View"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dip"
+                    android:layout_below="@+id/Player3View"
+                    android:layout_marginTop="4dp" >
+
+                    <View
+                        android:id="@+id/Player4TagView"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dip"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="4dip"
+                        android:background="#ccff4444" />
+
+                    <ImageView
+                        android:id="@+id/Player4ImageView"
+                        android:layout_width="80dip"
+                        android:layout_height="60dip"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="8dip"
+                        android:contentDescription="@string/player"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/face_unknown_r" />
+
+                    <TextView
+                        android:id="@+id/Player4NameTextView"
+                        android:layout_width="100dip"
+                        android:layout_height="25dip"
+                        android:layout_alignTop="@+id/Player4ImageView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_marginTop="4dip"
+                        android:layout_toRightOf="@+id/Player4ImageView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="#ffffffff" />
+
+                    <TextView
+                        android:id="@+id/Player4ScoreTextView"
+                        android:layout_width="40dip"
+                        android:layout_height="35dip"
+                        android:layout_below="@+id/Player4NameTextView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_toRightOf="@+id/Player4ImageView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="?attr/primaryTextColor" />
+
+                    <TextView
+                        android:id="@+id/Player4TotalFeeTextView"
+                        android:layout_width="100dip"
+                        android:layout_height="35dip"
+                        android:layout_below="@+id/Player4NameTextView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_toRightOf="@+id/Player4ScoreTextView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="?attr/primaryTextColor" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Player5View"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dip"
+                    android:layout_below="@+id/Player4View"
+                    android:layout_marginTop="4dp" >
+
+                    <View
+                        android:id="@+id/Player5TagView"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dip"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="4dip"
+                        android:background="#ccff4444" />
+
+                    <ImageView
+                        android:id="@+id/Player5ImageView"
+                        android:layout_width="80dip"
+                        android:layout_height="60dip"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="8dip"
+                        android:contentDescription="@string/player"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/face_unknown_r" />
+
+                    <TextView
+                        android:id="@+id/Player5NameTextView"
+                        android:layout_width="100dip"
+                        android:layout_height="25dip"
+                        android:layout_alignTop="@+id/Player5ImageView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_marginTop="4dip"
+                        android:layout_toRightOf="@+id/Player5ImageView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="#ffffffff" />
+
+                    <TextView
+                        android:id="@+id/Player5ScoreTextView"
+                        android:layout_width="40dip"
+                        android:layout_height="35dip"
+                        android:layout_below="@+id/Player5NameTextView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_toRightOf="@+id/Player5ImageView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="?attr/primaryTextColor" />
+
+                    <TextView
+                        android:id="@+id/Player5TotalFeeTextView"
+                        android:layout_width="100dip"
+                        android:layout_height="35dip"
+                        android:layout_below="@+id/Player5NameTextView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_toRightOf="@+id/Player5ScoreTextView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="?attr/primaryTextColor" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Player6View"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dip"
+                    android:layout_below="@+id/Player5View"
+                    android:layout_marginTop="4dp" >
+
+                    <View
+                        android:id="@+id/Player6TagView"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dip"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="4dip"
+                        android:background="#ccff4444" />
+
+                    <ImageView
+                        android:id="@+id/Player6ImageView"
+                        android:layout_width="80dip"
+                        android:layout_height="60dip"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="8dip"
+                        android:contentDescription="@string/player"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/face_unknown_r" />
+
+                    <TextView
+                        android:id="@+id/Player6NameTextView"
+                        android:layout_width="100dip"
+                        android:layout_height="25dip"
+                        android:layout_alignTop="@+id/Player6ImageView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_marginTop="4dip"
+                        android:layout_toRightOf="@+id/Player6ImageView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="#ffffffff" />
+
+                    <TextView
+                        android:id="@+id/Player6ScoreTextView"
+                        android:layout_width="40dip"
+                        android:layout_height="35dip"
+                        android:layout_below="@+id/Player6NameTextView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_toRightOf="@+id/Player6ImageView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="?attr/primaryTextColor" />
+
+                    <TextView
+                        android:id="@+id/Player6TotalFeeTextView"
+                        android:layout_width="100dip"
+                        android:layout_height="35dip"
+                        android:layout_below="@+id/Player6NameTextView"
+                        android:layout_marginLeft="8dip"
+                        android:layout_toRightOf="@+id/Player6ScoreTextView"
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceMedium"
+                        android:textColor="?attr/primaryTextColor" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</RelativeLayout>

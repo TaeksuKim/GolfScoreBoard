@@ -17,9 +17,14 @@ public class GameParser extends ResponseParser {
 
 	private static final String TAG = "GameParser";
 
+	private long tick;
 	private GameSetting gameSetting;
 	private PlayerSetting playerSetting;
 	private ArrayList<Result> results;
+
+	public long getTick() {
+		return tick;
+	}
 
 	public boolean parse(Context context, String contents)
 			throws ResponseException {
@@ -48,6 +53,14 @@ public class GameParser extends ResponseParser {
 							String errorMessage = xpp.getAttributeValue(null,
 									"message");
 							throw new ResponseException(errorMessage);
+						}
+
+						String tickString = xpp.getAttributeValue(null, "tick");
+						if (tickString != null && !tickString.isEmpty()) {
+							try {
+								tick = Long.parseLong(tickString);
+							} catch (Throwable t) {
+							}
 						}
 
 						gameSetting = new GameSetting();

@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
-import android.content.Context;
-
 public class SimpleHandicapCalculator implements HandicapCalculator {
 
 	private static final int AVG_COUNT_THRESHOLD = 7;
@@ -17,7 +15,7 @@ public class SimpleHandicapCalculator implements HandicapCalculator {
 	private HashMap<String, PlayerScore> playerScoreMap = null;
 
 	@Override
-	public String getName(Context context) {
+	public String getName(ResourceContainer context) {
 		return "기본 알고리즘";
 	}
 

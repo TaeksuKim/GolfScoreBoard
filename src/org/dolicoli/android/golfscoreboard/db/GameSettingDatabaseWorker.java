@@ -575,22 +575,24 @@ public class GameSettingDatabaseWorker extends AbstractDatabaseWorker {
 				player5HandicapUsed = cursor.getInt(offset++);
 				player6HandicapUsed = cursor.getInt(offset++);
 
-				Result result = new Result(holeNumber, parNumber);
-				result.setScore(0, player1Score);
-				result.setScore(1, player2Score);
-				result.setScore(2, player3Score);
-				result.setScore(3, player4Score);
-				result.setScore(4, player5Score);
-				result.setScore(5, player6Score);
-				result.setUsedHandicap(0, player1HandicapUsed);
-				result.setUsedHandicap(1, player2HandicapUsed);
-				result.setUsedHandicap(2, player3HandicapUsed);
-				result.setUsedHandicap(3, player4HandicapUsed);
-				result.setUsedHandicap(4, player5HandicapUsed);
-				result.setUsedHandicap(5, player6HandicapUsed);
-				result.calculate();
+				if (holeNumber > 0) {
+					Result result = new Result(holeNumber, parNumber);
+					result.setScore(0, player1Score);
+					result.setScore(1, player2Score);
+					result.setScore(2, player3Score);
+					result.setScore(3, player4Score);
+					result.setScore(4, player5Score);
+					result.setScore(5, player6Score);
+					result.setUsedHandicap(0, player1HandicapUsed);
+					result.setUsedHandicap(1, player2HandicapUsed);
+					result.setUsedHandicap(2, player3HandicapUsed);
+					result.setUsedHandicap(3, player4HandicapUsed);
+					result.setUsedHandicap(4, player5HandicapUsed);
+					result.setUsedHandicap(5, player6HandicapUsed);
+					result.calculate();
 
-				results.add(result);
+					results.add(result);
+				}
 
 				cursor.moveToNext();
 			}

@@ -12,13 +12,16 @@ import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
 import org.dolicoli.android.golfscoreboard.db.DownloadTickDatabaseWorker;
+import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.HistoryGameSettingDatabaseWorker;
+import org.dolicoli.android.golfscoreboard.db.PlayerSettingDatabaseWorker;
+import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.net.HistoryListParser;
 import org.dolicoli.android.golfscoreboard.net.HistoryListParser.History;
 import org.dolicoli.android.golfscoreboard.net.HttpScraper;
 import org.dolicoli.android.golfscoreboard.net.ResponseException;
-import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask.ReceiveProgress;
-import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask.ReceiveResult;
+import org.dolicoli.android.golfscoreboard.tasks.ImportAllTask.ReceiveProgress;
+import org.dolicoli.android.golfscoreboard.tasks.ImportAllTask.ReceiveResult;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil.DateRange;
 
@@ -27,10 +30,10 @@ import android.os.AsyncTask;
 import android.text.format.DateUtils;
 import android.util.Log;
 
-public class ThreeMonthsGameReceiveTask extends
+public class ImportAllTask extends
 		AsyncTask<Void, ReceiveProgress, ReceiveResult> {
 
-	private static final String TAG = "ThreeMonthsGameReceiveTask";
+	private static final String TAG = "ImportAllTask";
 
 	public static final int CODE_OK = 100;
 	public static final int CODE_CANCEL = 101;
@@ -43,7 +46,7 @@ public class ThreeMonthsGameReceiveTask extends
 	private String host;
 	private boolean running;
 
-	public ThreeMonthsGameReceiveTask(Context context, TaskListener listener) {
+	public ImportAllTask(Context context, TaskListener listener) {
 		this.context = context;
 		this.listener = listener;
 
@@ -59,7 +62,7 @@ public class ThreeMonthsGameReceiveTask extends
 			return;
 
 		if (listener != null) {
-			listener.onThreeMonthsGameReceiveProgressUpdate(values[0]);
+			listener.onImportAllProgressUpdate(values[0]);
 		}
 	}
 
@@ -68,7 +71,7 @@ public class ThreeMonthsGameReceiveTask extends
 
 		running = true;
 		if (listener != null) {
-			listener.onThreeMonthsGameReceiveStart();
+			listener.onImportAllStart();
 		}
 	}
 
@@ -78,7 +81,7 @@ public class ThreeMonthsGameReceiveTask extends
 
 		running = false;
 		if (listener != null) {
-			listener.onThreeMonthsGameReceiveFinished(result);
+			listener.onImportAllFinished(result);
 		}
 	}
 
@@ -127,10 +130,6 @@ public class ThreeMonthsGameReceiveTask extends
 				return new ReceiveResult(true, CODE_CANCEL);
 			}
 
-			DownloadTickDatabaseWorker tickWorker = new DownloadTickDatabaseWorker(
-					context);
-			tickWorker.updateTick(parser.getTick());
-
 			publishProgress(new ReceiveProgress(
 					0,
 					0,
@@ -140,6 +139,10 @@ public class ThreeMonthsGameReceiveTask extends
 			if (isCancelled()) {
 				return new ReceiveResult(true, CODE_CANCEL);
 			}
+
+			DownloadTickDatabaseWorker tickWorker = new DownloadTickDatabaseWorker(
+					context);
+			tickWorker.updateTick(parser.getTick());
 
 			int totalSize = historyList.size();
 			int index = 0;
@@ -174,7 +177,51 @@ public class ThreeMonthsGameReceiveTask extends
 				historyWorker.addCurrentHistory(true, gameSetting,
 						playerSetting, results);
 			}
-			return new ReceiveResult();
+
+			if (totalSize > 0) {
+				History lastHistory = historyList.get(0);
+
+				GameSettingDatabaseWorker gameSettingWorker = new GameSettingDatabaseWorker(
+						context);
+				gameSettingWorker.updateGameSetting(lastHistory
+						.getGameSetting());
+				if (isCancelled()) {
+					return new ReceiveResult(true, CODE_CANCEL);
+				}
+
+				publishProgress(new ReceiveProgress(7, 10,
+						context.getString(R.string.task_gamereceive_saving)));
+
+				PlayerSettingDatabaseWorker playerSettingWorker = new PlayerSettingDatabaseWorker(
+						context);
+				playerSettingWorker.updatePlayerSetting(lastHistory
+						.getPlayerSetting());
+				if (isCancelled()) {
+					return new ReceiveResult(true, CODE_CANCEL);
+				}
+
+				publishProgress(new ReceiveProgress(8, 10,
+						context.getString(R.string.task_gamereceive_saving)));
+
+				ResultDatabaseWorker resultWorker = new ResultDatabaseWorker(
+						context);
+				resultWorker.cleanUpAllData();
+				if (isCancelled()) {
+					return new ReceiveResult(true, CODE_CANCEL);
+				}
+
+				List<Result> results = lastHistory.getResults();
+				for (Result result : results) {
+					resultWorker.updateResult(result);
+					if (isCancelled()) {
+						return new ReceiveResult(true, CODE_CANCEL);
+					}
+				}
+
+				publishProgress(new ReceiveProgress(9, 10,
+						context.getString(R.string.task_gamereceive_saving)));
+			}
+			return null;
 		} catch (ResponseException e) {
 			return new ReceiveResult(false, CODE_CONNECTION_ERROR);
 		}
@@ -185,11 +232,11 @@ public class ThreeMonthsGameReceiveTask extends
 	}
 
 	public static interface TaskListener {
-		void onThreeMonthsGameReceiveStart();
+		void onImportAllStart();
 
-		void onThreeMonthsGameReceiveProgressUpdate(ReceiveProgress progress);
+		void onImportAllProgressUpdate(ReceiveProgress progress);
 
-		void onThreeMonthsGameReceiveFinished(ReceiveResult result);
+		void onImportAllFinished(ReceiveResult result);
 	}
 
 	public static class ReceiveProgress {

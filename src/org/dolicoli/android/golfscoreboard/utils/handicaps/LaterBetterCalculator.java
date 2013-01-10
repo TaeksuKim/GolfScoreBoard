@@ -3,8 +3,6 @@ package org.dolicoli.android.golfscoreboard.utils.handicaps;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.content.Context;
-
 public class LaterBetterCalculator implements HandicapCalculator {
 
 	private static final int AVG_COUNT_THRESHOLD = 6;
@@ -16,7 +14,7 @@ public class LaterBetterCalculator implements HandicapCalculator {
 	private HashMap<String, PlayerScore> playerScoreMap;
 
 	@Override
-	public String getName(Context context) {
+	public String getName(ResourceContainer context) {
 		return "최근 경기 먼저 알고리즘";
 	}
 
@@ -130,17 +128,16 @@ public class LaterBetterCalculator implements HandicapCalculator {
 		}
 
 		public void increaseScore(int score) {
-			int count = scores.size();
-			if (count < 1) {
+			if (gameCount < 1) {
 				scores.add(score);
 				scores.add(score);
 				scores.add(score);
 				scores.add(score);
-			} else if (count < 3) {
+			} else if (gameCount < 3) {
 				scores.add(score);
 				scores.add(score);
 				scores.add(score);
-			} else if (count < 5) {
+			} else if (gameCount < 5) {
 				scores.add(score);
 				scores.add(score);
 			} else {

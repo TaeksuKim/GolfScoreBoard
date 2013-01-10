@@ -14,6 +14,7 @@ import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameHoleResultFr
 import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameSummaryFragment;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ActionBar.OnNavigationListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -154,7 +155,7 @@ public class OneGameActivity extends FragmentActivity implements
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
-			setResult(0);
+			setResult(Activity.RESULT_CANCELED);
 			finish();
 			return true;
 		}

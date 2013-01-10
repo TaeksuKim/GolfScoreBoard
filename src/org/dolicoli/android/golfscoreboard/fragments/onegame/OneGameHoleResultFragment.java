@@ -41,6 +41,8 @@ public class OneGameHoleResultFragment extends ListFragment implements
 		CurrentGameQueryTask.TaskListener,
 		HistoryGameSettingWithResultQueryTask.TaskListener {
 
+	private static final int REQ_MODIFY_RESULT = 0x0001;
+
 	private View gameSettingView;
 	private TextView currentHoleTextView, finalHoleTextView;
 	private TextView sumOfHoleFeeTextView, totalHoleFeeTextView;
@@ -238,6 +240,16 @@ public class OneGameHoleResultFragment extends ListFragment implements
 	}
 
 	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		super.onActivityResult(requestCode, resultCode, intent);
+
+		if (requestCode == REQ_MODIFY_RESULT
+				&& resultCode == Activity.RESULT_OK) {
+			((MainFragmentContainer) getActivity()).reload(false);
+		}
+	}
+
+	@Override
 	public void onCurrentGameQueryStarted() {
 	}
 
@@ -350,7 +362,7 @@ public class OneGameHoleResultFragment extends ListFragment implements
 		Intent intent = new Intent(getActivity(), ModifyResultActivity.class);
 		intent.putExtra(ModifyResultActivity.IK_HOLE_NUMBER,
 				holeResult.holeNumber);
-		startActivity(intent);
+		startActivityForResult(intent, REQ_MODIFY_RESULT);
 	}
 
 	private void deleteResult(final HoleResult holeResult) {

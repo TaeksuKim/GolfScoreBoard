@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.dolicoli.android.golfscoreboard"
     android:installLocation="auto"
-    android:versionCode="26"
-    android:versionName="1.1.10" >
+    android:versionCode="28"
+    android:versionName="1.1.12" >
 
     <uses-sdk
         android:minSdkVersion="15"
@@ -29,6 +29,11 @@
         </activity>
 
         <!-- Current Game -->
+        <activity
+            android:name=".CurrentGameActivity"
+            android:label="@string/title_activity_current_game"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".CurrentGameNewGameSettingActivity"
             android:label="@string/title_activity_current_game_new_game"

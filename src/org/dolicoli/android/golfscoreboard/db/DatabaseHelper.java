@@ -10,7 +10,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TAG = "org.dolicoli.android.golfscoreboard.db.DatabaseHelper";
 
 	private static final String DATABASE_NAME = "datum.db";
-	private static final int DATABASE_VERSION = 8;
+	private static final int DATABASE_VERSION = 9;
 
 	private Context context;
 
@@ -30,6 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		HistoryGameSettingDatabaseWorker.createTable(db);
 		HistoryPlayerSettingDatabaseWorker.createTable(db);
 		HistoryResultDatabaseWorker.createTable(db);
+		DownloadTickDatabaseWorker.createTable(db);
 	}
 
 	@Override
@@ -49,6 +50,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		HistoryPlayerSettingDatabaseWorker.upgradeTable(db, oldVersion,
 				newVersion, context);
 		HistoryResultDatabaseWorker.upgradeTable(db, oldVersion, newVersion);
+		DownloadTickDatabaseWorker.upgradeTable(db, oldVersion, newVersion,
+				context);
 	}
 
 	public static void cleanUpAllData(Context context) {
@@ -95,6 +98,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		{
 			HistoryResultDatabaseWorker worker = new HistoryResultDatabaseWorker(
+					context);
+			worker.open();
+			worker.cleanUpAllData();
+			worker.close();
+		}
+		{
+			DownloadTickDatabaseWorker worker = new DownloadTickDatabaseWorker(
 					context);
 			worker.open();
 			worker.cleanUpAllData();

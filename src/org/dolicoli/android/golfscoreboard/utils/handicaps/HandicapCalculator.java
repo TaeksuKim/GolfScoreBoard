@@ -2,11 +2,9 @@ package org.dolicoli.android.golfscoreboard.utils.handicaps;
 
 import java.util.Date;
 
-import android.content.Context;
-
 public interface HandicapCalculator {
 
-	String getName(Context context);
+	String getName(ResourceContainer context);
 
 	void calculate(String[] playerNames, Iterable<GameResultItem> items);
 
@@ -30,5 +28,9 @@ public interface HandicapCalculator {
 		int getEighteenHoleFee(String playerName);
 
 		Date getDate();
+	}
+
+	public static interface ResourceContainer {
+		String getString(int resourceId);
 	}
 }

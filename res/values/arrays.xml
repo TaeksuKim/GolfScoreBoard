@@ -7,5 +7,6 @@
 		<item>@string/default_cached_player_name4</item>
 		<item>@string/default_cached_player_name5</item>
 		<item>@string/default_cached_player_name6</item>
+		<item>@string/default_cached_player_name7</item>
 	</string-array>
 </resources>
