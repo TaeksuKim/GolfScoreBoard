@@ -300,7 +300,6 @@ public class ModifyPlayerSettingFragment extends Fragment implements
 	}
 
 	private static class PlayerNameSpinnerAdapter extends ArrayAdapter<String> {
-
 		public PlayerNameSpinnerAdapter(Context context) {
 			super(context, android.R.layout.simple_list_item_1);
 		}

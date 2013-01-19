@@ -1,6 +1,6 @@
 package org.dolicoli.android.golfscoreboard.db;
 
-import org.dolicoli.android.golfscoreboard.data.UsedHandicap;
+import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
 
 import android.content.ContentValues;
@@ -120,7 +120,7 @@ public class ResultDatabaseWorker extends AbstractDatabaseWorker {
 		}
 	}
 
-	public UsedHandicap getUsedHandicaps() {
+	public int[] getUsedHandicaps() {
 		Log.d(TAG, "getUsedHandicaps()");
 		open();
 		Cursor cursor = null;
@@ -137,7 +137,7 @@ public class ResultDatabaseWorker extends AbstractDatabaseWorker {
 			if (cursor != null)
 				cursor.moveToFirst();
 
-			UsedHandicap usedHandicap = new UsedHandicap();
+			int[] usedHandicaps = new int[Constants.MAX_PLAYER_COUNT];
 			if (!cursor.isAfterLast()) {
 				int offset = 0;
 
@@ -148,12 +148,12 @@ public class ResultDatabaseWorker extends AbstractDatabaseWorker {
 				int used5 = cursor.getInt(offset++);
 				int used6 = cursor.getInt(offset++);
 
-				usedHandicap.setUsedHandicap(0, used1);
-				usedHandicap.setUsedHandicap(1, used2);
-				usedHandicap.setUsedHandicap(2, used3);
-				usedHandicap.setUsedHandicap(3, used4);
-				usedHandicap.setUsedHandicap(4, used5);
-				usedHandicap.setUsedHandicap(5, used6);
+				usedHandicaps[0] = used1;
+				usedHandicaps[1] = used2;
+				usedHandicaps[2] = used3;
+				usedHandicaps[3] = used4;
+				usedHandicaps[4] = used5;
+				usedHandicaps[5] = used6;
 
 				// Log.d(TAG, "1: " + used1 + ", 2:" + used2 + ", 3:" + used3
 				// + ", 4:" + used4 + ", 5:" + used5 + ", 6:" + used6);
@@ -161,7 +161,7 @@ public class ResultDatabaseWorker extends AbstractDatabaseWorker {
 				cursor.moveToNext();
 			}
 
-			return usedHandicap;
+			return usedHandicaps;
 		} finally {
 			if (cursor != null) {
 				cursor.close();
@@ -170,8 +170,8 @@ public class ResultDatabaseWorker extends AbstractDatabaseWorker {
 		}
 	}
 
-	public UsedHandicap getUsedHandicaps(int exceptHoleNumber) {
-		Log.d(TAG, "getUsedHandicaps()");
+	public int[] getUsedHandicaps(int exceptHoleNumber) {
+		Log.d(TAG, "getUsedHandicaps(" + exceptHoleNumber + ")");
 		open();
 		Cursor cursor = null;
 		try {
@@ -189,7 +189,7 @@ public class ResultDatabaseWorker extends AbstractDatabaseWorker {
 			if (cursor != null)
 				cursor.moveToFirst();
 
-			UsedHandicap usedHandicap = new UsedHandicap();
+			int[] usedHandicaps = new int[Constants.MAX_PLAYER_COUNT];
 			if (!cursor.isAfterLast()) {
 				int offset = 0;
 
@@ -200,12 +200,12 @@ public class ResultDatabaseWorker extends AbstractDatabaseWorker {
 				int used5 = cursor.getInt(offset++);
 				int used6 = cursor.getInt(offset++);
 
-				usedHandicap.setUsedHandicap(0, used1);
-				usedHandicap.setUsedHandicap(1, used2);
-				usedHandicap.setUsedHandicap(2, used3);
-				usedHandicap.setUsedHandicap(3, used4);
-				usedHandicap.setUsedHandicap(4, used5);
-				usedHandicap.setUsedHandicap(5, used6);
+				usedHandicaps[0] = used1;
+				usedHandicaps[1] = used2;
+				usedHandicaps[2] = used3;
+				usedHandicaps[3] = used4;
+				usedHandicaps[4] = used5;
+				usedHandicaps[5] = used6;
 
 				// Log.d(TAG, "1: " + used1 + ", 2:" + used2 + ", 3:" + used3
 				// + ", 4:" + used4 + ", 5:" + used5 + ", 6:" + used6);
@@ -213,7 +213,7 @@ public class ResultDatabaseWorker extends AbstractDatabaseWorker {
 				cursor.moveToNext();
 			}
 
-			return usedHandicap;
+			return usedHandicaps;
 		} finally {
 			if (cursor != null) {
 				cursor.close();

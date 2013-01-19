@@ -1,4 +1,4 @@
-package org.dolicoli.android.golfscoreboard.fragments.history;
+package org.dolicoli.android.golfscoreboard.fragments.main;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -8,8 +8,7 @@ import java.util.HashMap;
 import org.dolicoli.android.golfscoreboard.GolfScoreBoardApplication;
 import org.dolicoli.android.golfscoreboard.PersonalStatisticsActivity;
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.data.GameAndResult;
-import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
+import org.dolicoli.android.golfscoreboard.data.OneGame;
 import org.dolicoli.android.golfscoreboard.utils.PlayerUIUtil;
 import org.dolicoli.android.golfscoreboard.utils.TagProgressBar;
 import org.dolicoli.android.golfscoreboard.utils.UIUtil;
@@ -28,14 +27,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class NewPlayerRankingFragment extends NewHistoryItemListFragment {
+public class PlayerRankingFragment extends HistoryItemListFragment {
 
 	private PlayerInfoListAdapter adapter;
 
 	@Override
 	protected View inflate(LayoutInflater inflater) {
-		return inflater.inflate(R.layout.new_history_player_ranking_fragment,
-				null);
+		return inflater.inflate(R.layout.main_player_ranking_fragment, null);
 	}
 
 	@Override
@@ -44,7 +42,7 @@ public class NewPlayerRankingFragment extends NewHistoryItemListFragment {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 
 		adapter = new PlayerInfoListAdapter(getActivity(),
-				R.layout.new_history_player_ranking_list_item);
+				R.layout.main_player_ranking_list_item);
 		adapter.setNotifyOnChange(false);
 		setListAdapter(adapter);
 
@@ -67,7 +65,7 @@ public class NewPlayerRankingFragment extends NewHistoryItemListFragment {
 	}
 
 	@Override
-	protected void reload() {
+	public void reload(boolean clean) {
 		if (getActivity() == null)
 			return;
 
@@ -82,14 +80,11 @@ public class NewPlayerRankingFragment extends NewHistoryItemListFragment {
 			HashMap<String, PlayerInfo> playerInfoMap = new HashMap<String, PlayerInfo>();
 			if (getCurrentMode() == GolfScoreBoardApplication.MODE_RECENT_FIVE_GAMES) {
 				HashMap<String, Integer> playerGameCountMap = new HashMap<String, Integer>();
-				for (GameAndResult gameAndResult : resultList) {
+				for (OneGame gameAndResult : resultList) {
 					int holeCount = gameAndResult.getHoleCount();
-					int playerCount = gameAndResult.getGameSetting()
-							.getPlayerCount();
-					PlayerSetting playerSettings = gameAndResult
-							.getPlayerSetting();
+					int playerCount = gameAndResult.getPlayerCount();
 					for (int playerId = 0; playerId < playerCount; playerId++) {
-						String playerName = playerSettings
+						String playerName = gameAndResult
 								.getPlayerName(playerId);
 						playerName = PlayerUIUtil.toCanonicalName(playerName);
 						if (playerName.startsWith("Player"))
@@ -110,7 +105,7 @@ public class NewPlayerRankingFragment extends NewHistoryItemListFragment {
 						}
 						PlayerInfo playerInfo = playerInfoMap.get(playerName);
 						int originalScore = gameAndResult.getPlayerScore(
-								playerName).getOriginalScore();
+								playerId).getOriginalScore();
 						if (holeCount < 18) {
 							playerInfo.increaseScore(originalScore * 2);
 						} else {
@@ -121,14 +116,11 @@ public class NewPlayerRankingFragment extends NewHistoryItemListFragment {
 					}
 				}
 			} else {
-				for (GameAndResult gameAndResult : resultList) {
+				for (OneGame gameAndResult : resultList) {
 					int holeCount = gameAndResult.getHoleCount();
-					int playerCount = gameAndResult.getGameSetting()
-							.getPlayerCount();
-					PlayerSetting playerSettings = gameAndResult
-							.getPlayerSetting();
+					int playerCount = gameAndResult.getPlayerCount();
 					for (int playerId = 0; playerId < playerCount; playerId++) {
-						String playerName = playerSettings
+						String playerName = gameAndResult
 								.getPlayerName(playerId);
 						playerName = PlayerUIUtil.toCanonicalName(playerName);
 						if (playerName.startsWith("Player"))
@@ -140,7 +132,7 @@ public class NewPlayerRankingFragment extends NewHistoryItemListFragment {
 						}
 						PlayerInfo playerInfo = playerInfoMap.get(playerName);
 						int originalScore = gameAndResult.getPlayerScore(
-								playerName).getOriginalScore();
+								playerId).getOriginalScore();
 						if (holeCount < 18) {
 							playerInfo.increaseScore(originalScore * 2);
 						} else {
@@ -173,7 +165,7 @@ public class NewPlayerRankingFragment extends NewHistoryItemListFragment {
 		TextView playerNameTextView, attendCountTextView;
 	}
 
-	private class PlayerInfoListAdapter extends ArrayAdapter<PlayerInfo>
+	private static class PlayerInfoListAdapter extends ArrayAdapter<PlayerInfo>
 			implements OnClickListener {
 
 		private ScoreListViewHolder holder;
@@ -192,7 +184,7 @@ public class NewPlayerRankingFragment extends NewHistoryItemListFragment {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View v = convertView;
 			if (v == null) {
-				LayoutInflater vi = (LayoutInflater) getActivity()
+				LayoutInflater vi = (LayoutInflater) getContext()
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = vi.inflate(textViewResourceId, null);
 				holder = new ScoreListViewHolder();
@@ -241,7 +233,7 @@ public class NewPlayerRankingFragment extends NewHistoryItemListFragment {
 			DecimalFormat overParScoreCountFormat = new DecimalFormat("+0.00");
 			DecimalFormat underParScoreCountFormat = new DecimalFormat("0.00");
 
-			String attendText = UIUtil.formatGameCount(getActivity(),
+			String attendText = UIUtil.formatGameCount(getContext(),
 					playerInfo.attend);
 			if (playerInfo.avgOfScore > 0) {
 				holder.attendCountTextView.setText(overParScoreCountFormat

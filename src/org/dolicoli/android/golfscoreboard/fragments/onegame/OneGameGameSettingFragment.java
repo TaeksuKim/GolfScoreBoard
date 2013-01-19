@@ -3,7 +3,7 @@ package org.dolicoli.android.golfscoreboard.fragments.onegame;
 import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.OneGameActivity;
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
+import org.dolicoli.android.golfscoreboard.data.OneGame;
 import org.dolicoli.android.golfscoreboard.tasks.HistoryGameSettingQueryTask;
 import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
@@ -148,7 +148,7 @@ public class OneGameGameSettingFragment extends Fragment implements
 	}
 
 	@Override
-	public void onGameQueryFinished(SingleGameResult gameResult) {
+	public void onGameQueryFinished(OneGame gameResult) {
 		FragmentActivity activity = getActivity();
 		if (activity == null)
 			return;

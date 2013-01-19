@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/ImportThisGame"
+        android:alphabeticShortcut="g"
+        android:icon="?refreshMenuIcon"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_import_this_game"/>
+    <item
         android:id="@+id/ImportThreeMonth"
         android:alphabeticShortcut="t"
         android:icon="?downloadMenuIcon"
         android:showAsAction="ifRoom|withText"
         android:title="@string/menu_import_three_month"/>
-    <item
-        android:id="@+id/Reset"
-        android:alphabeticShortcut="r"
-        android:icon="?deleteMenuIcon"
-        android:showAsAction="ifRoom|withText"
-        android:title="@string/menu_reset"/>
     <item
         android:id="@+id/Settings"
         android:alphabeticShortcut="s"

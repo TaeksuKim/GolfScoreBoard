@@ -7,12 +7,13 @@ import java.util.Comparator;
 import java.util.HashSet;
 
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.data.GameAndResult;
+import org.dolicoli.android.golfscoreboard.data.OneGame;
 import org.dolicoli.android.golfscoreboard.tasks.GameAndResultTask;
 import org.dolicoli.android.golfscoreboard.tasks.GameAndResultTask.GameAndResultTaskListener;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil.DateRange;
 import org.dolicoli.android.golfscoreboard.utils.PlayerUIUtil;
+import org.dolicoli.android.golfscoreboard.utils.Reloadable;
 import org.dolicoli.android.golfscoreboard.utils.handicaps.Ecco1Calculator;
 import org.dolicoli.android.golfscoreboard.utils.handicaps.HandicapCalculator;
 import org.dolicoli.android.golfscoreboard.utils.handicaps.HandicapCalculator.GameResultItem;
@@ -20,6 +21,7 @@ import org.dolicoli.android.golfscoreboard.utils.handicaps.HandicapCalculator.Re
 import org.dolicoli.android.golfscoreboard.utils.handicaps.LaterBetterCalculator;
 import org.dolicoli.android.golfscoreboard.utils.handicaps.MoyaCalculator;
 import org.dolicoli.android.golfscoreboard.utils.handicaps.SimpleHandicapCalculator;
+import org.dolicoli.android.golfscoreboard.utils.handicaps.ThreeMonthsHandicapCalculator;
 
 import android.app.ActionBar;
 import android.content.Context;
@@ -27,6 +29,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -41,12 +46,12 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 public class HandicapSimulatorFragment extends ListFragment implements
-		GameAndResultTaskListener, OnItemSelectedListener {
+		Reloadable, GameAndResultTaskListener, OnItemSelectedListener {
 
 	private ProgressBar progressBar;
 	private Spinner handicapCalculatorSpinner;
 
-	private ArrayList<GameAndResult> gameAndResults;
+	private ArrayList<OneGame> gameAndResults;
 	private PlayerHandicapListAdapter adapter;
 	private HandicapCalculator[] calculators;
 	private String[] canonicalPlayerNames;
@@ -73,7 +78,8 @@ public class HandicapSimulatorFragment extends ListFragment implements
 		};
 		calculators = new HandicapCalculator[] {
 				new SimpleHandicapCalculator(), new Ecco1Calculator(),
-				new LaterBetterCalculator(), new MoyaCalculator() };
+				new LaterBetterCalculator(), new MoyaCalculator(),
+				new ThreeMonthsHandicapCalculator() };
 		String[] calculatorNames = new String[calculators.length];
 		for (int i = 0; i < calculators.length; i++) {
 			calculatorNames[i] = calculators[i].getName(resourceContainer);
@@ -99,7 +105,9 @@ public class HandicapSimulatorFragment extends ListFragment implements
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		gameAndResults = new ArrayList<GameAndResult>();
+		setHasOptionsMenu(true);
+		
+		gameAndResults = new ArrayList<OneGame>();
 		canonicalPlayerNames = new String[0];
 
 		DateRange dateRange = DateRangeUtil.getDateRange(3);
@@ -107,9 +115,64 @@ public class HandicapSimulatorFragment extends ListFragment implements
 		task.execute(dateRange);
 	}
 
-	protected void reload() {
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.main_handicap_simulator, menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		FragmentActivity activity = getActivity();
+		if (activity == null) {
+			return false;
+		}
+
+		return activity.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void reload(boolean clean) {
 		if (getActivity() == null)
 			return;
+
+		if (canonicalPlayerNames == null || canonicalPlayerNames.length < 1)
+			return;
+
+		HandicapCalculator calculator = calculators[handicapCalculatorSpinner
+				.getSelectedItemPosition()];
+
+		ArrayList<GameResultItem> items = new ArrayList<GameResultItem>();
+		items.addAll(gameAndResults);
+		calculator.calculate(canonicalPlayerNames, items);
+
+		int playerCount = canonicalPlayerNames.length;
+		adapter.clear();
+		for (int i = 0; i < playerCount; i++) {
+			String playerName = canonicalPlayerNames[i];
+			int handicap = calculator.getHandicap(playerName);
+			if (handicap < 0)
+				handicap = 0;
+
+			int gameCount = calculator.getGameCount(playerName);
+			if (gameCount < 0)
+				gameCount = 0;
+
+			float avgScore = calculator.getAvgScore(playerName);
+			if (avgScore < 0F)
+				avgScore = 0F;
+
+			PlayerHandicapInfo info = new PlayerHandicapInfo(playerName,
+					gameCount, handicap, avgScore);
+			adapter.add(info);
+		}
+		adapter.sort(new Comparator<PlayerHandicapInfo>() {
+			@Override
+			public int compare(PlayerHandicapInfo lhs, PlayerHandicapInfo rhs) {
+				return lhs.compareTo(rhs);
+			}
+		});
+		adapter.notifyDataSetChanged();
 	}
 
 	private static class PlayerHandicapListViewHolder {
@@ -119,7 +182,7 @@ public class HandicapSimulatorFragment extends ListFragment implements
 				handicapTextView;
 	}
 
-	private class PlayerHandicapListAdapter extends
+	private static class PlayerHandicapListAdapter extends
 			ArrayAdapter<PlayerHandicapInfo> implements OnClickListener {
 
 		private PlayerHandicapListViewHolder holder;
@@ -137,7 +200,7 @@ public class HandicapSimulatorFragment extends ListFragment implements
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View v = convertView;
 			if (v == null) {
-				LayoutInflater vi = (LayoutInflater) getActivity()
+				LayoutInflater vi = (LayoutInflater) getContext()
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = vi.inflate(textViewResourceId, null);
 				holder = new PlayerHandicapListViewHolder();
@@ -239,10 +302,10 @@ public class HandicapSimulatorFragment extends ListFragment implements
 	}
 
 	@Override
-	public void onGameAndResultFinished(GameAndResult[] results) {
+	public void onGameAndResultFinished(OneGame[] results) {
 		gameAndResults.clear();
 		HashSet<String> playerNameSet = new HashSet<String>();
-		for (GameAndResult result : results) {
+		for (OneGame result : results) {
 			int playerCount = result.getPlayerCount();
 			for (int i = 0; i < playerCount; i++) {
 				playerNameSet.add(PlayerUIUtil.toCanonicalName(result
@@ -255,7 +318,7 @@ public class HandicapSimulatorFragment extends ListFragment implements
 		canonicalPlayerNames = new String[playerNameSet.size()];
 		playerNameSet.toArray(canonicalPlayerNames);
 
-		calculateHandicap();
+		reload(true);
 
 		if (progressBar != null) {
 			progressBar.setVisibility(View.GONE);
@@ -265,50 +328,10 @@ public class HandicapSimulatorFragment extends ListFragment implements
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
-		calculateHandicap();
+		reload(true);
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
-	}
-
-	private void calculateHandicap() {
-		if (canonicalPlayerNames == null || canonicalPlayerNames.length < 1)
-			return;
-
-		HandicapCalculator calculator = calculators[handicapCalculatorSpinner
-				.getSelectedItemPosition()];
-
-		ArrayList<GameResultItem> items = new ArrayList<GameResultItem>();
-		items.addAll(gameAndResults);
-		calculator.calculate(canonicalPlayerNames, items);
-
-		int playerCount = canonicalPlayerNames.length;
-		adapter.clear();
-		for (int i = 0; i < playerCount; i++) {
-			String playerName = canonicalPlayerNames[i];
-			int handicap = calculator.getHandicap(playerName);
-			if (handicap < 0)
-				handicap = 0;
-
-			int gameCount = calculator.getGameCount(playerName);
-			if (gameCount < 0)
-				gameCount = 0;
-
-			float avgScore = calculator.getAvgScore(playerName);
-			if (avgScore < 0F)
-				avgScore = 0F;
-
-			PlayerHandicapInfo info = new PlayerHandicapInfo(playerName,
-					gameCount, handicap, avgScore);
-			adapter.add(info);
-		}
-		adapter.sort(new Comparator<PlayerHandicapInfo>() {
-			@Override
-			public int compare(PlayerHandicapInfo lhs, PlayerHandicapInfo rhs) {
-				return lhs.compareTo(rhs);
-			}
-		});
-		adapter.notifyDataSetChanged();
 	}
 }

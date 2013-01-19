@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.dolicoli.android.golfscoreboard.Constants;
-import org.dolicoli.android.golfscoreboard.data.GameAndResult;
+import org.dolicoli.android.golfscoreboard.data.OneGame;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
@@ -302,7 +302,7 @@ public class HistoryGameSettingDatabaseWorker extends AbstractDatabaseWorker {
 
 	private void addHistory(GameSetting gameSetting,
 			PlayerSetting playerSetting, Iterable<Result> results) {
-		Log.d(TAG, "clearHistory()");
+		Log.d(TAG, "addHistory()");
 
 		open();
 
@@ -316,6 +316,12 @@ public class HistoryGameSettingDatabaseWorker extends AbstractDatabaseWorker {
 
 			HistoryPlayerSettingDatabaseWorker.updatePlayerSetting(mDb,
 					playDate, playerSetting);
+
+			int playerCount = gameSetting.getPlayerCount();
+			for (int i = 0; i < playerCount; i++) {
+				String playerName = playerSetting.getPlayerName(i);
+				PlayerCacheDatabaseWorker.putPlayer(mDb, playerName);
+			}
 
 			HistoryResultDatabaseWorker.deleteResult(mDb, playDate);
 			for (Result result : results) {
@@ -883,7 +889,7 @@ public class HistoryGameSettingDatabaseWorker extends AbstractDatabaseWorker {
 	}
 
 	public void getGameSettingsWithResult(long from, long to,
-			List<GameAndResult> gameAndResults) throws SQLException {
+			List<OneGame> gameAndResults) throws SQLException {
 		Log.d(TAG, "getGameSettingsWithResult()");
 
 		HashMap<String, Wrapper> map = new HashMap<String, Wrapper>();
@@ -1215,13 +1221,8 @@ public class HistoryGameSettingDatabaseWorker extends AbstractDatabaseWorker {
 			values.toArray(array);
 			Arrays.sort(array);
 			for (Wrapper w : array) {
-				// SingleGameResult r = new SingleGameResult();
-				// r.setGameSetting(w.gameSetting);
-				// r.setPlayerSetting(w.playerSetting);
-				// r.setResults(w.results);
-				// gameAndResults.add(r);
-				gameAndResults.add(new GameAndResult(w.gameSetting,
-						w.playerSetting, w.results));
+				gameAndResults.add(new OneGame(w.gameSetting, w.playerSetting,
+						w.results));
 			}
 		} finally {
 			if (cursor != null) {

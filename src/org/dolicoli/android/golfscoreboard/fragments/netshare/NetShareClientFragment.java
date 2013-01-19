@@ -364,7 +364,8 @@ public class NetShareClientFragment extends ListFragment implements
 		TextView date1TextView, date2TextView, playerTextView;
 	}
 
-	private class GameHistoryAdapter extends ArrayAdapter<GameHistoryListItem> {
+	private static class GameHistoryAdapter extends
+			ArrayAdapter<GameHistoryListItem> {
 
 		private NetShareDeviceListViewHolder holder;
 
@@ -376,7 +377,7 @@ public class NetShareClientFragment extends ListFragment implements
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View v = convertView;
 			if (v == null) {
-				LayoutInflater vi = (LayoutInflater) getActivity()
+				LayoutInflater vi = (LayoutInflater) getContext()
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = vi.inflate(R.layout.netshare_client_list_item, null);
 				holder = new NetShareDeviceListViewHolder();
@@ -402,12 +403,12 @@ public class NetShareClientFragment extends ListFragment implements
 			if (gameSetting == null)
 				return v;
 
-			String date1String = DateUtils.formatDateTime(getActivity(),
+			String date1String = DateUtils.formatDateTime(getContext(),
 					gameSetting.getDate().getTime(), DateUtils.FORMAT_SHOW_DATE
 							| DateUtils.FORMAT_SHOW_YEAR);
 			holder.date1TextView.setText(date1String);
 
-			String date2String = DateUtils.formatDateTime(getActivity(),
+			String date2String = DateUtils.formatDateTime(getContext(),
 					gameSetting.getDate().getTime(), DateUtils.FORMAT_SHOW_TIME
 							| DateUtils.FORMAT_ABBREV_WEEKDAY
 							| DateUtils.FORMAT_SHOW_WEEKDAY

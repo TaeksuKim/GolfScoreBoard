@@ -9,13 +9,14 @@ import org.dolicoli.android.golfscoreboard.data.settings.Result;
 import org.dolicoli.android.golfscoreboard.db.HistoryResultDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.fragments.DummySectionFragment;
 import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameActivityPage;
+import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameFragmentContainer;
 import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameGameSettingFragment;
 import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameHoleResultFragment;
 import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameSummaryFragment;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ActionBar.OnNavigationListener;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,7 +37,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class OneGameActivity extends FragmentActivity implements
-		OnNavigationListener, OnClickListener, OnPageChangeListener {
+		OneGameFragmentContainer, OnNavigationListener, OnClickListener,
+		OnPageChangeListener {
 
 	public static final String IK_PLAY_DATE = "PLAY_DATE";
 	public static final String IK_DATE = "DATE";
@@ -303,5 +305,13 @@ public class OneGameActivity extends FragmentActivity implements
 
 			return "Hole " + holeNumber;
 		}
+	}
+
+	@Override
+	public void showModifyGameSettingActivity() {
+	}
+
+	@Override
+	public void reload(boolean clean) {
 	}
 }

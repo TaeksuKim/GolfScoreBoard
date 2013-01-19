@@ -2,7 +2,6 @@ package org.dolicoli.android.golfscoreboard.fragments.currentgame;
 
 import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.data.UsedHandicap;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
@@ -40,7 +39,7 @@ public class ModifyResultFragment extends Fragment implements OnClickListener {
 	private int playerCount;
 
 	private Result oldResult;
-	private UsedHandicap usedHandicaps;
+	private int[] usedHandicaps;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -471,7 +470,7 @@ public class ModifyResultFragment extends Fragment implements OnClickListener {
 
 	private void fillHandicapSpinner(PlayerSetting playerSetting, int playerId) {
 		int remainedHandicap = playerSetting.getHandicap(playerId)
-				- usedHandicaps.getUsedHandicap(playerId);
+				- usedHandicaps[playerId];
 
 		HandicapSpinnerAdapter adapter = playerHandicapSpinnerAdapters[playerId];
 		adapter.clear();
@@ -488,7 +487,6 @@ public class ModifyResultFragment extends Fragment implements OnClickListener {
 
 	private static class ScoreSpinnerAdapter extends
 			ArrayAdapter<ScoreSpinnerItem> {
-
 		public ScoreSpinnerAdapter(Context context, int textViewResourceId) {
 			super(context, textViewResourceId);
 		}
@@ -511,7 +509,6 @@ public class ModifyResultFragment extends Fragment implements OnClickListener {
 
 	private static class HandicapSpinnerAdapter extends
 			ArrayAdapter<HandicapSpinnerItem> {
-
 		public HandicapSpinnerAdapter(Context context, int textViewResourceId) {
 			super(context, textViewResourceId);
 		}

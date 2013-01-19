@@ -210,6 +210,9 @@ public class ImportAllTask extends
 					return new ReceiveResult(true, CODE_CANCEL);
 				}
 
+				publishProgress(new ReceiveProgress(9, 10,
+						context.getString(R.string.task_gamereceive_saving)));
+
 				List<Result> results = lastHistory.getResults();
 				for (Result result : results) {
 					resultWorker.updateResult(result);
@@ -217,11 +220,11 @@ public class ImportAllTask extends
 						return new ReceiveResult(true, CODE_CANCEL);
 					}
 				}
-
-				publishProgress(new ReceiveProgress(9, 10,
-						context.getString(R.string.task_gamereceive_saving)));
 			}
-			return null;
+
+			publishProgress(new ReceiveProgress(10, 10,
+					context.getString(R.string.task_gamereceive_finish)));
+			return new ReceiveResult(true, CODE_OK);
 		} catch (ResponseException e) {
 			return new ReceiveResult(false, CODE_CONNECTION_ERROR);
 		}

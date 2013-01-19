@@ -2,10 +2,10 @@ package org.dolicoli.android.golfscoreboard.fragments;
 
 import org.dolicoli.android.golfscoreboard.MainActivity;
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.fragments.history.NewGameResultHistoryFragment;
-import org.dolicoli.android.golfscoreboard.fragments.history.NewPlayerRankingFragment;
 import org.dolicoli.android.golfscoreboard.fragments.main.CurrentGameFragment;
 import org.dolicoli.android.golfscoreboard.fragments.main.HandicapSimulatorFragment;
+import org.dolicoli.android.golfscoreboard.fragments.main.GameResultHistoryFragment;
+import org.dolicoli.android.golfscoreboard.fragments.main.PlayerRankingFragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MenuFragment extends ListFragment {
 	public MenuFragment() {
@@ -31,9 +33,15 @@ public class MenuFragment extends ListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		MenuAdapter colorAdapter = new MenuAdapter(getActivity(),
-				android.R.layout.simple_list_item_1, android.R.id.text1,
-				new String[] { "오늘 게임", "지난 게임", "개인 기록", "핸디캡 계산" });
+		MenuAdapter colorAdapter = new MenuAdapter(
+				getActivity(),
+				R.layout.menu_list_item,
+				new MenuBarItem[] {
+						new MenuBarItem(R.drawable.ic_menubar_current, "오늘 게임"),
+						new MenuBarItem(R.drawable.ic_menubar_history, "지난 게임"),
+						new MenuBarItem(R.drawable.ic_menubar_player, "개인 기록"),
+						new MenuBarItem(R.drawable.ic_menubar_handicap,
+								"핸디캡 계산") });
 		setListAdapter(colorAdapter);
 	}
 
@@ -45,10 +53,10 @@ public class MenuFragment extends ListFragment {
 			newContent = new CurrentGameFragment();
 			break;
 		case 1:
-			newContent = new NewGameResultHistoryFragment();
+			newContent = new GameResultHistoryFragment();
 			break;
 		case 2:
-			newContent = new NewPlayerRankingFragment();
+			newContent = new PlayerRankingFragment();
 			break;
 		case 3:
 			newContent = new HandicapSimulatorFragment();
@@ -68,13 +76,67 @@ public class MenuFragment extends ListFragment {
 		}
 	}
 
-	private static class MenuAdapter extends ArrayAdapter<String> {
+	private static class MenuBarItem {
+		int icon;
+		String text;
+
+		public MenuBarItem(int icon, String text) {
+			this.icon = icon;
+			this.text = text;
+		}
+	}
+
+	private static class MenuViewHolder {
+		ImageView imageView;
+		TextView titleTextView;
+	}
+
+	private static class MenuAdapter extends ArrayAdapter<MenuBarItem> {
 
 		private static int TYPE_SECTION_HEADER = 1;
 
-		public MenuAdapter(Context context, int resource,
-				int textViewResourceId, String[] objects) {
-			super(context, resource, textViewResourceId, objects);
+		private int textViewResourceId = 0;
+		private MenuViewHolder holder;
+
+		public MenuAdapter(Context context, int textViewResourceId,
+				MenuBarItem[] objects) {
+			super(context, textViewResourceId, objects);
+			this.textViewResourceId = textViewResourceId;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View v = convertView;
+			if (v == null) {
+				LayoutInflater vi = (LayoutInflater) getContext()
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				v = vi.inflate(textViewResourceId, null);
+				holder = new MenuViewHolder();
+
+				holder.imageView = (ImageView) v.findViewById(R.id.ImageView);
+				holder.titleTextView = (TextView) v
+						.findViewById(R.id.TitleTextView);
+
+				v.setTag(holder);
+			} else {
+				holder = (MenuViewHolder) v.getTag();
+			}
+
+			int count = getCount();
+			if (count < 1)
+				return v;
+
+			if (position < 0 || position > count - 1)
+				return v;
+
+			MenuBarItem menuBarItem = getItem(position);
+			if (menuBarItem == null)
+				return v;
+
+			holder.imageView.setImageResource(menuBarItem.icon);
+			holder.titleTextView.setText(menuBarItem.text);
+
+			return v;
 		}
 
 		@Override

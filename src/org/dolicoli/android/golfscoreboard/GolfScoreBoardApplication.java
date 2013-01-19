@@ -1,13 +1,14 @@
 package org.dolicoli.android.golfscoreboard;
 
+import org.dolicoli.android.golfscoreboard.data.DateItem;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil.DateRange;
 
 import android.app.Application;
-import android.util.Log;
 
 public class GolfScoreBoardApplication extends Application {
 
+	@SuppressWarnings("unused")
 	private static final String TAG = "GolfScoreBoardApplication";
 
 	public static final int MODE_RECENT_FIVE_GAMES = 0;
@@ -18,6 +19,7 @@ public class GolfScoreBoardApplication extends Application {
 	private DateItem[] navigationItems;
 	private String webHost;
 	private int navigationMode;
+	private boolean downloadData;
 
 	@Override
 	public void onCreate() {
@@ -26,8 +28,6 @@ public class GolfScoreBoardApplication extends Application {
 		loadRangeItems();
 		loadCustomProperties();
 		navigationMode = MODE_RECENT_FIVE_GAMES;
-
-		Log.d(TAG, "WEB HOST: " + webHost);
 	}
 
 	public DateItem[] getNavigationItems() {
@@ -44,6 +44,14 @@ public class GolfScoreBoardApplication extends Application {
 
 	public void setNavigationMode(int mode) {
 		this.navigationMode = mode;
+	}
+
+	public boolean shouldDownloadData() {
+		return downloadData;
+	}
+
+	public void dataDownloadFinished() {
+		this.downloadData = false;
 	}
 
 	private void loadCustomProperties() {
@@ -68,37 +76,5 @@ public class GolfScoreBoardApplication extends Application {
 		DateRange lastThreeMonthRange = DateRangeUtil.getDateRange(2);
 		navigationItems[3] = new DateItem(lastThreeMonthRange.getFrom(),
 				lastThreeMonthRange.getTo(), "최근 3개월");
-	}
-
-	public static class DateItem {
-		private long from, to;
-		private String title;
-
-		public DateItem(long from, long to, String title) {
-			this.from = from;
-			this.to = to;
-			this.title = title;
-		}
-
-		public long getFrom() {
-			return from;
-		}
-
-		public long getTo() {
-			return to;
-		}
-
-		public String getTitle() {
-			return title;
-		}
-
-		public DateRange getDateRange() {
-			return new DateRange(from, to);
-		}
-
-		@Override
-		public String toString() {
-			return title;
-		}
 	}
 }

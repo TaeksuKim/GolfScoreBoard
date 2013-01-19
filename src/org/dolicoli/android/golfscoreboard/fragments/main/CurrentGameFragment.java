@@ -6,10 +6,11 @@ import java.util.Date;
 
 import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.CurrentGameActivity;
+import org.dolicoli.android.golfscoreboard.NetShareClientActivity;
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
+import org.dolicoli.android.golfscoreboard.data.OneGame;
+import org.dolicoli.android.golfscoreboard.data.PlayerScore;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
-import org.dolicoli.android.golfscoreboard.data.settings.Result;
 import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.tasks.CurrentGameQueryTask;
 import org.dolicoli.android.golfscoreboard.tasks.ImportCurrentGameTask;
@@ -18,20 +19,16 @@ import org.dolicoli.android.golfscoreboard.tasks.ImportCurrentGameTask.ImportRes
 import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask;
 import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask.ReceiveProgress;
 import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask.ReceiveResult;
-import org.dolicoli.android.golfscoreboard.utils.FeeCalculator;
-import org.dolicoli.android.golfscoreboard.utils.PlayerUIUtil;
-import org.dolicoli.android.golfscoreboard.utils.UIUtil;
+import org.dolicoli.android.golfscoreboard.utils.Reloadable;
 
 import android.app.ActionBar;
-import android.app.AlertDialog;
+import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateUtils;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,20 +36,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class CurrentGameFragment extends Fragment implements OnClickListener,
-		ThreeMonthsGameReceiveTask.TaskListener,
+		Reloadable, ThreeMonthsGameReceiveTask.TaskListener,
 		CurrentGameQueryTask.TaskListener, ImportCurrentGameTask.TaskListener {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "CurrentGameFragment";
+
 	private static final int REQ_CURRENT_GAME = 0x0001;
+	private static final int REQ_IMPORT = 0x0004;
 
 	private ProgressDialog progressDialog;
-	private SingleGameResult gameResult;
+	private OneGame gameResult;
 
 	private View contentView;
 
@@ -60,13 +58,7 @@ public class CurrentGameFragment extends Fragment implements OnClickListener,
 	private TextView currentHoleTextView;
 	private TextView finalHoleTextView;
 
-	private View[] playerViews;
-
-	private ImageView[] playerImageViews;
-	private View[] playerTagViews;
-	private TextView[] playerNameTextViews;
-	private TextView[] playerScoreTextViews;
-	private TextView[] playerTotalFeeTextViews;
+	private PlayerSummaryView[] playerViews;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,7 +67,7 @@ public class CurrentGameFragment extends Fragment implements OnClickListener,
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setTitle("오늘 게임");
 
-		View view = inflater.inflate(R.layout.current_game, null);
+		View view = inflater.inflate(R.layout.main_current_game, null);
 
 		contentView = view.findViewById(R.id.content_frame);
 		dateTextView = (TextView) view.findViewById(R.id.DateTextView);
@@ -84,81 +76,22 @@ public class CurrentGameFragment extends Fragment implements OnClickListener,
 		finalHoleTextView = (TextView) view
 				.findViewById(R.id.FinalHoleTextView);
 
-		playerViews = new View[Constants.MAX_PLAYER_COUNT];
-		playerViews[0] = view.findViewById(R.id.Player1View);
-		playerViews[1] = view.findViewById(R.id.Player2View);
-		playerViews[2] = view.findViewById(R.id.Player3View);
-		playerViews[3] = view.findViewById(R.id.Player4View);
-		playerViews[4] = view.findViewById(R.id.Player5View);
-		playerViews[5] = view.findViewById(R.id.Player6View);
-
-		playerImageViews = new ImageView[Constants.MAX_PLAYER_COUNT];
-		playerImageViews[0] = (ImageView) view
-				.findViewById(R.id.Player1ImageView);
-		playerImageViews[1] = (ImageView) view
-				.findViewById(R.id.Player2ImageView);
-		playerImageViews[2] = (ImageView) view
-				.findViewById(R.id.Player3ImageView);
-		playerImageViews[3] = (ImageView) view
-				.findViewById(R.id.Player4ImageView);
-		playerImageViews[4] = (ImageView) view
-				.findViewById(R.id.Player5ImageView);
-		playerImageViews[5] = (ImageView) view
-				.findViewById(R.id.Player6ImageView);
-
-		playerTagViews = new View[Constants.MAX_PLAYER_COUNT];
-		playerTagViews[0] = view.findViewById(R.id.Player1TagView);
-		playerTagViews[1] = view.findViewById(R.id.Player2TagView);
-		playerTagViews[2] = view.findViewById(R.id.Player3TagView);
-		playerTagViews[3] = view.findViewById(R.id.Player4TagView);
-		playerTagViews[4] = view.findViewById(R.id.Player5TagView);
-		playerTagViews[5] = view.findViewById(R.id.Player6TagView);
-
-		playerNameTextViews = new TextView[Constants.MAX_PLAYER_COUNT];
-		playerNameTextViews[0] = (TextView) view
-				.findViewById(R.id.Player1NameTextView);
-		playerNameTextViews[1] = (TextView) view
-				.findViewById(R.id.Player2NameTextView);
-		playerNameTextViews[2] = (TextView) view
-				.findViewById(R.id.Player3NameTextView);
-		playerNameTextViews[3] = (TextView) view
-				.findViewById(R.id.Player4NameTextView);
-		playerNameTextViews[4] = (TextView) view
-				.findViewById(R.id.Player5NameTextView);
-		playerNameTextViews[5] = (TextView) view
-				.findViewById(R.id.Player6NameTextView);
-
-		playerScoreTextViews = new TextView[Constants.MAX_PLAYER_COUNT];
-		playerScoreTextViews[0] = (TextView) view
-				.findViewById(R.id.Player1ScoreTextView);
-		playerScoreTextViews[1] = (TextView) view
-				.findViewById(R.id.Player2ScoreTextView);
-		playerScoreTextViews[2] = (TextView) view
-				.findViewById(R.id.Player3ScoreTextView);
-		playerScoreTextViews[3] = (TextView) view
-				.findViewById(R.id.Player4ScoreTextView);
-		playerScoreTextViews[4] = (TextView) view
-				.findViewById(R.id.Player5ScoreTextView);
-		playerScoreTextViews[5] = (TextView) view
-				.findViewById(R.id.Player6ScoreTextView);
-
-		playerTotalFeeTextViews = new TextView[Constants.MAX_PLAYER_COUNT];
-		playerTotalFeeTextViews[0] = (TextView) view
-				.findViewById(R.id.Player1TotalFeeTextView);
-		playerTotalFeeTextViews[1] = (TextView) view
-				.findViewById(R.id.Player2TotalFeeTextView);
-		playerTotalFeeTextViews[2] = (TextView) view
-				.findViewById(R.id.Player3TotalFeeTextView);
-		playerTotalFeeTextViews[3] = (TextView) view
-				.findViewById(R.id.Player4TotalFeeTextView);
-		playerTotalFeeTextViews[4] = (TextView) view
-				.findViewById(R.id.Player5TotalFeeTextView);
-		playerTotalFeeTextViews[5] = (TextView) view
-				.findViewById(R.id.Player6TotalFeeTextView);
+		playerViews = new PlayerSummaryView[Constants.MAX_PLAYER_COUNT];
+		playerViews[0] = new PlayerSummaryView(
+				view.findViewById(R.id.Player1View));
+		playerViews[1] = new PlayerSummaryView(
+				view.findViewById(R.id.Player2View));
+		playerViews[2] = new PlayerSummaryView(
+				view.findViewById(R.id.Player3View));
+		playerViews[3] = new PlayerSummaryView(
+				view.findViewById(R.id.Player4View));
+		playerViews[4] = new PlayerSummaryView(
+				view.findViewById(R.id.Player5View));
+		playerViews[5] = new PlayerSummaryView(
+				view.findViewById(R.id.Player6View));
 
 		view.findViewById(R.id.MainView).setOnClickListener(this);
 		view.findViewById(R.id.PlayerView).setOnClickListener(this);
-		view.findViewById(R.id.ImportButton).setOnClickListener(this);
 
 		return view;
 	}
@@ -174,14 +107,17 @@ public class CurrentGameFragment extends Fragment implements OnClickListener,
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.attend_count, menu);
+		inflater.inflate(R.menu.main_current_game, menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.ImportThreeMonth:
-			importThreeMonthData();
+			importGame();
+			return true;
+		case R.id.ImportThisGame:
+			importCurentGame();
 			return true;
 		}
 
@@ -203,9 +139,6 @@ public class CurrentGameFragment extends Fragment implements OnClickListener,
 					CurrentGameActivity.class);
 			startActivityForResult(historyIntent, REQ_CURRENT_GAME);
 			return;
-		case R.id.ImportButton:
-			importCurentGame();
-			return;
 		}
 	}
 
@@ -213,8 +146,15 @@ public class CurrentGameFragment extends Fragment implements OnClickListener,
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if (requestCode == REQ_CURRENT_GAME) {
-			reload(true);
+		switch (requestCode) {
+		case REQ_CURRENT_GAME:
+			reloadData();
+			return;
+		case REQ_IMPORT:
+			if (resultCode == Activity.RESULT_OK) {
+				reloadData();
+			}
+			return;
 		}
 	}
 
@@ -293,58 +233,25 @@ public class CurrentGameFragment extends Fragment implements OnClickListener,
 		hideProgressDialog();
 	}
 
-	private void reload(boolean clean) {
+	@Override
+	public void reload(boolean clean) {
 		if (getActivity() == null || gameResult == null)
 			return;
 
-		int holeCount = gameResult.getHoleCount();
+		finalHoleTextView.setText(String.valueOf(gameResult.getHoleCount()));
+
+		currentHoleTextView.setText(getString(
+				R.string.fragment_onegamesummary_current_hole_format,
+				gameResult.getCurrentHole()));
 
 		int playerCount = gameResult.getPlayerCount();
-		SparseArray<PlayerScore> playerScoreMap = new SparseArray<PlayerScore>();
-
 		ArrayList<PlayerScore> list = new ArrayList<PlayerScore>();
 		for (int playerId = 0; playerId < playerCount; playerId++) {
-			PlayerScore playerScore = new PlayerScore(playerId,
-					gameResult.getPlayerName(playerId),
-					gameResult.getHandicap(playerId),
-					gameResult.getHandicap(playerId)
-							- gameResult.getUsedHandicap(playerId),
-					gameResult.getExtraScore(playerId));
-			playerScoreMap.put(playerId, playerScore);
-			list.add(playerId, playerScore);
-		}
-
-		int currentHole = 0;
-		for (Result result : gameResult.getResults()) {
-			if (currentHole < result.getHoleNumber())
-				currentHole = result.getHoleNumber();
-
-			int[] fees = FeeCalculator.calculateFee(gameResult, result);
-
-			for (int playerId = 0; playerId < playerCount; playerId++) {
-				PlayerScore playerScore = list.get(playerId);
-
-				playerScore.score += result.getFinalScore(playerId);
-				playerScore.originalHoleFee += fees[playerId];
-				playerScore.adjustedHoleFee = playerScore.originalHoleFee;
-			}
-		}
-
-		for (int playerId = 0; playerId < playerCount; playerId++) {
-			PlayerScore playerScore = list.get(playerId);
-			playerScore.extraScore = gameResult.getExtraScore(playerId);
-			playerScore.originalScore = playerScore.score;
-			playerScore.score -= playerScore.extraScore;
+			PlayerScore playerScore = gameResult.getPlayerScore(playerId);
+			list.add(playerScore);
 		}
 
 		Collections.sort(list);
-		calculateRanking(list);
-		calculateRankingFee(list, gameResult);
-		calculateAvgRanking(currentHole, list);
-		calculateOverPar(currentHole, list);
-
-		adjustFee(list, gameResult, currentHole >= gameResult.getHoleCount());
-		Collections.sort(list); // Sort again after adjustFee has been set
 
 		Date date = gameResult.getDate();
 		if (date != null) {
@@ -359,26 +266,15 @@ public class CurrentGameFragment extends Fragment implements OnClickListener,
 		} else {
 			dateTextView.setText(R.string.blank);
 		}
-		currentHoleTextView.setText(getString(
-				R.string.fragment_onegamesummary_current_hole_format,
-				currentHole));
-		finalHoleTextView.setText(String.valueOf(holeCount));
 
 		for (int i = 0; i < Constants.MAX_PLAYER_COUNT; i++) {
 			if (i < playerCount) {
-				playerViews[i].setVisibility(View.VISIBLE);
-
 				PlayerScore playerScore = list.get(i);
-				playerImageViews[i].setImageResource(PlayerUIUtil
-						.getRoundResourceId(playerScore.name));
-				playerTagViews[i].setBackgroundColor(PlayerUIUtil
-						.getTagColor(playerScore.name));
-				playerNameTextViews[i].setText(playerScore.name);
-				UIUtil.setScoreTextView(getActivity(), playerScoreTextViews[i],
-						playerScore.score);
-				UIUtil.setFeeTextView(getActivity(),
-						playerTotalFeeTextViews[i],
-						playerScore.adjustedTotalFee);
+
+				playerViews[i].setVisibility(View.VISIBLE);
+				playerViews[i].setValue(getActivity(), playerScore.getName(),
+						playerScore.getRanking(), playerScore.getFinalScore(),
+						playerScore.getAdjustedTotalFee());
 			} else {
 				playerViews[i].setVisibility(View.GONE);
 			}
@@ -391,27 +287,6 @@ public class CurrentGameFragment extends Fragment implements OnClickListener,
 		CurrentGameQueryTask task = new CurrentGameQueryTask(getActivity(),
 				this);
 		task.execute();
-	}
-
-	private void importThreeMonthData() {
-		final FragmentActivity activity = getActivity();
-		final CurrentGameFragment instance = this;
-
-		new AlertDialog.Builder(activity)
-				.setTitle(R.string.dialog_import_three_month)
-				.setMessage(R.string.dialog_are_you_sure_to_import_three_month)
-				.setPositiveButton(android.R.string.yes,
-						new DialogInterface.OnClickListener() {
-
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								ThreeMonthsGameReceiveTask task = new ThreeMonthsGameReceiveTask(
-										activity, instance);
-								task.execute();
-							}
-
-						}).setNegativeButton(android.R.string.no, null).show();
 	}
 
 	private void showProgressDialog(int defaultTitleId, int defaultMessageId) {
@@ -463,129 +338,9 @@ public class CurrentGameFragment extends Fragment implements OnClickListener,
 	}
 
 	@Override
-	public void onCurrentGameQueryFinished(SingleGameResult gameResult) {
+	public void onCurrentGameQueryFinished(OneGame gameResult) {
 		this.gameResult = gameResult;
 		reload(false);
-	}
-
-	private void calculateRanking(ArrayList<PlayerScore> list) {
-		PlayerScore prevPlayerScore = null;
-		int ranking = 1;
-		for (PlayerScore playerScore : list) {
-			if (prevPlayerScore != null
-					&& prevPlayerScore.score == playerScore.score) {
-				playerScore.ranking = prevPlayerScore.ranking;
-			} else {
-				playerScore.ranking = ranking;
-			}
-			ranking++;
-			prevPlayerScore = playerScore;
-		}
-
-		int size = list.size();
-		for (int i = 0; i < size; i++) {
-			PlayerScore playerScore = list.get(i);
-			playerScore.sameRankingCount = 0;
-			for (int j = 0; j < size; j++) {
-				PlayerScore compare = list.get(j);
-				if (compare.ranking == playerScore.ranking) {
-					playerScore.sameRankingCount++;
-				}
-			}
-		}
-	}
-
-	private void calculateRankingFee(ArrayList<PlayerScore> list,
-			SingleGameResult gameSetting) {
-		for (PlayerScore playerScore : list) {
-			int sum = 0;
-			int sameRankingCount = playerScore.sameRankingCount;
-
-			for (int i = 0; i < sameRankingCount; i++) {
-				sum += gameSetting.getRankingFeeForRanking(playerScore.ranking
-						+ i);
-			}
-			playerScore.originalRankingFee = FeeCalculator.ceil(sum,
-					sameRankingCount);
-			playerScore.adjustedRankingFee = playerScore.originalRankingFee;
-		}
-	}
-
-	private void calculateAvgRanking(int currentHole,
-			ArrayList<PlayerScore> list) {
-	}
-
-	private void calculateOverPar(int currentHole, ArrayList<PlayerScore> list) {
-	}
-
-	private void adjustFee(ArrayList<PlayerScore> list,
-			SingleGameResult gameSetting, boolean isGameFinished) {
-		int sumOfHoleFee = 0;
-		int sumOfRankingFee = 0;
-		for (PlayerScore playerScore : list) {
-			sumOfHoleFee += playerScore.originalHoleFee;
-			sumOfRankingFee += playerScore.originalRankingFee;
-
-			playerScore.originalTotalFee = playerScore.originalHoleFee
-					+ playerScore.originalRankingFee;
-		}
-
-		int rankingFee = gameSetting.getRankingFee();
-		int holeFee = gameSetting.getHoleFee();
-
-		int remainOfHoleFee = 0;
-		if (sumOfHoleFee < holeFee && isGameFinished) {
-			int additionalHoleFeePerPlayer = FeeCalculator.ceil(holeFee
-					- sumOfHoleFee, gameSetting.getPlayerCount());
-
-			int sum = 0;
-			for (PlayerScore playerScore : list) {
-				playerScore.adjustedHoleFee += additionalHoleFeePerPlayer;
-				sum += playerScore.adjustedHoleFee;
-			}
-			remainOfHoleFee = sum - holeFee;
-		} else if (sumOfHoleFee > holeFee) {
-			remainOfHoleFee = sumOfHoleFee - holeFee;
-		}
-
-		int remainOfRankingFee = 0;
-		if (sumOfRankingFee < rankingFee) {
-			int additionalRankingFeePerPlayer = FeeCalculator.ceil(rankingFee
-					- sumOfRankingFee, gameSetting.getPlayerCount());
-
-			int sum = 0;
-			for (PlayerScore playerScore : list) {
-				playerScore.adjustedRankingFee += additionalRankingFeePerPlayer;
-				sum += playerScore.adjustedRankingFee;
-			}
-			remainOfRankingFee = sum - rankingFee;
-		} else if (sumOfRankingFee > rankingFee) {
-			remainOfRankingFee = sumOfRankingFee - rankingFee;
-		}
-
-		PlayerScore lastSinglePlayerScore = null;
-		for (PlayerScore playerScore : list) {
-			if (playerScore.sameRankingCount <= 1) {
-				lastSinglePlayerScore = playerScore;
-			}
-		}
-		if (remainOfHoleFee > 0 || remainOfRankingFee > 0) {
-			if (lastSinglePlayerScore != null) {
-				lastSinglePlayerScore.adjustedRankingFee -= (remainOfHoleFee + remainOfRankingFee);
-			} else {
-				// 이 경우 어떻게 해야 할까요?
-			}
-		}
-
-		sumOfHoleFee = 0;
-		sumOfRankingFee = 0;
-		for (PlayerScore playerScore : list) {
-			sumOfHoleFee += playerScore.adjustedHoleFee;
-			sumOfRankingFee += playerScore.adjustedRankingFee;
-
-			playerScore.adjustedTotalFee = playerScore.adjustedHoleFee
-					+ playerScore.adjustedRankingFee;
-		}
 	}
 
 	private void importCurentGame() {
@@ -602,62 +357,17 @@ public class CurrentGameFragment extends Fragment implements OnClickListener,
 		task.execute(currentGameId);
 	}
 
-	private static class PlayerScore implements Comparable<PlayerScore> {
+	private void importGame() {
+		GameSettingDatabaseWorker gameSettingWorker = new GameSettingDatabaseWorker(
+				getActivity());
+		GameSetting gameSetting = new GameSetting();
+		gameSettingWorker.getGameSetting(gameSetting);
 
-		private int playerId;
-		private String name;
-		private int ranking;
-		private int sameRankingCount;
+		String currentGameId = GameSetting
+				.toGameIdFormat(gameSetting.getDate());
 
-		private int originalScore;
-		private int score;
-		private int extraScore;
-
-		private int originalHoleFee, adjustedHoleFee;
-		private int originalRankingFee, adjustedRankingFee;
-		@SuppressWarnings("unused")
-		private int originalTotalFee, adjustedTotalFee;
-
-		public PlayerScore(int playerId, String name, int handicap,
-				int remainHandicap, int extraScore) {
-			this.playerId = playerId;
-			this.name = name;
-			this.extraScore = extraScore;
-
-			this.ranking = 0;
-			this.score = 0;
-
-			this.originalHoleFee = 0;
-			this.originalRankingFee = 0;
-			this.originalTotalFee = 0;
-			this.adjustedHoleFee = 0;
-			this.adjustedRankingFee = 0;
-			this.adjustedTotalFee = 0;
-		}
-
-		@Override
-		public int compareTo(PlayerScore compare) {
-			if (ranking < compare.ranking)
-				return -1;
-			if (ranking > compare.ranking)
-				return 1;
-			if (score < compare.score)
-				return -1;
-			if (score > compare.score)
-				return 1;
-			if (originalScore < compare.originalScore)
-				return -1;
-			if (originalScore > compare.originalScore)
-				return 1;
-			if (adjustedTotalFee < compare.adjustedTotalFee)
-				return -1;
-			if (adjustedTotalFee > compare.adjustedTotalFee)
-				return 1;
-			if (playerId < compare.playerId)
-				return -1;
-			if (playerId > compare.playerId)
-				return 1;
-			return 0;
-		}
+		Intent intent = new Intent(getActivity(), NetShareClientActivity.class);
+		intent.putExtra(NetShareClientActivity.IK_GAME_ID, currentGameId);
+		startActivityForResult(intent, REQ_IMPORT);
 	}
 }

@@ -2,11 +2,10 @@ package org.dolicoli.android.golfscoreboard.fragments.onegame;
 
 import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
-import org.dolicoli.android.golfscoreboard.data.settings.Result;
+import org.dolicoli.android.golfscoreboard.data.OneGame;
+import org.dolicoli.android.golfscoreboard.data.OneHolePlayerScore;
 import org.dolicoli.android.golfscoreboard.tasks.CurrentGameQueryTask;
 import org.dolicoli.android.golfscoreboard.tasks.HistoryGameSettingWithResultQueryTask;
-import org.dolicoli.android.golfscoreboard.utils.FeeCalculator;
 import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
 import android.os.Bundle;
@@ -156,7 +155,7 @@ public class OneGamePlayerRecordSummaryFragment extends Fragment implements
 		this.currentGame = currentGame;
 		this.playerId = playerId;
 		this.playDate = playDate;
-		reload();
+		reloadData();
 	}
 
 	@Override
@@ -164,11 +163,11 @@ public class OneGamePlayerRecordSummaryFragment extends Fragment implements
 	}
 
 	@Override
-	public void onCurrentGameQueryFinished(SingleGameResult gameResult) {
+	public void onCurrentGameQueryFinished(OneGame gameResult) {
 		reloadUI(gameResult);
 	}
 
-	private void reload() {
+	private void reloadData() {
 		FragmentActivity activity = getActivity();
 		if (activity == null)
 			return;
@@ -177,12 +176,14 @@ public class OneGamePlayerRecordSummaryFragment extends Fragment implements
 			CurrentGameQueryTask task = new CurrentGameQueryTask(activity, this);
 			task.execute();
 		} else {
-			HistoryGameSettingWithResultQueryTask task = new HistoryGameSettingWithResultQueryTask(activity, this);
-			task.execute(new HistoryGameSettingWithResultQueryTask.QueryParam(playDate));
+			HistoryGameSettingWithResultQueryTask task = new HistoryGameSettingWithResultQueryTask(
+					activity, this);
+			task.execute(new HistoryGameSettingWithResultQueryTask.QueryParam(
+					playDate));
 		}
 	}
 
-	private void reloadUI(SingleGameResult gameResult) {
+	private void reloadUI(OneGame gameResult) {
 		FragmentActivity activity = getActivity();
 
 		if (activity == null || gameResult == null)
@@ -289,53 +290,57 @@ public class OneGamePlayerRecordSummaryFragment extends Fragment implements
 		int quadrupleBogey = 0;
 		int overQuintupleBogey = 0;
 
-		for (Result result : gameResult.getResults()) {
-			int ranking = result.getRanking(playerId);
-			int sameRankingCount = result.getSameRankingCount(playerId);
+		int currentHole = gameResult.getCurrentHole();
+		for (int hole = 1; hole <= currentHole; hole++) {
+			OneHolePlayerScore holePlayerScore = gameResult.getHolePlayerScore(
+					hole, playerId);
 
+			int ranking = holePlayerScore.getRanking();
+			int sameRankingCount = holePlayerScore.getSameRankingCount();
 			if (sameRankingCount > 1)
 				sameValues[ranking - 1]++;
 			else
 				values[ranking - 1]++;
 
-			int[] fees = FeeCalculator.calculateFee(gameResult, result);
-			if (fees[playerId] <= 0) {
+			int fee = holePlayerScore.getFee();
+			if (fee <= 0) {
 				feeZero++;
-			} else if (fees[playerId] <= 1000) {
+			} else if (fee <= 1000) {
 				feeUnder1000++;
-			} else if (fees[playerId] <= 1500) {
+			} else if (fee <= 1500) {
 				feeUnder1500++;
-			} else if (fees[playerId] <= 2000) {
+			} else if (fee <= 2000) {
 				feeUnder2000++;
-			} else if (fees[playerId] <= 2500) {
+			} else if (fee <= 2500) {
 				feeUnder2500++;
 			} else {
 				feeOver2500++;
 			}
 
-			int score = result.getOriginalScore(playerId);
-			if (score <= -4) {
+			int originalScore = holePlayerScore.getOriginalScore();
+			if (originalScore <= -4) {
 				underCondor++;
-			} else if (score <= -3) {
+			} else if (originalScore <= -3) {
 				albatross++;
-			} else if (score <= -2) {
+			} else if (originalScore <= -2) {
 				eagle++;
-			} else if (score <= -1) {
+			} else if (originalScore <= -1) {
 				birdie++;
-			} else if (score <= 0) {
+			} else if (originalScore <= 0) {
 				par++;
-			} else if (score <= 1) {
+			} else if (originalScore <= 1) {
 				bogey++;
-			} else if (score <= 2) {
+			} else if (originalScore <= 2) {
 				doubleBogey++;
-			} else if (score <= 3) {
+			} else if (originalScore <= 3) {
 				tripleBogey++;
-			} else if (score <= 4) {
+			} else if (originalScore <= 4) {
 				quadrupleBogey++;
 			} else {
 				overQuintupleBogey++;
 			}
 		}
+
 		for (int i = 0; i < Constants.MAX_PLAYER_COUNT; i++) {
 			rankingValueTextViews[i].setText(UIUtil.formatGameCount(activity,
 					values[i]));

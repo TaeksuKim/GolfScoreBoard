@@ -1,6 +1,5 @@
 package org.dolicoli.android.golfscoreboard.utils;
 
-import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
 import org.dolicoli.android.golfscoreboard.data.RankingContainer;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 
@@ -26,28 +25,7 @@ public class FeeCalculator {
 		return fees;
 	}
 
-	public static int[] calculateFee(SingleGameResult result,
-			RankingContainer container) {
-
-		int playerCount = result.getPlayerCount();
-		int[] fees = new int[playerCount];
-		for (int playerId = 0; playerId < playerCount; playerId++) {
-			int ranking = container.getRanking(playerId);
-			int sameRankingPlayerCount = container
-					.getSameRankingCount(playerId);
-
-			int partialFee = 0;
-			for (int i = ranking; i < ranking + sameRankingPlayerCount; i++) {
-				partialFee += result.getHoleFeeForRanking(i);
-			}
-
-			fees[playerId] = toFee(partialFee, sameRankingPlayerCount);
-		}
-		return fees;
-	}
-
 	public static int toFee(int a, int b) {
-		// return ceil(a, b);
 		return floor(a, b);
 	}
 

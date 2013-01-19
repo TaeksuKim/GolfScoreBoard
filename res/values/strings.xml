@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name">사만원</string>
+    <string name="version">버전 1.1.14</string>
 
     <!-- Common -->
     <string name="player">사용자</string>
@@ -94,6 +95,7 @@
     <string name="menu_export">내보내기</string>
     <string name="menu_import">가져오기</string>
     <string name="menu_import_three_month">3개월 정보 가져오기</string>
+    <string name="menu_import_this_game">이 게임 가져오기</string>
     <string name="menu_reset">결과 초기화</string>
     <string name="menu_delete">삭제</string>
     <string name="menu_settings">설정</string>

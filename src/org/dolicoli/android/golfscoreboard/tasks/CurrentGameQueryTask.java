@@ -2,19 +2,16 @@ package org.dolicoli.android.golfscoreboard.tasks;
 
 import java.util.ArrayList;
 
-import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
-import org.dolicoli.android.golfscoreboard.data.UsedHandicap;
+import org.dolicoli.android.golfscoreboard.data.OneGame;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.Result;
 import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
-import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
-public class CurrentGameQueryTask extends
-		AsyncTask<Void, Void, SingleGameResult> {
+public class CurrentGameQueryTask extends AsyncTask<Void, Void, OneGame> {
 
 	private Context context;
 	private TaskListener listener;
@@ -33,7 +30,7 @@ public class CurrentGameQueryTask extends
 	}
 
 	@Override
-	protected void onPostExecute(SingleGameResult result) {
+	protected void onPostExecute(OneGame result) {
 		super.onPostExecute(result);
 		if (listener != null) {
 			listener.onCurrentGameQueryFinished(result);
@@ -41,7 +38,7 @@ public class CurrentGameQueryTask extends
 	}
 
 	@Override
-	protected SingleGameResult doInBackground(Void... params) {
+	protected OneGame doInBackground(Void... params) {
 		if (context == null) {
 			return null;
 		}
@@ -49,27 +46,17 @@ public class CurrentGameQueryTask extends
 		GameSetting gameSetting = new GameSetting();
 		PlayerSetting playerSetting = new PlayerSetting();
 		ArrayList<Result> results = new ArrayList<Result>();
-		UsedHandicap usedHandicap = null;
 
 		GameSettingDatabaseWorker gameSettingWorker = new GameSettingDatabaseWorker(
 				context);
 		gameSettingWorker.getGameSetting(gameSetting, playerSetting, results);
 
-		ResultDatabaseWorker resultWorker = new ResultDatabaseWorker(context);
-		usedHandicap = resultWorker.getUsedHandicaps();
-
-		SingleGameResult result = new SingleGameResult();
-		result.setGameSetting(gameSetting);
-		result.setPlayerSetting(playerSetting);
-		result.setResults(results);
-		result.setUsedHandicap(usedHandicap);
-
-		return result;
+		return new OneGame(gameSetting, playerSetting, results);
 	}
 
 	public static interface TaskListener {
 		void onCurrentGameQueryStarted();
 
-		void onCurrentGameQueryFinished(SingleGameResult gameResult);
+		void onCurrentGameQueryFinished(OneGame gameResult);
 	}
 }

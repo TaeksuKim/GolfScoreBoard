@@ -3,15 +3,13 @@ package org.dolicoli.android.golfscoreboard.fragments.statistics;
 import java.util.ArrayList;
 
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.Reloadable;
-import org.dolicoli.android.golfscoreboard.data.GameAndResult;
+import org.dolicoli.android.golfscoreboard.data.OneGame;
 import org.dolicoli.android.golfscoreboard.data.PlayerScore;
-import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
+import org.dolicoli.android.golfscoreboard.utils.Reloadable;
 import org.dolicoli.android.golfscoreboard.utils.UIUtil;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -27,7 +25,7 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 
 	private GameAndResultListAdapter adapter;
 
-	private ArrayList<GameAndResult> gameAndResults;
+	private ArrayList<OneGame> gameAndResults;
 	private String playerName;
 
 	public void setDataContainer(PersonalStatisticsDataContainer container) {
@@ -55,6 +53,7 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 		if (dataContainer != null) {
 			gameAndResults = dataContainer.getGameAndResults();
 			playerName = dataContainer.getPlayerName();
+			adapter.setPlayerName(playerName);
 		}
 	}
 
@@ -70,7 +69,7 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 			return;
 
 		adapter.clear();
-		for (GameAndResult gameAndResult : gameAndResults) {
+		for (OneGame gameAndResult : gameAndResults) {
 			if (!gameAndResult.containsPlayerScore(playerName))
 				continue;
 
@@ -84,8 +83,9 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 				scoreTextView, feeTextView;
 	}
 
-	private class GameAndResultListAdapter extends ArrayAdapter<GameAndResult> {
+	private static class GameAndResultListAdapter extends ArrayAdapter<OneGame> {
 
+		private String playerName;
 		private GameAndResultListViewHolder holder;
 		private int textViewResourceId;
 
@@ -95,10 +95,13 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 			this.textViewResourceId = textViewResourceId;
 		}
 
+		public void setPlayerName(String playerName) {
+			this.playerName = playerName;
+		}
+
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			FragmentActivity activity = getActivity();
-
+			Context activity = getContext();
 			View v = convertView;
 			if (v == null) {
 				LayoutInflater vi = (LayoutInflater) activity
@@ -129,13 +132,13 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 			if (position < 0 || position > count - 1)
 				return v;
 
-			GameAndResult gameAndResult = getItem(position);
+			OneGame gameAndResult = getItem(position);
 			if (gameAndResult == null)
 				return v;
 
-			GameSetting gameSetting = gameAndResult.getGameSetting();
-			String dateString = DateUtils.formatDateTime(activity, gameSetting
-					.getDate().getTime(), DateUtils.FORMAT_SHOW_DATE);
+			String dateString = DateUtils.formatDateTime(activity,
+					gameAndResult.getDate().getTime(),
+					DateUtils.FORMAT_SHOW_DATE);
 			holder.dateTextView.setText(dateString);
 
 			PlayerScore playerScore = gameAndResult.getPlayerScore(playerName);
@@ -143,9 +146,9 @@ public class PersonalStatisticsGameResultListFragment extends ListFragment
 			UIUtil.setRankingTextView(activity, holder.rankingTextView,
 					playerScore.getRanking());
 			UIUtil.setPlayerCountTextView(activity, holder.playerCountTextView,
-					gameSetting.getPlayerCount());
+					gameAndResult.getPlayerCount());
 
-			int score = playerScore.getOriginalScore();
+			int score = playerScore.getOriginalScoreInEighteenHole();
 			UIUtil.setScoreTextView(activity, holder.scoreTextView, score);
 
 			UIUtil.setFeeTextView(activity, holder.feeTextView,

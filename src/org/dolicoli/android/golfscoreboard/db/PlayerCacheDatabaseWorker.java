@@ -118,13 +118,13 @@ public class PlayerCacheDatabaseWorker extends AbstractDatabaseWorker {
 			mDb.delete(TABLE, COLUMN_DATE + " < ? ",
 					new String[] { String.valueOf(calendar.getTimeInMillis()) });
 
-			putPlayer(mDb, name, 0);
+			putPlayer(mDb, name);
 		} finally {
 			close();
 		}
 	}
 
-	public void putPlayer(String[] names, int[] handicaps) {
+	public void putPlayer(String[] names) {
 		open();
 		try {
 			Calendar calendar = Calendar.getInstance();
@@ -134,20 +134,20 @@ public class PlayerCacheDatabaseWorker extends AbstractDatabaseWorker {
 
 			int length = names.length;
 			for (int i = 0; i < length; i++) {
-				putPlayer(mDb, names[i], handicaps[i]);
+				putPlayer(mDb, names[i]);
 			}
 		} finally {
 			close();
 		}
 	}
 
-	private static void putPlayer(SQLiteDatabase db, String name, int handicap) {
+	public static void putPlayer(SQLiteDatabase db, String name) {
 		Log.d(TAG, "putPlayer()");
 
 		ContentValues args = new ContentValues();
 
 		args.put(COLUMN_NAME, name);
-		args.put(COLUMN_HANDICAP, handicap);
+		args.put(COLUMN_HANDICAP, 0);
 		args.put(COLUMN_DATE, new Date().getTime());
 
 		db.replace(TABLE, null, args);

@@ -1,16 +1,17 @@
-package org.dolicoli.android.golfscoreboard.fragments.history;
+package org.dolicoli.android.golfscoreboard.fragments.main;
 
 import java.util.ArrayList;
 
 import org.dolicoli.android.golfscoreboard.GolfScoreBoardApplication;
-import org.dolicoli.android.golfscoreboard.GolfScoreBoardApplication.DateItem;
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.data.GameAndResult;
+import org.dolicoli.android.golfscoreboard.data.DateItem;
+import org.dolicoli.android.golfscoreboard.data.OneGame;
 import org.dolicoli.android.golfscoreboard.tasks.GameAndResultTask;
 import org.dolicoli.android.golfscoreboard.tasks.GameAndResultTask.GameAndResultTaskListener;
 import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask;
 import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask.ReceiveProgress;
 import org.dolicoli.android.golfscoreboard.tasks.ThreeMonthsGameReceiveTask.ReceiveResult;
+import org.dolicoli.android.golfscoreboard.utils.Reloadable;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
@@ -31,21 +32,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public abstract class NewHistoryItemListFragment extends ListFragment implements
-		GameAndResultTaskListener, OnNavigationListener,
+public abstract class HistoryItemListFragment extends ListFragment implements
+		Reloadable, GameAndResultTaskListener, OnNavigationListener,
 		ThreeMonthsGameReceiveTask.TaskListener {
 
 	protected ProgressBar progressBar;
 	protected TextView noResultTextView;
 	protected ProgressDialog progressDialog;
 
-	protected ArrayList<GameAndResult> resultList;
+	protected ArrayList<OneGame> resultList;
 	protected ArrayAdapter<DateItem> navigationAdapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		resultList = new ArrayList<GameAndResult>();
+		resultList = new ArrayList<OneGame>();
 	}
 
 	@Override
@@ -96,7 +97,7 @@ public abstract class NewHistoryItemListFragment extends ListFragment implements
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.attend_count, menu);
+		inflater.inflate(R.menu.main_fragment, menu);
 	}
 
 	@Override
@@ -125,12 +126,12 @@ public abstract class NewHistoryItemListFragment extends ListFragment implements
 	}
 
 	@Override
-	public void onGameAndResultFinished(GameAndResult[] results) {
+	public void onGameAndResultFinished(OneGame[] results) {
 		resultList.clear();
-		for (GameAndResult result : results) {
+		for (OneGame result : results) {
 			resultList.add(result);
 		}
-		reload();
+		reload(true);
 
 		if (progressBar != null) {
 			getListView().setVisibility(View.VISIBLE);
@@ -196,7 +197,7 @@ public abstract class NewHistoryItemListFragment extends ListFragment implements
 
 	protected void importThreeMonthData() {
 		final FragmentActivity activity = getActivity();
-		final NewHistoryItemListFragment instance = this;
+		final HistoryItemListFragment instance = this;
 
 		new AlertDialog.Builder(activity)
 				.setTitle(R.string.dialog_import_three_month)
@@ -298,6 +299,4 @@ public abstract class NewHistoryItemListFragment extends ListFragment implements
 	}
 
 	protected abstract View inflate(LayoutInflater inflater);
-
-	protected abstract void reload();
 }

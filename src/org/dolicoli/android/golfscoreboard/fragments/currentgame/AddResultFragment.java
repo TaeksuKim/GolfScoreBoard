@@ -3,7 +3,6 @@ package org.dolicoli.android.golfscoreboard.fragments.currentgame;
 import org.dolicoli.android.golfscoreboard.AddResultActivity;
 import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.data.UsedHandicap;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
@@ -28,7 +27,7 @@ public class AddResultFragment extends Fragment implements OnClickListener {
 	private int holeNumber, gameMaxHoleNumber;
 	private ScoreSpinnerAdapter[] playerScoreSpinnerAdapters;
 	private HandicapSpinnerAdapter[] playerHandicapSpinnerAdapters;
-	private UsedHandicap usedHandicaps;
+	private int[] usedHandicaps;
 
 	private RadioButton parThreeRadioButton, parFourRadioButton,
 			parFiveRadioButton, parSixRadioButton;
@@ -386,7 +385,7 @@ public class AddResultFragment extends Fragment implements OnClickListener {
 
 	private void fillHandicapSpinner(PlayerSetting playerSetting, int playerId) {
 		int remainedHandicap = playerSetting.getHandicap(playerId)
-				- usedHandicaps.getUsedHandicap(playerId);
+				- usedHandicaps[playerId];
 
 		HandicapSpinnerAdapter adapter = playerHandicapSpinnerAdapters[playerId];
 		adapter.clear();

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="invisible" >
+
+    <RelativeLayout
+        android:id="@+id/StatusView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/stripColor"
+        android:paddingBottom="4dip"
+        android:paddingLeft="4dip"
+        android:paddingRight="4dip"
+        android:paddingTop="4dip" >
+
+        <TextView
+            android:id="@+id/CurrentHoleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceMedium"
+            android:textColor="?attr/stripTextColor" />
+
+        <TextView
+            android:id="@+id/CenterTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/CurrentHoleTextView"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:layout_toRightOf="@+id/CurrentHoleTextView"
+            android:gravity="center"
+            android:text="@string/fragment_hole_fee_setting_per"
+            android:textColor="?attr/stripTextColor"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/FinalHoleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/CurrentHoleTextView"
+            android:layout_toRightOf="@+id/CenterTextView"
+            android:gravity="center"
+            android:textColor="?attr/stripTextColor"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/DateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/FinalHoleTextView"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/FinalHoleTextView"
+            android:gravity="center_vertical|right"
+            android:textColor="?attr/stripTextColor" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/MainView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/StatusView"
+        android:background="@drawable/list_selector_holo_light"
+        android:clickable="true"
+        android:focusable="true" >
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/PlayerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_selector_holo_light"
+                android:clickable="true"
+                android:focusable="true" >
+
+                <include
+                    android:id="@+id/Player1View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/main_current_game_player_summary" />
+
+                <include
+                    android:id="@+id/Player2View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Player1View"
+                    layout="@layout/main_current_game_player_summary" />
+
+                <include
+                    android:id="@+id/Player3View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Player2View"
+                    layout="@layout/main_current_game_player_summary" />
+
+                <include
+                    android:id="@+id/Player4View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Player3View"
+                    layout="@layout/main_current_game_player_summary" />
+
+                <include
+                    android:id="@+id/Player5View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Player4View"
+                    layout="@layout/main_current_game_player_summary" />
+
+                <include
+                    android:id="@+id/Player6View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Player5View"
+                    layout="@layout/main_current_game_player_summary" />
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</RelativeLayout>

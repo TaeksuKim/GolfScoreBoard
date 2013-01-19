@@ -6,8 +6,8 @@ import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.HistoryGameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.fragments.DummySectionFragment;
-import org.dolicoli.android.golfscoreboard.fragments.main.MainFragmentContainer;
 import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameActivityPage;
+import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameFragmentContainer;
 import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameHoleResultFragment;
 import org.dolicoli.android.golfscoreboard.fragments.onegame.OneGameSummaryFragment;
 import org.dolicoli.android.golfscoreboard.tasks.ExportCurrentGameTask;
@@ -40,7 +40,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class CurrentGameActivity extends FragmentActivity implements
-		MainFragmentContainer, ImportCurrentGameTask.TaskListener,
+		OneGameFragmentContainer, ImportCurrentGameTask.TaskListener,
 		ExportCurrentGameTask.TaskListener, OnClickListener,
 		OnPageChangeListener {
 
@@ -63,7 +63,7 @@ public class CurrentGameActivity extends FragmentActivity implements
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle(R.string.activity_currentgame_title);
 
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_current_game);
 
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager());
@@ -109,6 +109,9 @@ public class CurrentGameActivity extends FragmentActivity implements
 			setResult(Activity.RESULT_CANCELED);
 			finish();
 			return true;
+		case R.id.ImportThisGame:
+			importCurentGame();
+			return true;
 		case R.id.AddResult:
 			showAddResultActivity();
 			return true;
@@ -126,9 +129,6 @@ public class CurrentGameActivity extends FragmentActivity implements
 			return true;
 		case R.id.Save:
 			saveHistory();
-			return true;
-		case R.id.Settings:
-			showSettingActivity();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -273,11 +273,6 @@ public class CurrentGameActivity extends FragmentActivity implements
 		worker.addCurrentHistory(true);
 
 		reload(false);
-	}
-
-	private void showSettingActivity() {
-		Intent settingsIntent = new Intent(this, SettingsActivity.class);
-		startActivity(settingsIntent);
 	}
 
 	@Override

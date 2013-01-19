@@ -43,6 +43,7 @@
         <item name="saveMenuIcon">@drawable/ic_menu_save_light</item>
         <item name="settingMenuIcon">@drawable/ic_menu_settings_light</item>
         <item name="uploadMenuIcon">@drawable/ic_menu_upload_light</item>
+        <item name="refreshMenuIcon">@drawable/ic_menu_refresh_light</item>
         <item name="aboutMenuIcon">@drawable/ic_menu_about_light</item>
     </style>
 
@@ -88,6 +89,7 @@
         <item name="saveMenuIcon">@drawable/ic_menu_save_dark</item>
         <item name="settingMenuIcon">@drawable/ic_menu_settings_dark</item>
         <item name="uploadMenuIcon">@drawable/ic_menu_upload_dark</item>
+        <item name="refreshMenuIcon">@drawable/ic_menu_refresh_dark</item>
         <item name="aboutMenuIcon">@drawable/ic_menu_about_dark</item>
     </style>
 

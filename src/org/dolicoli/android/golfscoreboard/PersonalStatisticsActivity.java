@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
-import org.dolicoli.android.golfscoreboard.data.GameAndResult;
+import org.dolicoli.android.golfscoreboard.data.OneGame;
 import org.dolicoli.android.golfscoreboard.fragments.DummySectionFragment;
 import org.dolicoli.android.golfscoreboard.fragments.statistics.PersonalStatisticsDataContainer;
 import org.dolicoli.android.golfscoreboard.fragments.statistics.PersonalStatisticsGameResultListFragment;
@@ -14,6 +14,7 @@ import org.dolicoli.android.golfscoreboard.tasks.GameAndResultTask.GameAndResult
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil.DateRange;
 import org.dolicoli.android.golfscoreboard.utils.PlayerUIUtil;
+import org.dolicoli.android.golfscoreboard.utils.Reloadable;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -45,7 +46,7 @@ public class PersonalStatisticsActivity extends FragmentActivity implements
 
 	private String playerName;
 	private int playerImageResourceId;
-	private ArrayList<GameAndResult> gameAndResults;
+	private ArrayList<OneGame> gameAndResults;
 
 	private ImageView playerImageView;
 	private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -69,7 +70,7 @@ public class PersonalStatisticsActivity extends FragmentActivity implements
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
-		gameAndResults = new ArrayList<GameAndResult>();
+		gameAndResults = new ArrayList<OneGame>();
 
 		DateRange dateRange = DateRangeUtil.getDateRange(2);
 		GameAndResultTask task = new GameAndResultTask(this, this);
@@ -124,7 +125,7 @@ public class PersonalStatisticsActivity extends FragmentActivity implements
 	}
 
 	@Override
-	public ArrayList<GameAndResult> getGameAndResults() {
+	public ArrayList<OneGame> getGameAndResults() {
 		return gameAndResults;
 	}
 
@@ -136,9 +137,9 @@ public class PersonalStatisticsActivity extends FragmentActivity implements
 	}
 
 	@Override
-	public void onGameAndResultFinished(GameAndResult[] results) {
+	public void onGameAndResultFinished(OneGame[] results) {
 		gameAndResults.clear();
-		for (GameAndResult result : results) {
+		for (OneGame result : results) {
 			gameAndResults.add(result);
 		}
 		Collections.sort(gameAndResults);

@@ -1,27 +1,17 @@
 package org.dolicoli.android.golfscoreboard;
 
-import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
-import org.dolicoli.android.golfscoreboard.db.GameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.fragments.MenuFragment;
-import org.dolicoli.android.golfscoreboard.fragments.history.NewPlayerRankingFragment;
-import org.dolicoli.android.golfscoreboard.fragments.main.MainFragmentContainer;
+import org.dolicoli.android.golfscoreboard.fragments.main.PlayerRankingFragment;
 import org.dolicoli.android.golfscoreboard.tasks.DownloadTickCheckTask;
 import org.dolicoli.android.golfscoreboard.tasks.DownloadTickCheckTask.DownloadTickCheckResult;
-import org.dolicoli.android.golfscoreboard.tasks.ExportCurrentGameTask;
-import org.dolicoli.android.golfscoreboard.tasks.ExportCurrentGameTask.ExportProgress;
-import org.dolicoli.android.golfscoreboard.tasks.ExportCurrentGameTask.ExportResult;
 import org.dolicoli.android.golfscoreboard.tasks.ImportAllTask;
 import org.dolicoli.android.golfscoreboard.tasks.ImportAllTask.ReceiveProgress;
 import org.dolicoli.android.golfscoreboard.tasks.ImportAllTask.ReceiveResult;
-import org.dolicoli.android.golfscoreboard.tasks.ImportCurrentGameTask;
-import org.dolicoli.android.golfscoreboard.tasks.ImportCurrentGameTask.ImportProgress;
-import org.dolicoli.android.golfscoreboard.tasks.ImportCurrentGameTask.ImportResult;
+import org.dolicoli.android.golfscoreboard.utils.Reloadable;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,20 +21,21 @@ import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class MainActivity extends SlidingFragmentActivity implements
-		MainFragmentContainer, ImportCurrentGameTask.TaskListener,
-		ExportCurrentGameTask.TaskListener, ImportAllTask.TaskListener,
+		ImportAllTask.TaskListener,
 		DownloadTickCheckTask.DownloadTickCheckListener {
 
-	private ProgressDialog progressDialog;
 	private View downloadView;
+	private ProgressBar progressBar;
+	private TextView progressMessageTextView;
 
-	@SuppressWarnings("unused")
 	private Fragment contentFragment;
 
 	private boolean init;
@@ -70,9 +61,11 @@ public class MainActivity extends SlidingFragmentActivity implements
 		sm.setFadeDegree(0.35f);
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
-		setContentView(R.layout.content_frame);
+		setContentView(R.layout.activity_main);
 
-		downloadView = this.findViewById(R.id.DownloadView);
+		downloadView = findViewById(R.id.DownloadView);
+		progressBar = (ProgressBar) findViewById(R.id.ProgressBar);
+		progressMessageTextView = (TextView) findViewById(R.id.ProgressTextView);
 
 		SharedPreferences preferences = PreferenceManager
 				.getDefaultSharedPreferences(this);
@@ -95,6 +88,7 @@ public class MainActivity extends SlidingFragmentActivity implements
 				.getDefaultSharedPreferences(this);
 		boolean alwaysDownload = preferences.getBoolean(
 				getString(R.string.preference_auto_download_key), true);
+
 		if (alwaysDownload) {
 			DownloadTickCheckTask task = new DownloadTickCheckTask(this, this);
 			task.execute();
@@ -112,78 +106,11 @@ public class MainActivity extends SlidingFragmentActivity implements
 		case R.id.Reset:
 			showResetDialog();
 			return true;
-		case R.id.NetShareSendData:
-			showExportDataDialog();
-			return true;
-		case R.id.NetShareReceiveData:
-			importData();
-			return true;
 		case R.id.Settings:
 			showSettingActivity();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	private static final int REQ_ADD_RESULT = 0x0001;
-	private static final int REQ_NEW_GAME = 0x0002;
-	private static final int REQ_MODIFY_GAME = 0x0003;
-	private static final int REQ_IMPORT = 0x0004;
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		super.onActivityResult(requestCode, resultCode, intent);
-
-		switch (requestCode) {
-		case REQ_NEW_GAME:
-			if (resultCode == Activity.RESULT_OK) {
-				SharedPreferences preferences = PreferenceManager
-						.getDefaultSharedPreferences(this);
-				boolean autoUpload = preferences.getBoolean(
-						getString(R.string.preference_auto_upload_key), true);
-				if (autoUpload) {
-					exportData();
-				}
-			}
-			reload(true);
-			return;
-		case REQ_MODIFY_GAME:
-			if (resultCode == Activity.RESULT_OK) {
-				SharedPreferences preferences = PreferenceManager
-						.getDefaultSharedPreferences(this);
-				boolean autoUpload = preferences.getBoolean(
-						getString(R.string.preference_auto_upload_key), true);
-				if (autoUpload) {
-					exportData();
-				}
-			}
-			reload(true);
-			return;
-		case REQ_ADD_RESULT:
-			if (resultCode == Activity.RESULT_OK) {
-				SharedPreferences preferences = PreferenceManager
-						.getDefaultSharedPreferences(this);
-				boolean autoUpload = preferences.getBoolean(
-						getString(R.string.preference_auto_upload_key), true);
-				if (autoUpload) {
-					exportData();
-				}
-			}
-			reload(false);
-			return;
-		case REQ_IMPORT:
-			if (resultCode == Activity.RESULT_OK) {
-				reload(true);
-			}
-			return;
-		}
-	}
-
-	@Override
-	public void showModifyGameSettingActivity() {
-		Intent intent = new Intent(this,
-				CurrentGameModifyGameSettingActivity.class);
-		startActivityForResult(intent, REQ_MODIFY_GAME);
 	}
 
 	private void showResetDialog() {
@@ -197,39 +124,13 @@ public class MainActivity extends SlidingFragmentActivity implements
 							public void onClick(DialogInterface dialog,
 									int which) {
 								resetDatabase();
-								reload(true);
+								if (contentFragment != null
+										&& (contentFragment instanceof Reloadable)) {
+									((Reloadable) contentFragment).reload(true);
+								}
 							}
 
 						}).setNegativeButton(android.R.string.no, null).show();
-	}
-
-	private void showExportDataDialog() {
-		new AlertDialog.Builder(this)
-				.setTitle(R.string.dialog_export_current_game)
-				.setMessage(R.string.dialog_are_you_sure_to_export_current_game)
-				.setPositiveButton(android.R.string.yes,
-						new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								exportData();
-							}
-
-						}).setNegativeButton(android.R.string.no, null).show();
-	}
-
-	private void importData() {
-		GameSettingDatabaseWorker gameSettingWorker = new GameSettingDatabaseWorker(
-				MainActivity.this);
-		GameSetting gameSetting = new GameSetting();
-		gameSettingWorker.getGameSetting(gameSetting);
-
-		String currentGameId = GameSetting
-				.toGameIdFormat(gameSetting.getDate());
-
-		Intent intent = new Intent(this, NetShareClientActivity.class);
-		intent.putExtra(NetShareClientActivity.IK_GAME_ID, currentGameId);
-		startActivityForResult(intent, REQ_IMPORT);
 	}
 
 	private void showSettingActivity() {
@@ -237,138 +138,25 @@ public class MainActivity extends SlidingFragmentActivity implements
 		startActivity(settingsIntent);
 	}
 
-	@Override
-	public void onImportGameStart() {
-		showProgressDialog(R.string.dialog_import_current_game,
-				R.string.dialog_import_please_wait);
-	}
-
-	@Override
-	public void onImportGameProgressUpdate(ImportProgress progress) {
-		if (progress == null)
-			return;
-
-		int messageId = progress.getMessageId();
-		setProgressDialogStatus(R.string.dialog_import_current_game,
-				R.string.dialog_import_please_wait, progress.getCurrent(),
-				progress.getTotal(), getString(messageId));
-	}
-
-	@Override
-	public void onImportGameFinished(ImportResult result) {
-		if (result.isSuccess()) {
-			if (!result.isCancel()) {
-				Toast.makeText(MainActivity.this,
-						R.string.activity_main_netshare_import_success,
-						Toast.LENGTH_LONG).show();
-				reload(false);
-			}
-		} else {
-			Toast.makeText(MainActivity.this,
-					R.string.activity_main_netshare_import_fail,
-					Toast.LENGTH_LONG).show();
-		}
-		hideProgressDialog();
-	}
-
-	@Override
-	public void reload(final boolean clean) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-			}
-		});
-	}
-
-	private void exportData() {
-		ExportCurrentGameTask task = new ExportCurrentGameTask(this, this);
-		task.execute();
-	}
-
 	private void resetDatabase() {
 		ResultDatabaseWorker resultWorker = new ResultDatabaseWorker(this);
 		resultWorker.reset();
 	}
 
-	private void showProgressDialog(int defaultTitleId, int defaultMessageId) {
-		if (progressDialog != null && progressDialog.isShowing()) {
-			return;
-		}
-		final Activity activity = this;
-
-		progressDialog = new ProgressDialog(activity);
-		progressDialog.setTitle(defaultTitleId);
-		progressDialog.setMessage(getString(defaultMessageId));
-		progressDialog.setIndeterminate(true);
-		progressDialog.setMax(100);
-		progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		progressDialog.setCancelable(true);
-		progressDialog.show();
-	}
-
-	private void setProgressDialogStatus(int defaultTitleId,
-			int defaultMessageId, final int current, final int total,
-			final String message) {
-		if (progressDialog == null) {
-			showProgressDialog(defaultTitleId, defaultMessageId);
-		} else {
-			if (total <= 0) {
-				progressDialog.setIndeterminate(true);
-			} else {
-				progressDialog.setIndeterminate(false);
-
-				progressDialog.setMax(total);
-				progressDialog.setProgress(current);
-			}
-			progressDialog.setMessage(message);
-		}
-	}
-
-	private void hideProgressDialog() {
-		if (progressDialog != null) {
-			progressDialog.dismiss();
-			progressDialog = null;
-		}
-	}
-
-	@Override
-	public void onExportCurrentGameStarted() {
-		showProgressDialog(R.string.dialog_export_current_game,
-				R.string.dialog_export_current_game_please_wait);
-	}
-
-	@Override
-	public void onExportCurrentGameProgressUpdate(ExportProgress progress) {
-		if (progress == null)
-			return;
-
-		int messageId = progress.getMessageId();
-		setProgressDialogStatus(R.string.dialog_export_current_game,
-				R.string.dialog_export_current_game_please_wait,
-				progress.getCurrent(), progress.getTotal(),
-				getString(messageId));
-	}
-
-	@Override
-	public void onExportCurrentGameFinished(ExportResult result) {
-		if (result.isSuccess()) {
-			Toast.makeText(MainActivity.this,
-					R.string.activity_main_netshare_upload_success,
-					Toast.LENGTH_LONG).show();
-		} else {
-			Toast.makeText(MainActivity.this,
-					R.string.activity_main_netshare_upload_fail,
-					Toast.LENGTH_LONG).show();
-		}
-		hideProgressDialog();
-	}
-
 	@Override
 	public void onDownloadTickCheckStart() {
+		downloadView.setVisibility(View.VISIBLE);
+		setProgressMessage(true, 100, 0, "최신 데이터를 확인합니다");
 	}
 
 	@Override
 	public void onDownloadTickCheckFinished(DownloadTickCheckResult result) {
+		downloadView.setVisibility(View.GONE);
+		if (!result.isSuccess()) {
+			Toast.makeText(this, R.string.activity_main_netshare_import_fail,
+					Toast.LENGTH_LONG).show();
+		}
+
 		if (result.isSuccess() && result.isShouldRefresh()) {
 			ImportAllTask task = new ImportAllTask(this, this);
 			task.execute();
@@ -384,10 +172,22 @@ public class MainActivity extends SlidingFragmentActivity implements
 
 	@Override
 	public void onImportAllProgressUpdate(ReceiveProgress progress) {
+		setProgressMessage(false, progress.getTotal(), progress.getCurrent(),
+				progress.getMessage());
 	}
 
 	@Override
 	public void onImportAllFinished(ReceiveResult result) {
+		if (result.isSuccess()) {
+			if (!result.isCancel()) {
+				Toast.makeText(this,
+						R.string.activity_main_netshare_import_success,
+						Toast.LENGTH_LONG).show();
+			}
+		} else {
+			Toast.makeText(this, R.string.activity_main_netshare_import_fail,
+					Toast.LENGTH_LONG).show();
+		}
 		downloadView.setVisibility(View.GONE);
 		initialize();
 	}
@@ -402,10 +202,28 @@ public class MainActivity extends SlidingFragmentActivity implements
 	}
 
 	private void initialize() {
+		if (init)
+			return;
+		
 		init = true;
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.content_frame, new NewPlayerRankingFragment())
+				.replace(R.id.content_frame, new PlayerRankingFragment())
 				.commit();
 
+	}
+
+	private void setProgressMessage(boolean indeterminate, final int max,
+			final int current, final String message) {
+		if (progressBar == null || progressMessageTextView == null)
+			return;
+
+		if (indeterminate) {
+			progressBar.setIndeterminate(true);
+		} else {
+			progressBar.setIndeterminate(false);
+			progressBar.setMax(max);
+			progressBar.setProgress(current);
+		}
+		progressMessageTextView.setText(message);
 	}
 }

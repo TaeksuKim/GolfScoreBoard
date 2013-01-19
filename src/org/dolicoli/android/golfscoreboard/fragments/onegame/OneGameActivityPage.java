@@ -1,6 +1,6 @@
 package org.dolicoli.android.golfscoreboard.fragments.onegame;
 
-import org.dolicoli.android.golfscoreboard.Reloadable;
+import org.dolicoli.android.golfscoreboard.utils.Reloadable;
 
 public interface OneGameActivityPage extends Reloadable {
 

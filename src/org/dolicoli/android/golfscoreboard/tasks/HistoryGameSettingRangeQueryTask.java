@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import org.dolicoli.android.golfscoreboard.data.GameAndResult;
+import org.dolicoli.android.golfscoreboard.data.OneGame;
 import org.dolicoli.android.golfscoreboard.db.HistoryGameSettingDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil.DateRange;
 
@@ -12,9 +12,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 public class HistoryGameSettingRangeQueryTask extends
-		AsyncTask<DateRange, Void, GameAndResult[]> {
+		AsyncTask<DateRange, Void, OneGame[]> {
 
-	private static final GameAndResult[] NULL_RESULTS = new GameAndResult[0];
+	private static final OneGame[] NULL_RESULTS = new OneGame[0];
 
 	private Context context;
 	private TaskListener listener;
@@ -34,7 +34,7 @@ public class HistoryGameSettingRangeQueryTask extends
 	}
 
 	@Override
-	protected void onPostExecute(GameAndResult[] results) {
+	protected void onPostExecute(OneGame[] results) {
 		super.onPostExecute(results);
 		if (listener != null) {
 			listener.onHistoryGameSettingQueryFinished(results);
@@ -42,28 +42,28 @@ public class HistoryGameSettingRangeQueryTask extends
 	}
 
 	@Override
-	protected GameAndResult[] doInBackground(DateRange... params) {
+	protected OneGame[] doInBackground(DateRange... params) {
 		if (context == null || params == null || params.length < 1) {
 			return NULL_RESULTS;
 		}
 
 		DateRange dateRange = params[0];
 
-		ArrayList<GameAndResult> results = new ArrayList<GameAndResult>();
+		ArrayList<OneGame> results = new ArrayList<OneGame>();
 
 		HistoryGameSettingDatabaseWorker historyGameWorker = new HistoryGameSettingDatabaseWorker(
 				context);
 		historyGameWorker.getGameSettingsWithResult(dateRange.getFrom(),
 				dateRange.getTo(), results);
 
-		Collections.sort(results, new Comparator<GameAndResult>() {
+		Collections.sort(results, new Comparator<OneGame>() {
 			@Override
-			public int compare(GameAndResult lhs, GameAndResult rhs) {
+			public int compare(OneGame lhs, OneGame rhs) {
 				return rhs.getDate().compareTo(lhs.getDate());
 			}
 		});
 
-		GameAndResult[] array = new GameAndResult[results.size()];
+		OneGame[] array = new OneGame[results.size()];
 		results.toArray(array);
 		return array;
 	}
@@ -71,6 +71,6 @@ public class HistoryGameSettingRangeQueryTask extends
 	public static interface TaskListener {
 		void onHistoryGameSettingQueryStarted();
 
-		void onHistoryGameSettingQueryFinished(GameAndResult[] gameResults);
+		void onHistoryGameSettingQueryFinished(OneGame[] gameResults);
 	}
 }

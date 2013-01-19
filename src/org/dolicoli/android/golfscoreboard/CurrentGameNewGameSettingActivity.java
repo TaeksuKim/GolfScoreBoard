@@ -384,14 +384,12 @@ public class CurrentGameNewGameSettingActivity extends FragmentActivity
 			PlayerSetting playerSetting) {
 		int playerCount = gameSetting.getPlayerCount();
 		String[] names = new String[playerCount];
-		int[] handicaps = new int[playerCount];
 		for (int i = 0; i < playerCount; i++) {
 			names[i] = playerSetting.getPlayerName(i);
-			handicaps[i] = playerSetting.getHandicap(i);
 		}
 
 		PlayerCacheDatabaseWorker worker = new PlayerCacheDatabaseWorker(this);
-		worker.putPlayer(names, handicaps);
+		worker.putPlayer(names);
 	}
 
 	public void setNextButtonEnable(boolean enabled) {

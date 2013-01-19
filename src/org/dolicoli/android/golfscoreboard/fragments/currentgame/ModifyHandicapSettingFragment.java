@@ -5,7 +5,7 @@ import java.util.Collections;
 
 import org.dolicoli.android.golfscoreboard.Constants;
 import org.dolicoli.android.golfscoreboard.R;
-import org.dolicoli.android.golfscoreboard.data.GameAndResult;
+import org.dolicoli.android.golfscoreboard.data.OneGame;
 import org.dolicoli.android.golfscoreboard.tasks.GameAndResultTask;
 import org.dolicoli.android.golfscoreboard.tasks.GameAndResultTask.GameAndResultTaskListener;
 import org.dolicoli.android.golfscoreboard.utils.DateRangeUtil;
@@ -19,6 +19,7 @@ import org.dolicoli.android.golfscoreboard.utils.handicaps.HandicapCalculator.Re
 import org.dolicoli.android.golfscoreboard.utils.handicaps.LaterBetterCalculator;
 import org.dolicoli.android.golfscoreboard.utils.handicaps.MoyaCalculator;
 import org.dolicoli.android.golfscoreboard.utils.handicaps.SimpleHandicapCalculator;
+import org.dolicoli.android.golfscoreboard.utils.handicaps.ThreeMonthsHandicapCalculator;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -49,7 +50,7 @@ public class ModifyHandicapSettingFragment extends Fragment implements
 
 	private int playerCount;
 	private String[] playerNames, canonicalPlayerNames;
-	private ArrayList<GameAndResult> gameAndResults;
+	private ArrayList<OneGame> gameAndResults;
 	private HandicapCalculator[] calculators;
 
 	@Override
@@ -69,7 +70,8 @@ public class ModifyHandicapSettingFragment extends Fragment implements
 		};
 		calculators = new HandicapCalculator[] {
 				new SimpleHandicapCalculator(), new Ecco1Calculator(),
-				new LaterBetterCalculator(), new MoyaCalculator() };
+				new LaterBetterCalculator(), new MoyaCalculator(),
+				new ThreeMonthsHandicapCalculator() };
 		String[] calculatorNames = new String[calculators.length];
 		for (int i = 0; i < calculators.length; i++) {
 			calculatorNames[i] = calculators[i].getName(resourceContainer);
@@ -268,7 +270,7 @@ public class ModifyHandicapSettingFragment extends Fragment implements
 		this.playerNames = new String[playerCount];
 		this.canonicalPlayerNames = new String[playerCount];
 
-		gameAndResults = new ArrayList<GameAndResult>();
+		gameAndResults = new ArrayList<OneGame>();
 
 		for (int i = 0; i < playerCount; i++) {
 			playerNames[i] = names[i];
@@ -319,9 +321,9 @@ public class ModifyHandicapSettingFragment extends Fragment implements
 	}
 
 	@Override
-	public void onGameAndResultFinished(GameAndResult[] results) {
+	public void onGameAndResultFinished(OneGame[] results) {
 		gameAndResults.clear();
-		for (GameAndResult result : results) {
+		for (OneGame result : results) {
 			gameAndResults.add(result);
 		}
 		Collections.sort(gameAndResults);

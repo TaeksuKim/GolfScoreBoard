@@ -1,6 +1,6 @@
 package org.dolicoli.android.golfscoreboard.tasks;
 
-import org.dolicoli.android.golfscoreboard.data.SingleGameResult;
+import org.dolicoli.android.golfscoreboard.data.OneGame;
 import org.dolicoli.android.golfscoreboard.data.settings.GameSetting;
 import org.dolicoli.android.golfscoreboard.data.settings.PlayerSetting;
 import org.dolicoli.android.golfscoreboard.db.HistoryGameSettingDatabaseWorker;
@@ -8,7 +8,8 @@ import org.dolicoli.android.golfscoreboard.db.HistoryGameSettingDatabaseWorker;
 import android.content.Context;
 import android.os.AsyncTask;
 
-public class HistoryGameSettingQueryTask extends AsyncTask<String, Void, SingleGameResult> {
+public class HistoryGameSettingQueryTask extends
+		AsyncTask<String, Void, OneGame> {
 
 	private Context context;
 	private TaskListener listener;
@@ -27,7 +28,7 @@ public class HistoryGameSettingQueryTask extends AsyncTask<String, Void, SingleG
 	}
 
 	@Override
-	protected void onPostExecute(SingleGameResult result) {
+	protected void onPostExecute(OneGame result) {
 		super.onPostExecute(result);
 		if (listener != null) {
 			listener.onGameQueryFinished(result);
@@ -35,7 +36,7 @@ public class HistoryGameSettingQueryTask extends AsyncTask<String, Void, SingleG
 	}
 
 	@Override
-	protected SingleGameResult doInBackground(String... params) {
+	protected OneGame doInBackground(String... params) {
 		if (context == null || params == null || params.length < 1) {
 			return null;
 		}
@@ -49,16 +50,13 @@ public class HistoryGameSettingQueryTask extends AsyncTask<String, Void, SingleG
 				context);
 		historyGameWorker.getGameSetting(playDate, gameSetting, playerSetting);
 
-		SingleGameResult result = new SingleGameResult();
-		result.setGameSetting(gameSetting);
-		result.setPlayerSetting(playerSetting);
-
+		OneGame result = new OneGame(gameSetting, playerSetting);
 		return result;
 	}
 
 	public static interface TaskListener {
 		void onGameQueryStarted();
 
-		void onGameQueryFinished(SingleGameResult gameResult);
+		void onGameQueryFinished(OneGame gameResult);
 	}
 }

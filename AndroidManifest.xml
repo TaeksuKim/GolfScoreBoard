@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.dolicoli.android.golfscoreboard"
     android:installLocation="auto"
-    android:versionCode="28"
-    android:versionName="1.1.12" >
+    android:versionCode="30"
+    android:versionName="1.1.14" >
 
     <uses-sdk
         android:minSdkVersion="15"
@@ -75,12 +75,6 @@
         <activity
             android:name=".OneGamePlayerRecordActivity"
             android:label="@string/title_activity_onegame_player_record"
-            android:screenOrientation="portrait" />
-
-        <!-- History -->
-        <activity
-            android:name=".HistoryActivity"
-            android:label="@string/title_activity_history"
             android:screenOrientation="portrait" />
 
         <!-- Setting -->
