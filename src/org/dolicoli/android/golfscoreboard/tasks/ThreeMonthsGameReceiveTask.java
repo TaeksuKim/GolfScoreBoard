@@ -143,6 +143,10 @@ public class ThreeMonthsGameReceiveTask extends
 
 			int totalSize = historyList.size();
 			int index = 0;
+
+			HistoryGameSettingDatabaseWorker historyWorker = new HistoryGameSettingDatabaseWorker(
+					context);
+			historyWorker.clearAllHistory();
 			for (History history : historyList) {
 				GameSetting gameSetting = history.getGameSetting();
 
@@ -169,8 +173,6 @@ public class ThreeMonthsGameReceiveTask extends
 					return new ReceiveResult(true, CODE_CANCEL);
 				}
 
-				HistoryGameSettingDatabaseWorker historyWorker = new HistoryGameSettingDatabaseWorker(
-						context);
 				historyWorker.addCurrentHistory(true, gameSetting,
 						playerSetting, results);
 			}

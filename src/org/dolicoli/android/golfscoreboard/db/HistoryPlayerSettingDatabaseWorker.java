@@ -433,4 +433,9 @@ public class HistoryPlayerSettingDatabaseWorker extends AbstractDatabaseWorker {
 		Log.d(TAG, "deletePlayerSetting()");
 		db.delete(TABLE, COLUMN_PLAY_DATE + " = ? ", new String[] { playDate });
 	}
+
+	static void deleteAll(SQLiteDatabase db) {
+		Log.d(TAG, "deleteAll()");
+		db.delete(TABLE, null, null);
+	}
 }

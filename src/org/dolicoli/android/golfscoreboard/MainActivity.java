@@ -2,7 +2,7 @@ package org.dolicoli.android.golfscoreboard;
 
 import org.dolicoli.android.golfscoreboard.db.ResultDatabaseWorker;
 import org.dolicoli.android.golfscoreboard.fragments.MenuFragment;
-import org.dolicoli.android.golfscoreboard.fragments.main.PlayerRankingFragment;
+import org.dolicoli.android.golfscoreboard.fragments.main.CurrentGameFragment;
 import org.dolicoli.android.golfscoreboard.tasks.DownloadTickCheckTask;
 import org.dolicoli.android.golfscoreboard.tasks.DownloadTickCheckTask.DownloadTickCheckResult;
 import org.dolicoli.android.golfscoreboard.tasks.ImportAllTask;
@@ -204,10 +204,10 @@ public class MainActivity extends SlidingFragmentActivity implements
 	private void initialize() {
 		if (init)
 			return;
-		
+
 		init = true;
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.content_frame, new PlayerRankingFragment())
+				.replace(R.id.content_frame, new CurrentGameFragment())
 				.commit();
 
 	}

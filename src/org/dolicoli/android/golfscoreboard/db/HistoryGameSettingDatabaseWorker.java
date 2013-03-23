@@ -1273,4 +1273,23 @@ public class HistoryGameSettingDatabaseWorker extends AbstractDatabaseWorker {
 		Log.d(TAG, "deleteGameSetting()");
 		db.delete(TABLE, COLUMN_PLAY_DATE + " = ? ", new String[] { playDate });
 	}
+
+	public void clearAllHistory() {
+		Log.d(TAG, "clearAllHistory()");
+
+		open();
+
+		try {
+			mDb.beginTransaction();
+			HistoryResultDatabaseWorker.deleteAll(mDb);
+			HistoryPlayerSettingDatabaseWorker.deleteAll(mDb);
+
+			mDb.delete(TABLE, null, null);
+
+			mDb.setTransactionSuccessful();
+		} finally {
+			mDb.endTransaction();
+			close();
+		}
+	}
 }
